@@ -1,0 +1,102 @@
+{
+  "timestamp": "2025-10-10T12:37:21.862900",
+  "whale_movements": [
+    {
+      "symbol": "USDT",
+      "amount": 133000000,
+      "amount_usd": 133138985,
+      "from": "unknown",
+      "to": "tether_treasury",
+      "age_mins": 120,
+      "type": "transfer",
+      "impact": "LIQUIDITY_DRAIN",
+      "severity": "\ud83d\udd25 HIGH"
+    },
+    {
+      "symbol": "LINK",
+      "amount": 3999999,
+      "amount_usd": 83269988,
+      "from": "unknown",
+      "to": "binance",
+      "age_mins": 12,
+      "type": "transfer",
+      "impact": "SELL_PRESSURE",
+      "severity": "\ud83d\udea8 CRITICAL"
+    },
+    {
+      "symbol": "USDC",
+      "amount": 63794388,
+      "amount_usd": 63780194,
+      "from": "circle",
+      "to": "burned",
+      "age_mins": 24,
+      "type": "burn",
+      "impact": "LIQUIDITY_DRAIN",
+      "severity": "\ud83d\udd25 HIGH"
+    }
+  ],
+  "threat_level": "\ud83d\udfe0 HIGH RISK - WAIT FOR STABILIZATION",
+  "threat_score": 181.7295775,
+  "news_sentiment": {
+    "BTC": {
+      "positive": 142,
+      "negative": 12,
+      "neutral": 0,
+      "important": 89,
+      "articles": [
+        "Bitcoin ETF sees $500M inflow - institutions accumulating"
+      ]
+    },
+    "ETH": {
+      "positive": 23,
+      "negative": 78,
+      "neutral": 0,
+      "important": 45,
+      "articles": [
+        "Ethereum gas fees spike as network congestion increases"
+      ]
+    },
+    "SOL": {
+      "positive": 8,
+      "negative": 134,
+      "neutral": 0,
+      "important": 67,
+      "articles": [
+        "Solana network experiences brief outage"
+      ]
+    },
+    "XRP": {
+      "positive": 189,
+      "negative": 23,
+      "neutral": 0,
+      "important": 112,
+      "articles": [
+        "XRP regulatory clarity boosts institutional interest"
+      ]
+    }
+  },
+  "prices": {
+    "BTC": {
+      "price": 116242,
+      "change_24h": -3.8629230576555464
+    },
+    "ETH": {
+      "price": 3982.06,
+      "change_24h": -8.10850298832831
+    },
+    "SOL": {
+      "price": 204.78,
+      "change_24h": -6.400054335510625
+    },
+    "XRP": {
+      "price": 2.67,
+      "change_24h": -4.642656562751643
+    }
+  },
+  "portfolio_risk": {
+    "total_value": 197.19641606000002,
+    "total_pnl": -0.80580425,
+    "whale_threat": 181.7295775
+  },
+  "trading_signal": "\ud83d\uded1 DO NOT BUY - Wait for stabilization"
+}

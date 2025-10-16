@@ -1,0 +1,1 @@
+[2025-10-09T15:29:37.256768] GUARDRAIL PASS: STARTUP | {'Trading Mode': 'FAKE', 'ENV': 'dev', 'ALLOW_LIVE_EXCHANGE': '0', 'DISABLE_REAL_EXCHANGES': '1', 'Max Trade Size': '100', 'Max Daily Exposure': '500', 'Confidence Threshold': '0.85'}

@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-10-10T12:41:06.457238",
+    "threat_score": 181.7295775,
+    "threat_level": "\ud83d\udfe0 HIGH RISK - WAIT FOR STABILIZATION",
+    "signal": "\ud83d\uded1 DO NOT BUY - Wait for stabilization",
+    "btc_price": 116485,
+    "portfolio_pnl": -0.39357176
+  }
+]
