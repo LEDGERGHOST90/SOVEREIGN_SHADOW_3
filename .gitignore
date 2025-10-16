@@ -1,16 +1,37 @@
-# API Keys and Secrets
+# 🔒 SOVEREIGN SHADOW - FORTRESS PROTECTION
+# NEVER COMMIT THESE - YOUR COMPETITIVE EDGE DEPENDS ON IT
+
+# API KEYS AND SECRETS (CRITICAL)
 .env
 .env.production
 .env.local
 .env.*
+*.key
+*.pem
+*_api_key*
+*credentials*
+*secret*
+config/secrets/
 config/*.env
 config/*credentials*
+config/*secret*
 
-# Logs
-logs/
-*.log
+# LIVE TRADING DATA (PROPRIETARY)
+data/exports/*_live.csv
+data/production/
+logs/production/
+logs/live_trading.log
+logs/api_validation.json
 
-# Python
+# COMPETITIVE ADVANTAGE (WORTH MILLIONS)
+strategies/proprietary/
+algorithms/secret/
+strategies/real/
+algorithms/live/
+proprietary/
+secret_sauce/
+
+# PYTHON CACHE
 __pycache__/
 *.pyc
 *.pyo
@@ -32,27 +53,42 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual Environment
+# VIRTUAL ENVIRONMENTS
 venv/
 env/
 ENV/
+.venv/
 
-# IDE
+# IDE FILES
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Temporary files
-*.tmp
-*.temp
 *~
 
-# API Keys (SECURITY)
-**/api_keys.json
-**/credentials.json
-**/secrets.json
+# OS FILES
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# DOCKER SECRETS
+docker-compose.override.yml
+.env.docker
+
+# TRADING LOGS (CONTAINS EDGE)
+*.trade.log
+*.arbitrage.log
+*.snipe.log
+performance/
+
+# BACKUP FILES
+*.backup
+*.bak
+*.old
+
+# TEST FILES WITH REAL DATA
+*_test_live.py
+*_production_test.py
+
+# YOUR EDGE IS SAFE NOW 🔒
