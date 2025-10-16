@@ -1,0 +1,74 @@
+# 🏗️ DEVELOPMENT ENVIRONMENT CONFIGURATION
+# Purpose: Code development & initial testing
+# Risk Level: ZERO - No real money, pure simulation
+
+environment:
+  name: "Development"
+  tier: "dev"
+  mode: "simulation"
+  purpose: "Code development & algorithm testing"
+
+trading_config:
+  starting_balance: 10000.0  # Fake money for testing
+  max_position_size: 0.05    # 5% for testing larger moves
+  max_daily_trades: 50       # High frequency for testing
+  min_spread_threshold: 0.001 # 0.1% for testing detection
+
+data_sources:
+  mode: "simulated"
+  providers:
+    - "historical_feeds"
+    - "mock_data_generator"
+  latency_simulation: true
+  slippage_simulation: true
+
+execution:
+  mode: "simulation"
+  fees: 0.001  # 0.1% simulated fees
+  latency: 0.1  # 100ms simulated latency
+  success_rate: 0.95  # 95% simulated success rate
+
+risk_management:
+  stop_loss: 0.05      # 5% stop loss for testing
+  take_profit: 0.03    # 3% take profit for testing
+  max_drawdown: 0.10   # 10% max drawdown for testing
+  daily_loss_limit: 0.05  # 5% daily loss limit for testing
+
+logging:
+  level: "DEBUG"
+  verbose: true
+  save_all_trades: true
+  performance_metrics: true
+
+testing:
+  stress_testing: true
+  backtesting: true
+  algorithm_validation: true
+  performance_profiling: true
+
+exchanges:
+  binance_sim:
+    enabled: true
+    mode: "simulation"
+    pairs: ["BTCUSDT", "ETHUSDT", "BNBUSDT", "ADAUSDT", "SOLUSDT"]
+  
+  coinbase_sim:
+    enabled: true
+    mode: "simulation"
+    pairs: ["BTC-USD", "ETH-USD", "LTC-USD", "ADA-USD", "SOL-USD"]
+  
+  kraken_sim:
+    enabled: true
+    mode: "simulation"
+    pairs: ["XXBTZUSD", "XETHZUSD", "ADAZUSD", "SOLUSD"]
+
+performance_targets:
+  monthly_return: 0.15      # 15% target for testing
+  win_rate: 0.70           # 70% win rate target
+  sharpe_ratio: 2.0        # High Sharpe for testing
+  max_drawdown: 0.05       # 5% max drawdown
+
+safety:
+  emergency_stop: false    # Disabled for testing
+  kill_switch: false      # Disabled for testing
+  position_limits: false  # Relaxed for testing

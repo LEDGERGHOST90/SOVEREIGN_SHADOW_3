@@ -1,0 +1,228 @@
+{
+  "test_summary": {
+    "total_tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "warnings": 0,
+    "errors": 0,
+    "success_rate": 100.0,
+    "duration_seconds": 1.7795777320861816
+  },
+  "test_details": {
+    "system_integrity_memory_usage": {
+      "status": "PASSED",
+      "data_structures_created": 100,
+      "memory_test_completed": true
+    },
+    "system_integrity_file_operations": {
+      "status": "PASSED",
+      "files_created": 100,
+      "cleanup_successful": true
+    },
+    "system_integrity_exception_handling": {
+      "status": "PASSED",
+      "exceptions_handled": 4,
+      "total_test_cases": 4
+    },
+    "system_integrity_resource_cleanup": {
+      "status": "PASSED",
+      "resources_created": 50,
+      "resources_cleaned": 50
+    },
+    "trading_logic_duplicate_prevention": {
+      "status": "PASSED",
+      "total_orders": 100,
+      "duplicates_detected": 900,
+      "detection_rate": 0.9
+    },
+    "trading_logic_position_sizing": {
+      "status": "PASSED",
+      "test_cases": [
+        {
+          "portfolio": 10000.0,
+          "confidence": 0.8,
+          "expected_percent": 0.04,
+          "actual_percent": 0.04000000000000001,
+          "correct": true
+        },
+        {
+          "portfolio": 10000.0,
+          "confidence": 0.9,
+          "expected_percent": 0.045,
+          "actual_percent": 0.045000000000000005,
+          "correct": true
+        },
+        {
+          "portfolio": 10000.0,
+          "confidence": 0.5,
+          "expected_percent": 0.025,
+          "actual_percent": 0.025,
+          "correct": true
+        },
+        {
+          "portfolio": 0,
+          "confidence": 0.8,
+          "expected_percent": 0,
+          "actual_percent": 0,
+          "correct": true
+        },
+        {
+          "portfolio": -1000,
+          "confidence": 0.8,
+          "expected_percent": 0,
+          "actual_percent": 0,
+          "correct": true
+        }
+      ],
+      "all_correct": true
+    },
+    "trading_logic_risk_management": {
+      "status": "PASSED",
+      "scenarios": [
+        {
+          "risk_percent": 0.01,
+          "position_value": 100.0,
+          "should_allow": true,
+          "risk_exceeded": false,
+          "decision_correct": true
+        },
+        {
+          "risk_percent": 0.02,
+          "position_value": 200.0,
+          "should_allow": true,
+          "risk_exceeded": false,
+          "decision_correct": true
+        },
+        {
+          "risk_percent": 0.03,
+          "position_value": 300.0,
+          "should_allow": false,
+          "risk_exceeded": true,
+          "decision_correct": true
+        },
+        {
+          "risk_percent": 0.05,
+          "position_value": 500.0,
+          "should_allow": false,
+          "risk_exceeded": true,
+          "decision_correct": true
+        }
+      ],
+      "all_correct": true
+    },
+    "trading_logic_kill_switch": {
+      "status": "PASSED",
+      "scenarios": [
+        {
+          "scenario": {
+            "daily_loss": 250.0,
+            "consecutive_losses": 3,
+            "daily_trades": 30,
+            "portfolio_risk": 0.03,
+            "should_trigger": true
+          },
+          "conditions_met": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "kill_switch_triggered": true,
+          "should_trigger": true,
+          "decision_correct": true
+        },
+        {
+          "scenario": {
+            "daily_loss": 150.0,
+            "consecutive_losses": 6,
+            "daily_trades": 30,
+            "portfolio_risk": 0.03,
+            "should_trigger": true
+          },
+          "conditions_met": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "kill_switch_triggered": true,
+          "should_trigger": true,
+          "decision_correct": true
+        },
+        {
+          "scenario": {
+            "daily_loss": 150.0,
+            "consecutive_losses": 3,
+            "daily_trades": 60,
+            "portfolio_risk": 0.03,
+            "should_trigger": true
+          },
+          "conditions_met": [
+            false,
+            false,
+            true,
+            false
+          ],
+          "kill_switch_triggered": true,
+          "should_trigger": true,
+          "decision_correct": true
+        },
+        {
+          "scenario": {
+            "daily_loss": 150.0,
+            "consecutive_losses": 3,
+            "daily_trades": 30,
+            "portfolio_risk": 0.06,
+            "should_trigger": true
+          },
+          "conditions_met": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "kill_switch_triggered": true,
+          "should_trigger": true,
+          "decision_correct": true
+        },
+        {
+          "scenario": {
+            "daily_loss": 150.0,
+            "consecutive_losses": 3,
+            "daily_trades": 30,
+            "portfolio_risk": 0.03,
+            "should_trigger": false
+          },
+          "conditions_met": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "kill_switch_triggered": false,
+          "should_trigger": false,
+          "decision_correct": true
+        }
+      ],
+      "all_correct": true
+    },
+    "integration_end_to_end_workflow": {
+      "status": "PASSED",
+      "steps_completed": 7,
+      "total_steps": 7,
+      "workflow_complete": true
+    },
+    "integration_component_interaction": {
+      "status": "PASSED",
+      "components_tested": 5,
+      "interactions_tested": 10,
+      "all_interactions_successful": true
+    },
+    "integration_data_flow": {
+      "status": "PASSED",
+      "data_points_tested": 5,
+      "flow_successful": true
+    }
+  },
+  "timestamp": "2025-10-06T05:12:32.743865"
+}

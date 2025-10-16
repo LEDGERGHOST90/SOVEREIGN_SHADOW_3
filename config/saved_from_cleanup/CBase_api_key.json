@@ -1,0 +1,13 @@
+{
+   "name": "organizations/9338aba7-1875-4d27-84b9-a4a10af0d7fb/apiKeys/62d59def-cd4b-4285-879c-ea113c1900a4",
+   "privateKey": "<your_coinbase_private_key>"
+BINANCEUS_KEY=<your_actual_binance_us_key>
+BINANCEUS_SECRET=<your_actual_binance_us_secret>
+
+OKX_KEY=
+OKX_SECRET=<your_actual_okx_secret>
+OKX_PASSPHRASE=<your_actual_okx_passphrase>
+
+# Add Coinbase (since you mentioned cBase)
+COINBASE_KEY=<your_coinbase_api_key>
+COINBASE_SECRET=<your_coinbase_api_secret>}

@@ -1,0 +1,106 @@
+# Sovereign Legacy Loop - Empire State Configuration
+# REBUILT FROM SCRATCH - 2025-10-09 15:50 PST
+# Using REAL MCP data from crypto-empire tool
+
+empire:
+  total_value: 8707.86  # REAL VALUE from MCP
+  last_updated: '2025-10-09T15:50:00Z'
+  
+  # Active Trading Capital
+  active_trading:
+    total: 977.11  # Binance US only
+    
+    binance_us:
+      balance: 977.11
+      role: "Sniper Engine"
+      strategy: "Trailing stops + scalps"
+      percent_of_empire: 11.22
+      status: "AUTH_ERROR - API key needs fixing"
+      siphon_rule: "30% profit → Ledger Vault"
+      reinvest_rule: "70% back to highest-need holding"
+  
+  # Cold Storage (Untouchable)
+  vault:
+    ledger:
+      balance: 7685.52
+      status: "untouchable"
+      percent_of_empire: 88.26
+      holdings:
+        steth: 4046.26  # LIDO Staked ETH
+        btc: 1762.11
+        xrp: 1181.18
+        eth: 543.05
+        sol: 151.76
+      strategy: "HODL + compound forever"
+  
+  # DeFi Positions
+  defi:
+    lido_staking:
+      steth_value: 4046.26
+      accumulated_rewards: 45.23
+      strategy: "Earning staking rewards"
+
+  # Infrastructure (Fiat Layer)
+  infrastructure:
+    etrade_jpmorgan:
+      role: "Main Account / Primary Banking"
+      purpose: "Central hub for all fiat operations"
+      flow: "Income → E*TRADE/JPM → Binance US"
+      
+    sofi:
+      role: "Income Receiver"
+      purpose: "Income collection point"
+      flow: "Income → SoFi → E*TRADE/JPM → Binance US"
+
+# Trading Parameters (FOR BINANCE US ONLY)
+trading:
+  platform: "binance_us"
+  
+  risk_management:
+    active_capital: 977.11
+    max_position_size: 19.54  # 2% of active
+    max_daily_exposure: 97.71  # 10% of active
+    max_daily_trades: 5
+    stop_loss_per_trade: 9.77  # 1% of active
+    
+  profit_targets:
+    daily: 9.77  # 1% of active
+    weekly: 68.40
+    monthly: 293.13  # 30% monthly on active
+    
+  siphon_strategy:
+    profit_to_vault: 0.30  # 30% of realized profit
+    profit_to_reinvest: 0.70  # 70% back to engine
+    vault_targets:
+      - btc
+      - eth  
+      - xrp
+      - sol
+
+# Capital Flow Architecture
+flow:
+  income_source: "Income → SoFi"
+  primary_banking: "SoFi → E*TRADE/JPMorgan"
+  crypto_deployment: "E*TRADE/JPM → Binance US"
+  active_trading: "Binance US (Sniper Engine)"
+  profit_extraction: "30% siphon → Ledger Vault"
+  vault_strategy: "HODL + LIDO staking rewards"
+  legacy_compound: "stETH rewards auto-compound"
+
+# Current Issues
+issues:
+  - "Binance US API key authentication error"
+  - "Need to reconnect Binance US API credentials"
+
+# Operational Mode
+mode: "foundation_rebuild"
+status: "cleaning_old_config_building_new"
+next_action: "fix_binance_api_then_build_monitor"
+notes: |
+  REAL EMPIRE STRUCTURE:
+  - Ledger: $7,685 (88%)
+  - Binance US: $977 (11%)
+  - LIDO: $45 rewards (0.5%)
+  
+  NO Coinbase, OKX, or Kraken active positions found
+  Focus: Binance US Sniper Engine + Ledger Vault

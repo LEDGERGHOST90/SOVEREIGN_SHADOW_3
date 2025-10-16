@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(test:*)",
+      "Read(//Users/memphis/Library/Application Support/Claude/**)",
+      "Read(//Users/memphis/Library/**)",
+      "Bash(python3:*)",
+      "Bash(docker build:*)",
+      "Read(//Volumes/LegacySafe/**)",
+      "Bash(grep:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

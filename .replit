@@ -1,0 +1,28 @@
+# Replit Configuration for SovereignShadow.Ai Trading Platform
+language = "python3"
+run = "python3 sovereign_shadow_unified.py"
+
+[nix]
+channel = "stable-23_11"
+
+[env]
+# Default to sandbox mode for safety
+SANDBOX = "1"
+DISABLE_REAL_EXCHANGES = "1"
+ENV = "dev"
+ALLOW_LIVE_EXCHANGE = "0"
+LEGACY_NO_LEDGER = "1"
+PYTHONUNBUFFERED = "1"
+
+[deployment]
+run = ["sh", "-c", "python3 sovereign_shadow_unified.py --autonomy --interval 120"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 8000
+externalPort = 80
+
+
+
+
+
