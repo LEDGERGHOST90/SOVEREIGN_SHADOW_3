@@ -1,0 +1,111 @@
+{
+  "name": "Sovereign Shadow + Claude MCP",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  
+  // 🤖 MCP Server Configuration
+  "mcp": {
+    "servers": {
+      "crypto-portfolio": {
+        "command": "python",
+        "args": ["/workspace/sovereign_legacy_loop/ClaudeSDK/mcp_exchange_server.py"],
+        "env": {
+          "PYTHONPATH": "/workspace",
+          "BINANCE_API_KEY": "${localEnv:BINANCEUS_KEY}",
+          "BINANCE_SECRET_KEY": "${localEnv:BINANCEUS_SECRET}",
+          "KRAKEN_KEY": "${localEnv:KRAKEN_KEY}",
+          "KRAKEN_SECRET": "${localEnv:KRAKEN_SECRET}",
+          "OKX_KEY": "${localEnv:OKX_KEY}",
+          "OKX_SECRET": "${localEnv:OKX_SECRET}",
+          "OKX_PASSPHRASE": "${localEnv:OKX_PASSPHRASE}"
+        }
+      }
+    }
+  },
+  
+  // 🔌 Port forwarding
+  "forwardPorts": [
+    8000,  // MCP Server
+    3000,  // Dashboard
+    5432,  // PostgreSQL
+    6379   // Redis
+  ],
+  
+  "portsAttributes": {
+    "8000": {
+      "label": "MCP/Claude Server",
+      "onAutoForward": "notify"
+    }
+  },
+  
+  // 🎨 VS Code Extensions (including Claude)
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "ms-python.black-formatter",
+        
+        // Claude/AI Integration
+        "anthropics.claude-vscode",
+        
+        // Docker
+        "ms-azuretools.vscode-docker",
+        
+        // Git
+        "eamodio.gitlens",
+        
+        // Data & Config
+        "redhat.vscode-yaml",
+        "mikestead.dotenv",
+        "mechatroner.rainbow-csv"
+      ],
+      
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "editor.formatOnSave": true,
+        
+        // Claude Configuration
+        "claude.apiKey": "${env:ANTHROPIC_API_KEY}",
+        "claude.mcpServers": {
+          "crypto-portfolio": {
+            "command": "python",
+            "args": ["/workspace/sovereign_legacy_loop/ClaudeSDK/mcp_exchange_server.py"]
+          }
+        }
+      }
+    }
+  },
+  
+  // 🔐 Environment setup
+  "containerEnv": {
+    "PYTHONPATH": "/workspace",
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+  
+  "mounts": [
+    "source=${localWorkspaceFolder}/.env,target=/workspace/.env,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/logs,target=/workspace/logs,type=bind,consistency=cached"
+  ],
+  
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  "remoteUser": "trader",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "username": "trader"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  }
+}
+

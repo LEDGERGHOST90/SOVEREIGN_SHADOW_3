@@ -24,7 +24,7 @@ from .pulse import ShadowPulse
 from .snaps import ShadowSnaps
 from .synapse import ShadowSynapse
 
-__version__ = "0.1.0-GENESIS"
+__version__ = "0.1.0"
 __all__ = ["ShadowScope", "ShadowPulse", "ShadowSnaps", "ShadowSynapse"]
 
 # Empire Constants
@@ -41,8 +41,8 @@ STOP_LOSS_PERCENT = 0.05
 CONSECUTIVE_LOSS_LIMIT = 3
 
 # Monitored Assets
-EXCHANGES = ["coinbase", "okx", "kraken", "binance"]
-PAIRS = ["BTC/USD", "ETH/USD", "SOL/USD", "XRP/USD", "ADA/USD", "DOGE/USD", "LTC/USD", "BNB/USD"]
+EXCHANGES = ["coinbase", "okx", "kraken"]
+PAIRS = ["BTC/USD", "ETH/USD", "SOL/USD", "XRP/USD", "ADA/USD", "DOGE/USD", "LTC/USD"]
 
 # System Philosophy
 PHILOSOPHY = "Fearless. Bold. Smiling through chaos."

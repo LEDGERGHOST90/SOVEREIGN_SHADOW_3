@@ -11,7 +11,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="shadow-sdk",
-    version="0.1.0-GENESIS",
+    version="0.1.0",
     author="Sovereign Shadow Empire",
     description="Internal SDK for the Sovereign Shadow Trading Empire",
     long_description=long_description,

@@ -1,0 +1,129 @@
+# 🏴 Sovereign Shadow - Docker Ignore File
+# Prevents unnecessary files from being copied into Docker images
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.cursor/
+
+# Environment & Secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.crt
+*.p12
+config/*.env
+okx_credentials.env
+trading_parameters.env
+
+# Logs
+logs/
+*.log
+*.log.*
+*.out
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (don't need in container images)
+*.md
+*.pdf
+docs/
+Master_LOOP_Creation/
+CLEANUP_BACKUP/
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+
+# Node.js (if applicable)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Sensitive data
+Crypto Tax/
+*_BACKUP/
+*.csv
+*.json
+!package.json
+!tsconfig.json
+
+# Test artifacts
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/
+
+# Deployment artifacts
+*.pyc
+__pycache__
+.cache
+

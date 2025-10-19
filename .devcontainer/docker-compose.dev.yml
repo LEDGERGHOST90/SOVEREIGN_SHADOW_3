@@ -1,0 +1,82 @@
+# 🏴 Sovereign Shadow - Dev Container with Supporting Services
+# This is OPTIONAL - only use if you need database/Redis for development
+
+version: '3.8'
+
+services:
+  # 🐍 Main Development Container
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - venv-volume:/workspace/venv
+    command: sleep infinity
+    environment:
+      - PYTHONPATH=/workspace
+      - WORKSPACE=/workspace
+    networks:
+      - shadow-dev-network
+    depends_on:
+      - postgres
+      - redis
+    # Allow debugging
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    # Increase shared memory for data processing
+    shm_size: '2gb'
+
+  # 🗄️ PostgreSQL for Development
+  postgres:
+    image: postgres:15-alpine
+    container_name: shadow-dev-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: shadow_dev
+      POSTGRES_USER: trader
+      POSTGRES_PASSWORD: devpassword123
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - shadow-dev-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trader -d shadow_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ⚡ Redis for Development
+  redis:
+    image: redis:7-alpine
+    container_name: shadow-dev-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass devredis123
+    volumes:
+      - redis-dev-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - shadow-dev-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  shadow-dev-network:
+    driver: bridge
+
+volumes:
+  postgres-dev-data:
+    driver: local
+  redis-dev-data:
+    driver: local
+  venv-volume:
+    driver: local
+

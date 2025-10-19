@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+"""
+🏴 SOVEREIGN SHADOW - MANUAL TRADE EXECUTOR
+Execute a single trade manually with full control
+"""
+
+import os
+import sys
+import ccxt
+from pathlib import Path
+from dotenv import load_dotenv
+from datetime import datetime
+
+# Load environment
+load_dotenv()
+
+def get_current_price(exchange_name, pair):
+    """Get current price from exchange"""
+    try:
+        if exchange_name.lower() == 'coinbase':
+            exchange = ccxt.coinbase({
+                'apiKey': os.getenv('COINBASE_API_KEY'),
+                'secret': os.getenv('COINBASE_API_SECRET'),
+                'enableRateLimit': True
+            })
+        elif exchange_name.lower() == 'okx':
+            exchange = ccxt.okx({
+                'apiKey': os.getenv('OKX_API_KEY'),
+                'secret': os.getenv('OKX_SECRET_KEY'),
+                'password': os.getenv('OKX_PASSPHRASE'),
+                'enableRateLimit': True
+            })
+        elif exchange_name.lower() == 'kraken':
+            exchange = ccxt.kraken({
+                'apiKey': os.getenv('KRAKEN_API_KEY'),
+                'secret': os.getenv('KRAKEN_PRIVATE_KEY'),
+                'enableRateLimit': True
+            })
+        else:
+            print(f"❌ Unknown exchange: {exchange_name}")
+            return None
+        
+        ticker = exchange.fetch_ticker(pair)
+        return {
+            'bid': ticker['bid'],
+            'ask': ticker['ask'],
+            'last': ticker['last'],
+            'volume': ticker['baseVolume']
+        }
+    except Exception as e:
+        print(f"❌ Error fetching price: {e}")
+        return None
+
+def execute_manual_trade(exchange_name, pair, side, amount_usd, dry_run=True):
+    """
+    Execute a manual trade
+    
+    Args:
+        exchange_name: 'coinbase' or 'okx'
+        pair: e.g. 'BTC/USD'
+        side: 'buy' or 'sell'
+        amount_usd: Dollar amount to trade
+        dry_run: If True, don't actually execute
+    """
+    print(f"\n{'='*70}")
+    print(f"🎯 MANUAL TRADE EXECUTION")
+    print(f"{'='*70}")
+    print(f"Exchange: {exchange_name.upper()}")
+    print(f"Pair: {pair}")
+    print(f"Side: {side.upper()}")
+    print(f"Amount: ${amount_usd:.2f}")
+    print(f"Mode: {'DRY RUN (simulation)' if dry_run else 'LIVE EXECUTION'}")
+    print(f"{'='*70}\n")
+    
+    # Get current price
+    print("📊 Fetching current price...")
+    price_data = get_current_price(exchange_name, pair)
+    
+    if not price_data:
+        print("❌ Failed to fetch price. Aborting.")
+        return False
+    
+    execution_price = price_data['ask'] if side == 'buy' else price_data['bid']
+    quantity = amount_usd / execution_price
+    
+    print(f"   Current Bid: ${price_data['bid']:,.2f}")
+    print(f"   Current Ask: ${price_data['ask']:,.2f}")
+    print(f"   Last Price: ${price_data['last']:,.2f}")
+    print(f"   24h Volume: {price_data['volume']:,.2f}")
+    print(f"   Execution Price: ${execution_price:,.2f}")
+    print(f"   Quantity: {quantity:.8f} {pair.split('/')[0]}")
+    
+    # Check position limits
+    if amount_usd > 23.20:
+        print(f"\n⚠️  WARNING: Amount ${amount_usd} exceeds max position size ($23.20)")
+        response = input("Continue anyway? (yes/no): ")
+        if response.lower() != 'yes':
+            print("❌ Trade cancelled by user")
+            return False
+    
+    if dry_run:
+        print(f"\n✅ DRY RUN: Trade would execute successfully")
+        print(f"   {side.upper()} {quantity:.8f} {pair.split('/')[0]} @ ${execution_price:,.2f}")
+        print(f"   Total: ${amount_usd:.2f}")
+        print(f"\n💡 To execute for real, run with: --live flag")
+        return True
+    
+    # LIVE EXECUTION
+    print(f"\n⚠️  ⚠️  ⚠️  LIVE TRADE EXECUTION ⚠️  ⚠️  ⚠️")
+    print(f"This will execute a REAL trade with REAL money!")
+    response = input(f"Type 'EXECUTE' to confirm: ")
+    
+    if response != 'EXECUTE':
+        print("❌ Trade cancelled by user")
+        return False
+    
+    try:
+        if exchange_name.lower() == 'coinbase':
+            exchange = ccxt.coinbase({
+                'apiKey': os.getenv('COINBASE_API_KEY'),
+                'secret': os.getenv('COINBASE_API_SECRET'),
+                'enableRateLimit': True
+            })
+        elif exchange_name.lower() == 'okx':
+            exchange = ccxt.okx({
+                'apiKey': os.getenv('OKX_API_KEY'),
+                'secret': os.getenv('OKX_SECRET_KEY'),
+                'password': os.getenv('OKX_PASSPHRASE'),
+                'enableRateLimit': True
+            })
+        elif exchange_name.lower() == 'kraken':
+            exchange = ccxt.kraken({
+                'apiKey': os.getenv('KRAKEN_API_KEY'),
+                'secret': os.getenv('KRAKEN_PRIVATE_KEY'),
+                'enableRateLimit': True
+            })
+        
+        # Execute market order
+        print(f"\n🚀 Executing {side} order...")
+        order = exchange.create_market_order(
+            symbol=pair,
+            side=side,
+            amount=quantity
+        )
+        
+        print(f"\n✅ TRADE EXECUTED SUCCESSFULLY!")
+        print(f"   Order ID: {order['id']}")
+        print(f"   Status: {order['status']}")
+        print(f"   Filled: {order.get('filled', 'N/A')}")
+        print(f"   Cost: ${order.get('cost', 'N/A'):.2f}")
+        
+        # Log trade
+        log_file = Path(__file__).parent / "logs" / "manual_trades.log"
+        log_file.parent.mkdir(exist_ok=True)
+        with open(log_file, 'a') as f:
+            f.write(f"{datetime.now()} | {exchange_name} | {pair} | {side} | ${amount_usd} | {order['id']}\n")
+        
+        return True
+        
+    except Exception as e:
+        print(f"\n❌ TRADE FAILED: {e}")
+        return False
+
+def main():
+    """Main execution"""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Execute manual trades")
+    parser.add_argument('exchange', choices=['coinbase', 'okx', 'kraken'], help="Exchange to trade on")
+    parser.add_argument('pair', help="Trading pair (e.g. BTC/USD)")
+    parser.add_argument('side', choices=['buy', 'sell'], help="Buy or sell")
+    parser.add_argument('amount', type=float, help="Amount in USD")
+    parser.add_argument('--live', action='store_true', help="Execute real trade (default is dry run)")
+    
+    args = parser.parse_args()
+    
+    success = execute_manual_trade(
+        exchange_name=args.exchange,
+        pair=args.pair,
+        side=args.side,
+        amount_usd=args.amount,
+        dry_run=not args.live
+    )
+    
+    sys.exit(0 if success else 1)
+
+if __name__ == "__main__":
+    main()
+
+

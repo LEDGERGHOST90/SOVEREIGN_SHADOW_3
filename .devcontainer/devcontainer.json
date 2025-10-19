@@ -1,0 +1,165 @@
+{
+  "name": "Sovereign Shadow Trading System",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  
+  // 🔧 Container Configuration
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  
+  // 🔌 Port forwarding for services
+  "forwardPorts": [
+    8000,  // MCP Server
+    3000,  // Dashboard
+    5432,  // PostgreSQL
+    6379   // Redis
+  ],
+  
+  "portsAttributes": {
+    "8000": {
+      "label": "MCP Server",
+      "onAutoForward": "notify"
+    },
+    "3000": {
+      "label": "Dashboard",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    }
+  },
+  
+  // 🎨 VS Code Extensions
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python Development
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        
+        // Docker
+        "ms-azuretools.vscode-docker",
+        
+        // Git
+        "eamodio.gitlens",
+        
+        // Data & Config
+        "redhat.vscode-yaml",
+        "mikestead.dotenv",
+        "mechatroner.rainbow-csv",
+        
+        // Utilities
+        "streetsidesoftware.code-spell-checker",
+        "gruntfuggly.todo-tree",
+        "aaron-bond.better-comments"
+      ],
+      
+      "settings": {
+        // Python Configuration
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": ["--line-length", "120"],
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoImportCompletions": true,
+        
+        // Editor
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "editor.rulers": [120],
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        
+        // Terminal
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        },
+        
+        // Security
+        "files.exclude": {
+          "**/.env": false,
+          "**/*.pyc": true,
+          "**/__pycache__": true,
+          "**/.pytest_cache": true,
+          "**/.mypy_cache": true
+        },
+        
+        // Git
+        "git.autofetch": true,
+        "git.confirmSync": false
+      }
+    }
+  },
+  
+  // 🔐 Mount .env file securely (never copied into image)
+  "mounts": [
+    "source=${localWorkspaceFolder}/.env,target=/workspace/.env,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/logs,target=/workspace/logs,type=bind,consistency=cached",
+    "source=sovereign-shadow-venv,target=/workspace/venv,type=volume"
+  ],
+  
+  // 🚀 Post-creation commands
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  
+  // 👤 Run as non-root user
+  "remoteUser": "trader",
+  "containerUser": "trader",
+  
+  // 🌍 Environment variables
+  "containerEnv": {
+    "PYTHONPATH": "/workspace",
+    "PYTHONUNBUFFERED": "1",
+    "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+    "WORKSPACE": "/workspace"
+  },
+  
+  // 🎯 Features to add to the container
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "configureZshAsDefaultShell": true,
+      "username": "trader"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": false
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": true
+    }
+  },
+  
+  // 🔧 Additional capabilities
+  "capAdd": [
+    "SYS_PTRACE"
+  ],
+  
+  // 🔒 Security options
+  "securityOpt": [
+    "seccomp=unconfined"
+  ],
+  
+  // 💾 Increase shared memory (for data processing)
+  "runArgs": [
+    "--shm-size=2g"
+  ]
+}
+

@@ -1,37 +1,57 @@
 # 🔒 SOVEREIGN SHADOW - FORTRESS PROTECTION
 # NEVER COMMIT THESE - YOUR COMPETITIVE EDGE DEPENDS ON IT
 
-# API KEYS AND SECRETS (CRITICAL)
+# ════════════════════════════════════════
+# 🛡️ API KEYS AND SECRETS (CRITICAL)
+# ════════════════════════════════════════
 .env
-.env.production
-.env.local
 .env.*
+*.env
 *.key
 *.pem
 *_api_key*
 *credentials*
 *secret*
+*passphrase*
+*password*
 config/secrets/
 config/*.env
 config/*credentials*
 config/*secret*
+config/*.yaml
+config/*.yml
+config/*.json
+okx_credentials.env
+trading_parameters.env
 
-# LIVE TRADING DATA (PROPRIETARY)
+# ════════════════════════════════════════
+# 🏦 LIVE TRADING DATA (PROPRIETARY)
+# ════════════════════════════════════════
 data/exports/*_live.csv
 data/production/
 logs/production/
 logs/live_trading.log
 logs/api_validation.json
+logs/ai_enhanced/*.json
+logs/ai_enhanced/*.log
+real_balances.json
+portfolio_snapshot.json
 
-# COMPETITIVE ADVANTAGE (WORTH MILLIONS)
+# ════════════════════════════════════════
+# 💎 COMPETITIVE ADVANTAGE (WORTH MILLIONS)
+# ════════════════════════════════════════
 strategies/proprietary/
 algorithms/secret/
 strategies/real/
 algorithms/live/
 proprietary/
 secret_sauce/
+*_live_trading_*
+*_real_strategy_*
 
-# PYTHON CACHE
+# ════════════════════════════════════════
+# 🐍 PYTHON CACHE
+# ════════════════════════════════════════
 __pycache__/
 *.pyc
 *.pyo
@@ -53,42 +73,79 @@ wheels/
 .installed.cfg
 *.egg
 
-# VIRTUAL ENVIRONMENTS
+# ════════════════════════════════════════
+# 🌐 VIRTUAL ENVIRONMENTS
+# ════════════════════════════════════════
 venv/
 env/
 ENV/
 .venv/
+node_modules/
 
-# IDE FILES
+# ════════════════════════════════════════
+# 💻 IDE FILES
+# ════════════════════════════════════════
 .vscode/
 .idea/
+.cursor/
 *.swp
 *.swo
 *~
 
-# OS FILES
+# ════════════════════════════════════════
+# 🖥️ OS FILES
+# ════════════════════════════════════════
 .DS_Store
 Thumbs.db
 *.tmp
 *.temp
 
-# DOCKER SECRETS
+# ════════════════════════════════════════
+# 🐳 DOCKER SECRETS
+# ════════════════════════════════════════
 docker-compose.override.yml
 .env.docker
 
-# TRADING LOGS (CONTAINS EDGE)
+# ════════════════════════════════════════
+# 📊 TRADING LOGS (CONTAINS EDGE)
+# ════════════════════════════════════════
 *.trade.log
 *.arbitrage.log
 *.snipe.log
 performance/
+logs/*.log
+logs/**/*.log
 
-# BACKUP FILES
+# ════════════════════════════════════════
+# 💾 BACKUP FILES
+# ════════════════════════════════════════
 *.backup
 *.bak
 *.old
+CLEANUP_BACKUP/
 
-# TEST FILES WITH REAL DATA
+# ════════════════════════════════════════
+# 🧪 TEST FILES WITH REAL DATA
+# ════════════════════════════════════════
 *_test_live.py
 *_production_test.py
+test_coinbase_*.py
+check_*_balance.py
+
+# ════════════════════════════════════════
+# 📦 TAR/ZIP ARCHIVES (MAY CONTAIN SECRETS)
+# ════════════════════════════════════════
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# ════════════════════════════════════════
+# 🔐 OBSIDIAN ENCRYPTED VAULT
+# ════════════════════════════════════════
+.obsidian-vault/
+ObsidianVault/
+*obsidian*/secrets/
+*obsidian*/api-keys/
 
 # YOUR EDGE IS SAFE NOW 🔒

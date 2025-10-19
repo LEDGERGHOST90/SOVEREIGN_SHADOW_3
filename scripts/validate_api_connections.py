@@ -194,54 +194,6 @@ class ExchangeValidator:
         finally:
             self.results['summary']['tested'] += 1
     
-    def test_binance_us(self):
-        """Test Binance US API"""
-        exchange_name = "Binance US"
-        print(f"\n🔍 Testing {exchange_name}...")
-        
-        try:
-            api_key = os.getenv('BINANCE_US_API_KEY')
-            secret = os.getenv('BINANCE_US_SECRET')
-            
-            if not api_key or not secret:
-                raise ValueError("API credentials not found in environment")
-            
-            exchange = ccxt.binanceus({
-                'apiKey': api_key,
-                'secret': secret,
-                'enableRateLimit': True
-            })
-            
-            # Test connection
-            balance = exchange.fetch_balance()
-            
-            total_usd = balance.get('total', {}).get('USD', 0)
-            assets = {k: v for k, v in balance['total'].items() if v > 0}
-            
-            self.results['exchanges'][exchange_name] = {
-                'status': 'connected',
-                'balance_usd': total_usd,
-                'assets': assets,
-                'api_key': f"{api_key[:10]}..." if api_key else None
-            }
-            
-            print(f"   ✅ Connected successfully")
-            print(f"   💰 Balance: ${total_usd:.2f} USD")
-            print(f"   📊 Assets: {list(assets.keys())}")
-            
-            self.results['summary']['working'] += 1
-            return True
-            
-        except Exception as e:
-            self.results['exchanges'][exchange_name] = {
-                'status': 'failed',
-                'error': str(e)
-            }
-            print(f"   ❌ Connection failed: {str(e)[:100]}")
-            self.results['summary']['failed'] += 1
-            return False
-        finally:
-            self.results['summary']['tested'] += 1
     
     def run_all_tests(self):
         """Run validation on all exchanges"""
@@ -252,7 +204,6 @@ class ExchangeValidator:
         self.test_coinbase()
         self.test_okx()
         self.test_kraken()
-        self.test_binance_us()
         
         # Summary
         print("\n" + "="*70)
@@ -289,7 +240,7 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Validate exchange API connections")
-    parser.add_argument('--exchange', help="Test specific exchange (coinbase, okx, kraken, binance)")
+    parser.add_argument('--exchange', help="Test specific exchange (coinbase, okx, kraken)")
     parser.add_argument('--full-test', action='store_true', help="Run comprehensive tests")
     
     args = parser.parse_args()
@@ -304,8 +255,6 @@ def main():
             validator.test_okx()
         elif exchange == 'kraken':
             validator.test_kraken()
-        elif exchange == 'binance':
-            validator.test_binance_us()
         else:
             print(f"Unknown exchange: {exchange}")
             sys.exit(1)

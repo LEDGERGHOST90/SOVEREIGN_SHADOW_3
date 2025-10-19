@@ -57,8 +57,7 @@ class ShadowScope:
         self.exchanges = {
             'coinbase': {'api_key': '', 'secret': '', 'reliability': 0.95},
             'okx': {'api_key': '', 'secret': '', 'reliability': 0.92},
-            'kraken': {'api_key': '', 'secret': '', 'reliability': 0.90},
-            'binance': {'api_key': '', 'secret': '', 'reliability': 0.88}
+            'kraken': {'api_key': '', 'secret': '', 'reliability': 0.90}
         }
         
         self.pairs = [
