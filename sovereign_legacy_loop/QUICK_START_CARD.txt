@@ -1,0 +1,37 @@
+╔══════════════════════════════════════════════════════════════════╗
+║   🏰 SOVEREIGN SHADOW AI - QUICK START CARD                      ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📋 RESTORE SESSION:
+------------------
+Say: "bring up what we did last"
+
+Then run:
+cd /Volumes/LegacySafe/SovereignShadow.Ai[LegacyLoop]
+source multi-exchange-crypto-mcp/crypto_empire_env/bin/activate
+python3 sovereign_shadow_unified.py
+
+🎯 CURRENT STATUS: 83% Operational
+----------------------------------
+✅ Kraken: $150+ portfolio (9 positions)
+✅ OKX: Connected (needs API refresh)
+✅ Arbitrage: 0.125% BTC opportunities detected
+✅ Security: Ledger + AES-256 encryption
+
+⚡ NEXT PRIORITIES:
+------------------
+1. Update OKX API key (5 min)
+2. Fix Coinbase API key (10 min)  
+3. Execute arbitrage (immediate)
+
+💰 Bitcoin Volatility: HIGH 🚨
+🎯 Profit Spreads: 0.1228% average
+📊 Portfolio Value: $150+
+
+Files Saved:
+• SESSION_COMPLETE_SUMMARY.txt (detailed status)
+• SYSTEM_STATE_SAVE.txt (recovery info)
+• logs/ai_enhanced/sovereign_shadow_unified_report.json (full report)
+
+🛡️ Safety: FAKE mode active - No real trades without permission
+╚══════════════════════════════════════════════════════════════════╝

@@ -1,0 +1,523 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "darwin-arm64", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  username      String    @unique
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  firstName     String?
+  lastName      String?
+  role          UserRole  @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts       Account[]
+  sessions       Session[]
+  portfolios     Portfolio[]
+  trades         Trade[]
+  vaultLogs      VaultLog[]
+  agentMilestones AgentMilestone[]
+  agentReflections AgentReflection[]
+  agentHighlights AgentHighlight[]
+  settings       UserSettings?
+  
+  // Oracle-inspired RWA relationships
+  rwaAssets      RWAAsset[]
+  rwaTransactions RWATransaction[]
+  wealthMilestones WealthMilestone[]
+  rwaVaults      RWAVault[]
+  
+  // Enhanced Siphon Analytics relationships
+  siphonAnalytics SiphonAnalytics[]
+  portfolioSnapshots PortfolioSnapshot[]
+  
+  // Advanced Trading Engine relationships
+  tradeExecutions TradeExecution[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model Portfolio {
+  id           String   @id @default(cuid())
+  userId       String
+  asset        String   // BTC, ETH, etc.
+  balance      Decimal  @db.Decimal(18, 8)
+  hotBalance   Decimal  @db.Decimal(18, 8) @default(0)
+  coldBalance  Decimal  @db.Decimal(18, 8) @default(0)
+  avgBuyPrice  Decimal  @db.Decimal(18, 8) @default(0)
+  averagePrice Decimal  @db.Decimal(18, 8) @default(0) // Alias for enhanced siphon compatibility  
+  currentPrice Decimal  @db.Decimal(18, 8) @default(0) // Latest market price
+  totalInvested Decimal @db.Decimal(18, 8) @default(0)
+  lastUpdated  DateTime @default(now())
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trades       Trade[]  // Add relation to trades
+  
+  @@unique([userId, asset])
+}
+
+model Trade {
+  id           String      @id @default(cuid())
+  userId       String
+  portfolioId  String?     // Optional relation to portfolio
+  asset        String
+  type         TradeType
+  side         TradeSide
+  quantity     Decimal     @db.Decimal(18, 8) // Enhanced siphon compatibility
+  amount       Decimal     @db.Decimal(18, 8)
+  price        Decimal     @db.Decimal(18, 8)
+  fee          Decimal     @db.Decimal(18, 8) @default(0)
+  pnl          Decimal?    @db.Decimal(18, 8)
+  profit       Decimal?    @db.Decimal(18, 8) // Alias for enhanced siphon compatibility
+  strategy     String?
+  status       TradeStatus @default(PENDING)
+  binanceOrderId String?
+  executedAt   DateTime?
+  createdAt    DateTime    @default(now())
+  
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolio    Portfolio?  @relation(fields: [portfolioId], references: [id], onDelete: SetNull)
+}
+
+enum TradeType {
+  MARKET
+  LIMIT
+  STOP_LOSS
+  SCALP
+  SNIPE
+}
+
+enum TradeSide {
+  BUY
+  SELL
+}
+
+enum TradeStatus {
+  PENDING
+  FILLED
+  PARTIALLY_FILLED
+  CANCELLED
+  FAILED
+}
+
+// Advanced Trading Engine - AI-powered trade execution tracking
+model TradeExecution {
+  id                String   @id @default(cuid())
+  userId            String
+  orderId           String   @unique
+  symbol            String
+  side              String   // "BUY", "SELL"
+  type              String   // "MARKET", "LIMIT", etc.
+  quantity          Decimal  @db.Decimal(18, 8)
+  price             Decimal  @db.Decimal(18, 8)
+  status            String   // "PENDING", "FILLED", "CANCELLED"
+  executionStrategy String   // "AGGRESSIVE", "CONSERVATIVE", "BALANCED"
+  riskLevel         String   // "LOW", "MEDIUM", "HIGH"
+  expectedProfit    Decimal  @db.Decimal(8, 4)
+  maxLoss           Decimal  @db.Decimal(8, 4)
+  actualProfit      Decimal? @db.Decimal(8, 4)
+  feesPaid          Decimal? @db.Decimal(18, 8)
+  filledAt          DateTime?
+  metadata          Json?    // AI analysis, market conditions, etc.
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("trade_executions")
+}
+
+model VaultLog {
+  id          String    @id @default(cuid())
+  userId      String
+  asset       String
+  amount      Decimal   @db.Decimal(18, 8)
+  type        VaultType
+  fromWallet  String    // hot/cold
+  toWallet    String    // hot/cold
+  txHash      String?
+  status      VaultStatus @default(PENDING)
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum VaultType {
+  SIPHON
+  GRADUATION
+  EMERGENCY_WITHDRAWAL
+  MANUAL_TRANSFER
+}
+
+enum VaultStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model AgentMilestone {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  description String?
+  category    String   // wealth, trading, security, etc.
+  achieved    Boolean  @default(false)
+  achievedAt  DateTime?
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AgentReflection {
+  id          String   @id @default(cuid())
+  userId      String
+  content     String   @db.Text
+  mood        String?  // confident, cautious, excited, etc.
+  tags        String[] // JSON array of tags
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AgentHighlight {
+  id          String           @id @default(cuid())
+  userId      String
+  component   String          // component name
+  issue       String          @db.Text
+  severity    HighlightSeverity
+  status      HighlightStatus @default(OPEN)
+  resolvedAt  DateTime?
+  createdAt   DateTime        @default(now())
+  
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum HighlightSeverity {
+  LOW      // Green
+  MEDIUM   // Yellow 
+  HIGH     // Red
+}
+
+enum HighlightStatus {
+  OPEN
+  RESOLVED
+  DISMISSED
+}
+
+model UserSettings {
+  id                   String  @id @default(cuid())
+  userId               String  @unique
+  apiKey               String? // Encrypted Binance API key
+  apiSecret            String? // Encrypted Binance API secret
+  liveTrading          Boolean @default(false)
+  dailyLimit           Decimal @db.Decimal(18, 8) @default(1000)
+  
+  // Hybrid Siphon Configuration
+  siphonThreshold      Decimal @db.Decimal(18, 8) @default(3500) // $3,500 trigger threshold
+  siphonRatio          Decimal @db.Decimal(3, 2) @default(0.30) // 30% to vault (changed from 70%)
+  retentionRatio       Decimal @db.Decimal(3, 2) @default(0.70) // 70% retained hot
+  volatilityAdjustment Decimal @db.Decimal(3, 2) @default(0.10) // ±10% volatility adjustment
+  autoSiphon           Boolean @default(false) // Auto-execute siphons
+  
+  graduationThreshold  Decimal @db.Decimal(18, 8) @default(3500)
+  agentReviewInterval  Int     @default(24) // hours
+  agentStrictMode      Boolean @default(false)
+  riskLevel            String  @default("MODERATE") // CONSERVATIVE, MODERATE, AGGRESSIVE
+  
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SystemHealth {
+  id              String   @id @default(cuid())
+  binanceStatus   Boolean  @default(true)
+  databaseStatus  Boolean  @default(true)
+  aiAdvisorStatus Boolean  @default(true)
+  vaultStatus     Boolean  @default(true)
+  ondoStatus      Boolean  @default(true)
+  ibkrStatus      Boolean  @default(true)
+  lastCheck       DateTime @default(now())
+}
+
+// Real World Assets - Inspired by Oracle's AI Infrastructure Boom
+model RWAAsset {
+  id              String      @id @default(cuid())
+  userId          String
+  assetType       RWAAssetType
+  symbol          String      // OUSG, USDY, OMMF, etc.
+  name            String      // "Ondo Short-Term US Government Bond Fund"
+  balance         Decimal     @db.Decimal(18, 8)
+  value           Decimal     @db.Decimal(18, 2) // USD value
+  yield           Decimal     @db.Decimal(5, 4) @default(0) // Annual yield percentage
+  maturityDate    DateTime?
+  issuer          String?     // "Ondo Finance", "BlackRock", etc.
+  underlying      String?     // "US Treasuries", "Corporate Bonds", etc.
+  
+  // Oracle-inspired wealth tracking
+  historicalHigh  Decimal     @db.Decimal(18, 2) @default(0)
+  historicalLow   Decimal     @db.Decimal(18, 2) @default(0)
+  dayChange       Decimal     @db.Decimal(18, 2) @default(0)
+  dayChangePercent Decimal    @db.Decimal(8, 4) @default(0)
+  weekChange      Decimal     @db.Decimal(18, 2) @default(0)
+  monthChange     Decimal     @db.Decimal(18, 2) @default(0)
+  
+  lastUpdated     DateTime    @default(now())
+  createdAt       DateTime    @default(now())
+  
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions    RWATransaction[]
+  
+  @@unique([userId, symbol])
+}
+
+enum RWAAssetType {
+  TOKENIZED_TREASURY    // OUSG, USDY
+  MONEY_MARKET         // OMMF
+  TOKENIZED_STOCK      // Through Ondo Global Markets
+  PRIVATE_CREDIT       // Private debt instruments
+  REAL_ESTATE          // Tokenized real estate
+  COMMODITIES          // Tokenized commodities
+}
+
+model RWATransaction {
+  id              String            @id @default(cuid())
+  userId          String
+  rwaAssetId      String
+  type            RWATransactionType
+  amount          Decimal           @db.Decimal(18, 8)
+  price           Decimal           @db.Decimal(18, 8)
+  value           Decimal           @db.Decimal(18, 2)
+  fee             Decimal           @db.Decimal(18, 2) @default(0)
+  txHash          String?           // Blockchain transaction hash
+  brokerOrderId   String?           // Interactive Brokers order ID
+  ondoOrderId     String?           // Ondo Finance order ID
+  status          TransactionStatus @default(PENDING)
+  executedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rwaAsset        RWAAsset          @relation(fields: [rwaAssetId], references: [id], onDelete: Cascade)
+}
+
+enum RWATransactionType {
+  MINT            // Mint tokenized asset
+  REDEEM          // Redeem for underlying
+  TRANSFER        // Transfer between wallets
+  DIVIDEND        // Dividend/yield payment
+  APPRECIATION    // Value appreciation
+}
+
+enum TransactionStatus {
+  PENDING
+  CONFIRMED
+  SETTLED
+  FAILED
+  CANCELLED
+}
+
+// Oracle Wealth Surge Tracking - Inspired by Ellison's $393B milestone
+model WealthMilestone {
+  id              String      @id @default(cuid())
+  userId          String
+  milestoneType   WealthType
+  amount          Decimal     @db.Decimal(18, 2)
+  achievedAt      DateTime    @default(now())
+  description     String      @db.Text
+  
+  // Oracle-inspired metrics
+  trigger         String      // "Oracle AI Infrastructure Surge", "RWA Yield Compound"
+  dayGain         Decimal     @db.Decimal(18, 2) @default(0)
+  percentGain     Decimal     @db.Decimal(8, 4) @default(0)
+  assetClass      String      // "RWA", "Crypto", "Stocks", "Mixed"
+  
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum WealthType {
+  NET_WORTH_MILESTONE   // $100K, $1M, $10M, etc.
+  DAILY_GAIN_RECORD     // Largest single-day gain
+  PORTFOLIO_ALL_TIME_HIGH
+  RWA_YIELD_MILESTONE
+  VAULT_GRADUATION
+}
+
+// RWA Vault Management - Inspired by Oracle's Systematic Wealth Preservation
+model RWAVault {
+  id              String      @id @default(cuid())
+  userId          String
+  name            String      // "Treasury Vault", "Yield Vault", etc.
+  description     String?     @db.Text
+  strategy        VaultStrategy
+  
+  // Vault composition
+  targetAllocation Decimal    @db.Decimal(5, 2) // Percentage of portfolio
+  currentValue    Decimal     @db.Decimal(18, 2) @default(0)
+  totalDeposits   Decimal     @db.Decimal(18, 2) @default(0)
+  totalYield      Decimal     @db.Decimal(18, 2) @default(0)
+  averageYield    Decimal     @db.Decimal(5, 4) @default(0)
+  
+  // Oracle-inspired automation
+  autoRebalance   Boolean     @default(true)
+  rebalanceThreshold Decimal  @db.Decimal(5, 2) @default(5.00) // 5% deviation
+  lastRebalance   DateTime?
+  nextRebalance   DateTime?
+  
+  isActive        Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  allocations     VaultAllocation[]
+}
+
+enum VaultStrategy {
+  CONSERVATIVE    // Heavy Treasury focus, low risk
+  BALANCED        // Mixed RWA assets
+  GROWTH          // Higher yield, moderate risk
+  ORACLE_INSPIRED // Mimics Oracle's wealth strategy
+}
+
+model VaultAllocation {
+  id              String      @id @default(cuid())
+  vaultId         String
+  assetType       RWAAssetType
+  symbol          String
+  targetPercent   Decimal     @db.Decimal(5, 2) // Target allocation %
+  currentPercent  Decimal     @db.Decimal(5, 2) @default(0) // Current allocation %
+  currentValue    Decimal     @db.Decimal(18, 2) @default(0)
+  
+  vault           RWAVault    @relation(fields: [vaultId], references: [id], onDelete: Cascade)
+  
+  @@unique([vaultId, symbol])
+}
+
+// Enhanced Siphon Analytics - Real-time wealth preservation tracking
+model SiphonAnalytics {
+  id                    String   @id @default(cuid())
+  userId                String
+  executionDate         DateTime @default(now())
+  
+  // Portfolio state at execution
+  totalPortfolioValue   Decimal  @db.Decimal(18, 2)
+  realizedPnL          Decimal  @db.Decimal(18, 2)
+  unrealizedPnL        Decimal  @db.Decimal(18, 2)
+  
+  // Siphon execution details
+  siphonedAmount       Decimal  @db.Decimal(18, 2)
+  retainedAmount       Decimal  @db.Decimal(18, 2)
+  siphonRatio          Decimal  @db.Decimal(5, 4) // Actual ratio used
+  
+  // Optimization metrics
+  feesSaved            Decimal  @db.Decimal(18, 2) @default(0)
+  urgencyLevel         String   // LOW, MEDIUM, HIGH, CRITICAL
+  marketConditions     String   @db.Text
+  
+  // Performance tracking
+  efficiencyScore      Decimal? @db.Decimal(5, 2) // 0-100 score
+  
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId, executionDate])
+}
+
+// Real-time Portfolio Snapshots - For tracking live performance
+model PortfolioSnapshot {
+  id                   String   @id @default(cuid())
+  userId               String
+  snapshotTime         DateTime @default(now())
+  
+  // Portfolio composition
+  totalValue           Decimal  @db.Decimal(18, 2)
+  totalProfit          Decimal  @db.Decimal(18, 2)
+  unrealizedPnL        Decimal  @db.Decimal(18, 2)
+  realizedPnL          Decimal  @db.Decimal(18, 2)
+  
+  // Performance metrics
+  dayChange            Decimal  @db.Decimal(18, 2) @default(0)
+  dayChangePercent     Decimal  @db.Decimal(5, 2) @default(0)
+  profitVelocity       Decimal  @db.Decimal(5, 2) @default(0) // Profit rate %
+  
+  // Risk assessment
+  riskLevel            String   @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
+  volatilityIndex      Decimal  @db.Decimal(5, 2) @default(0)
+  
+  // Market conditions
+  marketRegime         String   @default("NORMAL") // BULL, BEAR, SIDEWAYS, VOLATILE
+  
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  positions            SnapshotPosition[]
+  
+  @@index([userId, snapshotTime])
+}
+
+// Individual position snapshots
+model SnapshotPosition {
+  id               String   @id @default(cuid())
+  snapshotId       String
+  
+  asset            String
+  symbol           String
+  quantity         Decimal  @db.Decimal(18, 8)
+  avgPrice         Decimal  @db.Decimal(18, 8)
+  currentPrice     Decimal  @db.Decimal(18, 8)
+  unrealizedPnL    Decimal  @db.Decimal(18, 2)
+  realizedPnL      Decimal  @db.Decimal(18, 2)
+  percentChange    Decimal  @db.Decimal(5, 2)
+  
+  snapshot         PortfolioSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+  
+  @@unique([snapshotId, symbol])
+}

@@ -1,0 +1,29 @@
+{
+  "name": "sovereign_legacy_loop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Memphispradda/sovereign-legacy-loop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Memphispradda/sovereign-legacy-loop/issues"
+  },
+  "homepage": "https://github.com/Memphispradda/sovereign-legacy-loop#readme",
+  "description": "",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.65.0",
+    "@coinbase/agentkit": "^0.10.3",
+    "@coinbase/cdp-sdk": "^1.38.4",
+    "@coinbase/onchainkit": "^1.1.1"
+  }
+}

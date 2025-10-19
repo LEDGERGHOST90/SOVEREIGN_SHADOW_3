@@ -1,0 +1,102 @@
+
+# DeFi Policy for The Sovereign Legacy Loop
+# Explicit guardrails for non-custodial wallet operations
+
+version: "1.0"
+updated: "2025-10-04"
+
+guardrails:
+  # Global DeFi controls
+  allow_defi_actions: false  # Must be explicitly enabled
+  allow_bridge_operations: false
+  allow_ledger_withdrawals: false
+  
+  # Environment requirements
+  require_prod_for_live: true
+  require_explicit_live_flag: true
+  
+  # Risk limits
+  max_single_defi_trade_percent: 5  # Max 5% of portfolio per trade
+  max_daily_defi_volume_percent: 15  # Max 15% of portfolio per day
+  min_ledger_confirmation_usd: 1000  # Require manual confirmation above $1000
+  
+  # Slippage controls
+  max_slippage_tolerance: 5.0  # 5% max slippage
+  default_slippage_tolerance: 0.5  # 0.5% default
+  
+  # Gas controls
+  max_gas_price_gwei: 100
+  max_transaction_fee_usd: 50
+
+wallets:
+  metamask:
+    enabled: true
+    purpose: "EVM DeFi rail (Uniswap, Sushi, Polygon, Arbitrum)"
+    supported_chains:
+      - ethereum
+      - polygon
+      - arbitrum
+      - optimism
+      - base
+    default_chain: ethereum
+    
+  phantom:
+    enabled: true
+    purpose: "Solana DeFi rail (Serum, Orca, BONK, PENGU)"
+    supported_chains:
+      - solana
+    default_dex: orca
+    
+  walletconnect:
+    enabled: true
+    purpose: "Generic mobile wallet connector"
+    supported_chains:
+      - ethereum
+      - polygon
+      - solana
+    
+  ledger:
+    enabled: true
+    purpose: "Vault sink (final cold storage)"
+    require_manual_confirmation: true
+    supported_assets:
+      - BTC
+      - ETH
+      - XRP
+      - stETH
+      - SOL
+
+strategies:
+  # Personal strategy mappings (Raymond's preferences)
+  polyx_ladder:
+    chain: polygon
+    wallet: metamask
+    dex: uniswap_v3
+    use_case: "EVM-native token ladders on Polygon"
+    
+  bonk_snipe:
+    chain: solana
+    wallet: phantom
+    dex: orca
+    use_case: "Solana memecoin fast entry/exit"
+    
+  vault_siphon:
+    destination: ledger
+    require_bridge_finality: true
+    require_manual_sign: true
+    use_case: "Final cold storage sink"
+
+audit:
+  log_all_live_attempts: true
+  require_pre_trade_snapshot: true
+  require_post_trade_reconciliation: true
+  
+compliance:
+  kyc_required_above_usd: 10000
+  report_large_moves: true
+  maintain_transaction_history: true
+
+emergency:
+  enable_kill_switch: true
+  kill_switch_env_var: "EMERGENCY_STOP_DEFI"
+  fallback_mode: "FAKE"
