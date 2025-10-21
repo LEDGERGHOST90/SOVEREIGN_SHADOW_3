@@ -1,0 +1,537 @@
+{
+  "dashboard": {
+    "name": "SovereignShadow VES Command Center",
+    "version": "1.0.0",
+    "description": "Unified monitoring and control interface for Vault-Engine-Siphon architecture",
+    "last_updated": "2025-10-21",
+    
+    "sections": {
+      "overview": {
+        "title": "System Overview",
+        "refresh_rate": "1m",
+        "widgets": [
+          {
+            "id": "total_portfolio_value",
+            "type": "metric",
+            "title": "Total Portfolio Value",
+            "data_source": "aggregated",
+            "format": "currency_usd",
+            "size": "large",
+            "color_rules": {
+              "positive": "green",
+              "negative": "red"
+            }
+          },
+          {
+            "id": "24h_pnl",
+            "type": "metric",
+            "title": "24H P&L",
+            "data_source": "engine.daily_pnl",
+            "format": "currency_usd_change",
+            "size": "medium"
+          },
+          {
+            "id": "system_health",
+            "type": "health_indicator",
+            "title": "System Health",
+            "data_sources": [
+              "vault.health_score",
+              "engine.status",
+              "siphon.last_run"
+            ],
+            "thresholds": {
+              "critical": 50,
+              "warning": 75,
+              "healthy": 90
+            }
+          },
+          {
+            "id": "active_alerts",
+            "type": "alert_list",
+            "title": "Active Alerts",
+            "max_items": 5,
+            "priority_filter": ["critical", "warning"]
+          }
+        ]
+      },
+      
+      "vault_layer": {
+        "title": "Vault (Cold Storage)",
+        "icon": "🏦",
+        "refresh_rate": "5m",
+        "widgets": [
+          {
+            "id": "vault_composition",
+            "type": "pie_chart",
+            "title": "Asset Allocation",
+            "data_source": "vault.positions",
+            "show_percentages": true,
+            "show_values": true
+          },
+          {
+            "id": "vault_value",
+            "type": "metric",
+            "title": "Total Vault Value",
+            "data_source": "vault.total_value_usd",
+            "format": "currency_usd",
+            "size": "large"
+          },
+          {
+            "id": "yield_metrics",
+            "type": "table",
+            "title": "Yield Generation",
+            "columns": [
+              {
+                "key": "asset",
+                "label": "Asset",
+                "width": "25%"
+              },
+              {
+                "key": "apy",
+                "label": "APY",
+                "format": "percentage",
+                "width": "20%"
+              },
+              {
+                "key": "daily_yield",
+                "label": "Daily Yield",
+                "format": "currency_usd",
+                "width": "25%"
+              },
+              {
+                "key": "accumulated",
+                "label": "Accumulated",
+                "format": "currency_usd",
+                "width": "30%"
+              }
+            ],
+            "data_source": "vault.yield_data",
+            "sortable": true
+          },
+          {
+            "id": "collateral_health",
+            "type": "gauge",
+            "title": "Collateral Health",
+            "data_source": "vault.collateral_ratio",
+            "min": 1.0,
+            "max": 3.0,
+            "thresholds": {
+              "danger": 1.3,
+              "warning": 1.5,
+              "safe": 2.0
+            }
+          },
+          {
+            "id": "rebalance_suggestions",
+            "type": "action_list",
+            "title": "Rebalancing Needed",
+            "data_source": "vault.rebalancing_targets",
+            "show_if_empty": false
+          }
+        ]
+      },
+      
+      "engine_layer": {
+        "title": "Engine (Active Trading)",
+        "icon": "⚡",
+        "refresh_rate": "30s",
+        "widgets": [
+          {
+            "id": "open_positions",
+            "type": "position_tracker",
+            "title": "Active Positions",
+            "columns": [
+              {
+                "key": "symbol",
+                "label": "Symbol",
+                "width": "15%"
+              },
+              {
+                "key": "side",
+                "label": "Side",
+                "width": "10%",
+                "color_map": {
+                  "BUY": "green",
+                  "SELL": "red"
+                }
+              },
+              {
+                "key": "entry_price",
+                "label": "Entry",
+                "format": "currency_usd",
+                "width": "15%"
+              },
+              {
+                "key": "current_price",
+                "label": "Current",
+                "format": "currency_usd",
+                "width": "15%"
+              },
+              {
+                "key": "pnl",
+                "label": "P&L",
+                "format": "currency_usd_change",
+                "width": "15%"
+              },
+              {
+                "key": "pnl_percent",
+                "label": "P&L %",
+                "format": "percentage_change",
+                "width": "15%"
+              },
+              {
+                "key": "actions",
+                "label": "Actions",
+                "type": "buttons",
+                "buttons": ["close", "modify"],
+                "width": "15%"
+              }
+            ],
+            "data_source": "engine.positions",
+            "auto_refresh": true
+          },
+          {
+            "id": "trading_performance",
+            "type": "stats_grid",
+            "title": "Performance Metrics",
+            "metrics": [
+              {
+                "label": "Win Rate",
+                "data_source": "engine.win_rate",
+                "format": "percentage"
+              },
+              {
+                "label": "Total Trades",
+                "data_source": "engine.total_trades",
+                "format": "number"
+              },
+              {
+                "label": "Avg Win",
+                "data_source": "engine.avg_win",
+                "format": "currency_usd"
+              },
+              {
+                "label": "Avg Loss",
+                "data_source": "engine.avg_loss",
+                "format": "currency_usd"
+              }
+            ]
+          },
+          {
+            "id": "recent_trades",
+            "type": "trade_history",
+            "title": "Recent Trades",
+            "limit": 10,
+            "data_source": "engine.trade_history",
+            "show_chart": true
+          },
+          {
+            "id": "risk_limits",
+            "type": "progress_bars",
+            "title": "Risk Utilization",
+            "items": [
+              {
+                "label": "Daily Loss Limit",
+                "current": "engine.daily_loss",
+                "max": "config.daily_loss_limit",
+                "format": "currency_usd",
+                "color_thresholds": {
+                  "0-50": "green",
+                  "50-75": "yellow",
+                  "75-90": "orange",
+                  "90-100": "red"
+                }
+              },
+              {
+                "label": "Position Count",
+                "current": "engine.position_count",
+                "max": "config.max_positions",
+                "format": "number"
+              },
+              {
+                "label": "Capital Deployed",
+                "current": "engine.capital_deployed",
+                "max": "engine.total_capital",
+                "format": "percentage"
+              }
+            ]
+          }
+        ]
+      },
+      
+      "siphon_layer": {
+        "title": "Siphon (Profit Distribution)",
+        "icon": "💧",
+        "refresh_rate": "1m",
+        "widgets": [
+          {
+            "id": "distribution_flow",
+            "type": "sankey_diagram",
+            "title": "Profit Flow",
+            "data_source": "siphon.distributions",
+            "show_amounts": true,
+            "time_range": "7d"
+          },
+          {
+            "id": "distribution_stats",
+            "type": "stat_cards",
+            "title": "Distribution Statistics",
+            "cards": [
+              {
+                "label": "Total Distributed",
+                "value": "siphon.total_distributed",
+                "format": "currency_usd",
+                "icon": "📊"
+              },
+              {
+                "label": "Distributions",
+                "value": "siphon.distribution_count",
+                "format": "number",
+                "icon": "🔄"
+              },
+              {
+                "label": "Avg Distribution",
+                "value": "siphon.avg_distribution",
+                "format": "currency_usd",
+                "icon": "📈"
+              },
+              {
+                "label": "Last Distribution",
+                "value": "siphon.last_distribution",
+                "format": "time_ago",
+                "icon": "⏰"
+              }
+            ]
+          },
+          {
+            "id": "distribution_rules",
+            "type": "rule_display",
+            "title": "Active Distribution Rules",
+            "data_source": "config.siphon.distribution_rules",
+            "editable": false,
+            "highlight_active": true
+          },
+          {
+            "id": "pending_transfers",
+            "type": "queue_display",
+            "title": "Pending Transfers",
+            "data_source": "siphon.pending_transfers",
+            "show_eta": true,
+            "allow_manual_trigger": true
+          }
+        ]
+      },
+      
+      "watchlist": {
+        "title": "Exchange Watchlist",
+        "icon": "👁️",
+        "refresh_rate": "10m",
+        "widgets": [
+          {
+            "id": "locked_funds",
+            "type": "alert_banner",
+            "title": "Locked Funds Alert",
+            "data_source": "watchlist.binance_us",
+            "severity": "warning",
+            "show_recovery_plan": true
+          },
+          {
+            "id": "exchange_status",
+            "type": "status_grid",
+            "title": "Exchange Status",
+            "exchanges": [
+              {
+                "name": "Coinbase",
+                "status_source": "engine.connection_status",
+                "health_source": "engine.api_health"
+              },
+              {
+                "name": "Ledger",
+                "status_source": "vault.connection_status",
+                "health_source": "vault.last_update"
+              },
+              {
+                "name": "Binance US",
+                "status_source": "watchlist.binance_us.status",
+                "health_source": "watchlist.binance_us.last_checked"
+              }
+            ]
+          },
+          {
+            "id": "recovery_timeline",
+            "type": "timeline",
+            "title": "Recovery Attempts",
+            "data_source": "watchlist.recovery_log",
+            "show_actions": true
+          }
+        ]
+      },
+      
+      "controls": {
+        "title": "System Controls",
+        "icon": "🎛️",
+        "widgets": [
+          {
+            "id": "quick_actions",
+            "type": "action_buttons",
+            "title": "Quick Actions",
+            "buttons": [
+              {
+                "label": "Run Siphon Cycle",
+                "action": "siphon.run_cycle",
+                "confirmation": true,
+                "color": "primary"
+              },
+              {
+                "label": "Check Vault Health",
+                "action": "vault.check_health",
+                "confirmation": false,
+                "color": "info"
+              },
+              {
+                "label": "Close All Positions",
+                "action": "engine.close_all",
+                "confirmation": true,
+                "color": "danger"
+              },
+              {
+                "label": "Trigger Rebalance",
+                "action": "siphon.rebalance",
+                "confirmation": true,
+                "color": "warning"
+              }
+            ]
+          },
+          {
+            "id": "system_toggles",
+            "type": "switch_panel",
+            "title": "System Toggles",
+            "switches": [
+              {
+                "label": "Auto Trading",
+                "setting": "engine.auto_trade_enabled",
+                "default": false
+              },
+              {
+                "label": "Auto Siphon",
+                "setting": "siphon.auto_enabled",
+                "default": true
+              },
+              {
+                "label": "Rebalancing",
+                "setting": "siphon.rebalancing_enabled",
+                "default": true
+              },
+              {
+                "label": "Notifications",
+                "setting": "alerts.notifications_enabled",
+                "default": true
+              }
+            ]
+          },
+          {
+            "id": "parameter_adjustments",
+            "type": "slider_panel",
+            "title": "Risk Parameters",
+            "sliders": [
+              {
+                "label": "Max Position Size",
+                "setting": "engine.max_position_size",
+                "min": 100,
+                "max": 5000,
+                "step": 100,
+                "format": "currency_usd"
+              },
+              {
+                "label": "Daily Loss Limit",
+                "setting": "engine.daily_loss_limit",
+                "min": 50,
+                "max": 500,
+                "step": 50,
+                "format": "currency_usd"
+              },
+              {
+                "label": "Siphon Threshold",
+                "setting": "siphon.min_transfer_amount",
+                "min": 10,
+                "max": 100,
+                "step": 10,
+                "format": "currency_usd"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    
+    "data_sources": {
+      "vault": {
+        "endpoint": "../modules/vault_manager.py",
+        "method": "get_summary",
+        "cache_ttl": 300
+      },
+      "engine": {
+        "endpoint": "../modules/engine_manager.py",
+        "method": "get_performance_metrics",
+        "cache_ttl": 30
+      },
+      "siphon": {
+        "endpoint": "../modules/siphon_distributor.py",
+        "method": "get_statistics",
+        "cache_ttl": 60
+      },
+      "watchlist": {
+        "endpoint": "../logs/exchange_watchlist.yaml",
+        "type": "static_file",
+        "cache_ttl": 3600
+      },
+      "config": {
+        "endpoint": "../config/ves_architecture.yaml",
+        "type": "static_file",
+        "cache_ttl": 3600
+      }
+    },
+    
+    "integrations": {
+      "notion": {
+        "enabled": true,
+        "api_key_env": "NOTION_API_KEY",
+        "database_id_env": "NOTION_DATABASE_ID",
+        "update_frequency": "5m",
+        "pages_to_create": [
+          "Daily Summary",
+          "Trade Log",
+          "Siphon History",
+          "Alert Log"
+        ]
+      },
+      "obsidian": {
+        "enabled": true,
+        "vault_path_env": "OBSIDIAN_VAULT_PATH",
+        "update_method": "file_sync",
+        "template_path": "./templates/obsidian_dashboard.md"
+      },
+      "discord": {
+        "enabled": false,
+        "webhook_url_env": "DISCORD_WEBHOOK_URL",
+        "alert_levels": ["critical", "warning"]
+      },
+      "telegram": {
+        "enabled": false,
+        "bot_token_env": "TELEGRAM_BOT_TOKEN",
+        "chat_id_env": "TELEGRAM_CHAT_ID",
+        "alert_levels": ["critical"]
+      }
+    },
+    
+    "themes": {
+      "default": "dark",
+      "available": ["dark", "light", "midnight", "forest"],
+      "custom_css_enabled": true
+    },
+    
+    "mobile_responsive": true,
+    "auto_refresh_default": true,
+    "timezone": "UTC"
+  }
+}

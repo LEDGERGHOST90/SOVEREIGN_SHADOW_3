@@ -1,0 +1,84 @@
+# Environment and Secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+
+# Data and Logs
+data/
+logs/
+backups/
+tmp/
+*.log
+*.jsonl
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+.eggs/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.DS_Store
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+.hypothesis/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Node (for dashboard if added)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache/
+*.cache
+redis-data/
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# OS
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Project specific
+exchange_credentials.json
+api_keys.json
+wallet_addresses.txt
+positions_backup_*.json
+emergency_stop.json
+shutdown_state.json
