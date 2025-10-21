@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  sovereign-shadow:
+    build: .
+    ports:
+      - "3006:3006"  # MCP Server
+      - "3007:3007"  # WebSocket
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - postgres
+      
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+      
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: sovereign_shadow
+      POSTGRES_USER: trader
+      POSTGRES_PASSWORD: secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+volumes:
+  postgres_data:

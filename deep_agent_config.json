@@ -1,0 +1,34 @@
+{
+  "agents": {
+    "market_analyst": {
+      "model": "claude-3-5-sonnet-20241022",
+      "tools": ["perplexity_pro", "exchange_apis"],
+      "schedule": "*/5 * * * *",
+      "tasks": [
+        "analyze_market_trends",
+        "detect_arbitrage_opportunities",
+        "monitor_aave_position"
+      ]
+    },
+    "risk_manager": {
+      "model": "gpt-5",
+      "tools": ["portfolio_monitor", "ledger_security"],
+      "schedule": "*/1 * * * *",
+      "tasks": [
+        "check_health_factors",
+        "validate_position_sizes",
+        "monitor_crisis_triggers"
+      ]
+    },
+    "trade_executor": {
+      "model": "claude-max",
+      "tools": ["exchange_apis", "ledger_hardware"],
+      "schedule": "*/30 * * * * *",
+      "tasks": [
+        "execute_arbitrage_trades",
+        "confirm_ledger_transactions",
+        "log_trade_results"
+      ]
+    }
+  }
+}

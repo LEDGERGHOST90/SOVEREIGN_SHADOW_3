@@ -145,7 +145,8 @@ class SovereignShadowUnified:
         logger.info("🔍 Running arbitrage opportunity scan...")
 
         try:
-            sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'scripts'))
+            # Fix path: go up to project root, then into scripts
+            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))
             from claude_arbitrage_trader import ClaudeArbitrageTrader  # type: ignore
             trader = ClaudeArbitrageTrader()
             exchanges = await trader.initialize_exchanges()

@@ -1,0 +1,485 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# SHADOW.AI II - SOVEREIGN LEGACY LOOP
+# Unified Architecture Configuration
+# ═══════════════════════════════════════════════════════════════════════════
+# Owner: LEDGERGHOST90
+# Version: 2.0.0
+# Canonical Root: /Volumes/LegacySafe/SovereignShadow.Ai[LegacyLoop]
+# Last Updated: 2025-10-03
+# ═══════════════════════════════════════════════════════════════════════════
+
+system:
+  name: "SovereignShadow.Ai[LegacyLoop]"
+  version: "2.0.0"
+  owner: "LEDGERGHOST90"
+  canonical_root: "/Volumes/LegacySafe/SovereignShadow.Ai[LegacyLoop]"
+  status: "active"
+  deployment_mode: "production-ready"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# HARDWARE INFRASTRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════
+
+hardware:
+  primary_node:
+    name: "MacBook M3"
+    role: "command_center"
+    status: "active"
+    os: "macOS"
+    functions:
+      - "development"
+      - "primary_operations"
+      - "claude_integration"
+      - "dashboard_hosting"
+      - "docker_orchestration"
+    deployed_services:
+      - "ClaudeSDK_MCP_Server"
+      - "Sovereign_Legacy_Loop_Dashboard"
+      - "PostgreSQL"
+      - "Redis"
+      - "Prometheus"
+      - "Grafana"
+
+  secondary_node:
+    name: "Lenovo Yoga"
+    role: "monitoring_station"
+    status: "activation_pending"
+    os: "Windows"
+    features:
+      - "touchscreen"
+      - "24_7_monitoring"
+    functions:
+      - "always_on_dashboard"
+      - "windows_specific_tools"
+      - "backup_mcp_server"
+      - "alert_monitoring"
+      - "e_trade_platform"
+      - "chatgpt_interface"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# AI ORCHESTRATION LAYER
+# ═══════════════════════════════════════════════════════════════════════════
+
+ai:
+  primary:
+    name: "Claude Sonnet 4.5"
+    provider: "Anthropic"
+    integration: "MCP SDK"
+    functions:
+      - "strategic_planning"
+      - "code_generation"
+      - "portfolio_management"
+      - "risk_assessment"
+      - "system_orchestration"
+    deployment:
+      location: "MacBook M3"
+      sdk_path: "apps/claudesdk"
+      mcp_server: "http://localhost:8000"
+
+  secondary:
+    name: "Abacus Deep Agent"
+    provider: "Abacus.AI"
+    functions:
+      - "building_planning"
+      - "strategy_design"
+      - "predictive_modeling"
+      - "scenario_analysis"
+    deployment:
+      location: "Cloud API"
+      integration: "REST API"
+
+  tertiary:
+    name: "ChatGPT-5 Pro"
+    provider: "OpenAI"
+    functions:
+      - "market_research"
+      - "quick_queries"
+      - "alternative_analysis"
+    deployment:
+      location: "Lenovo Yoga"
+      interface: "Browser-based"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FINANCIAL ECOSYSTEM
+# ═══════════════════════════════════════════════════════════════════════════
+
+financial_accounts:
+  crypto:
+    hot_wallets:
+      binance_us:
+        role: "primary_hot_wallet"
+        priority: 1
+        allocation_pct: 50
+        functions:
+          - "spot_trading"
+          - "dca_execution"
+          - "profit_siphon_source"
+        integration:
+          api: "CCXT"
+          sdk_path: "apps/claudesdk/enhanced_exchanges.py"
+          env_vars:
+            - "BINANCEUS_KEY"
+            - "BINANCEUS_SECRET"
+
+      okx:
+        role: "web3_arbitrage"
+        priority: 2
+        allocation_pct: 25
+        functions:
+          - "dex_trading"
+          - "cross_chain_arbitrage"
+          - "web3_connectivity"
+          - "derivatives"
+        integration:
+          api: "CCXT"
+          sdk_path: "apps/claudesdk/enhanced_exchanges.py"
+          env_vars:
+            - "OKX_KEY"
+            - "OKX_SECRET"
+            - "OKX_PASSPHRASE"
+
+    cold_vault:
+      ledger_live:
+        role: "legacy_loop_vault"
+        priority: 1
+        allocation_pct: 25
+        functions:
+          - "cold_storage"
+          - "defi_staking"
+          - "yield_farming"
+          - "legacy_preservation"
+        integration:
+          method: "csv_export"
+          data_path: "data/ledgerlive"
+          dashboard_sync: true
+
+  investments:
+    robinhood:
+      role: "etf_options_trading"
+      status: "pending_setup"
+      priority: "high"
+      allocation_pct: 20
+      functions:
+        - "etf_portfolio"
+        - "options_trading"
+        - "dividend_income"
+        - "tax_loss_harvesting"
+      implementation:
+        phase: "not_started"
+        timeline: "weeks_1_2"
+
+    e_trade:
+      role: "dual_purpose"
+      status: "active"
+      allocation_pct: 15
+      functions:
+        investment:
+          - "portfolio_management"
+          - "stock_trading"
+        banking:
+          - "checking_account"
+          - "savings_account"
+          - "bill_payments"
+      integration:
+        api: "E*Trade OAuth"
+        windows_platform: true
+        deployment: "Lenovo Yoga"
+
+  banking:
+    sofi:
+      role: "primary_checking"
+      status: "active"
+      priority: 1
+      functions:
+        - "va_stipend_receiver"
+        - "primary_spending"
+        - "emergency_fund"
+      automation:
+        income_split:
+          investments: 50
+          crypto: 25
+          bills: 15
+          savings: 10
+
+    capital_one:
+      role: "bills_subscriptions"
+      status: "active"
+      functions:
+        - "bill_payments"
+        - "subscription_management"
+        - "expense_isolation"
+      automation:
+        auto_transfer_from: "sofi"
+        scheduled_payments: true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# APPLICATION ARCHITECTURE
+# ═══════════════════════════════════════════════════════════════════════════
+
+applications:
+  claudesdk:
+    path: "apps/claudesdk"
+    type: "python"
+    description: "Multi-exchange MCP server"
+    tech_stack:
+      - "Python 3.11"
+      - "CCXT"
+      - "FastMCP"
+      - "Docker"
+    services:
+      mcp_server:
+        port: 8000
+        health_endpoint: "/health"
+      redis:
+        port: 6379
+      postgres:
+        port: 5432
+      prometheus:
+        port: 9090
+      grafana:
+        port: 3001
+
+  sovereign_legacy_loop:
+    path: "apps/sovereign_legacy_loop"
+    type: "nextjs"
+    description: "AI wealth management dashboard"
+    tech_stack:
+      - "Next.js 14"
+      - "TypeScript"
+      - "Prisma"
+      - "PostgreSQL"
+      - "NextAuth"
+    services:
+      dashboard:
+        port: 3000
+        features:
+          - "dual_mode_ai_advisor"
+          - "vault_management"
+          - "trading_hub"
+          - "rwa_engine"
+          - "siphon_automation"
+          - "tax_integration"
+
+  multi_exchange_mcp:
+    path: "apps/multi-exchange-mcp"
+    type: "python"
+    description: "Empire automation layer"
+    status: "active"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WORKFLOW AUTOMATION
+# ═══════════════════════════════════════════════════════════════════════════
+
+workflows:
+  daily:
+    morning_routine:
+      time: "06:00"
+      steps:
+        - name: "system_wake"
+          actions:
+            - "start_docker_services"
+            - "verify_lenovo_monitoring"
+        - name: "portfolio_sync"
+          time: "06:30"
+          actions:
+            - "fetch_all_balances"
+            - "calculate_overnight_pnl"
+            - "update_dashboard"
+        - name: "ai_analysis"
+          time: "07:00"
+          actions:
+            - "claude_arbitrage_scan"
+            - "market_trend_analysis"
+            - "generate_recommendations"
+
+    evening_routine:
+      time: "20:00"
+      steps:
+        - name: "reconciliation"
+          actions:
+            - "sync_transactions"
+            - "calculate_daily_pnl"
+            - "update_allocations"
+        - name: "siphon_execution"
+          time: "21:00"
+          actions:
+            - "check_profit_thresholds"
+            - "execute_hot_to_cold_transfers"
+            - "rebalance_if_needed"
+        - name: "backup_reporting"
+          time: "22:00"
+          actions:
+            - "database_backup"
+            - "generate_daily_report"
+            - "prepare_next_day"
+
+  weekly:
+    review:
+      day: "sunday"
+      time: "10:00"
+      steps:
+        - "review_weekly_pnl"
+        - "analyze_trades"
+        - "update_strategies"
+        - "rebalance_allocations"
+
+  monthly:
+    planning:
+      day: 1
+      time: "09:00"
+      steps:
+        - "deep_portfolio_analysis"
+        - "strategy_adjustment"
+        - "tax_planning_review"
+        - "goal_progress_check"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DEPLOYMENT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════
+
+deployment:
+  environment: "production"
+  
+  docker:
+    compose_file: "infra/docker/docker-compose.yml"
+    networks:
+      - "shadow_network"
+    volumes:
+      - "postgres_data"
+      - "redis_data"
+      - "prometheus_data"
+      - "grafana_data"
+      - "logs"
+
+  monitoring:
+    prometheus:
+      retention: "30d"
+      scrape_interval: "15s"
+    grafana:
+      admin_user: "admin"
+      dashboards_path: "infra/config/grafana"
+    alerts:
+      - "system_down"
+      - "api_errors"
+      - "high_resource_usage"
+      - "arbitrage_opportunities"
+
+  security:
+    api_keys:
+      storage: "environment_variables"
+      backup: "1password_vault"
+    network:
+      vpn_required: true
+      firewall: true
+      2fa_enabled: true
+    access:
+      session_timeout: 1800  # 30 minutes
+      ip_whitelist: true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ALLOCATION STRATEGY
+# ═══════════════════════════════════════════════════════════════════════════
+
+allocation:
+  current:
+    crypto: 60
+    investments: 25
+    cash: 15
+  
+  target_6_months:
+    crypto: 50
+    investments: 35
+    cash: 15
+
+  risk_profile: "aggressive_growth"
+  rebalancing_threshold: 5  # percentage
+
+# ═══════════════════════════════════════════════════════════════════════════
+# IMPLEMENTATION ROADMAP
+# ═══════════════════════════════════════════════════════════════════════════
+
+roadmap:
+  phase_1:
+    name: "Foundation"
+    timeline: "weeks_1_2"
+    status: "in_progress"
+    tasks:
+      - "claudesdk_deployed"
+      - "sovereign_loop_operational"
+      - "binance_integration"
+      - "okx_integration"
+      - "lenovo_activation"
+
+  phase_2:
+    name: "Banking Integration"
+    timeline: "weeks_3_4"
+    status: "pending"
+    tasks:
+      - "sofi_api_integration"
+      - "capital_one_integration"
+      - "e_trade_sync"
+      - "automated_cash_flow"
+
+  phase_3:
+    name: "Investment Expansion"
+    timeline: "month_2"
+    status: "pending"
+    tasks:
+      - "robinhood_setup"
+      - "robinhood_api"
+      - "e_trade_investment_api"
+      - "tax_loss_harvesting"
+
+  phase_4:
+    name: "Advanced Automation"
+    timeline: "month_3"
+    status: "pending"
+    tasks:
+      - "multi_ai_framework"
+      - "abacus_integration"
+      - "advanced_arbitrage"
+      - "auto_rebalancing"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SUCCESS METRICS
+# ═══════════════════════════════════════════════════════════════════════════
+
+metrics:
+  financial:
+    net_worth_growth: "+50%/year"
+    arbitrage_profit_target: "$1000/month"
+    investment_returns: "beat_sp500"
+    savings_rate: "40%"
+    
+  technical:
+    uptime: "99.9%"
+    api_response_time: "<100ms"
+    arbitrage_detection: "<5s"
+    dashboard_load: "<2s"
+    
+  operational:
+    automation_level: "95%"
+    manual_trades: "<5%"
+    time_saved: "20h/week"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# END OF UNIFIED ARCHITECTURE
+# ═══════════════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SPECIALIZED TOOLS
+# ═══════════════════════════════════════════════════════════════════════════
+
+tools:
+  specialized:
+    keyblade_ai:
+      path: "/Volumes/LegacySafe/GitHub/KeybladeAi"
+      purpose: "manual_flip_trades"
+      integration: "separate_tool"
+      usage: "opportunistic"
+      status: "documented_only"
+      notes:
+        - "Do not integrate fully; extract risk+siphon+emergency patterns if beneficial"
+        - "No database merge; no automated control loops"
+        - "Use for manual 30-50% flip opportunities when spotted by human"
+        - "Risk engine and vault siphon logic may be ported to ClaudeSDK"

@@ -1,0 +1,92 @@
+project_name: sovereign-shadow-trading
+model: claude-3-5-sonnet-20241022
+context:
+  - "**/*.py"
+  - "**/*.ts" 
+  - "**/*.json"
+  - "**/*.md"
+  - "!**/node_modules/**"
+  - "!**/.git/**"
+  - "!**/__pycache__/**"
+  
+tasks:
+  monitor_aave:
+    description: "Monitor AAVE position and alert on health factor changes"
+    entrypoint: "scripts/monitor_aave.py"
+    schedule: "*/5 * * * *"  # Every 5 minutes
+    tools: ["perplexity_pro", "claude_max"]
+    
+  arbitrage_scan:
+    description: "Scan for arbitrage opportunities across exchanges"
+    entrypoint: "scripts/arbitrage_scanner.py"
+    schedule: "*/1 * * * *"  # Every minute
+    tools: ["exchange_apis", "ledger_confirmation"]
+    
+  execute_trade:
+    description: "Execute sovereign shadow trades with Ledger confirmation"
+    entrypoint: "scripts/execute_trade.py"
+    requires_confirmation: true
+    tools: ["ledger_hardware", "exchange_apis"]
+    
+  crisis_check:
+    description: "Check for market crashes and activate HODL mode"
+    entrypoint: "scripts/crisis_management.py"
+    schedule: "*/10 * * * *"  # Every 10 minutes
+    tools: ["market_data", "portfolio_monitor"]
+
+environment:
+  # Exchange APIs
+  COINBASE_API_KEY: "${COINBASE_API_KEY}"
+  COINBASE_API_SECRET: "${COINBASE_API_SECRET}"
+  OKX_API_KEY: "${OKX_API_KEY}"
+  OKX_API_SECRET: "${OKX_API_SECRET}"
+  KRAKEN_API_KEY: "${KRAKEN_API_KEY}"
+  KRAKEN_API_SECRET: "${KRAKEN_API_SECRET}"
+  
+  # AI Services
+  ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY}"
+  OPENAI_API_KEY: "${OPENAI_API_KEY}"
+  PERPLEXITY_API_KEY: "${PERPLEXITY_API_KEY}"
+  
+  # Hardware
+  LEDGER_DEVICE: "/dev/hidraw0"
+  
+  # System
+  PYTHONUNBUFFERED: "1"
+  LOG_LEVEL: "INFO"
+  
+safety:
+  max_position_size: 415
+  daily_loss_limit: 100
+  require_hardware_confirmation: true
+  test_mode: false
+  
+integrations:
+  cursor_ide:
+    enabled: true
+    auto_complete: true
+    real_time_errors: true
+    
+  warp_terminal:
+    enabled: true
+    ai_commands: true
+    shortcuts: true
+    
+  vscode:
+    enabled: true
+    extensions: ["python", "docker", "github"]
+    
+  github:
+    enabled: true
+    auto_deploy: true
+    security_scan: true
+    
+  docker:
+    enabled: true
+    multi_container: true
+    auto_scale: true
+    
+  abacus_ai:
+    enabled: true
+    web_dashboard: true
+    real_time_data: true

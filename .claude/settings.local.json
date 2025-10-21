@@ -1,13 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(test:*)",
-      "Read(//Users/memphis/Library/Application Support/Claude/**)",
-      "Read(//Users/memphis/Library/**)",
-      "Bash(python3:*)",
-      "Bash(docker build:*)",
-      "Read(//Volumes/LegacySafe/**)",
-      "Bash(grep:*)"
+      "Bash(node analyze_ledger.js)",
+      "Bash(cat SHADOW_SOV_UNIFIED_ARCHITECTURE.yaml)",
+      "Bash(./bin/MASTER_LOOP_CONTROL.sh logs 30)",
+      "Bash(chmod +x /Volumes/LegacySafe/SovereignShadow/demo_shadow_scope.py)",
+      "Bash(chmod +x demo_shadowscope_simple.py)",
+      "Bash(./bin/MASTER_LOOP_CONTROL.sh logs 20)",
+      "Read(//var/folders/kb/lr36njw10dg7ms4tvj8yfbd80000gn/T/TemporaryItems/NSIRD_screencaptureui_KErJqH/**)"
     ],
     "deny": [],
     "ask": []

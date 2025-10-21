@@ -21,7 +21,7 @@ logger = logging.getLogger("live_trading_monitor")
 
 class LiveTradingMonitor:
     def __init__(self):
-        self.system_root = Path("/Volumes/LegacySafe/SovereignShadow.Ai[LegacyLoop]")
+        self.system_root = Path("/Volumes/LegacySafe/SovereignShadow")
         self.monitoring_active = True
         self.performance_metrics = {
             "total_trades": 0,

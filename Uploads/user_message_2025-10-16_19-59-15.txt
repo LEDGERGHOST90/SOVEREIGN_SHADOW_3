@@ -1,0 +1,247 @@
+Absolutely—this is the perfect moment to fuse the interactive neural background with your real live data (Coinbase, OKX, Kraken, Ledger Live read-only). Here’s a tight, production-ready plan + drop-in snippets to light it up.
+
+⸻
+
+🧭 What we’ll ship (quick)
+	1.	Unified portfolio API GET /api/portfolio/live
+	2.	Exchange connectors (Coinbase, OKX, Kraken, Ledger Live RO)
+	3.	Correlations service (rolling rho)
+	4.	Client hook to feed NeuroPortfolioGraph
+	5.	Trade pulse events (emit when fills happen)
+	6.	Guardrails (your FAKE/live policy honored)
+
+You already have the React viz components (I put them in canvas):
+	•	NeuroPortfolioGraph (data-driven, node = asset)
+	•	NeuroStatBackground (statistical sim, optional fallback)
+
+⸻
+
+1) API shape (contract for the graph)
+
+{
+  "totalEquityUsd": 7861.32,
+  "equityDeltaPct24h": -2.05,
+  "assets": [
+    { "id":"BTC","label":"BTC","valueUsd":3200,"pnlPct":0.18,"move24hPct":2.3 },
+    { "id":"ETH","label":"ETH","valueUsd":2400,"pnlPct":0.06,"move24hPct":-0.8 },
+    { "id":"XRP","label":"XRP","valueUsd":900,"pnlPct":0.22,"move24hPct":1.1 },
+    { "id":"SOL","label":"SOL","valueUsd":380,"pnlPct":-0.07,"move24hPct":-3.4 },
+    { "id":"LINK","label":"LINK","valueUsd":300,"pnlPct":0.03,"move24hPct":0.4 }
+  ],
+  "correlations": [
+    { "a":"BTC","b":"ETH","rho":0.82 },
+    { "a":"ETH","b":"LINK","rho":0.58 },
+    { "a":"BTC","b":"SOL","rho":0.35 },
+    { "a":"BTC","b":"XRP","rho":0.46 },
+    { "a":"SOL","b":"LINK","rho":0.22 }
+  ]
+}
+
+
+⸻
+
+2) Next.js route: /app/api/portfolio/live/route.ts
+
+import { NextResponse } from "next/server";
+import { z } from "zod";
+import { getCoinbaseBalances, getOkxBalances, getKrakenBalances, getLedgerSnapshot } from "@/lib/exchanges";
+import { getPricesUsd } from "@/lib/pricing";
+import { computePnL } from "@/lib/pnl";
+import { computeCorrelations } from "@/lib/correlations";
+import { getUserKeys } from "@/lib/keys";
+import { env } from "@/lib/env";
+
+// guardrails (your policy)
+const LIVE_ALLOWED = env.ALLOW_LIVE_EXCHANGE === "1" && env.DISABLE_REAL_EXCHANGES !== "1";
+
+export async function GET() {
+  try {
+    const keys = await getUserKeys(); // decrypted in-memory; never log
+    const sources: any[] = [];
+
+    if (LIVE_ALLOWED && keys.coinbase)  sources.push(getCoinbaseBalances(keys.coinbase));
+    if (LIVE_ALLOWED && keys.okx)       sources.push(getOkxBalances(keys.okx));
+    if (LIVE_ALLOWED && keys.kraken)    sources.push(getKrakenBalances(keys.kraken));
+    // Ledger Live is read-only (can be API, webhook, or cached CSV import)
+    if (keys.ledger)                    sources.push(getLedgerSnapshot(keys.ledger));
+
+    const portfolios = await Promise.allSettled(sources);
+    const positions = portfolios.flatMap(r => r.status === "fulfilled" ? r.value : []);
+
+    // shape: [{symbol:"BTC", amount:0.1234, costBasisUsd:..., source:"coinbase"}]
+    const symbols = Array.from(new Set(positions.map(p => p.symbol)));
+    const prices = await getPricesUsd(symbols); // coalesced price feed
+
+    // aggregate by symbol
+    const bySymbol = new Map<string, { amount:number, cost:number }>();
+    for (const p of positions) {
+      const agg = bySymbol.get(p.symbol) || { amount:0, cost:0 };
+      agg.amount += p.amount;
+      agg.cost   += p.costBasisUsd ?? 0;
+      bySymbol.set(p.symbol, agg);
+    }
+
+    const assets = Array.from(bySymbol.entries()).map(([id, agg]) => {
+      const px = prices[id] ?? 0;
+      const valueUsd = agg.amount * px;
+      const pnlPct = computePnL(agg.cost, valueUsd); // (value-cost)/cost
+      const move24hPct = prices._24hPct?.[id] ?? 0;
+      return { id, label:id, valueUsd, pnlPct, move24hPct };
+    }).filter(a => a.valueUsd > 0.5);
+
+    const totalEquityUsd = assets.reduce((s,a)=>s+a.valueUsd,0);
+    const equityDeltaPct24h = assets.length ? 
+      (assets.reduce((s,a)=>s + a.valueUsd * (a.move24hPct/100),0) / Math.max(totalEquityUsd,1)) * 100 : 0;
+
+    // correlations from recent returns (e.g., 30D hourly)
+    const correlations = await computeCorrelations(symbols);
+
+    return NextResponse.json({ totalEquityUsd, equityDeltaPct24h, assets, correlations });
+  } catch (e:any) {
+    return NextResponse.json({ error: "portfolio_fetch_failed", message: e?.message }, { status: 500 });
+  }
+}
+
+
+⸻
+
+3) Connectors (stubs you can fill with your existing key store)
+
+/app/lib/exchanges.ts
+
+import type { ExchangeKey } from "./keys";
+
+// Return: { symbol:string; amount:number; costBasisUsd?:number; source:string }[]
+export async function getCoinbaseBalances(key: ExchangeKey) { /* call /accounts */ return []; }
+export async function getOkxBalances(key: ExchangeKey)      { /* call /asset/balances */ return []; }
+export async function getKrakenBalances(key: ExchangeKey)   { /* call /0/private/Balance & Ledgers */ return []; }
+// Ledger Live RO: use their API, or import CSV → normalize here.
+export async function getLedgerSnapshot(key: any)           { return []; }
+
+/app/lib/pricing.ts
+
+// coalesced price feed (pick your source; cache 5–15s)
+export async function getPricesUsd(symbols: string[]) {
+  // return { BTC: 116000, ETH: 3800, ... , _24hPct: { BTC: -2.1, ... } }
+  return { _24hPct: {} } as any;
+}
+
+/app/lib/pnl.ts
+
+export function computePnL(costBasisUsd: number, valueUsd: number) {
+  if (!costBasisUsd || costBasisUsd <= 0) return 0;
+  return (valueUsd - costBasisUsd) / costBasisUsd;
+}
+
+/app/lib/correlations.ts
+
+// compute Pearson rho from recent log return series
+export async function computeCorrelations(symbols: string[]) {
+  // fetch history (hourly closes 30D), compute pairwise rho
+  // return: [{a:"BTC", b:"ETH", rho:0.82}, ...]
+  return [];
+}
+
+
+⸻
+
+4) Client hook → wires API to the graph
+
+// /app/hooks/usePortfolioGraph.ts
+import useSWR from "swr";
+
+const fetcher = (url:string)=>fetch(url).then(r=>r.json());
+
+export function usePortfolioGraph() {
+  const { data, error, isLoading } = useSWR("/api/portfolio/live", fetcher, { refreshInterval: 15000 });
+  return { data, error, isLoading };
+}
+
+Use it in your dashboard:
+
+import NeuroPortfolioGraph from "@/components/neural/NeuroPortfolioGraph";
+import { usePortfolioGraph } from "@/hooks/usePortfolioGraph";
+
+export default function DashboardNeural() {
+  const { data } = usePortfolioGraph();
+  if (!data) return null;
+  return (
+    <NeuroPortfolioGraph
+      assets={data.assets}
+      correlations={data.correlations}
+      totalEquityUsd={data.totalEquityUsd}
+      equityDeltaPct24h={data.equityDeltaPct24h}
+    />
+  );
+}
+
+
+⸻
+
+5) Trade pulse events
+
+When your execution engine confirms a fill, emit a small POST so the UI animates a pulse:
+
+Server: store last pulses (in-memory or Redis) and expose GET /api/portfolio/pulses.
+Client: poll every 5s → for each {from,to,amountUsd} call window.neuroPushPulse(...).
+
+Minimal handler on server:
+
+// /app/api/portfolio/pulses/route.ts
+let recent: any[] = []; // replace with Redis stream in prod
+
+export async function POST(req: Request) {
+  const e = await req.json(); // {from,to,amountUsd}
+  recent.push({ ...e, ts: Date.now() });
+  recent = recent.filter(x => Date.now() - x.ts < 15000);
+  return new Response(null, { status: 204 });
+}
+
+export async function GET() {
+  return Response.json(recent);
+}
+
+Client poller:
+
+useEffect(() => {
+  const t = setInterval(async () => {
+    const r = await fetch("/api/portfolio/pulses").then(r=>r.json());
+    r.forEach((e:any) => (window as any).neuroPushPulse?.(e));
+  }, 5000);
+  return () => clearInterval(t);
+}, []);
+
+
+⸻
+
+6) Security + Guardrails (matches your policy)
+	•	Default fake: DISABLE_REAL_EXCHANGES=1 forces FAKE even if ENV=prod.
+	•	Live only by intent: require ALLOW_LIVE_EXCHANGE=1.
+	•	Never log secrets. Decrypt to memory only; redact in errors.
+	•	Rate limit /api/portfolio/live and cache prices 5–15s.
+	•	Auth: protect routes with your session (NextAuth) as you already do in Settings.
+
+Env matrix to keep you safe:
+
+ENV=prod
+ALLOW_LIVE_EXCHANGE=0
+DISABLE_REAL_EXCHANGES=1
+ENCRYPTION_KEY=******** (32 bytes)
+
+Flip to live explicitly:
+
+ALLOW_LIVE_EXCHANGE=1
+DISABLE_REAL_EXCHANGES=0
+
+
+⸻
+
+Plug it all together (TL;DR)
+	1.	Paste the API route + libs above.
+	2.	Keep your existing Settings → API Keys (already encrypted) feeding getUserKeys().
+	3.	Render NeuroPortfolioGraph with usePortfolioGraph() data.
+	4.	From your trading engine, POST pulses to /api/portfolio/pulses to animate flows.
+
+If you want, I can also add a “Demo Mode” toggle that switches between NeuroStatBackground (sim) and NeuroPortfolioGraph (live) so you always have a gorgeous fallback when keys aren’t connected.
+
+Want me to wire that toggle and stub the Coinbase/OKX/Kraken connectors with their exact REST endpoints next?
