@@ -33,30 +33,51 @@ MASTER_MEMORY.md (THIS FILE)
 
 ## 💰 CURRENT CAPITAL STATUS
 
-**Total Portfolio**: $4,741.54
-**Last Updated**: 2025-10-30 05:20 AM
+**Total Portfolio**: $10,820.19
+**Last Updated**: 2025-10-31 00:55 AM
 **Auto-Tracked**: ✅ unified_profit_tracker.py (live)
+**Version**: v2.5a with BTC/wstETH/XRP tracking
 
 ### Platform Breakdown:
 | Platform | Amount | % | Status |
 |----------|--------|---|--------|
-| **Ledger VAULT** | $14.39 | 0.3% | ✅ Cold storage (0.0055 ETH) |
-| **Coinbase** | $1,869.36 | 39.3% | ✅ Primary exchange |
-| **Binance US** | $150.00 | 3.2% | ✅ Active |
-| **AAVE V3** | $2,727.98 | 57.3% | ✅ HF: 2.7185 (SAFE) |
+| **Ledger VAULT** | $6,078.65 | 56.2% | ✅ Cold storage (Multi-asset) |
+| **Coinbase** | $1,869.36 | 17.3% | ✅ Primary exchange |
+| **AAVE V3** | $2,727.98 | 25.2% | ✅ HF: 2.7044 (SAFE) |
+| **Binance US** | $150.00 | 1.4% | ✅ Active |
+| **Kraken** | $4.63 | 0.0% | ✅ Minimal balance |
 | **OKX** | $0.00 | 0.0% | ⚠️ No balance |
-| **Kraken** | $0.00 | 0.0% | ⚠️ No balance |
 
-### Asset Allocation (Coinbase):
-- **USDC Cash**: $40.38 (2.2%, 4.25% APY)
-- **Crypto Portfolio**: $1,828.97 (97.8%, includes XRP, SOL, ETH, AAVE, others)
+### Ledger VAULT Asset Breakdown:
+**Total**: $6,078.65 (Primary cold storage)
+- **AAVE wstETH**: 0.821751 = $3,832.60 (63.05%)
+- **Bitcoin**: 0.0202271 BTC = $2,215.65 (36.44%)
+- **Ethereum**: 0.0055402 ETH = $21.23 (0.34%)
+- **USDtb**: $4.99 (0.08%)
+- **XRP**: 1.00054 = $2.48 (0.04%)
+- **Litecoin**: 0.00999361 LTC = $0.94 (0.01%)
 
-**AAVE V3 Details**:
+**Addresses**:
+- ETH: 0xC08413B63ecA84E2d9693af9414330dA88dcD81C
+- BTC: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
+
+### Coinbase Asset Allocation:
+- **USDC Cash**: $40.38 (2.16%, 4.25% APY)
+- **Crypto Portfolio**: $1,828.97 (97.84%, includes XRP, SOL, ETH, AAVE, others)
+
+### AAVE V3 Details:
 - Collateral: $3,885.75 wstETH
 - Debt: $1,157.77 USDC (ONLY debt in system)
-- Health Factor: 2.7185 ✅ SAFE
+- Health Factor: 2.7044 ✅ SAFE
 - Net Value: $2,727.98
 - Available to Borrow: $1,892.54
+
+### Capital Tracking Features:
+- ✅ Live blockchain queries (Ledger ETH, BTC, wstETH)
+- ✅ Exchange injection protocol (120min cache = 24 ETH RPC/day)
+- ✅ Income separation ($2,188/month VA income tracked)
+- ✅ True profit calculation (Portfolio - Initial - Injected - Withdrawn)
+- ✅ Multi-asset allocation tracking
 
 ---
 
