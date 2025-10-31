@@ -53,3 +53,4 @@ proprietary/
 *portfolio*.json
 *pnl*.json
 *profit*.json
+.keys/
