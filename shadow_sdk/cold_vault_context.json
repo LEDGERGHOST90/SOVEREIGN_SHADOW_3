@@ -1,0 +1,42 @@
+{
+  "_comment": "🏴 COLD VAULT CONTEXT - Auto-loaded by MCP Server for AI Awareness",
+  "_last_updated": "2025-10-30T00:00:00Z",
+
+  "cold_storage_addresses": {
+    "btc_xpub": "xpub6BgzNEknk2B5tMGRKoNrpCbu435dtAQQXiq1DENttBFToUeZvNtr7CeQhPEGrzGHZ4vyMWQYaR9yH1PNSEFpqDvee1dp49SMxqgBN2K3fg6",
+    "eth_address": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C"
+  },
+
+  "cold_vault_holdings": {
+    "btc_amount": 0.01745426,
+    "eth_amount": 0.00489773,
+    "total_value_usd": 6600,
+    "cost_basis_usd": 3053.60
+  },
+
+  "full_portfolio": {
+    "total": 10811,
+    "cold_storage": 6600,
+    "hot_wallet_velocity": 1663,
+    "defi_aave_net": 2397,
+    "aave_supplied": 3547,
+    "aave_borrowed": 1150,
+    "health_factor": 2.49
+  },
+
+  "trading_rules": {
+    "max_position_size": 415,
+    "max_daily_exposure": 100,
+    "emergency_reserve": 200,
+    "available_for_trading": 1463,
+    "cold_storage_locked": true,
+    "never_automate_cold_vault": true
+  },
+
+  "ai_awareness": {
+    "purpose": "This context is loaded by MCP server so all AI agents know the complete portfolio state",
+    "cold_vault_rule": "NEVER suggest trading with cold storage funds. Read-only monitoring only.",
+    "trading_capital_rule": "Only use velocity capital ($1,663) for automated trades",
+    "safety_check": "Always verify addresses are not cold storage before any operation"
+  }
+}

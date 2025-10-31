@@ -1,0 +1,43 @@
+{
+  "version": "2.5a",
+  "sliced_at": "2025-10-31T01:13:11.645384",
+  "modules": {
+    "ladder": {
+      "files": [
+        "tiered_ladder_system.py",
+        "unified_ladder_system.py"
+      ],
+      "count": 2
+    },
+    "tracking": {
+      "files": [
+        "profit_tracker.py",
+        "income_capital_tracker.py",
+        "unified_profit_tracker.py",
+        "exchange_injection_protocol.py"
+      ],
+      "count": 4
+    },
+    "safety": {
+      "files": [
+        "aave_monitor.py"
+      ],
+      "count": 1
+    },
+    "execution": {
+      "files": [
+        "swarm_intelligence_bridge.py",
+        "shadow_sniper_bridge.py"
+      ],
+      "count": 2
+    },
+    "storage": {
+      "files": [
+        "cold_storage_siphon.py",
+        "optimal_cold_storage_system.py"
+      ],
+      "count": 2
+    }
+  },
+  "total_files": 11
+}

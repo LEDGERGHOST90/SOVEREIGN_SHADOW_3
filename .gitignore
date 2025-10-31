@@ -1,18 +1,55 @@
-# SECURITY: Never commit these files
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Environments
 .env
-*.env
-*api_key*
-*secret*
-*credentials*
-*private*
-*key*
-deep_agent_config.json
-config.json
-logs/
+.venv
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
 *.log
-*.csv
-*.json
-/agents/
-/strategies/
-/keys/
-/secrets/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archive (old versions)
+archive/
+
+# 🔐 SENSITIVE DATA - NEVER COMMIT
+*api_key*
+*API_KEY*
+*secret*
+*SECRET*
+*private_key*
+*credentials*
+*config.json
+*keys.json
+*.pem
+*.key
+
+# 🎯 TRADING STRATEGIES - NEVER COMMIT
+*strategy*.py
+*strat*.py
+signal_sources/
+trading_signals/
+proprietary/
+
+# 💰 FINANCIAL DATA - NEVER COMMIT
+*wallet*
+*balance*
+*portfolio*.json
+*pnl*.json
+*profit*.json

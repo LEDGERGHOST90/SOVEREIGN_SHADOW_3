@@ -1,0 +1,15 @@
+{
+  "success": false,
+  "rejection_reason": "ROI requirements not met",
+  "roi_validation": {
+    "tp1_roi": 15.93,
+    "tp2_roi": 28.83,
+    "drawdown": 9.68,
+    "valid": false,
+    "requirements_met": {
+      "tp1_20_percent": false,
+      "tp2_30_percent": false,
+      "max_drawdown_7_percent": false
+    }
+  }
+}

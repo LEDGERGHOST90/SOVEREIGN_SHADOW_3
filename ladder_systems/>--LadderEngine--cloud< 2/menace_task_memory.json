@@ -1,0 +1,159 @@
+{
+  "menace_build_memory": {
+    "last_updated": "2025-01-07T12:00:00Z",
+    "total_tasks": 16,
+    "phases_parsed": ["Phase 4", "Phase 5", "Phase 6", "Phase 7"],
+    "tasks": [
+      {
+        "id": "P4-T1",
+        "task": "Build signal feed display",
+        "phase": "Phase 4",
+        "status": "pending",
+        "priority": "MED",
+        "category": "UI"
+      },
+      {
+        "id": "P4-T2", 
+        "task": "Add execution log viewer",
+        "phase": "Phase 4",
+        "status": "pending",
+        "priority": "MED",
+        "category": "UI"
+      },
+      {
+        "id": "P4-T3",
+        "task": "Implement PnL tracking interface",
+        "phase": "Phase 4", 
+        "status": "pending",
+        "priority": "HIGH",
+        "category": "execution"
+      },
+      {
+        "id": "P4-T4",
+        "task": "Create vault simulation display",
+        "phase": "Phase 4",
+        "status": "pending", 
+        "priority": "HIGH",
+        "category": "vault"
+      },
+      {
+        "id": "P5-T1",
+        "task": "Implement daily loss cap",
+        "phase": "Phase 5",
+        "status": "pending",
+        "priority": "HIGH",
+        "category": "risk"
+      },
+      {
+        "id": "P5-T2",
+        "task": "Add max concurrent orders limit", 
+        "phase": "Phase 5",
+        "status": "pending",
+        "priority": "MED",
+        "category": "risk"
+      },
+      {
+        "id": "P5-T3",
+        "task": "Create Ray Score filtering",
+        "phase": "Phase 5",
+        "status": "pending",
+        "priority": "HIGH", 
+        "category": "cognitive"
+      },
+      {
+        "id": "P5-T4",
+        "task": "Build mental stop loss (Ray < 60)",
+        "phase": "Phase 5",
+        "status": "pending",
+        "priority": "MED",
+        "category": "cognitive"
+      },
+      {
+        "id": "P5-T5",
+        "task": "Add position size management",
+        "phase": "Phase 5", 
+        "status": "pending",
+        "priority": "MED",
+        "category": "risk"
+      },
+      {
+        "id": "P6-T1",
+        "task": "Set up paper trading tests",
+        "phase": "Phase 6",
+        "status": "pending",
+        "priority": "MED",
+        "category": "execution"
+      },
+      {
+        "id": "P6-T2",
+        "task": "Create integration tests",
+        "phase": "Phase 6",
+        "status": "pending", 
+        "priority": "HIGH",
+        "category": "execution"
+      },
+      {
+        "id": "P6-T3",
+        "task": "Deploy to staging environment",
+        "phase": "Phase 6",
+        "status": "pending",
+        "priority": "LOW",
+        "category": "execution"
+      },
+      {
+        "id": "P6-T4",
+        "task": "Perform live trading readiness checks",
+        "phase": "Phase 6",
+        "status": "pending",
+        "priority": "HIGH",
+        "category": "execution"
+      },
+      {
+        "id": "P7-T1",
+        "task": "Create user documentation",
+        "phase": "Phase 7",
+        "status": "pending",
+        "priority": "LOW",
+        "category": "docs"
+      },
+      {
+        "id": "P7-T2", 
+        "task": "Write API documentation",
+        "phase": "Phase 7",
+        "status": "pending",
+        "priority": "LOW",
+        "category": "docs"
+      },
+      {
+        "id": "P7-T3",
+        "task": "Prepare deployment guide",
+        "phase": "Phase 7",
+        "status": "pending",
+        "priority": "LOW",
+        "category": "docs"
+      },
+      {
+        "id": "P7-T4",
+        "task": "Deliver final system to user",
+        "phase": "Phase 7",
+        "status": "pending",
+        "priority": "LOW", 
+        "category": "docs"
+      }
+    ],
+    "priority_breakdown": {
+      "HIGH": 6,
+      "MED": 7,
+      "LOW": 5
+    },
+    "category_breakdown": {
+      "execution": 5,
+      "risk": 3,
+      "cognitive": 2,
+      "UI": 2,
+      "vault": 1,
+      "docs": 4
+    }
+  }
+}
+
