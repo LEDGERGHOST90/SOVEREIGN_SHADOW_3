@@ -54,3 +54,10 @@ proprietary/
 *pnl*.json
 *profit*.json
 .keys/
+
+# 🛡️ SAFETY CONFIGURATIONS - NEVER COMMIT
+modules/safety/safety_rules_config.json
+modules/safety/emergency_contacts.json
+modules/execution/live_portfolio_state.json
+*safety_config*.json
+*emergency*.json

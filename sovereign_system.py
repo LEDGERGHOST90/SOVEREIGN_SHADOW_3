@@ -23,7 +23,7 @@ sys.path.insert(0, str(MODULES_PATH))
 # Import all components
 from ladder import UnifiedLadderSystem, TieredLadderSystem
 from tracking import UnifiedProfitTracker, IncomeCapitalTracker, InjectionManager
-from safety import AAVEMonitor
+from safety import AAVEMonitor, SafetyRulesImplementation, RealPortfolioBridge
 
 class SovereignShadow:
     """
@@ -38,7 +38,7 @@ class SovereignShadow:
 
     def __init__(self):
         print("\n" + "="*70)
-        print("👑 SOVEREIGNSHADOW v2.5a")
+        print("👑 SOVEREIGNSHADOW v2.5a - SAFETY ENABLED")
         print("="*70)
 
         # Initialize components
@@ -47,9 +47,21 @@ class SovereignShadow:
         self.profit_tracker = UnifiedProfitTracker()
         self.capital_tracker = IncomeCapitalTracker()
         self.injection_manager = InjectionManager()
-        self.aave_monitor = AAVEMonitor()
+
+        # Initialize AAVE monitor (optional - requires INFURA_URL)
+        try:
+            self.aave_monitor = AAVEMonitor()
+            print("✅ AAVE monitor initialized")
+        except ValueError as e:
+            print(f"⚠️  AAVE monitor disabled: {e}")
+            self.aave_monitor = None
+
+        # Initialize safety systems
+        self.safety_rules = SafetyRulesImplementation()
+        self.portfolio_bridge = RealPortfolioBridge()
 
         print("✅ All systems initialized")
+        print("🛡️  Safety systems ACTIVE")
         print("="*70 + "\n")
 
     def deploy_ladder(self, signal, capital, mode='paper'):
@@ -70,7 +82,21 @@ class SovereignShadow:
 
     def get_aave_health(self):
         """Get AAVE position health"""
-        return self.aave_monitor.get_position_summary()
+        if self.aave_monitor:
+            return self.aave_monitor.get_position_summary()
+        return {"status": "disabled", "message": "AAVE monitor not initialized"}
+
+    def check_safety_limits(self):
+        """Check all safety rules and limits"""
+        return self.safety_rules.check_all_safety_rules()
+
+    def validate_trade(self, trade_params):
+        """Validate trade against safety rules before execution"""
+        return self.portfolio_bridge.validate_trade(trade_params)
+
+    def get_portfolio_limits(self):
+        """Get current portfolio limits and risk parameters"""
+        return self.portfolio_bridge.get_portfolio_limits()
 
     def get_system_status(self):
         """Get complete system status"""
@@ -78,7 +104,9 @@ class SovereignShadow:
             'ladder': self.ladder.get_active_ladders(),
             'profit': self.get_total_profit(),
             'aave': self.get_aave_health(),
-            'extraction': self.profit_extraction.get_tier_summary()
+            'extraction': self.profit_extraction.get_tier_summary(),
+            'safety': self.safety_rules.get_safety_status(),
+            'portfolio_limits': self.get_portfolio_limits()
         }
 
 
@@ -89,11 +117,17 @@ def main():
     print("🎯 System ready for operation")
     print()
     print("Available methods:")
-    print("  - system.deploy_ladder(signal, capital)")
-    print("  - system.check_extraction_milestones()")
-    print("  - system.get_total_profit()")
-    print("  - system.inject_all_exchanges()")
-    print("  - system.get_system_status()")
+    print("  Trading:")
+    print("    - system.deploy_ladder(signal, capital)")
+    print("    - system.check_extraction_milestones()")
+    print("  Monitoring:")
+    print("    - system.get_total_profit()")
+    print("    - system.inject_all_exchanges()")
+    print("    - system.get_system_status()")
+    print("  Safety:")
+    print("    - system.check_safety_limits()")
+    print("    - system.validate_trade(trade_params)")
+    print("    - system.get_portfolio_limits()")
     print()
 
 if __name__ == "__main__":
