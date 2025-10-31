@@ -4,8 +4,11 @@
 Trading execution bridges:
 - Shadow Sniper (Coinbase)
 - Swarm Intelligence (multi-agent)
+- Universal Exchange Manager (CCXT-based)
+- Portfolio Connector (Real capital bridge)
 """
 
-# Bridge imports go here
+from .universal_exchange_manager import UniversalExchangeManager
+from .portfolio_connector import RealPortfolioConnector
 
-__all__ = []
+__all__ = ['UniversalExchangeManager', 'RealPortfolioConnector']

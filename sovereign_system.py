@@ -24,6 +24,7 @@ sys.path.insert(0, str(MODULES_PATH))
 from ladder import UnifiedLadderSystem, TieredLadderSystem
 from tracking import UnifiedProfitTracker, IncomeCapitalTracker, InjectionManager
 from safety import AAVEMonitor, SafetyRulesImplementation, RealPortfolioBridge
+from execution import UniversalExchangeManager, RealPortfolioConnector
 
 class SovereignShadow:
     """
@@ -60,8 +61,13 @@ class SovereignShadow:
         self.safety_rules = SafetyRulesImplementation()
         self.portfolio_bridge = RealPortfolioBridge()
 
+        # Initialize exchange management
+        self.exchange_manager = UniversalExchangeManager()
+        self.portfolio_connector = RealPortfolioConnector()
+
         print("✅ All systems initialized")
         print("🛡️  Safety systems ACTIVE")
+        print("🔗 Exchange management READY")
         print("="*70 + "\n")
 
     def deploy_ladder(self, signal, capital, mode='paper'):
@@ -98,6 +104,18 @@ class SovereignShadow:
         """Get current portfolio limits and risk parameters"""
         return self.portfolio_bridge.get_portfolio_limits()
 
+    def connect_to_exchanges(self):
+        """Auto-detect and connect to all configured exchanges"""
+        return self.exchange_manager.connect_all()
+
+    def get_connected_exchanges(self):
+        """Get list of successfully connected exchanges"""
+        return list(self.exchange_manager.exchanges.keys())
+
+    def get_portfolio_status(self):
+        """Get real portfolio status and capital allocation"""
+        return self.portfolio_connector.display_portfolio_status()
+
     def get_system_status(self):
         """Get complete system status"""
         return {
@@ -106,7 +124,9 @@ class SovereignShadow:
             'aave': self.get_aave_health(),
             'extraction': self.profit_extraction.get_tier_summary(),
             'safety': self.safety_rules.get_safety_status(),
-            'portfolio_limits': self.get_portfolio_limits()
+            'portfolio_limits': self.get_portfolio_limits(),
+            'connected_exchanges': self.get_connected_exchanges(),
+            'portfolio': self.portfolio_connector.portfolio
         }
 
 
@@ -128,6 +148,10 @@ def main():
     print("    - system.check_safety_limits()")
     print("    - system.validate_trade(trade_params)")
     print("    - system.get_portfolio_limits()")
+    print("  Exchange Management:")
+    print("    - system.connect_to_exchanges()")
+    print("    - system.get_connected_exchanges()")
+    print("    - system.get_portfolio_status()")
     print()
 
 if __name__ == "__main__":
