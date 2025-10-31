@@ -1,0 +1,10 @@
+# ΩTS_PROMPT_001 – MANUS + Super G Sync Prompt
+# Version: v1
+
+Single source of truth. Do not stack memory. All routing must respect live capital and rules. Use:
+load("ΩTS_PROMPT_001.txt")
+
+If command is strategic:
+→ route to GPT with ΩTS_PROMPT_001
+If command is operational:
+→ route to MANUS.AI with ΩTS_PROMPT_001

@@ -11,7 +11,7 @@ from typing import Any, Dict, List
 import os
 
 # Add SDK to path
-sys.path.insert(0, '/app/shadow_sdk')
+sys.path.insert(0, os.path.dirname(__file__))
 
 from shadow_sdk import (
     ShadowScope, 

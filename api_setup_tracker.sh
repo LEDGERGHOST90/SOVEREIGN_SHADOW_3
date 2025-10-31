@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo ''
+echo '🎯 SOVEREIGN SHADOW - API SETUP TRACKER'
+echo '========================================'
+echo ''
+echo 'STATUS:'
+echo '  [ ] Coinbase CDP - API Key Created'
+echo '  [ ] OKX - API Key Created'
+echo '  [ ] Kraken - API Key Created'
+echo '  [ ] Keys added to .env file'
+echo '  [ ] Connection test passed'
+echo ''
+echo 'WHEN EACH STEP COMPLETES:'
+echo '  1. Coinbase: Save JSON to Downloads'
+echo '  2. OKX: Save credentials to secure note'
+echo '  3. Kraken: Save credentials to secure note'
+echo '  4. Edit .env: nano .env'
+echo '  5. Test: python3 sovereign_empire_core.py'
+echo ''
+echo '⚡️ YOUR IP FOR WHITELISTS:'
+curl -s ifconfig.me
+echo ''
+echo ''
+echo 'Copy this IP for ALL three exchanges!'
+echo ''
+

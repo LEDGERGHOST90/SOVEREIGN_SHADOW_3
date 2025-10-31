@@ -11,7 +11,7 @@ from decimal import Decimal
 from datetime import datetime
 
 # Load CDP credentials
-api_key_name = os.getenv('COINBASE_API_KEY', 'b6a30ea8-9978-4666-b8be-69f605a5dc5f')
+api_key_name = os.getenv('COINBASE_API_KEY')
 private_key = os.getenv('COINBASE_API_SECRET', '')
 
 def execute_cdp_trade(pair, side, amount_usd, dry_run=True):

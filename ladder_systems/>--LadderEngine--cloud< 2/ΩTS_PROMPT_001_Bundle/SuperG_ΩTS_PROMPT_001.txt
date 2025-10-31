@@ -1,0 +1,45 @@
+⚫ TACTICAL SYSTEM INTEGRATION STRATEGY – SUPER G + MANUS.AI + Ω_TOTAL_SYSTEM
+
+🎯 PRIMARY GOAL:
+✅ Single source of truth
+✅ No copy/paste drift
+✅ Real-time intelligence routed into real execution
+✅ Always respects live capital, vaults, and rules
+
+🧱 1. Use a Single System Anchor: ΩTS_PROMPT_001
+Create and store the full prompt (which you now have) in one place:
+✅ Inside your Notion Vault
+✅ Labeled: ΩTS_PROMPT_001 – MANUS + Super G Sync
+✅ Version control allowed (v1, v2 if you revise)
+You do not need to remember it — just call it by name:
+load ΩTS_PROMPT_001
+
+🔁 2. Route ALL Systems Through a Shared Prompt Trigger
+Platform	Action	Tool
+GPT / Super G	Paste ΩTS_PROMPT_001 as system prompt	ChatGPT (Custom Instructions)
+MANUS.AI	Embed in memory core or /config/strategy_shell.py	Direct or JSON config
+Ω_TOTAL_SYSTEM_CORE	Reference in GPT prompt files	Local GPT routing
+
+🧠 3. Replace Memory Bloat with Modular File Calls
+Use stored prompts like:
+• ΩTS_PROMPT_001.txt
+• strategy_template_vault.json
+• flip_logic_layer.yaml
+Then just call the file from GPT / Super G / MANUS:
+load("ΩTS_PROMPT_001.txt")
+Example reply reference:
+Strategy confirmed. Governed by: ΩTS_PROMPT_001
+
+🧩 4. Command Chain Routing (Optional)
+def route_to_superg_or_manus(command, context):
+    if command in strategic or flip layer:
+        return run_gpt_response(context, prompt="ΩTS_PROMPT_001")
+    elif command in memory ops or capital sync:
+        return manus.execute(command, with="ΩTS_PROMPT_001")
+
+🔐 SUMMARY – HOW YOU WIN
+✅ Write ΩTS_PROMPT_001 once
+✅ Store it in Notion, local file, or system config
+✅ Route every strategy call through that file — not long chats
+✅ Replace memory stacking with prompt referencing
+✅ Command = load prompt + deploy — nothing else

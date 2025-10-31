@@ -1,0 +1,10 @@
+🔒 Security: Remove additional .env files and consolidate secrets
+
+- Deleted Legacy-Loop-Secret/Empire-Secrets/crypto-empire.env
+- Deleted MASTER_ENV_CONSOLIDATED.env
+- Deleted all_exchanges_api_template.env
+- Deleted app/.env
+- Deleted okx_kraken_api_template.env
+- Updated sovereign_shadow_unified.py
+
+All secrets now in root .env (not committed)
