@@ -3,11 +3,16 @@
 **Goal**: Delete thousands of portfolio update screenshots sent to AI systems
 **Perfect timing**: Before laptop replacement - start fresh!
 
-**⚠️ SAFE ZONES (DO NOT TOUCH):**
-- ❌ Google Photos (personal photos, exes, secrets - ALL SAFE)
-- ❌ iCloud Photos library
-- ❌ Personal photo folders
-- ✅ ONLY DELETE: Desktop/Downloads screenshot spam from 2025 portfolio updates
+**⚠️ WHAT WE'RE DELETING:**
+- ✅ Screenshots from Google Photos (portfolio spam)
+- ✅ Screenshots from Desktop/Downloads
+- ✅ CSV exports from Downloads
+
+**🔒 WHAT STAYS SAFE:**
+- ❌ Actual photos (exes, personal pics, booty pics, etc.)
+- ❌ Videos
+- ❌ Documents
+- ✅ Google Photos has a "Screenshots" filter - we only nuke those!
 
 ---
 
@@ -170,14 +175,53 @@ find ~/Desktop ~/Downloads -type f \( -name "*.png" -o -name "*.jpg" -o -name "*
 
 ---
 
-## 📱 iCloud CLEANUP
+## 📱 GOOGLE PHOTOS CLEANUP (Web/Mobile)
+
+**SAFE METHOD**: Google Photos has a built-in "Screenshots" category!
+
+### Via Web (photos.google.com)
+1. Go to **photos.google.com**
+2. Click **Search** (magnifying glass icon)
+3. Scroll down to **Categories** section
+4. Click **Screenshots**
+5. This shows ONLY screenshots (no actual photos!)
+6. Select all screenshots (or filter by date: Oct-Nov 2025)
+7. Click trash icon to delete
+8. Go to **Trash** and permanently delete
+
+### Via Mobile App
+1. Open **Google Photos** app
+2. Tap **Library** (bottom right)
+3. Tap **Screenshots** album
+4. Select screenshots from Oct-Nov 2025
+5. Tap **Delete** (trash icon)
+6. Empty trash
+
+**⚠️ IMPORTANT**:
+- The "Screenshots" category ONLY shows screenshots
+- Your actual photos (exes, personal pics, etc.) are in different albums
+- If unsure, preview before deleting!
+
+### Quick Date Filter (Oct-Nov 2025 Only)
+1. In Screenshots album
+2. Use date selector to show only Oct-Nov 2025
+3. Select all from those months
+4. Delete
+5. Earlier screenshots (might have memories) stay safe
+
+---
+
+## 📱 iCloud CLEANUP (Optional)
 
 ### Empty iCloud Downloads
 ```bash
 # Find iCloud temp downloads
-find ~/Library/Mobile\ Documents -name "*.png" -o -name "*.jpg" 2>/dev/null | wc -l
+find ~/Library/Mobile\ Documents -name "Screenshot*.png" 2>/dev/null | wc -l
 
-# Clear them (be careful with important docs!)
+# Preview them first
+find ~/Library/Mobile\ Documents -name "Screenshot*.png" 2>/dev/null | head -20
+
+# Delete only if confirmed to be junk
 # (Manual review recommended for iCloud)
 ```
 
@@ -193,7 +237,10 @@ rm -rf ~/.Trash/*
 
 **BEFORE laptop replacement:**
 
-**⚠️ IMPORTANT**: These commands ONLY touch Desktop/Downloads. Your Google Photos, iCloud Photos, and personal photo folders are 100% SAFE.
+**⚠️ IMPORTANT**:
+- Mac commands ONLY touch Desktop/Downloads screenshots
+- Google Photos cleanup uses "Screenshots" category (no actual photos touched)
+- All your personal photos (exes, booty pics, etc.) stay 100% SAFE
 
 1. **Count everything first**
    ```bash
@@ -235,10 +282,21 @@ rm -rf ~/.Trash/*
    rm -rf ~/.Trash/*
    ```
 
-6. **Check savings**
+6. **Clean Google Photos screenshots**
+   - Go to photos.google.com
+   - Search → Categories → Screenshots
+   - Select Oct-Nov 2025 screenshots
+   - Delete them
+   - Empty trash
+
+7. **Check savings**
    ```bash
    du -sh ~/Desktop ~/Downloads
    ```
+
+**Total cleanup**:
+- Local Mac: 2-5GB freed
+- Google Photos: Potentially 5-10GB freed (depends on how many uploaded)
 
 ---
 
