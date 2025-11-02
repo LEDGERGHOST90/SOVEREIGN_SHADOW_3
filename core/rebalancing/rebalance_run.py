@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Sovereign Shadow - Unified Rebalance Orchestrator
-# Location: /home/sovereign_shadow/core_portfolio/rebalance_run.py
+# Location: core/rebalancing/rebalance_run.py
 
 import os
 import json
@@ -10,10 +10,14 @@ from datetime import datetime
 from pathlib import Path
 from config_loader import load_portfolio_targets
 
+# Dynamic path resolution
+BASE_DIR = Path(__file__).parent.parent.parent  # Go up from core/rebalancing/
+LOG_DIR = BASE_DIR / "logs"
+CORE_REBALANCING = BASE_DIR / "core" / "rebalancing"
+
 # CONFIGURATION + GUARDRAILS
-LOG_DIR = Path("/home/sovereign_shadow/logs")
 SIM_PATH = LOG_DIR / "rebalance_sim_result.json"
-EXEC_PATH = Path("/home/sovereign_shadow/core_portfolio/rebalance_grace.py")
+EXEC_PATH = CORE_REBALANCING / "rebalance_grace.py"
 
 ENV = os.getenv("ENV", "paper")
 DISABLE_REAL = os.getenv("DISABLE_REAL_EXCHANGES", "1") == "1"
@@ -27,7 +31,7 @@ print(f"ENV={ENV} | REAL_EXCHANGES={'ENABLED' if not DISABLE_REAL else 'DISABLED
 # STEP 1 — Run Simulation if no existing sim result
 def run_simulation():
     print("🔍 Running adaptive volatility simulation...")
-    sim_script = Path("/home/sovereign_shadow/core_portfolio/rebalance_sim.py")
+    sim_script = CORE_REBALANCING / "rebalance_sim.py"
     if not sim_script.exists():
         print(f"❌ Missing {sim_script}, aborting.")
         return False

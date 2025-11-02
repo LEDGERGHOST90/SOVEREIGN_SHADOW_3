@@ -7,7 +7,17 @@
       "Bash(chmod +x /Volumes/LegacySafe/SovereignShadow/demo_shadow_scope.py)",
       "Bash(chmod +x demo_shadowscope_simple.py)",
       "Bash(./bin/MASTER_LOOP_CONTROL.sh logs 20)",
-      "Read(//var/folders/kb/lr36njw10dg7ms4tvj8yfbd80000gn/T/TemporaryItems/NSIRD_screencaptureui_KErJqH/**)"
+      "Read(//var/folders/kb/lr36njw10dg7ms4tvj8yfbd80000gn/T/TemporaryItems/NSIRD_screencaptureui_KErJqH/**)",
+      "Bash(python3:*)",
+      "Bash(ENV=paper DISABLE_REAL_EXCHANGES=1 COINBASE_API_KEY=test COINBASE_API_SECRET=test python3:*)",
+      "Bash(source:*)",
+      "Bash(ENV=prod DISABLE_REAL_EXCHANGES=1 COINBASE_API_KEY=placeholder_key_paper_mode COINBASE_API_SECRET=placeholder_secret_paper_mode python3:*)",
+      "Bash(git add:*)",
+      "Bash(cat:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git commit:*)",
+      "Bash(chmod:*)",
+      "Bash(./scripts/daily_check.sh:*)"
     ],
     "deny": [],
     "ask": []
