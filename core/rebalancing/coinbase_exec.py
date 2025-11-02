@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Sovereign Shadow - Coinbase Advanced Trade Execution
-# Location: /home/sovereign_shadow/core_portfolio/coinbase_exec.py
+# Location: core/rebalancing/coinbase_exec.py
 
 """
 Handles trade execution via Coinbase Advanced Trade API
@@ -13,7 +13,12 @@ import time
 import hmac
 import hashlib
 from datetime import datetime
+from pathlib import Path
 import requests
+
+# Dynamic path resolution
+BASE_DIR = Path(__file__).parent.parent.parent  # Go up from core/rebalancing/
+LOGS_DIR = BASE_DIR / "logs"
 
 # Safety guardrails
 ENV = os.getenv("ENV", "paper")
@@ -214,8 +219,8 @@ def sell(asset, amount_usd):
 
 def log_trade(trade_data):
     """Append trade to persistent log"""
-    log_file = "/home/sovereign_shadow/logs/trade_execution.jsonl"
-    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    log_file = LOGS_DIR / "trade_execution.jsonl"
+    log_file.parent.mkdir(parents=True, exist_ok=True)
     
     with open(log_file, "a") as f:
         json.dump(trade_data, f)

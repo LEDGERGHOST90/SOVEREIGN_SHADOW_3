@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Sovereign Shadow - AAVE Protocol Integration
-# Location: /home/sovereign_shadow/core_portfolio/aave_client.py
+# Location: core/rebalancing/aave_client.py
 
 """
 Handles AAVE collateral deposits, withdrawals, and health monitoring
@@ -9,6 +9,11 @@ Handles AAVE collateral deposits, withdrawals, and health monitoring
 import os
 import json
 from datetime import datetime
+from pathlib import Path
+
+# Dynamic path resolution
+BASE_DIR = Path(__file__).parent.parent.parent  # Go up from core/rebalancing/
+LOGS_DIR = BASE_DIR / "logs"
 
 ENV = os.getenv("ENV", "paper")
 DISABLE_REAL = os.getenv("DISABLE_REAL_EXCHANGES", "1") == "1"
@@ -80,9 +85,9 @@ def withdraw(asset, amount_usd):
 
 def log_aave_action(action_data):
     """Log AAVE actions to file"""
-    log_file = "/home/sovereign_shadow/logs/aave_actions.jsonl"
-    os.makedirs(os.path.dirname(log_file), exist_ok=True)
-    
+    log_file = LOGS_DIR / "aave_actions.jsonl"
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+
     with open(log_file, "a") as f:
         json.dump(action_data, f)
         f.write("\n")

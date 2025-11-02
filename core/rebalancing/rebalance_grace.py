@@ -79,7 +79,15 @@ if __name__ == "__main__":
     print("🧭 Starting Sovereign Shadow Grace Rebalance")
     if DISABLE_REAL:
         print("🔒 Running in PAPER MODE (no real trades)")
-    confirm = input("Type 'EXECUTE' to run or press Enter to cancel: ")
+
+    # Auto-confirm if AUTO_EXECUTE is set (for terminal automation)
+    auto_execute = os.getenv("AUTO_EXECUTE", "0") == "1"
+    if auto_execute:
+        confirm = "EXECUTE"
+        print("🤖 AUTO_EXECUTE enabled - proceeding automatically")
+    else:
+        confirm = input("Type 'EXECUTE' to run or press Enter to cancel: ")
+
     if confirm.strip().upper() == "EXECUTE":
         execute_trades()
         verify_final_allocation()

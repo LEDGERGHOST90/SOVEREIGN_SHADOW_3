@@ -17,7 +17,8 @@
       "Bash(git check-ignore:*)",
       "Bash(git commit:*)",
       "Bash(chmod:*)",
-      "Bash(./scripts/daily_check.sh:*)"
+      "Bash(./scripts/daily_check.sh:*)",
+      "Bash(ENV=prod DISABLE_REAL_EXCHANGES=1 COINBASE_API_KEY=placeholder_key COINBASE_API_SECRET=placeholder_secret AUTO_EXECUTE=1 python3:*)"
     ],
     "deny": [],
     "ask": []

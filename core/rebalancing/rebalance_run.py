@@ -69,7 +69,15 @@ for k, v in targets.items():
     print(f"   • {k}: {v*100:.1f}%")
 
 mode_desc = "PAPER" if DISABLE_REAL else "LIVE"
-confirm = input(f"\nType 'EXECUTE' to run in {mode_desc} mode, or press Enter to cancel: ").strip().upper()
+
+# Auto-confirm if AUTO_EXECUTE is set (for terminal automation)
+auto_execute = os.getenv("AUTO_EXECUTE", "0") == "1"
+if auto_execute:
+    confirm = "EXECUTE"
+    print(f"\n🤖 AUTO_EXECUTE enabled - proceeding in {mode_desc} mode automatically")
+else:
+    confirm = input(f"\nType 'EXECUTE' to run in {mode_desc} mode, or press Enter to cancel: ").strip().upper()
+
 if confirm != "EXECUTE":
     print("❌ Rebalance aborted by user.")
     exit(0)
@@ -123,7 +131,8 @@ out = {
 }
 
 try:
-    ledger = Path("/home/sovereign_shadow/memory/vault/allocation_log.json")
+    MEMORY_VAULT = BASE_DIR / "memory" / "vault"
+    ledger = MEMORY_VAULT / "allocation_log.json"
     ledger.parent.mkdir(parents=True, exist_ok=True)
     with open(ledger, "a") as f:
         json.dump(out, f)

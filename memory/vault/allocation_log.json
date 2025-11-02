@@ -1,0 +1,1 @@
+{"timestamp": "2025-11-02T13:27:11.997042", "env": "prod", "real_mode": false, "targets": {"ETH": 0.42500000000000004, "BTC": 0.31875, "SOL": 0.15, "XRP": 0.10625000000000001}, "variance_check": {"ETH": 45.9, "BTC": -31.87, "SOL": -4.81, "XRP": 12.65}}
