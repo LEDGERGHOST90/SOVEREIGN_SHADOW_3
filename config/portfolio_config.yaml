@@ -1,0 +1,47 @@
+# Sovereign Shadow Portfolio Configuration
+# Target allocation across Core 4 assets
+
+assets:
+  - symbol: ETH
+    target_weight: 0.35
+    tier: foundation
+    description: "Ethereum - Staking base with AAVE leverage"
+
+  - symbol: BTC
+    target_weight: 0.25
+    tier: foundation
+    description: "Bitcoin - Digital gold, portfolio anchor"
+
+  - symbol: LINK
+    target_weight: 0.15
+    tier: growth
+    description: "Chainlink - Oracle infrastructure leader"
+
+  - symbol: SOL
+    target_weight: 0.15
+    tier: growth
+    description: "Solana - High beta growth play"
+
+  - symbol: XRP
+    target_weight: 0.10
+    tier: tactical
+    description: "Ripple - News-driven momentum play"
+
+# Rebalancing parameters
+rebalancing:
+  drift_threshold: 0.10  # Rebalance when any asset >10% off target
+  min_trade_size: 50  # Minimum $50 per trade
+  ladder_large_orders: true  # Use ladder logic for trades >$500
+  ladder_count: 3  # Number of ladder steps for large orders
+
+# Risk management
+risk:
+  max_drawdown: 0.30  # -30% max portfolio drawdown
+  aave_min_health_factor: 2.0  # Minimum safe health factor
+  emergency_liquidation_threshold: 1.5  # Emergency exit if HF drops below
+
+# ATR Volatility Parameters (for adaptive targeting)
+volatility:
+  atr_period: 14
+  sol_adaptive_range: [0.15, 0.25]  # SOL can range 15-25%
+  update_frequency: "daily"
