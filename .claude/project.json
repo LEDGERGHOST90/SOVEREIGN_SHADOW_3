@@ -1,0 +1,124 @@
+{
+  "name": "Sovereign Shadow II",
+  "description": "Advanced cryptocurrency trading system with AAVE DeFi integration, multi-exchange support, and autonomous agent architecture. Portfolio: $6.1K with AAVE HF 2.44 monitoring.",
+  "version": "2.5a",
+  "icon": "🏴",
+  "root": "/Volumes/LegacySafe/SovereignShadow_II",
+
+  "languages": [
+    "python",
+    "typescript",
+    "javascript",
+    "solidity"
+  ],
+
+  "frameworks": [
+    "Next.js",
+    "React",
+    "ccxt",
+    "web3.py",
+    "ethers.js"
+  ],
+
+  "capabilities": [
+    "Multi-exchange trading (Coinbase, OKX, Kraken, Binance US)",
+    "AAVE v3 DeFi position monitoring",
+    "Ledger hardware wallet integration",
+    "Ladder trading strategies (4-tier entry, 3-tier exit)",
+    "Autonomous agent system (portfolio, risk, code review)",
+    "Real-time portfolio tracking",
+    "Emergency response system (HF monitoring, auto-repay)",
+    "Profit extraction (6-tier progressive system)"
+  ],
+
+  "key_directories": {
+    "agents/": "Autonomous trading agents (portfolio, risk, software architect, code reviewer)",
+    "core/": "Core trading engine, portfolio management, execution logic",
+    "modules/": "Ladder systems, safety gates, profit tracking, execution modules",
+    "scripts/": "AAVE monitoring, emergency repay, health dashboard, balance checkers",
+    "app/": "Next.js web dashboard with real-time portfolio display",
+    "config/": "Configuration files (NOT committed - contains API keys)",
+    "logs/": "Runtime logs and reports (NOT committed - contains sensitive data)",
+    "memory/": "Session summaries, analysis reports, deleveraging plans",
+    "bin/": "Executable scripts for system control",
+    "tools/": "Testing utilities and connection verifiers"
+  },
+
+  "important_files": [
+    "AAVE_PROTECTION_SUITE_COMPLETE.md",
+    "CLAUDE_DESKTOP_SETUP_COMPLETE.md",
+    ".env.example",
+    "memory/DELEVERAGING_PLAN_2025-11-03.md",
+    "SIMULATION_READY_2025-11-04.md",
+    "EMERGENCY_LSETH_DROP_ANALYSIS.md",
+    ".gitignore",
+    "README.md"
+  ],
+
+  "never_commit": [
+    ".env",
+    "*.csv",
+    "config/*_api*.json",
+    "config/cdp_api*.json",
+    "config/ladder_*.json",
+    "logs/**/*",
+    "__pycache__/**/*",
+    "*.pyc",
+    "*secret*",
+    "*credentials*",
+    "*private_key*",
+    "wallet.dat"
+  ],
+
+  "current_status": {
+    "portfolio_value": "$6,167.43",
+    "aave_health_factor": "2.44",
+    "aave_status": "WARNING - Monitor closely",
+    "lseth_alert": "8.6% drop, oracle not updated yet",
+    "protection_suite": "Deployed - 4 tools active",
+    "last_commit": "6433979 - CSV security fix",
+    "github_status": "Synced",
+    "security_status": "Maximum protection"
+  },
+
+  "quick_commands": {
+    "aave_dashboard": "python3 scripts/aave_health_dashboard.py",
+    "aave_guardian": "python3 scripts/aave_guardian_monitor.py",
+    "emergency_repay": "python3 scripts/emergency_aave_repay.py --target-hf 2.5",
+    "risk_scenarios": "python3 scripts/calculate_risk_scenarios.py",
+    "portfolio_agent": "python3 agents/portfolio_agent.py",
+    "risk_agent": "python3 agents/risk_agent.py",
+    "git_status": "git status",
+    "git_push": "git add . && git commit -m 'Update' && git push origin main"
+  },
+
+  "warnings": {
+    "aave_risk": "Health Factor 2.44 is in WARNING zone. If HF < 2.0, repay $26 USDC immediately.",
+    "lseth_drop": "LSETH dropped 8.6%. If oracle updates, HF will drop to 2.23 (still safe, 9.5% cushion).",
+    "battery_safety": "Commit every 30 minutes during work - Mac battery has died 20+ times",
+    "drive_safety": "Push to GitHub frequently - External drive disconnected improperly 10+ times"
+  },
+
+  "portfolio_targets": {
+    "BTC": "40% ($2,467 target, currently $2,232, need +$235)",
+    "ETH": "30% ($1,850 target, includes wstETH in AAVE)",
+    "SOL": "20% ($1,233 target, currently $0, need +$1,233)",
+    "XRP": "10% ($617 target, currently $0, need +$617)"
+  },
+
+  "next_actions": [
+    "Monitor AAVE HF during LSETH volatility (check every 6 hours)",
+    "If HF < 2.0: Execute emergency repay ($26 USDC to reach HF 2.5)",
+    "If HF < 1.8: Execute full deleveraging (repay $1,158 USDC)",
+    "Fund exchanges with $600 for trade ladder deployment",
+    "Deploy RENDER-USD ladder strategy (19% ROI conservative target)",
+    "Continue git commits every 30 min during active work"
+  ],
+
+  "mcp_servers_recommended": [
+    "docker (active)",
+    "github (needs PAT)",
+    "filesystem",
+    "obsidian"
+  ]
+}
