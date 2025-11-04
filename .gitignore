@@ -1,53 +1,141 @@
-# Python
+# =============================================================================
+# SOVEREIGN SHADOW II - GIT IGNORE
+# =============================================================================
+# Comprehensive protection for sensitive data, API keys, and private information
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# PYTHON
+# -----------------------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 *.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Environments
+# -----------------------------------------------------------------------------
+# NODE.JS / NEXT.JS
+# -----------------------------------------------------------------------------
+node_modules/
+.next/
+.swc/
+out/
+*.tsbuildinfo
+.vercel
+.turbo
+*.local
+
+# -----------------------------------------------------------------------------
+# ENVIRONMENTS & SECRETS
+# -----------------------------------------------------------------------------
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 .venv
 venv/
+env/
+ENV/
 
-# IDE
+# -----------------------------------------------------------------------------
+# IDE & EDITORS
+# -----------------------------------------------------------------------------
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.project
+.classpath
+.settings/
 
-# Logs
+# -----------------------------------------------------------------------------
+# LOGS
+# -----------------------------------------------------------------------------
 *.log
 logs/
+logs/**/*.log
+logs/**/*.json
+logs/**/*.txt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# OS
+# -----------------------------------------------------------------------------
+# OS FILES
+# -----------------------------------------------------------------------------
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Archive (old versions)
+# -----------------------------------------------------------------------------
+# ARCHIVE & BACKUP DIRECTORIES (NEVER COMMIT)
+# -----------------------------------------------------------------------------
 archive/
+config/Abicus&ENV/
+config/AbicusENV/
+abicusHO2CC*/
+*backup*/
+*_backup/
+*.backup
+*.bak
 
+# -----------------------------------------------------------------------------
+# ABACUS AI FILES
+# -----------------------------------------------------------------------------
+.abacus.donotdelete
+*.abacus.donotdelete
+
+# -----------------------------------------------------------------------------
 # 🔐 SENSITIVE DATA - NEVER COMMIT
+# -----------------------------------------------------------------------------
 *api_key*
 *API_KEY*
 *secret*
 *SECRET*
 *private_key*
+*PRIVATE_KEY*
 *credentials*
+*CREDENTIALS*
 *config.json
 *keys.json
 *.pem
 *.key
+*.p12
+*.pfx
+wallet.dat
+keystore/
 
-# 🎯 TRADING STRATEGIES - NEVER COMMIT
+# Specific config files with API keys
+config/cdp_api*.json
+config/*_api*.json
+config/ladder_*.json
+config/exchange_*.json
+
+# -----------------------------------------------------------------------------
+# 🎯 TRADING STRATEGIES - PROPRIETARY
+# -----------------------------------------------------------------------------
 *strategy*.py
 *strat*.py
 signal_sources/
 trading_signals/
 proprietary/
+algorithms/private/
 
+# -----------------------------------------------------------------------------
 # 💰 FINANCIAL DATA - NEVER COMMIT
+# -----------------------------------------------------------------------------
 *wallet*
 *_balance.json
 *balance.json
@@ -55,10 +143,71 @@ proprietary/
 *pnl*.json
 *profit*.json
 .keys/
+ledgerlive-*.csv
+*transaction*.csv
+*operations*.csv
+*.csv
+!.env.example
 
+# -----------------------------------------------------------------------------
 # 🛡️ SAFETY CONFIGURATIONS - NEVER COMMIT
+# -----------------------------------------------------------------------------
 modules/safety/safety_rules_config.json
 modules/safety/emergency_contacts.json
 modules/execution/live_portfolio_state.json
 *safety_config*.json
 *emergency*.json
+
+# -----------------------------------------------------------------------------
+# DATABASE FILES
+# -----------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+db.json
+database.json
+
+# -----------------------------------------------------------------------------
+# BLOCKCHAIN & CRYPTO
+# -----------------------------------------------------------------------------
+mnemonic.txt
+seed.txt
+*mnemonic*
+*seed_phrase*
+*recovery_phrase*
+
+# -----------------------------------------------------------------------------
+# REPORTS & AUDIT LOGS (May contain sensitive data)
+# -----------------------------------------------------------------------------
+logs/security_audit_*.json
+logs/aave_monitor_report.json
+logs/*_report.json
+reports/
+
+# -----------------------------------------------------------------------------
+# TEMPORARY FILES
+# -----------------------------------------------------------------------------
+*.tmp
+*.temp
+tmp/
+temp/
+.cache/
+
+# -----------------------------------------------------------------------------
+# EXCEPTIONS (Force include certain files)
+# -----------------------------------------------------------------------------
+!.env.example
+!.gitignore
+!README.md
+!LICENSE
+
+# =============================================================================
+# SECURITY CHECKLIST BEFORE PUSHING TO GITHUB:
+# =============================================================================
+# ✅ Run: python3 scripts/github_security_audit.py
+# ✅ Verify no .env files committed
+# ✅ Check no API keys in code
+# ✅ Remove all wallet addresses
+# ✅ Clear all logs with sensitive data
+# ✅ No database URLs exposed
+# =============================================================================
