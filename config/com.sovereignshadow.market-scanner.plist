@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Job Identification -->
+    <key>Label</key>
+    <string>com.sovereignshadow.market-scanner</string>
+
+    <!-- Program to run -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/python3</string>
+        <string>/Volumes/LegacySafe/SovereignShadow_II/bin/market_scanner_15min.py</string>
+    </array>
+
+    <!-- Run every 15 minutes (900 seconds) -->
+    <key>StartInterval</key>
+    <integer>900</integer>
+
+    <!-- Run at load (immediately when launchd starts) -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Keep job alive (restart if it crashes) -->
+    <key>KeepAlive</key>
+    <false/>
+
+    <!-- Standard output log -->
+    <key>StandardOutPath</key>
+    <string>/Volumes/LegacySafe/SovereignShadow_II/logs/market_scanner/stdout.log</string>
+
+    <!-- Standard error log -->
+    <key>StandardErrorPath</key>
+    <string>/Volumes/LegacySafe/SovereignShadow_II/logs/market_scanner/stderr.log</string>
+
+    <!-- Working directory -->
+    <key>WorkingDirectory</key>
+    <string>/Volumes/LegacySafe/SovereignShadow_II</string>
+
+    <!-- Environment variables -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONUNBUFFERED</key>
+        <string>1</string>
+    </dict>
+
+    <!-- Process settings -->
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <!-- Nice level (lower priority, won't slow down system) -->
+    <key>Nice</key>
+    <integer>10</integer>
+
+    <!-- Low priority I/O -->
+    <key>LowPriorityIO</key>
+    <true/>
+
+    <!-- Throttle interval (seconds to wait if job exits quickly) -->
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>
