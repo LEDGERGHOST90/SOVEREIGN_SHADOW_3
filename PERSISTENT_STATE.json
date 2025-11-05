@@ -1,7 +1,10 @@
 {
-  "schema_version": "1.0.0",
-  "last_updated": "2025-11-05T02:45:14.519469-08:00",
-  "last_session": "memory/SESSIONS/11-November/05/API-Testing-Portfolio-Check_0240-PST.md",
+  "schema_version": "1.1.0",
+  "last_updated": "2025-11-05T04:30:00.000000-08:00",
+  "last_session": "memory/SESSIONS/11-November/05/Market-Scanner-Setup_0331-PST.md",
+  "terminal_status": "unified_single_source_of_truth",
+  "merge_timestamp": "2025-11-05T04:30:00-08:00",
+  "merge_note": "Merged multiple terminal states into single unified system",
   "portfolio": {
     "total_value_usd": 6167.43,
     "last_verified": "2025-11-05T02:40:00-08:00",
@@ -185,14 +188,26 @@
       "status": "operational",
       "version": "2025.11.04",
       "alias": "LEDGER//ECHO",
-      "path": "agents/trade_journal.py",
+      "path": "logs/trading/trade_journal.json",
       "role": "trade_logging",
       "lines_of_code": 800,
-      "total_trades": 0,
-      "win_rate_percent": 0
+      "total_trades": 1,
+      "win_rate_percent": 100,
+      "wins": 1,
+      "losses": 0,
+      "monthly_pnl_usd": 64.74,
+      "monthly_return_percent": 3.94,
+      "last_trade": {
+        "id": "T0001",
+        "date": "2025-11-04T21:32:26",
+        "pair": "BTC/USDT",
+        "type": "long",
+        "profit_usd": 64.74,
+        "is_test": true
+      }
     },
     "mentor_system": {
-      "status": "ready",
+      "status": "started",
       "version": "2025.11.04",
       "alias": "MENTOR//NODE",
       "path": "agents/mentor_system.py",
@@ -200,7 +215,11 @@
       "lines_of_code": 900,
       "chapters": 8,
       "total_lessons": 42,
-      "completed_lessons": 0,
+      "completed_lessons": 1,
+      "current_chapter": 1,
+      "current_lesson": 2,
+      "last_lesson": "The Two-Timeframe Philosophy",
+      "last_completed": "2025-11-05T03:31:00-08:00",
       "paper_trades_required": 10,
       "paper_trades_completed": 0,
       "win_rate_required_percent": 40
