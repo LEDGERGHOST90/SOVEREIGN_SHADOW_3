@@ -3,7 +3,7 @@ const https = require('https');
 const fs = require('fs');
 
 // Read .env file manually
-const envFile = fs.readFileSync('/home/ubuntu/sovereign_legacy_loop/app/.env', 'utf8');
+const envFile = fs.readFileSync('/Volumes/LegacySafe/SovereignShadow_II/.env', 'utf8');
 const envVars = {};
 envFile.split('\n').forEach(line => {
   const [key, ...valueParts] = line.split('=');

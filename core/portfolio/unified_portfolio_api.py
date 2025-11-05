@@ -86,8 +86,36 @@ class UnifiedPortfolioAPI:
         analysis = self.cold_vault_monitor.analyze_portfolio()
 
         if not analysis:
-            # Fallback to knowledge base
-            return get_cold_vault_snapshot()
+            # Fallback to knowledge base - normalize structure
+            snapshot = get_cold_vault_snapshot()
+            # Convert holdings to balances format
+            return {
+                'source': 'cold_vault_knowledge_base',
+                'addresses': snapshot['addresses'],
+                'balances': {
+                    'btc': {
+                        'amount': 0.01966574,  # From knowledge base
+                        'value_usd': snapshot['holdings']['btc']['value_usd']
+                    },
+                    'eth': {
+                        'amount': 0.00494279,
+                        'value_usd': snapshot['holdings']['eth']['value_usd']
+                    },
+                    'usdtb': {
+                        'amount': 4.99,
+                        'value_usd': snapshot['holdings']['usdtb']['value_usd']
+                    },
+                    'xrp': {
+                        'amount': 0.0,
+                        'value_usd': snapshot['holdings']['xrp']['value_usd']
+                    }
+                },
+                'total_value_usd': snapshot['total_value_usd'],
+                'cost_basis': {},
+                'pnl': {},
+                'last_transaction': 'N/A',
+                'safety_status': 'LOCKED',
+            }
 
         return {
             'source': 'ledger_hardware_wallet',

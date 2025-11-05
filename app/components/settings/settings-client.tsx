@@ -35,9 +35,14 @@ export default function SettingsClient() {
   });
   
   const [apiCredentials, setApiCredentials] = useState({
-    apiKey: '',
-    apiSecret: '',
-    showSecret: false
+    binance: { apiKey: '', apiSecret: '', showSecret: false },
+    kraken: { apiKey: '', apiSecret: '', showSecret: false },
+    okx: { apiKey: '', apiSecret: '', passphrase: '', showSecret: false },
+    coinbase: { apiKey: '', apiSecret: '', showSecret: false },
+    infura: { apiKey: '', showSecret: false },
+    etherscan: { apiKey: '', showSecret: false },
+    ledger: { address: '', note: 'Hardware wallet - view only' },
+    metamask: { address: '', note: 'Connected via Etherscan API' }
   });
   
   const [loading, setLoading] = useState(false);
@@ -62,20 +67,71 @@ export default function SettingsClient() {
     }
   };
 
-  const handleSaveCredentials = async () => {
-    if (!apiCredentials.apiKey || !apiCredentials.apiSecret) {
-      toast.error("Please provide both API key and secret");
-      return;
+  const handleSaveCredentials = async (exchange: string) => {
+    const creds = apiCredentials[exchange as keyof typeof apiCredentials];
+
+    // Validation based on exchange type
+    if (exchange === 'infura' || exchange === 'etherscan') {
+      if (!creds.apiKey) {
+        toast.error("Please provide API key");
+        return;
+      }
+    } else if (exchange === 'ledger' || exchange === 'metamask') {
+      if (!creds.address) {
+        toast.error("Please provide wallet address");
+        return;
+      }
+    } else if (exchange === 'okx') {
+      if (!creds.apiKey || !creds.apiSecret || !creds.passphrase) {
+        toast.error("Please provide API key, secret, and passphrase");
+        return;
+      }
+    } else {
+      if (!creds.apiKey || !creds.apiSecret) {
+        toast.error("Please provide both API key and secret");
+        return;
+      }
     }
 
     setLoading(true);
     try {
-      // In a real app, this would encrypt and save credentials
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success("API credentials saved and encrypted");
-      setApiCredentials(prev => ({ ...prev, apiKey: '', apiSecret: '' }));
-    } catch (error) {
-      toast.error("Failed to save API credentials");
+      const payload: any = {
+        exchange,
+        apiKey: creds.apiKey,
+        apiSecret: creds.apiSecret
+      };
+
+      if (exchange === 'okx') {
+        payload.passphrase = creds.passphrase;
+      }
+
+      const response = await fetch('/api/settings/credentials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to save credentials');
+      }
+
+      toast.success(`${exchange.toUpperCase()} credentials verified and saved!`);
+
+      // Clear the form for this exchange
+      setApiCredentials(prev => ({
+        ...prev,
+        [exchange]: exchange === 'okx'
+          ? { apiKey: '', apiSecret: '', passphrase: '', showSecret: false }
+          : exchange === 'infura' || exchange === 'etherscan'
+          ? { apiKey: '', showSecret: false }
+          : exchange === 'ledger' || exchange === 'metamask'
+          ? { address: '', note: prev[exchange as keyof typeof prev].note }
+          : { apiKey: '', apiSecret: '', showSecret: false }
+      }));
+    } catch (error: any) {
+      toast.error(error.message || `Failed to save ${exchange.toUpperCase()} credentials`);
     } finally {
       setLoading(false);
     }
@@ -204,63 +260,349 @@ export default function SettingsClient() {
           </CardContent>
         </Card>
 
-        {/* API Credentials */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Key className="h-5 w-5" />
-              Binance API Credentials
-            </CardTitle>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <AlertTriangle className="h-4 w-4 text-orange-400" />
-              Credentials are encrypted and stored securely
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="apiKey">API Key</Label>
-              <Input
-                id="apiKey"
-                type="text"
-                value={apiCredentials.apiKey}
-                onChange={(e) => setApiCredentials(prev => ({ ...prev, apiKey: e.target.value }))}
-                placeholder="Enter your Binance API key"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="apiSecret">API Secret</Label>
-              <div className="relative">
-                <Input
-                  id="apiSecret"
-                  type={apiCredentials.showSecret ? "text" : "password"}
-                  value={apiCredentials.apiSecret}
-                  onChange={(e) => setApiCredentials(prev => ({ ...prev, apiSecret: e.target.value }))}
-                  placeholder="Enter your Binance API secret"
-                  className="pr-10"
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setApiCredentials(prev => ({ ...prev, showSecret: !prev.showSecret }))}
-                >
-                  {apiCredentials.showSecret ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+        {/* Exchange API Credentials */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold">Exchange & Service Credentials</h2>
+          <p className="text-sm text-muted-foreground flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-orange-400" />
+            All credentials are encrypted and stored securely
+          </p>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {/* Binance US */}
+            <Card className="border-amber-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Key className="h-4 w-4 text-amber-400" />
+                  Binance US
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">API Key</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.binance.apiKey}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      binance: { ...prev.binance, apiKey: e.target.value }
+                    }))}
+                    placeholder="Enter API key"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">API Secret</Label>
+                  <div className="relative">
+                    <Input
+                      type={apiCredentials.binance.showSecret ? "text" : "password"}
+                      value={apiCredentials.binance.apiSecret}
+                      onChange={(e) => setApiCredentials(prev => ({
+                        ...prev,
+                        binance: { ...prev.binance, apiSecret: e.target.value }
+                      }))}
+                      placeholder="Enter API secret"
+                      className="h-9 text-sm pr-9"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-9 px-2"
+                      onClick={() => setApiCredentials(prev => ({
+                        ...prev,
+                        binance: { ...prev.binance, showSecret: !prev.binance.showSecret }
+                      }))}
+                    >
+                      {apiCredentials.binance.showSecret ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                    </Button>
+                  </div>
+                </div>
+                <Button onClick={() => handleSaveCredentials('binance')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Verifying..." : "Save & Test"}
                 </Button>
-              </div>
-            </div>
-            
-            <Button onClick={handleSaveCredentials} disabled={loading} className="gap-2">
-              <Key className="h-4 w-4" />
-              {loading ? "Encrypting..." : "Save & Encrypt Credentials"}
-            </Button>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+
+            {/* Coinbase */}
+            <Card className="border-blue-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Key className="h-4 w-4 text-blue-400" />
+                  Coinbase Advanced
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">API Key</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.coinbase.apiKey}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      coinbase: { ...prev.coinbase, apiKey: e.target.value }
+                    }))}
+                    placeholder="Enter API key"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">API Secret</Label>
+                  <div className="relative">
+                    <Input
+                      type={apiCredentials.coinbase.showSecret ? "text" : "password"}
+                      value={apiCredentials.coinbase.apiSecret}
+                      onChange={(e) => setApiCredentials(prev => ({
+                        ...prev,
+                        coinbase: { ...prev.coinbase, apiSecret: e.target.value }
+                      }))}
+                      placeholder="Enter API secret"
+                      className="h-9 text-sm pr-9"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-9 px-2"
+                      onClick={() => setApiCredentials(prev => ({
+                        ...prev,
+                        coinbase: { ...prev.coinbase, showSecret: !prev.coinbase.showSecret }
+                      }))}
+                    >
+                      {apiCredentials.coinbase.showSecret ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                    </Button>
+                  </div>
+                </div>
+                <Button onClick={() => handleSaveCredentials('coinbase')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Verifying..." : "Save & Test"}
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Kraken */}
+            <Card className="border-purple-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Key className="h-4 w-4 text-purple-400" />
+                  Kraken
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">API Key</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.kraken.apiKey}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      kraken: { ...prev.kraken, apiKey: e.target.value }
+                    }))}
+                    placeholder="Enter API key"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">API Secret</Label>
+                  <div className="relative">
+                    <Input
+                      type={apiCredentials.kraken.showSecret ? "text" : "password"}
+                      value={apiCredentials.kraken.apiSecret}
+                      onChange={(e) => setApiCredentials(prev => ({
+                        ...prev,
+                        kraken: { ...prev.kraken, apiSecret: e.target.value }
+                      }))}
+                      placeholder="Enter API secret"
+                      className="h-9 text-sm pr-9"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute right-0 top-0 h-9 px-2"
+                      onClick={() => setApiCredentials(prev => ({
+                        ...prev,
+                        kraken: { ...prev.kraken, showSecret: !prev.kraken.showSecret }
+                      }))}
+                    >
+                      {apiCredentials.kraken.showSecret ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                    </Button>
+                  </div>
+                </div>
+                <Button onClick={() => handleSaveCredentials('kraken')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Verifying..." : "Save & Test"}
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* OKX */}
+            <Card className="border-green-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Key className="h-4 w-4 text-green-400" />
+                  OKX
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">API Key</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.okx.apiKey}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      okx: { ...prev.okx, apiKey: e.target.value }
+                    }))}
+                    placeholder="Enter API key"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">API Secret</Label>
+                  <Input
+                    type={apiCredentials.okx.showSecret ? "text" : "password"}
+                    value={apiCredentials.okx.apiSecret}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      okx: { ...prev.okx, apiSecret: e.target.value }
+                    }))}
+                    placeholder="Enter API secret"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Passphrase</Label>
+                  <Input
+                    type="password"
+                    value={apiCredentials.okx.passphrase}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      okx: { ...prev.okx, passphrase: e.target.value }
+                    }))}
+                    placeholder="Enter passphrase"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <Button onClick={() => handleSaveCredentials('okx')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Verifying..." : "Save & Test"}
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Infura */}
+            <Card className="border-orange-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Key className="h-4 w-4 text-orange-400" />
+                  Infura RPC
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Project ID / API Key</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.infura.apiKey}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      infura: { ...prev.infura, apiKey: e.target.value }
+                    }))}
+                    placeholder="Enter Infura project ID"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <Button onClick={() => handleSaveCredentials('infura')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Saving..." : "Save API Key"}
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Etherscan */}
+            <Card className="border-cyan-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Key className="h-4 w-4 text-cyan-400" />
+                  Etherscan API
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">API Key</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.etherscan.apiKey}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      etherscan: { ...prev.etherscan, apiKey: e.target.value }
+                    }))}
+                    placeholder="Enter Etherscan API key"
+                    className="h-9 text-sm"
+                  />
+                </div>
+                <Button onClick={() => handleSaveCredentials('etherscan')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Saving..." : "Save API Key"}
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Ledger */}
+            <Card className="border-amber-500/20 bg-amber-950/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Shield className="h-4 w-4 text-amber-400" />
+                  Ledger Wallet
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Wallet Address (View Only)</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.ledger.address}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      ledger: { ...prev.ledger, address: e.target.value }
+                    }))}
+                    placeholder="0x..."
+                    className="h-9 text-sm font-mono"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">{apiCredentials.ledger.note}</p>
+                <Button onClick={() => handleSaveCredentials('ledger')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Saving..." : "Save Address"}
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* MetaMask */}
+            <Card className="border-orange-500/20 bg-orange-950/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Shield className="h-4 w-4 text-orange-400" />
+                  MetaMask Wallet
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Wallet Address</Label>
+                  <Input
+                    type="text"
+                    value={apiCredentials.metamask.address}
+                    onChange={(e) => setApiCredentials(prev => ({
+                      ...prev,
+                      metamask: { ...prev.metamask, address: e.target.value }
+                    }))}
+                    placeholder="0x..."
+                    className="h-9 text-sm font-mono"
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">{apiCredentials.metamask.note}</p>
+                <Button onClick={() => handleSaveCredentials('metamask')} disabled={loading} size="sm" className="w-full">
+                  {loading ? "Saving..." : "Save Address"}
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
         {/* Agent Settings */}
         <Card>

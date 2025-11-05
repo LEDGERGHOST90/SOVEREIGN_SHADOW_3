@@ -1,21 +1,12 @@
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import Sidebar from "@/components/sidebar";
 import DynamicFloatingCoins from "@/components/dynamic-floating-coins";
 
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect("/");
-  }
-
   return (
     <div className="flex h-screen overflow-hidden relative bg-black text-white">
       {/* Custom Nebula Background - Same as welcome page */}
