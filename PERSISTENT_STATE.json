@@ -38,16 +38,37 @@
   },
   "defi_positions": {
     "aave": {
-      "status": "healthy",
-      "collateral_usd": 3494.76,
-      "debt_usd": 1158.58,
-      "debt_asset": "USDC",
-      "borrow_power_used_percent": 42,
-      "cushion_remaining_percent": 58,
-      "health_factor": "safe",
+      "status": "excellent",
+      "collateral_usd": 3330.54,
+      "debt_usd": 658.82,
+      "debt_positions": [
+        {
+          "asset": "USDtb",
+          "amount": 5.12,
+          "value_usd": 5.12,
+          "apy_percent": 4.13
+        },
+        {
+          "asset": "USDC",
+          "amount": 653.79,
+          "value_usd": 653.70,
+          "apy_percent": 6.02
+        }
+      ],
+      "net_value_usd": 2671.73,
+      "available_borrows_usd": 1955.66,
+      "borrow_power_used_percent": 19.8,
+      "cushion_remaining_percent": 80.2,
+      "apy_percent": 6.00,
+      "e_mode": "disabled",
+      "health_factor": 4.09,
+      "liquidation_threshold_percent": 0.81,
+      "loan_to_value_percent": 0.79,
       "risk_level": "low",
-      "last_checked": "2025-11-04T06:11:00-08:00",
-      "action_needed": false
+      "last_checked": "2025-11-05T04:19:47-08:00",
+      "last_checked_method": "live_blockchain_fetch",
+      "action_needed": false,
+      "note": "Excellent health factor 4.09 - Position very safe with 80% cushion"
     }
   },
   "exchange_accounts": {

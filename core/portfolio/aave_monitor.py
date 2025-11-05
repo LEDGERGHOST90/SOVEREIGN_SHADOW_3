@@ -53,15 +53,24 @@ class AAVEMonitor:
     
     def __init__(self):
         """Initialize AAVE monitor with Web3 connection"""
+        # Try multiple RPC endpoints in order of preference
+        # Check if INFURA_URL exists and is not a demo endpoint
         infura_url = os.getenv('INFURA_URL')
-        if not infura_url:
-            raise ValueError("INFURA_URL not found in environment variables")
-        
-        self.w3 = Web3(Web3.HTTPProvider(infura_url))
+        metamask_rpc = os.getenv('METAMASK_RPC_URL')
+
+        if infura_url and 'demo' not in infura_url:
+            rpc_url = infura_url
+        elif metamask_rpc and 'demo' not in metamask_rpc:
+            rpc_url = metamask_rpc
+        else:
+            # Use reliable public RPC endpoint (tested and working)
+            rpc_url = 'https://eth.llamarpc.com'  # LlamaRPC public endpoint
+
+        self.w3 = Web3(Web3.HTTPProvider(rpc_url, request_kwargs={'timeout': 15}))
         
         # Verify connection
         if not self.w3.is_connected():
-            raise ConnectionError("Failed to connect to Ethereum via Infura")
+            raise ConnectionError(f"Failed to connect to Ethereum via {rpc_url}")
         
         # Your Ledger address
         self.user_address = os.getenv('LEDGER_ETH_ADDRESS', '0xC08413B63ecA84E2d9693af9414330dA88dcD81C')
