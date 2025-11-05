@@ -22,30 +22,12 @@ aiohttp>=3.8.0
 websockets>=11.0.0
 
 # CLI & UI
-argparse  # Built-in, but listed for documentation
-rich>=13.0.0  # For beautiful terminal output (optional)
+rich>=13.0.0  # For beautiful terminal output
 tabulate>=0.9.0  # For table formatting
 
 # Configuration & Environment
 python-dotenv>=1.0.0
 pyyaml>=6.0.0
-
-# Testing
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-cov>=4.1.0
-pytest-mock>=3.11.0
-
-# Type Checking (Development)
-mypy>=1.5.0
-types-requests>=2.31.0
-types-pyyaml>=6.0.0
-
-# Code Quality (Development)
-black>=23.0.0
-flake8>=6.0.0
-isort>=5.12.0
-pylint>=2.17.0
 
 # Logging & Monitoring
 python-json-logger>=2.0.0
@@ -70,9 +52,6 @@ pydantic-openapi-schema>=1.0.0
 fastapi>=0.104.0  # For MCP server REST API
 uvicorn>=0.24.0  # ASGI server
 
-# Data Storage
-sqlite3  # Built-in, but listed for documentation
-
 # Utilities
 attrs>=23.1.0
 dataclasses-json>=0.6.0
@@ -83,12 +62,6 @@ markdown>=3.4.0
 # Performance
 numpy>=1.24.0  # For analytics calculations
 pandas>=2.0.0  # For trade journal analytics (optional)
-
-# Environment-Specific Dependencies
-# Development only - install with: pip install -r requirements-dev.txt
-# pytest-xdist  # Parallel test execution
-# pytest-benchmark  # Performance testing
-# memory-profiler  # Memory profiling
 
 # Production Dependencies
 gunicorn>=21.0.0  # Production WSGI server (if using web interface)
@@ -102,52 +75,27 @@ keyring>=24.0.0  # Secure credential storage (optional)
 # Backup & Restore
 python-gnupg>=0.5.0  # GPG encryption for backups (optional)
 
-# Notification Systems (Optional)
-# discord-webhook>=1.0.0  # Discord notifications
-# twilio>=8.0.0  # SMS notifications
-# python-telegram-bot>=20.0  # Telegram notifications
-
-# Chart Analysis (Future)
-# matplotlib>=3.7.0  # Chart visualization
-# plotly>=5.17.0  # Interactive charts
-# pillow>=10.0.0  # Image processing
-
-# Machine Learning (Future - AI trade analysis)
-# scikit-learn>=1.3.0
-# tensorflow>=2.14.0
-
-# === INSTALLATION NOTES ===
+# === NOTES ===
 #
-# Basic Installation:
+# Development dependencies (testing, linting, type checking) are in requirements-dev.txt
+# Install with: pip install -r requirements-dev.txt
+#
+# === INSTALLATION ===
+#
+# Production:
 #   pip install -r requirements.txt
 #
-# Development Installation:
+# Development:
 #   pip install -r requirements.txt
 #   pip install -r requirements-dev.txt
-#
-# Production Installation:
-#   pip install -r requirements.txt --no-dev
 #
 # Upgrade All:
 #   pip install -r requirements.txt --upgrade
 #
-# Freeze Current Environment:
-#   pip freeze > requirements-lock.txt
-#
 # === EXCHANGE-SPECIFIC NOTES ===
 #
-# CCXT (Cryptocurrency Exchange Trading Library)
-# - Supports 100+ exchanges with unified API
-# - Used for: Coinbase, Binance US, OKX, Kraken
-#
-# Web3.py (Ethereum Blockchain)
-# - Used for: AAVE v3 position monitoring
-# - Requires Ethereum RPC provider (Infura, Alchemy)
-#
-# Blockchain Explorers (Ledger)
-# - Uses requests library for API calls
-# - Etherscan API for ETH balance
-# - Blockchain.info API for BTC balance
+# CCXT: Unified API for 100+ exchanges (Coinbase, Binance US, OKX, Kraken)
+# Web3.py: Ethereum blockchain interaction (AAVE v3 monitoring)
 #
 # === SYSTEM REQUIREMENTS ===
 #
@@ -155,15 +103,3 @@ python-gnupg>=0.5.0  # GPG encryption for backups (optional)
 # OS: macOS, Linux, Windows
 # Memory: 2GB RAM minimum
 # Storage: 1GB for logs and journal data
-#
-# === EXTERNAL SERVICES ===
-#
-# Required:
-# - Exchange API keys (Coinbase, Binance US, OKX, Kraken)
-# - Ethereum RPC provider (Infura/Alchemy) for AAVE
-# - Etherscan API key for Ledger ETH balance
-#
-# Optional:
-# - Discord webhook for notifications
-# - Obsidian vault for configuration storage
-# - Claude Desktop for MCP integration
