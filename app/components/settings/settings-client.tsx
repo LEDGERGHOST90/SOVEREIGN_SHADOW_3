@@ -72,22 +72,22 @@ export default function SettingsClient() {
 
     // Validation based on exchange type
     if (exchange === 'infura' || exchange === 'etherscan') {
-      if (!creds.apiKey) {
+      if (!('apiKey' in creds) || !creds.apiKey) {
         toast.error("Please provide API key");
         return;
       }
     } else if (exchange === 'ledger' || exchange === 'metamask') {
-      if (!creds.address) {
+      if (!('address' in creds) || !creds.address) {
         toast.error("Please provide wallet address");
         return;
       }
     } else if (exchange === 'okx') {
-      if (!creds.apiKey || !creds.apiSecret || !creds.passphrase) {
+      if (!('apiKey' in creds) || !('apiSecret' in creds) || !('passphrase' in creds) || !creds.apiKey || !creds.apiSecret || !creds.passphrase) {
         toast.error("Please provide API key, secret, and passphrase");
         return;
       }
     } else {
-      if (!creds.apiKey || !creds.apiSecret) {
+      if (!('apiKey' in creds) || !('apiSecret' in creds) || !creds.apiKey || !creds.apiSecret) {
         toast.error("Please provide both API key and secret");
         return;
       }
@@ -97,11 +97,11 @@ export default function SettingsClient() {
     try {
       const payload: any = {
         exchange,
-        apiKey: creds.apiKey,
-        apiSecret: creds.apiSecret
+        apiKey: ('apiKey' in creds) ? creds.apiKey : undefined,
+        apiSecret: ('apiSecret' in creds) ? creds.apiSecret : undefined
       };
 
-      if (exchange === 'okx') {
+      if (exchange === 'okx' && 'passphrase' in creds) {
         payload.passphrase = creds.passphrase;
       }
 

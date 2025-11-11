@@ -71,8 +71,8 @@ export async function GET(req: NextRequest) {
     });
 
     // Get unique assets from portfolios
-    const assets = [...new Set(portfolios.map(p => p.asset))];
-    
+    const assets = [...new Set(portfolios.map(p => p.asset))] as string[];
+
     // Fetch real current prices
     const currentPrices = await getCurrentPrices(assets);
 

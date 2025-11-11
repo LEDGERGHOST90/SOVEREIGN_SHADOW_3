@@ -1,13 +1,15 @@
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Providers from "@/components/providers";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+// Using system fonts instead of Google Fonts due to network restrictions
+const inter = { className: "font-sans" };
 
 export const metadata: Metadata = {
   title: "Sovereign Legacy Loop - Crypto Wealth Management",
