@@ -1,12 +1,39 @@
-# Replit Configuration for SovereignShadow.Ai Trading Platform
-language = "python3"
-run = "python3 sovereign_shadow_unified.py"
+# =============================================================================
+# Replit Configuration for SovereignShadow_II Trading Platform
+# =============================================================================
+# Last Updated: November 19, 2025
+# Repo: github.com/LEDGERGHOST90/SovereignShadow_II
+# Website: sovereignnshadowii.abacusai.app
+# =============================================================================
 
+language = "python3"
+
+# PRIMARY RUN COMMAND
+# Choose one of the following based on your needs:
+
+# Option 1: FastAPI Trading Server (recommended for dashboard)
+run = "python3 core/api/trading_api_server.py"
+
+# Option 2: Master Trading System (SHADE agents)
+# run = "python3 agents/master_trading_system.py"
+
+# Option 3: Market Scanner (15-min intervals)
+# run = "python3 bin/market_scanner_15min.py"
+
+# Option 4: Mentor System (educational mode)
+# run = "python3 agents/mentor_system.py"
+
+# =============================================================================
+# NIX PACKAGE MANAGER
+# =============================================================================
 [nix]
 channel = "stable-23_11"
 
+# =============================================================================
+# ENVIRONMENT VARIABLES (SAFE DEFAULTS)
+# =============================================================================
 [env]
-# Default to sandbox mode for safety
+# Safety toggles - ALWAYS START IN SANDBOX MODE
 SANDBOX = "1"
 DISABLE_REAL_EXCHANGES = "1"
 ENV = "dev"
@@ -14,13 +41,60 @@ ALLOW_LIVE_EXCHANGE = "0"
 LEGACY_NO_LEDGER = "1"
 PYTHONUNBUFFERED = "1"
 
+# System paths
+PROJECT_ROOT = "/home/runner/SovereignShadow_II"
+LOGS_DIR = "/home/runner/SovereignShadow_II/logs"
+
+# =============================================================================
+# CLOUD DEPLOYMENT CONFIGURATION
+# =============================================================================
 [deployment]
-run = ["sh", "-c", "python3 sovereign_shadow_unified.py --autonomy --interval 120"]
+# Run command for production deployment
+run = ["sh", "-c", "python3 core/api/trading_api_server.py"]
+
+# Deployment target
 deploymentTarget = "cloudrun"
 
+# Build command (optional)
+# build = ["sh", "-c", "pip install -r requirements.txt"]
+
+# =============================================================================
+# PORT CONFIGURATION
+# =============================================================================
 [[ports]]
 localPort = 8000
 externalPort = 80
+
+# =============================================================================
+# REPLIT SECRETS REQUIRED
+# =============================================================================
+# Add these via Replit Secrets UI (lock icon in sidebar):
+#
+# Exchange APIs:
+#   - BINANCE_US_API_KEY
+#   - BINANCE_US_SECRET_KEY
+#   - KRAKEN_API_KEY
+#   - KRAKEN_PRIVATE_KEY
+#   - COINBASE_API_KEY
+#   - COINBASE_API_SECRET
+#
+# Website & Database:
+#   - ABACUSAI_API_KEY
+#   - DATABASE_URL
+#   - NEXTAUTH_SECRET
+#   - NEXTAUTH_URL
+#
+# Blockchain:
+#   - METAMASK_RPC_URL
+#   - PHANTOM_RPC_URL
+#   - WALLETCONNECT_PROJECT_ID
+#   - LEDGER_ETH_ADDRESS
+#
+# System:
+#   - ENCRYPTION_KEY
+#
+# See: docs/REPLIT_QUICK_START.md for complete setup guide
+# =============================================================================
 
 
 
