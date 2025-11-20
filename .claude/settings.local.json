@@ -56,7 +56,9 @@
       "Bash(docs/guides/deployment/)",
       "Bash(CLAUDE_DESKTOP_SETUP_COMPLETE.md )",
       "Bash(GITHUB_CLAUDE_APP_SETUP.md )",
-      "Bash(docs/guides/setup/)"
+      "Bash(docs/guides/setup/)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)"
     ],
     "deny": [],
     "ask": []
