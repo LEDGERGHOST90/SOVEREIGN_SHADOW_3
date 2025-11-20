@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SOVEREIGN_SHADOW_UNIFIED_WORKFLOW.md",
+                "file": "agents/SHADE_SYSTEM_README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SOVEREIGN_SHADOW_UNIFIED_WORKFLOW"
+              "title": "SHADE_SYSTEM_README"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "c7ffd40287c9aa0d",
@@ -95,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DEEPAGENT_HANDOFF_PACKAGE.md",
+                "file": "agents/SHADE_SYSTEM_README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for DEEPAGENT_HANDOFF_PACKAGE"
+              "title": "Backlinks for SHADE_SYSTEM_README"
             }
           },
           {

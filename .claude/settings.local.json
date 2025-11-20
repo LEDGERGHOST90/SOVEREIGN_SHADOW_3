@@ -58,7 +58,10 @@
       "Bash(GITHUB_CLAUDE_APP_SETUP.md )",
       "Bash(docs/guides/setup/)",
       "Bash(git pull:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(diskutil list:*)",
+      "Bash(diskutil info:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

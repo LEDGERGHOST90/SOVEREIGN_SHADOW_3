@@ -207,7 +207,7 @@
       }
     },
     "mentor_system": {
-      "status": "started",
+      "status": "in_progress",
       "version": "2025.11.04",
       "alias": "MENTOR//NODE",
       "path": "agents/mentor_system.py",
@@ -219,7 +219,7 @@
       "current_chapter": 1,
       "current_lesson": 2,
       "last_lesson": "The Two-Timeframe Philosophy",
-      "last_completed": "2025-11-05T03:31:00-08:00",
+      "last_completed": "2025-11-05T05:00:00-08:00",
       "paper_trades_required": 10,
       "paper_trades_completed": 0,
       "win_rate_required_percent": 40
