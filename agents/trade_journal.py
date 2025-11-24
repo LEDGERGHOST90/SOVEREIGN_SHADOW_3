@@ -45,7 +45,7 @@ class MistakeType(Enum):
 
 @dataclass
 class TradeEntry:
-    """Complete trade journal entry"""
+    """Complete trade journal entry - Professional 2025 Standard"""
     # Identification
     trade_id: str
     timestamp: str
@@ -67,17 +67,34 @@ class TradeEntry:
     validation_checks: Dict[str, Any]
     shade_approved: bool
 
-    # Psychology (from Psychology Tracker)
+    # Psychology - UPGRADED with granular tracking
     emotion_before: str
     emotion_after: Optional[str] = None
     emotional_intensity: int = 5
     followed_system: bool = True
+    # NEW: Granular emotion levels (0-10 scale)
+    fear_level: int = 5
+    greed_level: int = 5
+    fomo_level: int = 5
+    confidence_level: int = 5
 
-    # Market Context
+    # Market Context - UPGRADED with more details
     timeframe_4h_trend: str = "unknown"
     timeframe_15m_setup: str = "unknown"
     support_resistance_level: Optional[float] = None
     confluence_count: int = 0
+    # NEW: Market metrics
+    market_fear_greed_index: Optional[int] = None  # 0-100
+    volatility_rating: str = "medium"  # low, medium, high
+    btc_dominance: Optional[float] = None
+    market_phase: str = "unknown"  # accumulation, markup, distribution, markdown
+
+    # Timing Analysis - NEW
+    hour_of_day: int = 0
+    day_of_week: str = "unknown"
+    us_market_open: bool = False
+    asia_session: bool = False
+    london_session: bool = False
 
     # Execution
     status: str = TradeStatus.PLANNED.value
@@ -85,6 +102,7 @@ class TradeEntry:
     actual_entry: Optional[float] = None
     actual_exit: Optional[float] = None
     exit_timestamp: Optional[str] = None
+    slippage_percent: float = 0.0
 
     # Results
     profitable: Optional[bool] = None
@@ -93,12 +111,20 @@ class TradeEntry:
     actual_rr: Optional[float] = None
     held_duration_minutes: Optional[int] = None
 
+    # Process Scoring - NEW (separate from outcome)
+    process_score: Optional[Dict[str, Any]] = None
+
     # Analysis
     mistakes: List[str] = None
     what_went_right: List[str] = None
     what_went_wrong: List[str] = None
     lessons_learned: Optional[str] = None
     tags: List[str] = None
+
+    # Strategy Classification - NEW
+    strategy_name: str = "unknown"
+    setup_quality: int = 5  # 1-10 rating
+    dip_quality_score: Optional[int] = None  # If buying dip
 
     # Screenshots/Charts (file paths)
     chart_screenshot: Optional[str] = None
@@ -311,9 +337,98 @@ class TradeJournal:
         print(f"   R:R: {actual_rr:+.2f}")
         print(f"   Duration: {duration} minutes")
 
+    def calculate_process_score(self, trade: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Calculate process score - SEPARATE from outcome
+
+        Professional traders judge themselves on process, not results
+        A losing trade with A-grade process is better than
+        a winning trade with F-grade process (that was just luck)
+
+        Process checks:
+        1. Followed trading plan (didn't deviate)
+        2. Waited for setup (didn't jump in early)
+        3. Used stop-loss (defined before entry)
+        4. Sized position correctly (within risk limits)
+        5. Emotion was neutral/controlled (not FOMO/revenge)
+        6. Documented reasoning (wrote notes before trade)
+
+        Returns:
+            Score dict with grade A-F and individual checks
+        """
+        checks = {}
+
+        # 1. Followed plan
+        checks['followed_plan'] = trade.get('followed_system', False)
+
+        # 2. Waited for setup (check if SHADE approved)
+        checks['waited_for_setup'] = trade.get('shade_approved', False)
+
+        # 3. Used stop-loss
+        checks['used_stop_loss'] = trade.get('stop_loss') is not None
+
+        # 4. Sized correctly (risk within limits)
+        risk_pct = trade.get('risk_percent', 0)
+        checks['sized_correctly'] = 0.01 <= risk_pct <= 0.02
+
+        # 5. Emotion neutral (FOMO/greed/fear under 7)
+        fomo = trade.get('fomo_level', 5)
+        greed = trade.get('greed_level', 5)
+        fear = trade.get('fear_level', 5)
+        checks['emotion_neutral'] = fomo < 7 and greed < 7 and fear < 7
+
+        # 6. Documented reasoning
+        checks['documented_reasoning'] = bool(trade.get('notes'))
+
+        # Calculate score
+        score = sum(1 for passed in checks.values() if passed)
+        max_score = len(checks)
+
+        # Assign grade
+        percentage = (score / max_score) * 100
+        if percentage >= 100:
+            grade = 'A+'
+        elif percentage >= 83:
+            grade = 'A'
+        elif percentage >= 67:
+            grade = 'B'
+        elif percentage >= 50:
+            grade = 'C'
+        elif percentage >= 33:
+            grade = 'D'
+        else:
+            grade = 'F'
+
+        # Generate analysis
+        if grade in ['A+', 'A']:
+            analysis = f"Grade {grade} process - Perfect execution, proper discipline"
+        elif grade == 'B':
+            analysis = f"Grade {grade} process - Good execution with minor issues"
+        elif grade == 'C':
+            analysis = f"Grade {grade} process - Mediocre execution, room for improvement"
+        else:
+            analysis = f"Grade {grade} process - Poor execution, broke multiple rules"
+
+        return {
+            'score': score,
+            'max_score': max_score,
+            'percentage': percentage,
+            'grade': grade,
+            'checks': checks,
+            'analysis': analysis,
+            'note': 'Process grade is INDEPENDENT of trade outcome (P&L)'
+        }
+
     def _auto_analyze_trade(self, trade: Dict[str, Any]):
         """Automatically analyze trade and populate what went right/wrong"""
+
+        # Calculate process score FIRST (independent of outcome)
+        trade['process_score'] = self.calculate_process_score(trade)
+
         # What went right
+        if trade['process_score']['grade'] in ['A+', 'A', 'B']:
+            trade["what_went_right"].append(f"Process grade: {trade['process_score']['grade']}")
+
         if trade.get("profitable"):
             trade["what_went_right"].append("Trade was profitable")
         if trade.get("followed_system"):
@@ -324,6 +439,9 @@ class TradeJournal:
             trade["what_went_right"].append("Hit or exceeded target R:R")
 
         # What went wrong
+        if trade['process_score']['grade'] in ['D', 'F']:
+            trade["what_went_wrong"].append(f"Poor process grade: {trade['process_score']['grade']}")
+
         if not trade.get("profitable"):
             trade["what_went_wrong"].append("Trade was unprofitable")
         if not trade.get("followed_system"):
@@ -332,7 +450,7 @@ class TradeJournal:
             for mistake in trade["mistakes"]:
                 trade["what_went_wrong"].append(f"Mistake: {mistake}")
 
-        # Add tags
+        # Add tags based on process AND outcome
         if trade.get("profitable"):
             trade["tags"].append("winner")
         else:
@@ -340,6 +458,15 @@ class TradeJournal:
 
         if abs(trade.get("actual_rr", 0)) >= 2:
             trade["tags"].append("good_rr")
+
+        # Special case analysis
+        if trade.get("profitable") and trade['process_score']['grade'] in ['D', 'F']:
+            trade["tags"].append("lucky_win")
+            trade["what_went_right"].append("WARNING: Win with poor process - don't repeat")
+
+        if not trade.get("profitable") and trade['process_score']['grade'] in ['A+', 'A']:
+            trade["tags"].append("unlucky_loss")
+            trade["what_went_right"].append("Good process despite loss - keep doing this")
 
     def _find_trade(self, trade_id: str) -> Optional[Dict[str, Any]]:
         """Find trade by ID"""

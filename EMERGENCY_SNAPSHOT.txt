@@ -1,0 +1,12 @@
+Emergency Snapshot - 2025-11-23 22:17:44.422196
+============================================================
+
+Coinbase USD: $33.03
+Kraken USDG: $1.26
+Kraken ETH: $1.03
+Kraken USD: $0.00
+Binance US (manual): $482.62
+AAVE Net Value: $2,671.73
+
+TOTAL: $3,189.68
+LOSS: $4,665.37 (59.4%)

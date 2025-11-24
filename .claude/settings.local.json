@@ -61,7 +61,14 @@
       "Bash(git stash:*)",
       "Bash(diskutil list:*)",
       "Bash(diskutil info:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(kill:*)",
+      "Bash(nano:*)",
+      "Bash(curl:*)",
+      "Bash(unzip:*)",
+      "WebSearch",
+      "WebFetch(domain:youtu.be)",
+      "WebFetch(domain:www.youtube.com)"
     ],
     "deny": [],
     "ask": []

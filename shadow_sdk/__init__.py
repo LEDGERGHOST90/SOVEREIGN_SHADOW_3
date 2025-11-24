@@ -23,9 +23,10 @@ from .scope import ShadowScope
 from .pulse import ShadowPulse
 from .snaps import ShadowSnaps
 from .synapse import ShadowSynapse
+from .gemini import ShadowMind
 
 __version__ = "0.1.0"
-__all__ = ["ShadowScope", "ShadowPulse", "ShadowSnaps", "ShadowSynapse"]
+__all__ = ["ShadowScope", "ShadowPulse", "ShadowSnaps", "ShadowSynapse", "ShadowMind"]
 
 # Empire Constants
 CAPITAL_TOTAL = 8260

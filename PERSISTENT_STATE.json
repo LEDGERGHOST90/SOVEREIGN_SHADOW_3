@@ -1,35 +1,41 @@
 {
   "schema_version": "1.1.0",
-  "last_updated": "2025-11-05T04:30:00.000000-08:00",
+  "last_updated": "2025-11-24T02:04:25.258258",
   "last_session": "memory/SESSIONS/11-November/05/Market-Scanner-Setup_0331-PST.md",
   "terminal_status": "unified_single_source_of_truth",
   "merge_timestamp": "2025-11-05T04:30:00-08:00",
   "merge_note": "Merged multiple terminal states into single unified system",
   "portfolio": {
-    "total_value_usd": 6167.43,
-    "last_verified": "2025-11-05T02:40:00-08:00",
-    "status": "verified_coinbase_kraken",
+    "total_value_usd": 5308.51,
+    "last_verified": "2025-11-24T02:04:25.258245",
+    "status": "verified_ledger_live",
     "holdings": {
       "btc": {
-        "value_usd": 2232.0,
+        "value_usd": 1419.95,
         "target_percent": 40,
-        "current_percent": 36.2,
+        "current_percent": 26.74,
         "needs_usd": 235.0
       },
       "eth": {
-        "value_usd": null,
+        "value_usd": 13.43,
         "target_percent": 30,
-        "current_percent": null
+        "current_percent": 0.25
       },
       "sol": {
-        "value_usd": null,
+        "value_usd": 0.0,
         "target_percent": 20,
-        "current_percent": null
+        "current_percent": 0.0
       },
       "xrp": {
-        "value_usd": null,
+        "value_usd": 1014.62,
         "target_percent": 10,
-        "current_percent": null
+        "current_percent": 19.11
+      },
+      "aethwsteth": {
+        "value_usd": 2800.55,
+        "current_percent": 52.75,
+        "target_percent": 0,
+        "note": "Aave staked ETH position"
       }
     },
     "target_allocation": {
@@ -54,7 +60,7 @@
         {
           "asset": "USDC",
           "amount": 653.79,
-          "value_usd": 653.70,
+          "value_usd": 653.7,
           "apy_percent": 6.02
         }
       ],
@@ -62,7 +68,7 @@
       "available_borrows_usd": 1955.66,
       "borrow_power_used_percent": 19.8,
       "cushion_remaining_percent": 80.2,
-      "apy_percent": 6.00,
+      "apy_percent": 6.0,
       "e_mode": "disabled",
       "health_factor": 4.09,
       "liquidation_threshold_percent": 0.81,
@@ -572,5 +578,58 @@
     "requests": "2.31.0",
     "types-requests": "2.32.4.20250913",
     "web3": "7.10.0"
+  },
+  "ai_services": {
+    "gemini": {
+      "status": "active",
+      "model": "gemini-2.5-flash",
+      "api_key_configured": true,
+      "project_name": "Gemini_API",
+      "project_number": 643663034480,
+      "last_tested": "2025-11-21T04:02:58.915913",
+      "integration_path": "shadow_sdk/gemini.py",
+      "alias": "ShadowMind",
+      "role": "ai_market_analysis",
+      "capabilities": [
+        "market_sentiment_analysis",
+        "technical_analysis_interpretation",
+        "trade_recommendations",
+        "portfolio_analysis",
+        "natural_language_queries"
+      ],
+      "query_count": 1,
+      "free_tier": true,
+      "default_model": "gemini-3-pro-preview",
+      "available_models": {
+        "gemini-3-pro-preview": {
+          "status": "requires_paid_plan",
+          "free_tier": false,
+          "note": "Most powerful, requires billing setup"
+        },
+        "gemini-2.5-pro": {
+          "status": "available",
+          "free_tier": true,
+          "note": "Very powerful, working on free tier"
+        },
+        "gemini-2.5-flash": {
+          "status": "available",
+          "free_tier": true,
+          "note": "Fast and free tier friendly"
+        }
+      },
+      "current_plan": "free_tier",
+      "last_updated": "2025-11-21T04:11:18.490356"
+    },
+    "shadowmind": {
+      "status": "active",
+      "model": "gemini-2.5-pro",
+      "version": "1.0.0",
+      "last_updated": "2025-11-21T04:25:25.863800",
+      "capabilities": [
+        "market_analysis",
+        "trade_recommendations",
+        "portfolio_analysis"
+      ]
+    }
   }
 }

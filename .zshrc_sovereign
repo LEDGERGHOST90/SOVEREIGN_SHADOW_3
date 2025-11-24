@@ -1,0 +1,99 @@
+# SovereignShadow_II - ZSH Helper Functions
+# Source this in your ~/.zshrc: source /Volumes/LegacySafe/SovereignShadow_II/.zshrc_sovereign
+
+# Project root alias
+alias ss2='cd /Volumes/LegacySafe/SovereignShadow_II'
+
+# Quick navigation
+alias ss2-core='cd /Volumes/LegacySafe/SovereignShadow_II/core'
+alias ss2-agents='cd /Volumes/LegacySafe/SovereignShadow_II/agents'
+alias ss2-rebal='cd /Volumes/LegacySafe/SovereignShadow_II/core/rebalancing'
+alias ss2-app='cd /Volumes/LegacySafe/SovereignShadow_II/app'
+
+# BTC Transaction Monitor
+btc-check() {
+    if [ -z "$1" ]; then
+        echo "Usage: btc-check <TX_ID>"
+        echo "Example: btc-check abc123..."
+        return 1
+    fi
+    cd /Volumes/LegacySafe/SovereignShadow_II
+    python3 agents/transaction_monitor.py "$1"
+}
+
+btc-monitor() {
+    if [ -z "$1" ]; then
+        echo "Usage: btc-monitor <TX_ID>"
+        echo "Example: btc-monitor abc123..."
+        return 1
+    fi
+    cd /Volumes/LegacySafe/SovereignShadow_II
+    python3 agents/transaction_monitor.py "$1" --monitor
+}
+
+# Emergency execution helper
+emergency() {
+    cd /Volumes/LegacySafe/SovereignShadow_II
+    python3 agents/emergency_execution.py "$@"
+}
+
+# Brutal Critic test
+critic-test() {
+    cd /Volumes/LegacySafe/SovereignShadow_II
+    python3 -c "
+from agents.brutal_critic import run_brutal_analysis
+trades = [
+    {'action': 'BUY', 'asset': 'XRP', 'amount_usd': 265},
+    {'action': 'SELL', 'asset': 'ETH', 'amount_usd': 867}
+]
+run_brutal_analysis(trades)
+"
+}
+
+# Rebalance commands
+rebalance-sim() {
+    cd /Volumes/LegacySafe/SovereignShadow_II/core/rebalancing
+    python3 rebalance_sim.py
+}
+
+rebalance-run() {
+    cd /Volumes/LegacySafe/SovereignShadow_II/core/rebalancing
+    python3 rebalance_run.py
+}
+
+rebalance-preflight() {
+    cd /Volumes/LegacySafe/SovereignShadow_II/core/rebalancing
+    python3 preflight_check.py
+}
+
+# System status
+ss2-status() {
+    cd /Volumes/LegacySafe/SovereignShadow_II
+    echo "📊 SovereignShadow_II Status"
+    echo "================================"
+    echo "📍 Location: $(pwd)"
+    echo "🐍 Python: $(python3 --version)"
+    echo "📁 Agents: $(ls -1 agents/*.py 2>/dev/null | wc -l | xargs) files"
+    echo "📁 Core: $(ls -1 core/rebalancing/*.py 2>/dev/null | wc -l | xargs) files"
+    echo ""
+    echo "Quick commands:"
+    echo "  btc-check <TX_ID>     - Check BTC transaction"
+    echo "  btc-monitor <TX_ID>   - Monitor BTC transaction"
+    echo "  rebalance-sim         - Run rebalance simulation"
+    echo "  rebalance-run         - Execute rebalance"
+    echo "  critic-test           - Test brutal critic"
+}
+
+# Auto-complete for btc commands (only if compinit is available)
+if command -v compdef >/dev/null 2>&1; then
+    _btc_tx_complete() {
+        # Could add TX ID history here if needed
+        _files
+    }
+    compdef _btc_tx_complete btc-check btc-monitor 2>/dev/null || true
+fi
+
+echo "✅ SovereignShadow_II zsh helpers loaded!"
+echo "   Type 'ss2-status' for quick status"
+
+

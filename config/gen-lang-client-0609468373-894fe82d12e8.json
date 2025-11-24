@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gen-lang-client-0609468373",
+  "private_key_id": "894fe82d12e86b7f7559f959f9c1f827057c4263",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAdaXE0RoohOPq\n5L2x25IPu9qAtzunW6NulsnZLrcmqcyfafOnLv2nI9s+XDRXGtzi5L4dozHZujzE\nhUM5/2z+bzzGVscVrbsvyhU9K8rbyqXLDGSa8YcgOFgiR+U/Vg5XjerQOizPaAeo\ntOlZgEfHrFqSiNgaIdU3hWr0m4Aq5MWz2gSF9KH7gI7g5c1A4yfl2x6c4occSxGU\n1OqkX0B4CRNwP0b5x3bUgCwyxhfawOP1BT9oFq8tuBEpDzTv32t2kmEzz1tEqHCp\nEqfrGjoqUXkwh4kS4kcDGsB5j93fFIbS4ktJTa3Ka9SaE35E5Dfsp8CxzsBQvBA/\nbYQyKTJ/AgMBAAECggEAXg7hNgAvdZAEx36FCtBRYOkhD3j9aXxKsjh1a3P+RKIF\ng/9G+fToOHA4rRBo8A0L2MOL+nYQXeU735t1UHn5rZt1q0UrxPeEHQX5PU0Stjoi\nrspevK6/qEqBIDfc3QhUuAt+r8dOsQqZe6T2yiv8aKReG3FPk+3nA1xr+iGpEMym\npd3vSG27sp0rhk+SSCY51/oXyHjIyntBBTAiwu3jWqhTCpgn2qgppreVDpsEOmm3\nE/lOUwAezjddJPiYP7+1SBs3vfXtPNSq3BDGkZcwlPNLy0eToJEyzx0cVrVJINE+\nSv20g86hr9pW7lWt9jYzpWjeIEHmro0rgSdAOVwGQQKBgQDiUtJiFnWAmaQamUbW\nOO4F0ztRdOIpuAkoVrPQuEDW096zJYpTcoWVOLNCB/mxqpBD0GERJ6TpfaoC1u/J\nGjTlRNh6MDAn8OUgKMeJ8hC8fwFGPF6T088h8fSHxMyLMcBXZAnQn7QaSIl5erk/\nAUwqbFxTaEuDQx2so2EjxSaEYQKBgQDZshZzrtjZG+bPzQ0f2CYYxoqro1tqi6td\nD+wDhq9+sqSakVI+wfbJcIB3Pu59Vv7HX8K8Doi6nXRUEBrKqntJaSr+PVswRJXg\ny+hmxqDxuxuh+f3iwgulAzXoXUb7H6NmjqIBJP+4PPp61RQ2VDm/UbFYpA/3qhoh\n7CllNWci3wKBgEWSVB3W7ZP0pt+OUpozseeUgV2O4p8Udawyyt/UZAol4wWK+rSg\nNbQjU+ducDFPTz2pZs1RNH6aJJLu45McPTplKW6WNZdxk92I653aDY8EM64VjLVA\nnSHAMP0zX/VB+/BhTisVjNWviqMPOLbHfVRlLxRssRnOnead6pSGXErBAoGBAKFn\nBnpyslgV9cUv1IE9stE/suSa01Zlg4IWIfhjTY50SNJI2F+rU5v6i2TeBdhsPa34\nc9sWM42Y2/zPi+2jBJFjJfsl5owc7bqjtAUvU3imL1Cilvgewp9vh/Jl5hCeXnnV\nWovasLYaj+OuQ7QcMkyE9yYvTZ9kQMfR3scpFvSlAoGAXiuufwVr8VfeudIoRHps\nXFpAtK8ZJQJgImiKnL7uwuk1cNniz+4n5TJ/miNGBcxpnbMZbspVkmU3XvvN5T0V\nOCNNJ04BCs+UKAuYoL6AHybyIKrRPROXLumUrFF0USSSnl8iQR5Jp7b1oWs6bA/O\nq6fwb4gBTY7XzzgBWTMMTLg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tri-bridge-agent@gen-lang-client-0609468373.iam.gserviceaccount.com",
+  "client_id": "106868785599436051780",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tri-bridge-agent%40gen-lang-client-0609468373.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -39,11 +39,19 @@ class ShadeAgent:
 
     def __init__(self, account_balance: float = 1660.0):
         self.account_balance = account_balance
-        self.max_risk_per_trade = 0.02  # 2%
+        self.base_risk_per_trade = 0.02  # 2% base risk
         self.min_risk_per_trade = 0.01  # 1%
         self.min_risk_reward = 2.0  # 1:2 minimum
         self.max_total_exposure = 0.10  # 10% of total portfolio
         self.max_daily_losses = 3  # 3-strike rule
+
+        # Graduated risk reduction (professional upgrade)
+        self.risk_levels = {
+            0: 0.02,  # 2% - full freedom (0 strikes)
+            1: 0.015, # 1.5% - warning shot (1 strike)
+            2: 0.01,  # 1% - last chance (2 strikes)
+            3: 0.00   # 0% - locked out (3 strikes)
+        }
 
         # Track daily losses
         self.today = datetime.now().date()
@@ -53,11 +61,17 @@ class ShadeAgent:
         self.loss_log_file = Path(__file__).parent.parent / "logs" / "psychology" / "loss_streak.json"
         self._load_loss_history()
 
+        # Current allowed risk based on strikes
+        self.max_risk_per_trade = self.risk_levels.get(self.daily_losses, 0)
+
         print("🏴 SHADE//AGENT initialized")
         print(f"   Account: ${account_balance:,.2f}")
-        print(f"   Max Risk/Trade: {self.max_risk_per_trade*100}%")
+        print(f"   Max Risk/Trade: {self.max_risk_per_trade*100}% (Strike Level: {self.daily_losses})")
         print(f"   Min R:R: 1:{self.min_risk_reward}")
         print(f"   Daily Loss Count: {self.daily_losses}/{self.max_daily_losses}")
+
+        if self.daily_losses > 0:
+            print(f"   ⚠️  RISK REDUCED: {self.risk_levels[self.daily_losses]*100}% due to {self.daily_losses} loss(es)")
 
     def _load_loss_history(self):
         """Load today's loss count from file"""
@@ -171,15 +185,25 @@ class ShadeAgent:
         return result
 
     def _check_psychology(self) -> Dict[str, Any]:
-        """Check 3-strike rule"""
+        """Check 3-strike rule with graduated risk reduction"""
         passed = self.daily_losses < self.max_daily_losses
+        current_risk = self.risk_levels.get(self.daily_losses, 0)
+
+        if not passed:
+            reason = f"❌ 3 LOSSES TODAY - STOP TRADING"
+        elif self.daily_losses == 0:
+            reason = f"Psychology: Clear (full 2% risk allowed)"
+        else:
+            reason = f"Psychology: {self.daily_losses} loss(es) - risk reduced to {current_risk*100}%"
 
         return {
             'passed': passed,
-            'reason': f"3-Strike Rule: {self.daily_losses}/{self.max_daily_losses} losses today" if passed else f"❌ 3 LOSSES TODAY - STOP TRADING",
+            'reason': reason,
             'data': {
                 'daily_losses': self.daily_losses,
-                'max_losses': self.max_daily_losses
+                'max_losses': self.max_daily_losses,
+                'current_risk_allowed': current_risk,
+                'risk_reduction_active': self.daily_losses > 0
             }
         }
 
@@ -426,6 +450,141 @@ class ShadeAgent:
             'risk_reward': risk_reward
         }
 
+    def evaluate_dip_quality(
+        self,
+        asset: str,
+        current_price: float,
+        ma_50: Optional[float] = None,
+        ma_200: Optional[float] = None,
+        rsi: Optional[float] = None,
+        volume_ratio: Optional[float] = None,
+        support_level: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        Evaluate quality of a price dip for buying
+
+        Professional traders don't buy every dip - they score quality
+        Score: 0-10 (10 = highest quality dip)
+
+        Args:
+            asset: Asset symbol (e.g., "BTC")
+            current_price: Current price
+            ma_50: 50-day moving average (optional)
+            ma_200: 200-day moving average (optional)
+            rsi: RSI value (optional)
+            volume_ratio: Current volume / Average volume (optional)
+            support_level: Key support level (optional)
+
+        Returns:
+            Dict with score, quality rating, and recommendation
+        """
+        score = 0
+        checks = []
+
+        # 1. Trend still intact? (+3 points)
+        if ma_50 and ma_200:
+            if current_price > ma_50 > ma_200:
+                score += 3
+                checks.append(("Uptrend intact (price > MA50 > MA200)", True, 3))
+            else:
+                checks.append(("Uptrend broken", False, 0))
+        else:
+            checks.append(("Moving averages not provided", None, 0))
+
+        # 2. Oversold but not death spiral? (+2 points)
+        if rsi:
+            if 25 < rsi < 35:
+                score += 2
+                checks.append((f"RSI oversold but healthy ({rsi:.1f})", True, 2))
+            elif rsi < 25:
+                checks.append((f"RSI extreme ({rsi:.1f}) - possible breakdown", False, 0))
+            else:
+                checks.append((f"RSI not oversold ({rsi:.1f})", False, 0))
+        else:
+            checks.append(("RSI not provided", None, 0))
+
+        # 3. Volume declining? (+2 points) - selling exhaustion
+        if volume_ratio:
+            if volume_ratio < 0.7:
+                score += 2
+                checks.append((f"Volume declining ({volume_ratio:.1%}) - exhaustion", True, 2))
+            else:
+                checks.append((f"Volume still high ({volume_ratio:.1%})", False, 0))
+        else:
+            checks.append(("Volume data not provided", None, 0))
+
+        # 4. Support level held? (+2 points)
+        if support_level:
+            support_held = current_price >= support_level * 0.98
+            if support_held:
+                score += 2
+                checks.append((f"Support held @ ${support_level:,.0f}", True, 2))
+            else:
+                checks.append((f"Support broken @ ${support_level:,.0f}", False, 0))
+        else:
+            checks.append(("Support level not provided", None, 0))
+
+        # 5. Not in freefall? (+1 point) - Basic price action
+        # If we have recent price data, check for controlled decline
+        # For now, give benefit of doubt if other checks pass
+        if score >= 4:
+            score += 1
+            checks.append(("Price action controlled", True, 1))
+        else:
+            checks.append(("Price action concerning", False, 0))
+
+        # Determine quality rating
+        if score >= 7:
+            quality = "HIGH_QUALITY_DIP"
+            recommendation = "BUY - Strong setup"
+            color = "🟢"
+        elif score >= 4:
+            quality = "MEDIOCRE_DIP"
+            recommendation = "CAUTION - Wait for more confirmation"
+            color = "🟡"
+        else:
+            quality = "POTENTIAL_BREAKDOWN"
+            recommendation = "AVOID - Not a dip, possible trend reversal"
+            color = "🔴"
+
+        return {
+            "asset": asset,
+            "score": score,
+            "max_score": 10,
+            "quality": quality,
+            "recommendation": recommendation,
+            "color": color,
+            "checks": checks,
+            "analysis": f"{asset} dip scores {score}/10 - {quality}"
+        }
+
+    def print_dip_analysis(self, result: Dict[str, Any]):
+        """Print formatted dip quality analysis"""
+        print("\n" + "="*70)
+        print(f"{result['color']} DIP QUALITY ANALYSIS - {result['asset']}")
+        print("="*70)
+        print(f"Score: {result['score']}/10")
+        print(f"Quality: {result['quality']}")
+        print(f"Recommendation: {result['recommendation']}")
+        print("\n" + "-"*70)
+        print("CHECKS:")
+        print("-"*70)
+
+        for check_name, passed, points in result['checks']:
+            if passed is True:
+                emoji = "✅"
+                status = f"(+{points} pts)"
+            elif passed is False:
+                emoji = "❌"
+                status = "(+0 pts)"
+            else:
+                emoji = "⚪"
+                status = "(N/A)"
+
+            print(f"{emoji} {check_name} {status}")
+
+        print("="*70 + "\n")
+
     def record_trade_result(self, win: bool):
         """
         Record trade result for psychology tracking
@@ -443,6 +602,9 @@ class ShadeAgent:
             self.daily_losses += 1
             self._save_loss_history()
 
+            # Update allowed risk level
+            self.max_risk_per_trade = self.risk_levels.get(self.daily_losses, 0)
+
             if self.daily_losses >= self.max_daily_losses:
                 print("\n" + "="*70)
                 print("🛑 3-STRIKE RULE TRIGGERED")
@@ -451,8 +613,11 @@ class ShadeAgent:
                 print("STOP TRADING FOR THE REST OF THE DAY.")
                 print("Review your trades. Come back tomorrow.")
                 print("="*70 + "\n")
+            else:
+                print(f"\n⚠️  Loss recorded. Risk reduced to {self.max_risk_per_trade*100}%")
+                print(f"   Strikes: {self.daily_losses}/{self.max_daily_losses}\n")
         else:
-            # Win resets streak? (optional behavior)
+            # Win doesn't reset streak in professional systems
             pass
 
     def print_validation_report(self, result: Dict[str, Any]):

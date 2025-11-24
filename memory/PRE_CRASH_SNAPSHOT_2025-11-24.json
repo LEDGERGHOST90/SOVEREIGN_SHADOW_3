@@ -1,0 +1,69 @@
+{
+  "snapshot_type": "pre_crash_emergency_backup",
+  "timestamp": "2025-11-24T02:50:00-08:00",
+  "reason": "User requested memory persist/reload before potential crash",
+  "system_state": {
+    "portfolio": {
+      "total_value_usd": 5308.51,
+      "btc_usd": 1419.95,
+      "eth_usd": 13.43,
+      "sol_usd": 0.0,
+      "xrp_usd": 1014.62,
+      "aave_staked_eth_usd": 2800.55,
+      "last_verified": "2025-11-24T02:04:25"
+    },
+    "defi_health": {
+      "aave_health_factor": 4.09,
+      "collateral_usd": 3330.54,
+      "debt_usd": 658.82,
+      "status": "excellent_very_safe"
+    },
+    "exchanges": {
+      "coinbase": "connected",
+      "kraken": "connected",
+      "binance_us": "network_error_ipv6",
+      "okx": "disabled"
+    },
+    "git_state": {
+      "branch": "main",
+      "commit": "42e9c3d",
+      "staged_files": 26,
+      "untracked_files": 11,
+      "needs_commit": true
+    },
+    "pending_decisions": {
+      "btc_buy": {
+        "recommendation": "conservative",
+        "amount_usd": 117,
+        "wait_levels": [101000, 99000],
+        "btc_price_now": 101746.31
+      }
+    },
+    "trading_systems": {
+      "shade_agent": "operational_tested",
+      "psychology_tracker": "operational",
+      "trade_journal": "operational",
+      "mentor_system": "in_progress",
+      "master_trading_system": "operational"
+    },
+    "critical_files": {
+      "persistent_state": "PERSISTENT_STATE.json",
+      "env_file": ".env",
+      "agent_registry": "memory/SHADE_AGENT_REGISTRY.yaml",
+      "session_history": "memory/SESSIONS/"
+    }
+  },
+  "recovery_instructions": {
+    "step_1": "Check git status and commit any staged changes",
+    "step_2": "Read PERSISTENT_STATE.json to restore system state",
+    "step_3": "Verify .env file has API keys for Coinbase and Kraken",
+    "step_4": "Check memory/SESSIONS/ for session history",
+    "step_5": "Review this snapshot for last known good state",
+    "last_known_working_commit": "42e9c3d"
+  },
+  "battery_crash_history": {
+    "total_crashes": "20+",
+    "drive_disconnects": "10+",
+    "resilience_note": "System designed for crash recovery"
+  }
+}
