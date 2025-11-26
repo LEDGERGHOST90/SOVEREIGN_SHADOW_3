@@ -71,7 +71,7 @@ class ShadeAgent:
         print(f"   Daily Loss Count: {self.daily_losses}/{self.max_daily_losses}")
 
         if self.daily_losses > 0:
-            print(f"   ⚠️  RISK REDUCED: {self.risk_levels[self.daily_losses]*100}% due to {self.daily_losses} loss(es)")
+            print(f"   ⚠️  RISK REDUCED: {self.risk_levels.get(self.daily_losses, 0)*100}% due to {self.daily_losses} loss(es)")
 
     def _load_loss_history(self):
         """Load today's loss count from file"""

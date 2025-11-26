@@ -6,14 +6,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { 
-  LayoutDashboard, 
-  Vault, 
-  Zap, 
-  Map, 
-  BarChart3, 
-  Bot, 
-  User, 
+import {
+  LayoutDashboard,
+  Vault,
+  Zap,
+  Map,
+  BarChart3,
+  Bot,
+  User,
   Settings,
   ChevronLeft,
   ChevronRight,
@@ -21,7 +21,9 @@ import {
   Crown,
   Building2,
   Receipt,
-  Calculator
+  Calculator,
+  TrendingUp,
+  Sparkles
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 
@@ -49,6 +51,12 @@ const navigation = [
     href: "/trading",
     icon: Zap,
     description: "AI-Powered Trade Execution"
+  },
+  {
+    name: "Strategy Scout",
+    href: "/strategy-scout",
+    icon: Sparkles,
+    description: "AI Strategy Analyzer • Gemini-Powered"
   },
   {
     name: "Enhanced Siphon",
