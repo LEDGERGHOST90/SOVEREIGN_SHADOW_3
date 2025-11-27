@@ -4,6 +4,11 @@
 Validates all trades against the 15m/4h strategy rules
 Enforces risk management and psychology discipline
 
+"Trade blocked. The system has spoken."
+
+Now integrated with Sovereign Shadow Council for character-aware messaging.
+When trades are blocked, SHADE references the appropriate council members.
+
 Based on NetworkChuck Trading Education System
 Integrated into SovereignShadow_II
 
@@ -21,7 +26,9 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List
 
 # Add project paths
-sys.path.insert(0, str(Path(__file__).parent.parent))
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / "ShadowCouncil"))
 
 class ShadeAgent:
     """
@@ -64,11 +71,21 @@ class ShadeAgent:
         # Current allowed risk based on strikes
         self.max_risk_per_trade = self.risk_levels.get(self.daily_losses, 0)
 
+        # Load council for character-aware messaging
+        self.council = None
+        try:
+            from council_loader import load_council
+            self.council = load_council()
+        except ImportError:
+            pass  # Council not available, will use basic messages
+
         print("🏴 SHADE//AGENT initialized")
         print(f"   Account: ${account_balance:,.2f}")
         print(f"   Max Risk/Trade: {self.max_risk_per_trade*100}% (Strike Level: {self.daily_losses})")
         print(f"   Min R:R: 1:{self.min_risk_reward}")
         print(f"   Daily Loss Count: {self.daily_losses}/{self.max_daily_losses}")
+        if self.council:
+            print(f"   Council: Connected (VETO POWER ACTIVE)")
 
         if self.daily_losses > 0:
             print(f"   ⚠️  RISK REDUCED: {self.risk_levels.get(self.daily_losses, 0)*100}% due to {self.daily_losses} loss(es)")
@@ -611,7 +628,10 @@ class ShadeAgent:
                 print("="*70)
                 print("You've lost 3 trades today.")
                 print("STOP TRADING FOR THE REST OF THE DAY.")
-                print("Review your trades. Come back tomorrow.")
+                if self.council:
+                    elder_quote = self.council.get_catchphrase('btc_elder')
+                    print(f'\nTHE ELDER: "{elder_quote}"')
+                print("\nReview your trades. Come back tomorrow.")
                 print("="*70 + "\n")
             else:
                 print(f"\n⚠️  Loss recorded. Risk reduced to {self.max_risk_per_trade*100}%")
@@ -619,6 +639,129 @@ class ShadeAgent:
         else:
             # Win doesn't reset streak in professional systems
             pass
+
+    def validate_with_council(
+        self,
+        trade: Dict[str, Any],
+        emotion: str = "neutral",
+        emotion_intensity: int = 5
+    ) -> Dict[str, Any]:
+        """
+        Validate trade with full council integration.
+
+        This method combines SHADE's technical validation with
+        The Mirror's emotion analysis and council character messaging.
+
+        Args:
+            trade: Trade details (symbol, direction, entry, stop, target)
+            emotion: Current emotional state
+            emotion_intensity: Emotion intensity (1-10)
+
+        Returns:
+            Extended validation result with council dialogue
+        """
+        # Standard validation first
+        result = self.validate_trade(trade)
+
+        # Add council context
+        result['council'] = {
+            'dialogue': [],
+            'characters_consulted': [],
+            'emotion_detected': emotion,
+            'emotion_intensity': emotion_intensity
+        }
+
+        # Check emotion using council integration if available
+        if self.council:
+            try:
+                from council_integration import TheMirror
+                mirror = TheMirror()
+                mirror_reading = mirror.analyze_emotion(emotion, emotion_intensity)
+
+                result['council']['mirror_reading'] = {
+                    'character_speaking': mirror_reading.character_speaking,
+                    'threat_level': mirror_reading.threat_level.value,
+                    'veto_advised': mirror_reading.veto_advised,
+                    'quote': mirror_reading.character_quote
+                }
+
+                # Add council dialogue
+                result['council']['dialogue'].append(
+                    f"THE MIRROR: {emotion.upper()} detected. Intensity {emotion_intensity}/10."
+                )
+
+                if mirror_reading.character_speaking:
+                    result['council']['dialogue'].append(
+                        f"THE MIRROR: {mirror_reading.character_speaking} is speaking."
+                    )
+                    result['council']['characters_consulted'].append(mirror_reading.character_speaking)
+
+                # Override approval if emotion warrants veto
+                if mirror_reading.veto_advised and result['approved']:
+                    result['approved'] = False
+                    result['reason'] = f"❌ EMOTIONAL VETO: {mirror_reading.recommendation}"
+                    result['council']['dialogue'].append(
+                        f"SHADE//AGENT: {mirror_reading.character_speaking} is manipulating you. TRADE BLOCKED."
+                    )
+
+                    # The Elder's wisdom
+                    elder_quote = self.council.get_catchphrase('btc_elder')
+                    result['council']['dialogue'].append(f'THE ELDER: "{elder_quote}"')
+                    result['council']['characters_consulted'].append("The Elder")
+
+            except ImportError:
+                pass  # Council integration not available
+
+        # Add asset character context
+        if self.council and result['approved']:
+            symbol = trade.get('symbol', '').split('/')[0].upper()
+            asset_char = self.council.get_by_asset(symbol)
+            if asset_char:
+                trust = asset_char.trust_score.get('current', 50)
+                result['council']['dialogue'].append(
+                    f"{asset_char.name.upper()}: Trust score {trust}/100."
+                )
+                result['council']['characters_consulted'].append(asset_char.name)
+
+                if trust < 30:
+                    result['council']['dialogue'].append(
+                        f"SHADE//AGENT: Low trust asset. Extra caution required."
+                    )
+
+        # Final SHADE decision
+        if result['approved']:
+            result['council']['dialogue'].append("SHADE//AGENT: All checks passed. TRADE APPROVED.")
+            result['council']['dialogue'].append("THE ARCHITECT: The system works. Use it.")
+            result['council']['characters_consulted'].append("SHADE//AGENT")
+            result['council']['characters_consulted'].append("The Architect")
+        else:
+            result['council']['dialogue'].append(f"SHADE//AGENT: {result['reason']}")
+            result['council']['characters_consulted'].append("SHADE//AGENT")
+
+        return result
+
+    def print_council_validation(self, result: Dict[str, Any]):
+        """Print formatted council validation report"""
+        print("\n" + "="*70)
+        print("SOVEREIGN SHADOW COUNCIL - TRADE VALIDATION")
+        print("="*70)
+
+        if result['approved']:
+            print("✅ TRADE APPROVED")
+        else:
+            print("❌ TRADE BLOCKED")
+
+        if 'council' in result and result['council']['dialogue']:
+            print("\n" + "-"*70)
+            print("COUNCIL PROCEEDINGS:")
+            print("-"*70)
+            for line in result['council']['dialogue']:
+                print(f"  {line}")
+
+            print("\n" + "-"*70)
+            print(f"Characters Consulted: {', '.join(result['council']['characters_consulted'])}")
+
+        print("="*70 + "\n")
 
     def print_validation_report(self, result: Dict[str, Any]):
         """Print formatted validation report"""

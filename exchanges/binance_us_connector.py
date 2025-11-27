@@ -32,6 +32,9 @@ class BinanceUSConnector(BaseExchangeConnector):
             'apiKey': api_key,
             'secret': api_secret,
             'enableRateLimit': True,
+            'options': {
+                'warnOnFetchOpenOrdersWithoutSymbol': False,
+            }
         })
 
         if testnet:
@@ -127,3 +130,58 @@ class BinanceUSConnector(BaseExchangeConnector):
         except Exception as e:
             logger.error(f"❌ Failed to fetch Binance US ticker: {e}")
             return {"error": str(e)}
+
+    def fetch_open_orders(self, symbol: str = None) -> list:
+        """
+        Fetch open orders
+
+        Args:
+            symbol: Trading pair (e.g., 'BTC/USD'). If None, fetches all.
+                   Note: Fetching without symbol has 10x stricter rate limits.
+        """
+        try:
+            orders = self.exchange.fetch_open_orders(symbol)
+            logger.info(f"📋 Binance US open orders: {len(orders)}")
+            return [self.format_order_response(o) for o in orders]
+        except Exception as e:
+            logger.error(f"❌ Failed to fetch Binance US open orders: {e}")
+            return []
+
+    def fetch_my_trades(self, symbol: str, limit: int = 50) -> list:
+        """
+        Fetch trade history for a symbol
+
+        Args:
+            symbol: Trading pair (e.g., 'BTC/USD') - REQUIRED
+            limit: Number of trades to fetch (default 50)
+        """
+        try:
+            trades = self.exchange.fetch_my_trades(symbol, limit=limit)
+            logger.info(f"📊 Binance US trades for {symbol}: {len(trades)}")
+            return trades
+        except Exception as e:
+            logger.error(f"❌ Failed to fetch Binance US trades: {e}")
+            return []
+
+    def fetch_all_trades(self, symbols: list = None, limit: int = 20) -> Dict[str, list]:
+        """
+        Fetch trade history across multiple symbols
+
+        Args:
+            symbols: List of trading pairs. Defaults to common pairs.
+            limit: Trades per symbol
+        """
+        if symbols is None:
+            symbols = ['BTC/USD', 'ETH/USD', 'SOL/USD', 'XRP/USD', 'PEPE/USD']
+
+        all_trades = {}
+        for symbol in symbols:
+            try:
+                trades = self.exchange.fetch_my_trades(symbol, limit=limit)
+                if trades:
+                    all_trades[symbol] = trades
+            except Exception:
+                continue  # Symbol may not exist or no trades
+
+        logger.info(f"📊 Binance US total: {sum(len(t) for t in all_trades.values())} trades across {len(all_trades)} pairs")
+        return all_trades

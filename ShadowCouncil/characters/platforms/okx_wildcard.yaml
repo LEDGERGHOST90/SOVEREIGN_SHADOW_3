@@ -1,0 +1,50 @@
+# THE WILDCARD - OKX Character Profile
+# Sovereign Shadow Council - Consulates
+
+name: "The Wildcard"
+platform: "OKX"
+archetype: "Chaotic DeFi Native"
+council_role: "Consulate"
+
+personality:
+  traits:
+    - chaotic
+    - defi_native
+    - high_risk
+    - feature_rich
+    - unpredictable
+  voice: "DeFi speak, talks about yields and opportunities constantly."
+  catchphrases:
+    - "100x leverage available."
+    - "New DeFi opportunities live now."
+    - "Your API key doesn't exist. Try another."
+    - "High risk, high reward. That's the game."
+  speaking_style: "Fast, opportunity-focused, dismissive of caution"
+
+status:
+  connection: "DISABLED"
+  api_valid: false
+  error: "API key doesn't exist"
+  note: "Multiple fresh keys rejected"
+
+holdings:
+  note: "Disabled - no active holdings"
+
+trust_score:
+  current: 25
+  reliability: "poor"
+  api_issues: "chronic"
+  last_updated: "2025-11-27"
+
+jurisdiction: "Global, less regulated"
+
+warnings:
+  - "API consistently fails"
+  - "High leverage available (dangerous)"
+  - "Disabled in config for good reason"
+
+quotes:
+  on_leverage: "Why trade 1x when you can trade 100x?"
+  on_failures: "API issue? Just generate a new key. Easy."
+  on_risk: "Risk is just opportunity wearing a scary mask."
+  on_being_disabled: "Your loss. The yields here are insane."

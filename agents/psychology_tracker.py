@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
 """
-🏴 SOVEREIGN SHADOW II - PSYCHOLOGY TRACKER
+🏴 SOVEREIGN SHADOW II - PSYCHOLOGY TRACKER (THE MIRROR)
 Emotion monitoring and discipline enforcement system
 
-Philosophy: "The market doesn't care about your feelings. Neither should you."
+Philosophy: "I don't judge. I reflect. You judge yourself."
+
+Now integrated with the Sovereign Shadow Council for character-aware messaging.
+When emotions are detected, The Mirror identifies WHO is speaking.
 """
 
 import json
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
+
+# Add ShadowCouncil path for character integration
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT / "ShadowCouncil"))
 
 
 class EmotionState(Enum):
@@ -70,15 +78,31 @@ class DailyPsychology:
 
 class PsychologyTracker:
     """
-    Trading Psychology Monitoring System
+    THE MIRROR - Trading Psychology Monitoring System
+
+    "I don't judge. I reflect. You judge yourself."
 
     Enforces:
     - 3-strike rule (stop after 3 losses)
-    - Emotion logging
-    - Revenge trading detection
+    - Emotion logging with character identification
+    - Revenge trading detection (The Siren alert)
     - FOMO pattern recognition
     - Overtrading prevention
+
+    Now integrated with Sovereign Shadow Council for character-aware messaging.
     """
+
+    # Character mapping for emotions
+    EMOTION_TO_CHARACTER = {
+        EmotionState.REVENGE: "The Siren",
+        EmotionState.FOMO: "The Siren",
+        EmotionState.GREED: "The Siren",
+        EmotionState.HOPE: "The Siren",
+        EmotionState.FEAR: "The Market",
+        EmotionState.ANXIOUS: "The Market",
+        EmotionState.CONFIDENT: "The Elder",
+        EmotionState.NEUTRAL: None,
+    }
 
     def __init__(self, state_file: str = "logs/psychology/psychology_state.json"):
         self.state_file = Path(state_file)
@@ -92,11 +116,21 @@ class PsychologyTracker:
         self.min_time_between_trades = 15  # minutes
         self.revenge_trading_window = 30  # minutes (trade within 30min of loss = revenge?)
 
-        print("🧠 PSYCHOLOGY TRACKER initialized")
+        # Try to load council for character quotes
+        self.council = None
+        try:
+            from council_loader import load_council
+            self.council = load_council()
+        except ImportError:
+            pass  # Council not available, will use basic messages
+
+        print("🪞 THE MIRROR initialized")
         print(f"   Date: {self.daily_state.date}")
         print(f"   Losses: {self.daily_state.losses_today}/3")
         print(f"   Trades: {self.daily_state.trades_today}/{self.max_daily_trades}")
         print(f"   Status: {'🔴 LOCKED OUT' if self.daily_state.locked_out else '🟢 TRADING ALLOWED'}")
+        if self.council:
+            print(f"   Council: Connected ({len(self.council.assets)} assets loaded)")
 
     def _load_or_create_daily_state(self) -> DailyPsychology:
         """Load or create today's psychology state"""
@@ -316,7 +350,8 @@ class PsychologyTracker:
         """
         Log emotion BEFORE taking a trade
 
-        Returns analysis of emotional state and recommendation
+        Returns analysis of emotional state and recommendation,
+        including character identification from the Sovereign Shadow Council.
         """
         self._log_emotion(
             emotion=emotion,
@@ -339,8 +374,18 @@ class PsychologyTracker:
 
         recommendation = "PROCEED" if not (is_dangerous or high_intensity) else "WAIT"
 
+        # Identify who's speaking (Council integration)
+        character_speaking = self.EMOTION_TO_CHARACTER.get(emotion)
+        character_quote = ""
+
+        if character_speaking and self.council:
+            if character_speaking == "The Siren":
+                character_quote = self.council.get_catchphrase('xrp_siren')
+            elif character_speaking == "The Elder":
+                character_quote = self.council.get_catchphrase('btc_elder')
+
         if is_dangerous:
-            reason = f"Dangerous emotion: {emotion.value.upper()}"
+            reason = f"{character_speaking or 'Dangerous emotion'} is speaking: {emotion.value.upper()}"
         elif high_intensity:
             reason = f"High intensity ({intensity}/10) - Not thinking clearly"
         else:
@@ -353,7 +398,40 @@ class PsychologyTracker:
             "intensity": intensity,
             "recommendation": recommendation,
             "reason": reason,
-            "should_trade": recommendation == "PROCEED"
+            "should_trade": recommendation == "PROCEED",
+            "character_speaking": character_speaking,
+            "character_quote": character_quote
+        }
+
+    def who_is_speaking(self, emotion: EmotionState) -> Dict[str, Any]:
+        """
+        Identify which council character is influencing the user's decision.
+
+        THE MIRROR's core function: "I don't judge. I reflect."
+        """
+        character = self.EMOTION_TO_CHARACTER.get(emotion)
+        quote = ""
+        trust_score = None
+        warning = None
+
+        if character and self.council:
+            if character == "The Siren":
+                quote = self.council.get_catchphrase('xrp_siren')
+                trust_score = 23  # The Siren's trust score
+                warning = "The Siren is manipulating you. Step back."
+            elif character == "The Elder":
+                quote = self.council.get_catchphrase('btc_elder')
+                trust_score = 92
+            elif character == "The Market":
+                quote = "The market doesn't care about your feelings."
+
+        return {
+            "emotion": emotion.value,
+            "character": character,
+            "quote": quote,
+            "trust_score": trust_score,
+            "warning": warning,
+            "is_siren": character == "The Siren"
         }
 
     def get_psychology_report(self) -> Dict[str, Any]:

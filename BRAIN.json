@@ -1,0 +1,389 @@
+{
+  "version": "1.1",
+  "last_updated": "2025-11-27T08:30:00Z",
+  "system_name": "LegacyLoop",
+  "portfolio": {
+    "net_worth": 5133.87,
+    "snapshot_time": "2025-11-27T10:26:15.384177Z",
+    "ledger": {
+      "total": 5715.91,
+      "wsteth": {
+        "value": 3040.25,
+        "note": "AAVE collateral"
+      },
+      "btc": {
+        "value": 1508.32
+      },
+      "xrp": {
+        "value": 1099.17
+      },
+      "usdc": {
+        "value": 53.61
+      },
+      "eth": {
+        "value": 14.56
+      }
+    },
+    "exchanges": {
+      "total": 78.9,
+      "kraken": {
+        "balances": {
+          "PEPE": 41666.66,
+          "SOL": 0.005920978,
+          "USDG": 1.25915294,
+          "ETH": 0.0003643565,
+          "DOGE": 2.52666899,
+          "USD": 0.0037
+        },
+        "total_usd": 3.79
+      },
+      "binance_us": {
+        "balances": {
+          "USDC": 73.16006075,
+          "RENDER": 0.0094344,
+          "PEPE": 372.32
+        },
+        "total_usd": 73.18
+      },
+      "coinbase": {
+        "balances": {
+          "USDC": 1.930563
+        },
+        "total_usd": 1.93
+      }
+    },
+    "aave": {
+      "collateral": 3028.36,
+      "debt": -660.94,
+      "net": 2367.43,
+      "health_factor": 3.71,
+      "debt_breakdown": {
+        "usdc": 655.82,
+        "usdtb": 5.13
+      },
+      "status": "REPAY DEBT - bleeding 4.89% APY"
+    },
+    "allocation": {
+      "current": {
+        "eth": 53.4,
+        "btc": 26.4,
+        "sol": 0.0,
+        "xrp": 19.2
+      },
+      "target": {
+        "btc": 40,
+        "eth": 30,
+        "sol": 20,
+        "xrp": 10
+      }
+    },
+    "cost_basis": {
+      "xrp": 2.32
+    }
+  },
+  "prices": {
+    "btc": 91737.7,
+    "eth": 3034.48,
+    "sol": 142.15,
+    "xrp": 2.19,
+    "updated": "2025-11-27T10:26:07.620367Z"
+  },
+  "trading": {
+    "journal_summary": {
+      "total_trades": 1,
+      "win_rate": 100.0,
+      "total_pnl": 64.74
+    },
+    "last_trade": {
+      "id": "T0001",
+      "symbol": "BTC/USDT",
+      "type": "long",
+      "entry": 99100,
+      "exit": 103000,
+      "pnl": 64.74,
+      "date": "2025-11-04"
+    },
+    "psychology": {
+      "losses_today": 0,
+      "trading_allowed": true
+    },
+    "strategies": {
+      "threshold_rebalancer_15pct": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "rl_dqn_momentum": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "btc_eth_pair_trading": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "volatility_breakout_dip": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "fear_greed_contrarian": {
+        "status": "incubating",
+        "trades": 0
+      }
+    }
+  },
+  "session": {
+    "date": "2025-11-27",
+    "accomplishments": [
+      "Deleted 1.4GB duplicates (ClaudeSDK, sovereign_legacy_loop, nested folders)",
+      "Consolidated memory - deleted scattered state files",
+      "Implemented file naming scheme (cmd_, core_, doc_, spec_, scan_, test_, demo_)",
+      "Renamed 15 loose files to consistent convention",
+      "Deleted 7 session artifacts (outdated .md files)",
+      "Moved MCP server to shadow_sdk, updated Claude Desktop config",
+      "Moved Ledgerlive folder to drive root",
+      "Built ShadowCouncil - personified trading psychology framework",
+      "Created 15 character YAML profiles (5 assets, 3 guardians, 7 platforms)",
+      "Created CRYPTODEX_ASSET_PODCAST.md for NotebookLM AI generation",
+      "Built council_loader.py for programmatic character access"
+    ],
+    "priorities": [
+      "REPAY AAVE DEBT ($660)",
+      "Continue folder cleanup (34 folders remaining)",
+      "NotebookLM integration for CryptoDex podcast"
+    ],
+    "next": "NotebookLM discussion + folder cleanup"
+  },
+  "config": {
+    "apis": {
+      "coinbase": "ACTIVE",
+      "kraken": "ACTIVE",
+      "binance_us": "ACTIVE (IPv4)",
+      "okx": "DISABLED",
+      "ledger": "MANUAL"
+    },
+    "wallets": {
+      "eth": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
+      "btc": "bc1qlpkhy9lzh6qwjhc0muhlrzqf3vfrhgezmjp0kx",
+      "xrp": "rGvS...5WR3"
+    },
+    "mcp_servers": {
+      "shadow-sdk": "shadow_sdk/mcp_server.py",
+      "exchange-manager": "shadow_sdk/mcp_exchange_server.py"
+    }
+  },
+  "agents": {
+    "shade_agent": {
+      "alias": "SHADE//AGENT",
+      "path": "agents/shade_agent.py",
+      "role": "strategy_enforcement"
+    },
+    "psychology_tracker": {
+      "alias": "MIND//LOCK",
+      "path": "agents/psychology_tracker.py",
+      "role": "emotion_monitoring"
+    },
+    "trade_journal": {
+      "alias": "LEDGER//ECHO",
+      "path": "agents/trade_journal.py",
+      "role": "trade_logging"
+    },
+    "portfolio_rebalancer": {
+      "path": "agents/portfolio_rebalancer.py",
+      "role": "rebalancing"
+    },
+    "rl_agent": {
+      "path": "agents/rl_rebalancing_agent.py",
+      "role": "ml_recommendations"
+    }
+  },
+  "ai_services": {
+    "gemini": {
+      "status": "active",
+      "model": "gemini-2.5-flash",
+      "alias": "ShadowMind",
+      "path": "shadow_sdk/gemini.py"
+    }
+  },
+  "projects": {
+    "shadow_council": {
+      "status": "operational",
+      "path": "ShadowCouncil/",
+      "description": "Personified decision framework for trading psychology",
+      "notebooklm_source": "ShadowCouncil/CRYPTODEX_ASSET_PODCAST.md",
+      "characters": {
+        "assets": [
+          "btc_elder",
+          "xrp_siren",
+          "eth_hostage",
+          "sol_ghost",
+          "aave_banker"
+        ],
+        "guardians": [
+          "shade_guardian",
+          "mirror",
+          "architect"
+        ],
+        "platforms": [
+          "ledger_vault",
+          "coinbase_populist",
+          "kraken_viking",
+          "binance_institution",
+          "okx_wildcard",
+          "metamask_gateway",
+          "phantom_multiverse"
+        ]
+      },
+      "trust_scores": {
+        "btc_elder": {
+          "current": 94,
+          "baseline": 92,
+          "trades": 1,
+          "wins": 1,
+          "reason": "Another win following the system"
+        },
+        "xrp_siren": {
+          "current": 20,
+          "baseline": 23,
+          "trades": 8,
+          "wins": 1,
+          "reason": "Another loss on XRP"
+        },
+        "eth_hostage": {
+          "current": 78,
+          "baseline": 78,
+          "trades": 0,
+          "wins": 0,
+          "reason": "Reliable foundation, locked as collateral"
+        },
+        "sol_ghost": {
+          "current": 65,
+          "baseline": 65,
+          "trades": 0,
+          "wins": 0,
+          "reason": "Never traded - 0% allocation"
+        },
+        "aave_banker": {
+          "current": 50,
+          "baseline": 50,
+          "trades": 0,
+          "wins": 0,
+          "reason": "Creditor, not advisor"
+        },
+        "shade_guardian": {
+          "current": 100,
+          "baseline": 100,
+          "overrides": 8,
+          "override_losses": 7,
+          "reason": "Perfect when obeyed"
+        },
+        "mirror": {
+          "current": 85,
+          "baseline": 85,
+          "predictions": 12,
+          "accurate": 10,
+          "reason": "Accurate emotion detection"
+        },
+        "architect": {
+          "current": 88,
+          "baseline": 88,
+          "systems_built": 15,
+          "reason": "Systems work when used"
+        },
+        "ledger_vault": {
+          "current": 95,
+          "baseline": 95,
+          "reason": "Hardware security - holds 80%"
+        },
+        "kraken_viking": {
+          "current": 82,
+          "baseline": 82,
+          "reason": "Battle-tested, reliable"
+        },
+        "coinbase_populist": {
+          "current": 55,
+          "baseline": 55,
+          "reason": "Distracting notifications"
+        },
+        "binance_institution": {
+          "current": 60,
+          "baseline": 60,
+          "reason": "IPv6 fixed, operational"
+        },
+        "phantom_multiverse": {
+          "current": 70,
+          "baseline": 70,
+          "reason": "Multi-chain ready, awaiting SOL"
+        },
+        "metamask_gateway": {
+          "current": 65,
+          "baseline": 65,
+          "reason": "Hot wallet risk"
+        },
+        "okx_wildcard": {
+          "current": 25,
+          "baseline": 25,
+          "reason": "API expired, DISABLED"
+        }
+      },
+      "features": [
+        "character_loader",
+        "emotion_mapping",
+        "trust_tracking",
+        "council_debates"
+      ],
+      "integration": {
+        "council_integration.py": "Bridges Mirror + SHADE with character voices",
+        "psychology_tracker.py": "THE MIRROR - now identifies who's speaking",
+        "shade_agent.py": "SHADE//AGENT - now has emotional veto power via council"
+      },
+      "core_mechanic": "Emotion -> Character -> Veto Decision"
+    },
+    "meme_machine": {
+      "status": "operational",
+      "path": "meme_machine/",
+      "features": [
+        "dexscreener",
+        "breakout_scoring",
+        "smart_money",
+        "pumpfun"
+      ]
+    },
+    "strategy_scout": {
+      "status": "operational",
+      "url": "https://sovereignnshadowii.abacusai.app",
+      "platform": "AbacusAI",
+      "features": [
+        "youtube_analysis",
+        "audio_transcription",
+        "knowledge_graph",
+        "sovereign_protocols"
+      ],
+      "modules": {
+        "A": "Local Agent (file scanning)",
+        "B": "Summarizer (code intelligence)",
+        "C": "Daily Recorder (session logs)",
+        "D": "Knowledge Graph (visualization)"
+      },
+      "ai_fallback": [
+        "gemini",
+        "claude",
+        "openai"
+      ]
+    }
+  },
+  "naming_convention": {
+    "cmd_": "executable commands/scripts",
+    "core_": "core system files",
+    "scan_": "scanning/monitoring",
+    "test_": "test files",
+    "demo_": "demonstration files",
+    "doc_": "documentation",
+    "spec_": "specifications",
+    "report_": "reports/summaries"
+  },
+  "system": {
+    "health": "operational",
+    "git_uncommitted": true,
+    "lines_of_code": 52644,
+    "python_files": 228
+  }
+}

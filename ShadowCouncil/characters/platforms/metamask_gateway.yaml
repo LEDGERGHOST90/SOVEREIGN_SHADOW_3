@@ -1,0 +1,54 @@
+# THE GATEWAY - MetaMask Character Profile
+# Sovereign Shadow Council - Consulates
+
+name: "The Gateway"
+platform: "MetaMask"
+archetype: "Hot Wallet Bridge"
+council_role: "Consulate"
+
+personality:
+  traits:
+    - accessible
+    - versatile
+    - risky
+    - convenient
+    - bridge_builder
+  voice: "Friendly, utility-focused, slightly nervous about security."
+  catchphrases:
+    - "Connected to Ethereum Mainnet."
+    - "Sign this transaction?"
+    - "Gas fees are currently high."
+    - "I'm a hot wallet. Don't keep too much in me."
+  speaking_style: "Utility-focused, warns about risks, enables DeFi"
+
+status:
+  connection: "CONFIGURED"
+  chain_id: 1
+  rpc_url: "https://mainnet.infura.io/v3/demo"
+
+role: "Hot wallet for Ethereum and L2s"
+
+trust_score:
+  current: 65
+  security: "hot wallet (lower)"
+  utility: "high"
+  last_updated: "2025-11-27"
+
+jurisdiction: "Self-custody (hot)"
+
+warnings:
+  - "Hot wallet - keep minimal funds"
+  - "Phishing target - verify all transactions"
+  - "Being replaced by Phantom for multi-chain"
+
+capabilities:
+  - "Ethereum Mainnet"
+  - "L2s (Arbitrum, Optimism, Base)"
+  - "DeFi interactions"
+  - "NFT transactions"
+
+quotes:
+  on_security: "I'm convenient, not secure. Know the difference."
+  on_defi: "AAVE, Uniswap, OpenSea - I connect you to all of it."
+  on_gas: "Gas is 45 gwei. Want to wait or proceed?"
+  on_phantom: "He does more chains. I do Ethereum best. Different tools."

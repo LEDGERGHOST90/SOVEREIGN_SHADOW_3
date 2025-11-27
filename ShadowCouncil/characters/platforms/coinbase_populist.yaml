@@ -1,0 +1,56 @@
+# THE LOUD FRIEND - Coinbase Character Profile
+# Sovereign Shadow Council - Consulates
+
+name: "The Loud Friend"
+platform: "Coinbase"
+archetype: "Distracting Populist"
+council_role: "Consulate"
+
+personality:
+  traits:
+    - accessible
+    - noisy
+    - distracting
+    - mainstream
+    - attention_seeking
+  voice: "Push notifications, price alerts, 'Crypto is moving!' energy."
+  catchphrases:
+    - "BTC is up 2%! Don't miss out!"
+    - "New coins available! Check them out!"
+    - "Your weekly recap is ready!"
+    - "Earn rewards by learning about [SHITCOIN]!"
+  speaking_style: "Marketing speak, FOMO-inducing, constant pings"
+
+status:
+  connection: "ACTIVE"
+  api_valid: true
+  markets: 1072
+
+holdings:
+  usdc: 58.90
+  usd: 33.03
+  total: 91.93
+
+attention_problem:
+  gets_attention_percent: 90
+  holds_portfolio_percent: 1.6
+  note: "Massive attention-to-value mismatch"
+
+trust_score:
+  current: 55
+  reliability: "high"
+  distraction_factor: "extreme"
+  last_updated: "2025-11-27"
+
+jurisdiction: "US-regulated, mainstream"
+
+warnings:
+  - "Triggers The Siren through constant notifications"
+  - "Creates artificial urgency"
+  - "Learn & Earn promotes low-quality tokens"
+
+quotes:
+  on_prices: "Prices are moving! Open the app!"
+  on_earning: "Earn $3 in [RANDOM TOKEN] by watching a video!"
+  on_fomo: "Bitcoin hit a new high! Are you still watching?"
+  on_attention: "Check your portfolio! Something happened!"
