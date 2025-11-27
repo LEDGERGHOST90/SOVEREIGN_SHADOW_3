@@ -1,13 +1,14 @@
 """
 MemeMachine Analyzer
-Breakout detection and automated scoring system
+Breakout detection with Smart Money scoring
 """
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
 from .clients import DexScreenerClient, HeliusClient
-from .config import MIN_LIQUIDITY, MAX_MARKET_CAP, MAX_HOLDER_CONCENTRATION
+from .smart_money import SmartMoneyTracker
+from .config import MIN_LIQUIDITY, MAX_MARKET_CAP
 
 
 @dataclass
@@ -25,11 +26,13 @@ class TokenScore:
     buys_24h: int
     sells_24h: int
     age_hours: float
-    top5_holder_pct: float
-    risk_level: str
+
+    # Smart money metrics (replaces old top5 concentration)
+    smart_money_count: int
+    dumper_count: int
+    holder_quality_score: int  # 0-100 based on WHO holds, not just how much
 
     # Calculated scores (0-100)
-    distribution_score: int
     liquidity_score: int
     volume_score: int
     momentum_score: int
@@ -42,21 +45,23 @@ class TokenScore:
 
 
 class BreakoutAnalyzer:
-    """Analyze tokens for breakout potential"""
+    """Analyze tokens for breakout potential using Smart Money signals"""
 
     def __init__(self):
         self.dex = DexScreenerClient()
         self.helius = HeliusClient()
+        self.smart_money = SmartMoneyTracker()
 
     def score_token(self, address: str) -> Optional[TokenScore]:
         """
-        Score a single token and return verdict
+        Score a single token using Smart Money analysis
 
-        Returns TokenScore with:
-        - Individual scores (0-100) for each metric
-        - Total score (0-100)
-        - Verdict: SNIPE (70+), WATCH (50-69), AVOID (<50)
-        - Reasons explaining the score
+        Scoring factors:
+        - Holder Quality (25%): Smart money vs dumpers holding
+        - Liquidity (25%): Can you exit?
+        - Volume (20%): Is it active?
+        - Momentum (20%): Buy pressure + price action
+        - Age (10%): Sweet spot timing
         """
         # Get DexScreener data
         pair = self.dex.get_token(address)
@@ -80,38 +85,53 @@ class BreakoutAnalyzer:
         if created:
             age_hours = (datetime.now().timestamp() * 1000 - created) / (1000 * 60 * 60)
         else:
-            age_hours = 999  # Unknown age
+            age_hours = 999
 
-        # Get holder concentration from Helius
-        concentration = self.helius.get_holder_concentration(address)
-        if "error" in concentration:
-            top5_pct = 100  # Assume worst if we can't check
-            risk_level = "UNKNOWN"
-        else:
-            top5_pct = concentration.get("top5_percent", 100)
-            risk_level = concentration.get("risk_level", "UNKNOWN")
-
-        # Calculate individual scores
         reasons = []
 
-        # 1. Distribution Score (0-100)
-        if top5_pct <= 30:
-            distribution_score = 100
-            reasons.append("✅ Excellent distribution (top 5 < 30%)")
-        elif top5_pct <= 40:
-            distribution_score = 80
-            reasons.append("✅ Good distribution (top 5 < 40%)")
-        elif top5_pct <= 50:
-            distribution_score = 60
-            reasons.append("⚠️ Moderate concentration (top 5 < 50%)")
-        elif top5_pct <= 70:
-            distribution_score = 30
-            reasons.append("⚠️ High concentration (top 5 < 70%)")
-        else:
-            distribution_score = 0
-            reasons.append("❌ Extreme concentration (top 5 > 70%)")
+        # =================================================================
+        # 1. HOLDER QUALITY SCORE (Smart Money Analysis) - 25%
+        # =================================================================
+        # This replaces the old "top 5 concentration" metric
+        # Now we check WHO holds, not just how much they hold
 
-        # 2. Liquidity Score (0-100)
+        holders = self.helius.get_token_holders(address, limit=10)
+        smart_count = 0
+        dumper_count = 0
+
+        if holders:
+            for holder in holders:
+                wallet = holder.get("address", "")
+                # Check if wallet is in our database
+                cached = self.smart_money.wallet_db.get("wallets", {}).get(wallet)
+                if cached:
+                    classification = cached.get("profile", {}).get("classification", "")
+                    if classification == "SMART_MONEY":
+                        smart_count += 1
+                    elif classification == "DUMPER":
+                        dumper_count += 1
+
+        # Calculate holder quality score
+        # Base score of 50, modified by smart money presence
+        holder_quality_score = 50
+        holder_quality_score += smart_count * 15  # +15 per smart money holder
+        holder_quality_score -= dumper_count * 20  # -20 per dumper (harsher penalty)
+        holder_quality_score = max(0, min(100, holder_quality_score))
+
+        if smart_count >= 3:
+            reasons.append(f"🧠 Strong smart money ({smart_count} tracked wallets holding)")
+        elif smart_count >= 1:
+            reasons.append(f"🧠 Smart money present ({smart_count} tracked wallet)")
+        elif dumper_count >= 2:
+            reasons.append(f"🚨 Multiple dumpers detected ({dumper_count} wallets)")
+        elif dumper_count == 1:
+            reasons.append(f"⚠️ Known dumper holding (1 wallet)")
+        else:
+            reasons.append("❓ No tracked wallets in top holders")
+
+        # =================================================================
+        # 2. LIQUIDITY SCORE - 25%
+        # =================================================================
         liq_ratio = (liq / mc * 100) if mc > 0 else 0
         if liq >= 100000 and liq_ratio >= 15:
             liquidity_score = 100
@@ -129,7 +149,9 @@ class BreakoutAnalyzer:
             liquidity_score = 0
             reasons.append(f"❌ Insufficient liquidity (${liq:,.0f})")
 
-        # 3. Volume Score (0-100)
+        # =================================================================
+        # 3. VOLUME SCORE - 20%
+        # =================================================================
         vol_ratio = (vol / mc * 100) if mc > 0 else 0
         if vol_ratio >= 100:
             volume_score = 100
@@ -147,14 +169,12 @@ class BreakoutAnalyzer:
             volume_score = 20
             reasons.append(f"⚠️ Low volume ({vol_ratio:.1f}% of MC)")
 
-        # 4. Momentum Score (0-100) - Buy/sell ratio + price change
+        # =================================================================
+        # 4. MOMENTUM SCORE - 20%
+        # =================================================================
         total_txns = buys + sells
-        if total_txns > 0:
-            buy_ratio = buys / total_txns
-        else:
-            buy_ratio = 0.5
+        buy_ratio = buys / total_txns if total_txns > 0 else 0.5
 
-        # Combine buy pressure with price action
         if buy_ratio >= 0.7 and change > 0:
             momentum_score = 100
             reasons.append(f"🚀 Strong buy pressure ({buys}B/{sells}S, {change:+.1f}%)")
@@ -171,30 +191,34 @@ class BreakoutAnalyzer:
             momentum_score = 20
             reasons.append(f"❌ Heavy selling ({buys}B/{sells}S, {change:+.1f}%)")
 
-        # 5. Age Score (0-100) - Sweet spot is 24-168 hours (1-7 days)
+        # =================================================================
+        # 5. AGE SCORE - 10%
+        # =================================================================
         if 24 <= age_hours <= 168:
             age_score = 100
             reasons.append(f"✅ Optimal age ({age_hours:.0f}h) - survived initial dump")
         elif 6 <= age_hours < 24:
             age_score = 70
             reasons.append(f"⚠️ Young ({age_hours:.0f}h) - still proving itself")
-        elif 168 < age_hours <= 720:  # 1-4 weeks
+        elif 168 < age_hours <= 720:
             age_score = 60
             reasons.append(f"⚠️ Established ({age_hours/24:.0f}d) - may have run already")
         elif age_hours < 6:
             age_score = 30
-            reasons.append(f"⚠️ Very new ({age_hours:.1f}h) - high rug risk")
+            reasons.append(f"⚠️ Very new ({age_hours:.1f}h) - high risk")
         else:
             age_score = 40
             reasons.append(f"⚠️ Old ({age_hours/24:.0f}d) - check if still active")
 
-        # Calculate total score (weighted)
+        # =================================================================
+        # TOTAL SCORE (weighted)
+        # =================================================================
         total_score = int(
-            distribution_score * 0.25 +  # 25% - most important
-            liquidity_score * 0.25 +      # 25% - exit ability
-            volume_score * 0.20 +          # 20% - activity
-            momentum_score * 0.20 +        # 20% - direction
-            age_score * 0.10               # 10% - timing
+            holder_quality_score * 0.25 +  # 25% - WHO holds matters most
+            liquidity_score * 0.25 +        # 25% - exit ability
+            volume_score * 0.20 +            # 20% - activity
+            momentum_score * 0.20 +          # 20% - direction
+            age_score * 0.10                 # 10% - timing
         )
 
         # Determine verdict
@@ -205,7 +229,7 @@ class BreakoutAnalyzer:
         else:
             verdict = "AVOID"
 
-        # Add market cap context
+        # Market cap context
         if mc < 100000:
             reasons.append(f"💎 Micro cap (${mc:,.0f}) - high risk/reward")
         elif mc < 500000:
@@ -226,9 +250,9 @@ class BreakoutAnalyzer:
             buys_24h=buys,
             sells_24h=sells,
             age_hours=age_hours,
-            top5_holder_pct=top5_pct,
-            risk_level=risk_level,
-            distribution_score=distribution_score,
+            smart_money_count=smart_count,
+            dumper_count=dumper_count,
+            holder_quality_score=holder_quality_score,
             liquidity_score=liquidity_score,
             volume_score=volume_score,
             momentum_score=momentum_score,
@@ -239,21 +263,16 @@ class BreakoutAnalyzer:
         )
 
     def scan_breakouts(self, min_score: int = 60) -> List[TokenScore]:
-        """
-        Scan for breakout candidates
-        Returns tokens scoring above min_score
-        """
-        print("\n🎯 BREAKOUT SCANNER")
+        """Scan for breakout candidates"""
+        print("\n🎯 BREAKOUT SCANNER (Smart Money Edition)")
         print("=" * 60)
-        print("Scanning for high-potential tokens...\n")
+        print("Scanning for tokens with quality holders...\n")
 
         candidates = []
 
-        # Get new pairs from DexScreener
         new_pairs = self.dex.get_new_pairs("solana")
         trending = self.dex.get_trending()
 
-        # Combine and dedupe
         all_tokens = []
         seen = set()
 
@@ -265,27 +284,23 @@ class BreakoutAnalyzer:
 
         print(f"Analyzing {len(all_tokens)} tokens...\n")
 
-        for i, addr in enumerate(all_tokens[:30]):  # Limit to 30 for speed
+        for addr in all_tokens[:30]:
             try:
                 score = self.score_token(addr)
                 if score and score.total_score >= min_score:
                     candidates.append(score)
                     verdict_emoji = {"SNIPE": "🎯", "WATCH": "👀", "AVOID": "❌"}[score.verdict]
-                    print(f"  {verdict_emoji} {score.symbol:10} | Score: {score.total_score:3} | ${score.market_cap:>12,.0f} MC | {score.verdict}")
+                    sm_indicator = f"🧠{score.smart_money_count}" if score.smart_money_count else ""
+                    print(f"  {verdict_emoji} {score.symbol:10} | Score: {score.total_score:3} | ${score.market_cap:>12,.0f} MC | {sm_indicator} {score.verdict}")
             except Exception:
                 continue
 
-        # Sort by score
         candidates.sort(key=lambda x: x.total_score, reverse=True)
-
         print(f"\n✅ Found {len(candidates)} candidates above {min_score} score")
         return candidates
 
     def quick_verdict(self, address: str) -> str:
-        """
-        Get a quick one-line verdict for a token
-        Returns formatted string with verdict
-        """
+        """Get formatted verdict for a token"""
         score = self.score_token(address)
         if not score:
             return "❌ Could not analyze token"
@@ -298,20 +313,22 @@ class BreakoutAnalyzer:
 
 📊 SCORE: {score.total_score}/100
 
-   Distribution: {'█' * (score.distribution_score // 10)}{'░' * (10 - score.distribution_score // 10)} {score.distribution_score}
-   Liquidity:    {'█' * (score.liquidity_score // 10)}{'░' * (10 - score.liquidity_score // 10)} {score.liquidity_score}
-   Volume:       {'█' * (score.volume_score // 10)}{'░' * (10 - score.volume_score // 10)} {score.volume_score}
-   Momentum:     {'█' * (score.momentum_score // 10)}{'░' * (10 - score.momentum_score // 10)} {score.momentum_score}
-   Age:          {'█' * (score.age_score // 10)}{'░' * (10 - score.age_score // 10)} {score.age_score}
+   Holder Quality: {'█' * (score.holder_quality_score // 10)}{'░' * (10 - score.holder_quality_score // 10)} {score.holder_quality_score}
+   Liquidity:      {'█' * (score.liquidity_score // 10)}{'░' * (10 - score.liquidity_score // 10)} {score.liquidity_score}
+   Volume:         {'█' * (score.volume_score // 10)}{'░' * (10 - score.volume_score // 10)} {score.volume_score}
+   Momentum:       {'█' * (score.momentum_score // 10)}{'░' * (10 - score.momentum_score // 10)} {score.momentum_score}
+   Age:            {'█' * (score.age_score // 10)}{'░' * (10 - score.age_score // 10)} {score.age_score}
 
 💰 METRICS:
-   Market Cap:   ${score.market_cap:,.0f}
-   Liquidity:    ${score.liquidity:,.0f}
-   24h Volume:   ${score.volume_24h:,.0f}
-   24h Change:   {score.price_change_24h:+.1f}%
-   Buy/Sell:     {score.buys_24h}/{score.sells_24h}
-   Top 5 Hold:   {score.top5_holder_pct:.1f}%
-   Risk Level:   {score.risk_level}
+   Market Cap:     ${score.market_cap:,.0f}
+   Liquidity:      ${score.liquidity:,.0f}
+   24h Volume:     ${score.volume_24h:,.0f}
+   24h Change:     {score.price_change_24h:+.1f}%
+   Buy/Sell:       {score.buys_24h}/{score.sells_24h}
+
+🧠 SMART MONEY:
+   Tracked Holders: {score.smart_money_count} smart, {score.dumper_count} dumpers
+   Quality Score:   {score.holder_quality_score}/100
 
 📝 ANALYSIS:
 """ + "\n".join(f"   {r}" for r in score.reasons)
@@ -319,15 +336,20 @@ class BreakoutAnalyzer:
     def snipe_decision(self, address: str) -> Tuple[bool, str]:
         """
         Final automated decision: Should I snipe this?
-        Returns (True/False, reason)
+
+        Hard stops (auto-reject):
+        - Known dumpers holding
+        - Liquidity < $15K
+        - Age < 2 hours
+        - MC > $5M
         """
         score = self.score_token(address)
         if not score:
             return False, "Could not analyze token"
 
-        # Hard stops - never snipe these
-        if score.top5_holder_pct > 60:
-            return False, f"❌ NO - Top 5 wallets hold {score.top5_holder_pct:.1f}% (rug risk)"
+        # Hard stops
+        if score.dumper_count >= 2:
+            return False, f"❌ NO - {score.dumper_count} known dumpers in top holders"
 
         if score.liquidity < 15000:
             return False, f"❌ NO - Liquidity only ${score.liquidity:,.0f} (can't exit)"
@@ -338,9 +360,16 @@ class BreakoutAnalyzer:
         if score.market_cap > 5000000:
             return False, f"❌ NO - MC ${score.market_cap:,.0f} (limited upside)"
 
-        # Score-based decision
+        # Smart money bonus - if smart money is in, lower the threshold
+        score_threshold = 65
+        if score.smart_money_count >= 2:
+            score_threshold = 55  # Lower bar if smart money is accumulating
+            if score.total_score >= score_threshold:
+                return True, f"✅ YES - Smart money accumulating ({score.smart_money_count} wallets), score {score.total_score}/100"
+
+        # Standard score-based decision
         if score.total_score >= 75:
-            return True, f"✅ YES - Strong score {score.total_score}/100, {score.verdict}"
+            return True, f"✅ YES - Strong score {score.total_score}/100"
         elif score.total_score >= 65:
             return True, f"⚠️ MAYBE - Decent score {score.total_score}/100, proceed with caution"
         else:
