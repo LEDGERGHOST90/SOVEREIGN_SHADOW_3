@@ -8,6 +8,7 @@ import sys
 
 from .scanner import MemeMachine
 from .analyzer import BreakoutAnalyzer
+from .smart_money import SmartMoneyTracker
 
 
 def main():
@@ -25,13 +26,15 @@ Examples:
   python -m meme_machine --score <addr>     # Score a token (0-100)
   python -m meme_machine --snipe <addr>     # Get YES/NO decision
 
+  # SMART MONEY TRACKING
+  python -m meme_machine --holders <addr>   # Analyze holder quality
+  python -m meme_machine --wallet <addr>    # Analyze wallet win rate
+  python -m meme_machine --smart-buys       # Find smart money entries
+  python -m meme_machine --track-wallet <addr> --as smart  # Add to watchlist
+
   # DEEP ANALYSIS
   python -m meme_machine --deep <addr>      # Helius holder analysis
   python -m meme_machine --analyze <addr>   # Full Birdeye analysis
-
-  # OTHER
-  python -m meme_machine --trending         # Trending meme tokens
-  python -m meme_machine --watch <addr>     # Watch price live
         """
     )
 
@@ -43,7 +46,7 @@ Examples:
     parser.add_argument('--search', type=str, metavar='QUERY',
                         help='Search for tokens by name/symbol')
 
-    # Breakout detection (NEW)
+    # Breakout detection
     parser.add_argument('--breakout', action='store_true',
                         help='Scan for breakout candidates (scored)')
     parser.add_argument('--score', type=str, metavar='ADDRESS',
@@ -52,6 +55,21 @@ Examples:
                         help='Get final YES/NO snipe decision')
     parser.add_argument('--min-score', type=int, default=60,
                         help='Minimum score for breakout scan (default: 60)')
+
+    # Smart money tracking (NEW)
+    parser.add_argument('--holders', type=str, metavar='TOKEN',
+                        help='Analyze quality of token holders (smart money vs dumpers)')
+    parser.add_argument('--wallet', type=str, metavar='WALLET',
+                        help='Analyze a wallet\'s trading win rate')
+    parser.add_argument('--smart-buys', action='store_true',
+                        help='Find tokens smart money wallets recently bought')
+    parser.add_argument('--track-wallet', type=str, metavar='WALLET',
+                        help='Add wallet to tracking database')
+    parser.add_argument('--as', type=str, dest='wallet_class', metavar='CLASS',
+                        choices=['smart', 'dumper', 'neutral'],
+                        help='Classification for --track-wallet (smart/dumper/neutral)')
+    parser.add_argument('--list-wallets', action='store_true',
+                        help='List all tracked wallets')
 
     # Deep analysis
     parser.add_argument('--analyze', type=str, metavar='ADDRESS',
@@ -78,12 +96,54 @@ Examples:
         print("\n🎯 QUICK WORKFLOW:")
         print("  1. --breakout         Find candidates")
         print("  2. --score <addr>     Analyze in detail")
-        print("  3. --snipe <addr>     Get final decision")
+        print("  3. --holders <addr>   Check holder quality")
+        print("  4. --snipe <addr>     Get final decision")
+        print("\n🧠 SMART MONEY:")
+        print("  --wallet <addr>       Analyze trader's win rate")
+        print("  --smart-buys          See what winners are buying")
         print("\n💡 All scanning is FREE via DexScreener (no rate limits)")
         return
 
-    # Breakout analyzer (new)
-    if args.breakout or args.score or args.snipe:
+    # Smart money commands
+    if args.holders or args.wallet or args.smart_buys or args.track_wallet or args.list_wallets:
+        tracker = SmartMoneyTracker()
+
+        if args.holders:
+            tracker.analyze_token_holders(args.holders)
+
+        elif args.wallet:
+            profile = tracker.analyze_wallet(args.wallet)
+            print(f"\n📊 WALLET ANALYSIS")
+            print("=" * 60)
+            print(f"Address:        {profile.address[:20]}...{profile.address[-8:]}")
+            print(f"Total Trades:   {profile.total_trades}")
+            print(f"Win Rate:       {profile.win_rate:.1f}%")
+            print(f"Classification: {profile.classification}")
+            print(f"Confidence:     {profile.confidence}")
+            print(f"Last Active:    {profile.last_active}")
+
+        elif args.smart_buys:
+            tracker.find_smart_money_entries()
+
+        elif args.track_wallet:
+            if not args.wallet_class:
+                print("❌ Must specify --as smart/dumper/neutral")
+            else:
+                class_map = {
+                    'smart': 'SMART_MONEY',
+                    'dumper': 'DUMPER',
+                    'neutral': 'NEUTRAL'
+                }
+                tracker.add_known_wallet(
+                    args.track_wallet,
+                    class_map[args.wallet_class]
+                )
+
+        elif args.list_wallets:
+            tracker.list_tracked_wallets()
+
+    # Breakout analyzer
+    elif args.breakout or args.score or args.snipe:
         analyzer = BreakoutAnalyzer()
 
         if args.breakout:

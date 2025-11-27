@@ -20,15 +20,18 @@ Usage:
 
 from .scanner import MemeMachine
 from .analyzer import BreakoutAnalyzer, TokenScore
+from .smart_money import SmartMoneyTracker, WalletProfile
 from .clients import BirdeyeClient, DexScreenerClient, HeliusClient
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __author__ = "LedgerGhost90"
 
 __all__ = [
     'MemeMachine',
     'BreakoutAnalyzer',
     'TokenScore',
+    'SmartMoneyTracker',
+    'WalletProfile',
     'BirdeyeClient',
     'DexScreenerClient',
     'HeliusClient'
