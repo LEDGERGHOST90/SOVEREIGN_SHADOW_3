@@ -46,6 +46,14 @@ Examples:
     parser.add_argument('--search', type=str, metavar='QUERY',
                         help='Search for tokens by name/symbol')
 
+    # Pump.fun commands (earliest entry)
+    parser.add_argument('--pumpfun', action='store_true',
+                        help='Scan pump.fun for newest launches (earliest entry)')
+    parser.add_argument('--graduating', action='store_true',
+                        help='Find tokens about to graduate to Raydium')
+    parser.add_argument('--kings', action='store_true',
+                        help='Get King of the Hill tokens (most momentum)')
+
     # Breakout detection
     parser.add_argument('--breakout', action='store_true',
                         help='Scan for breakout candidates (scored)')
@@ -70,6 +78,14 @@ Examples:
                         help='Classification for --track-wallet (smart/dumper/neutral)')
     parser.add_argument('--list-wallets', action='store_true',
                         help='List all tracked wallets')
+
+    # Discovery tools (NEW)
+    parser.add_argument('--discover', action='store_true',
+                        help='Discover smart wallets from successful tokens (BONK, WIF, etc)')
+    parser.add_argument('--auto-track', action='store_true',
+                        help='Auto-track discovered wallets (use with --discover)')
+    parser.add_argument('--whales', action='store_true',
+                        help='Scan for whale activity on trending tokens')
 
     # Deep analysis
     parser.add_argument('--analyze', type=str, metavar='ADDRESS',
@@ -105,10 +121,19 @@ Examples:
         return
 
     # Smart money commands
-    if args.holders or args.wallet or args.smart_buys or args.track_wallet or args.list_wallets:
+    if args.holders or args.wallet or args.smart_buys or args.track_wallet or args.list_wallets or args.discover or args.whales:
         tracker = SmartMoneyTracker()
 
-        if args.holders:
+        if args.discover:
+            if args.auto_track:
+                tracker.auto_discover(auto_track=True)
+            else:
+                tracker.discover_winners()
+
+        elif args.whales:
+            tracker.scan_whale_activity()
+
+        elif args.holders:
             tracker.analyze_token_holders(args.holders)
 
         elif args.wallet:
@@ -169,7 +194,16 @@ Examples:
     else:
         machine = MemeMachine()
 
-        if args.dex:
+        if args.pumpfun:
+            machine.pumpfun_scan()
+
+        elif args.graduating:
+            machine.pumpfun_graduating()
+
+        elif args.kings:
+            machine.pumpfun_kings()
+
+        elif args.dex:
             machine.dex_scan()
 
         elif args.scan:

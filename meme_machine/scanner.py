@@ -10,7 +10,7 @@ from .config import (
     LOG_DIR, MIN_LIQUIDITY, MAX_MARKET_CAP,
     MIN_VOLUME_24H, MAX_HOLDER_CONCENTRATION
 )
-from .clients import BirdeyeClient, DexScreenerClient, HeliusClient
+from .clients import BirdeyeClient, DexScreenerClient, HeliusClient, PumpFunClient
 
 
 class MemeMachine:
@@ -20,6 +20,7 @@ class MemeMachine:
         self.birdeye = BirdeyeClient()
         self.dex = DexScreenerClient()
         self.helius = HeliusClient()
+        self.pumpfun = PumpFunClient()
         self.log_file = LOG_DIR / 'scans.json'
 
         # Ensure log directory exists
@@ -319,3 +320,109 @@ class MemeMachine:
 
         except Exception as e:
             print(f"[!] Log error: {e}")
+
+    # =========================================================================
+    # PUMP.FUN SCANNING (Earliest Entry Point)
+    # =========================================================================
+
+    def pumpfun_scan(self, limit: int = 30) -> List[Dict]:
+        """
+        Scan pump.fun for newest launches
+        This is the EARLIEST possible entry - tokens just created
+        """
+        print("\n🚀 PUMP.FUN SCAN (New Launches)")
+        print("=" * 60)
+        print("⚠️  WARNING: These are BRAND NEW - extremely high risk!\n")
+
+        coins = self.pumpfun.get_new_coins(limit=limit)
+
+        if not coins:
+            print("❌ Could not fetch pump.fun data")
+            return []
+
+        print(f"{'Symbol':12} | {'Name':20} | {'MC':>10} | {'Progress':>8} | {'Replies':>7}")
+        print("-" * 75)
+
+        results = []
+        for coin in coins:
+            formatted = self.pumpfun.format_token(coin)
+            mc = formatted["market_cap"]
+            progress = formatted["bonding_progress"]
+            replies = formatted["reply_count"]
+
+            # Progress bar
+            prog_bar = "█" * int(progress / 10) + "░" * (10 - int(progress / 10))
+
+            print(f"{formatted['symbol'][:12]:12} | {formatted['name'][:20]:20} | ${mc:>9,.0f} | {prog_bar} | {replies:>7}")
+
+            results.append(formatted)
+
+        print(f"\n✅ Found {len(results)} new launches")
+        print("\n💡 TIP: Look for tokens with high reply counts - indicates community interest")
+
+        return results
+
+    def pumpfun_graduating(self) -> List[Dict]:
+        """
+        Find tokens about to graduate from pump.fun to Raydium
+        These get real liquidity soon - critical moment
+        """
+        print("\n🎓 GRADUATING TOKENS (Near Raydium Launch)")
+        print("=" * 60)
+        print("Tokens close to $69k bonding curve completion\n")
+
+        coins = self.pumpfun.get_graduating(limit=50)
+
+        if not coins:
+            print("❌ No graduating tokens found")
+            return []
+
+        print(f"{'Symbol':12} | {'Name':20} | {'MC':>10} | {'Progress':>8}")
+        print("-" * 60)
+
+        results = []
+        for coin in coins:
+            formatted = self.pumpfun.format_token(coin)
+            mc = formatted["market_cap"]
+            progress = formatted["bonding_progress"]
+
+            # Only show tokens 70%+ through bonding curve
+            if progress >= 70:
+                prog_bar = "█" * int(progress / 10) + "░" * (10 - int(progress / 10))
+                print(f"{formatted['symbol'][:12]:12} | {formatted['name'][:20]:20} | ${mc:>9,.0f} | {prog_bar} {progress:.0f}%")
+                results.append(formatted)
+
+        print(f"\n✅ Found {len(results)} tokens near graduation")
+        print("\n💡 TIP: Graduation = Raydium listing = real liquidity + volatility")
+
+        return results
+
+    def pumpfun_kings(self) -> List[Dict]:
+        """
+        Get 'King of the Hill' tokens - most momentum right now
+        """
+        print("\n👑 KING OF THE HILL (Hottest Right Now)")
+        print("=" * 60)
+
+        coins = self.pumpfun.get_king_of_hill()
+
+        if not coins:
+            print("❌ Could not fetch king of the hill")
+            return []
+
+        print(f"{'Symbol':12} | {'Name':20} | {'MC':>10} | {'Progress':>8}")
+        print("-" * 60)
+
+        results = []
+        for coin in coins[:10]:
+            formatted = self.pumpfun.format_token(coin)
+            mc = formatted["market_cap"]
+            progress = formatted["bonding_progress"]
+
+            prog_bar = "█" * int(progress / 10) + "░" * (10 - int(progress / 10))
+            print(f"{formatted['symbol'][:12]:12} | {formatted['name'][:20]:20} | ${mc:>9,.0f} | {prog_bar}")
+            results.append(formatted)
+
+        print(f"\n✅ Top {len(results)} momentum tokens")
+
+        return results

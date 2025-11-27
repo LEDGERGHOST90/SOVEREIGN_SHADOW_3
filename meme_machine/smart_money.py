@@ -422,3 +422,182 @@ class SmartMoneyTracker:
                 print(f"   {addr[:16]}...")
 
         print(f"\n   Total tracked: {len(wallets)}")
+
+    def discover_winners(self, token_address: str = None) -> List[Dict]:
+        """
+        Discover winning wallets by analyzing successful tokens
+
+        Strategy: Find wallets that bought winning tokens EARLY
+        and still hold or sold for profit.
+
+        Args:
+            token_address: Specific token to analyze, or None to use known winners
+        """
+        print("\n🔍 WALLET DISCOVERY")
+        print("=" * 60)
+
+        # Known successful meme coins to analyze
+        KNOWN_WINNERS = {
+            "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263": "BONK",
+            "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm": "WIF",
+            "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr": "POPCAT",
+            "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump": "PNUT",
+            "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5": "MEW",
+        }
+
+        if token_address:
+            tokens_to_check = {token_address: "Custom"}
+        else:
+            tokens_to_check = KNOWN_WINNERS
+            print("Analyzing holders of known winners: BONK, WIF, POPCAT, PNUT, MEW\n")
+
+        discovered_wallets = []
+        wallet_scores = {}  # Track how many winners each wallet holds
+
+        for token, name in tokens_to_check.items():
+            print(f"\n📊 Analyzing {name} holders...")
+
+            holders = self.helius.get_token_holders(token, limit=20)
+
+            if not holders:
+                print(f"   Could not fetch holders for {name}")
+                continue
+
+            for holder in holders[:20]:
+                wallet = holder.get("address", "")
+                if not wallet:
+                    continue
+
+                # Skip if already tracked
+                if wallet in self.wallet_db.get("wallets", {}):
+                    continue
+
+                # Count how many winning tokens this wallet holds
+                if wallet not in wallet_scores:
+                    wallet_scores[wallet] = {
+                        "tokens": [],
+                        "count": 0
+                    }
+
+                wallet_scores[wallet]["tokens"].append(name)
+                wallet_scores[wallet]["count"] += 1
+
+        # Find wallets that appear in multiple winning tokens
+        print("\n\n🎯 DISCOVERED WALLETS")
+        print("=" * 60)
+        print("Wallets holding multiple successful tokens:\n")
+
+        # Sort by count of winning tokens held
+        sorted_wallets = sorted(
+            wallet_scores.items(),
+            key=lambda x: x[1]["count"],
+            reverse=True
+        )
+
+        candidates = []
+        for wallet, data in sorted_wallets[:20]:
+            if data["count"] >= 1:  # At least 1 winner
+                tokens_held = ", ".join(data["tokens"][:3])
+                if len(data["tokens"]) > 3:
+                    tokens_held += f" +{len(data['tokens'])-3} more"
+
+                print(f"   {wallet[:12]}...{wallet[-6:]} | {data['count']} winners | {tokens_held}")
+
+                candidates.append({
+                    "wallet": wallet,
+                    "winner_count": data["count"],
+                    "tokens": data["tokens"]
+                })
+
+        if not candidates:
+            print("   No new wallets discovered")
+            return []
+
+        # Offer to track top wallets
+        print(f"\n✅ Found {len(candidates)} potential smart money wallets")
+        print("\nTo track these wallets, run:")
+        for c in candidates[:5]:
+            print(f"   --track-wallet {c['wallet']} --as smart")
+
+        return candidates
+
+    def auto_discover(self, auto_track: bool = False) -> List[Dict]:
+        """
+        Auto-discover and optionally track winning wallets
+
+        This is the easy button - finds wallets from successful tokens
+        and optionally adds them to your tracking database.
+        """
+        print("\n🚀 AUTO-DISCOVERY MODE")
+        print("=" * 60)
+
+        candidates = self.discover_winners()
+
+        if not candidates:
+            return []
+
+        if auto_track:
+            print("\n📝 Auto-tracking top discovered wallets...")
+            tracked = 0
+
+            for c in candidates[:10]:  # Track top 10
+                if c["winner_count"] >= 2:  # Must hold 2+ winners
+                    self.add_known_wallet(
+                        c["wallet"],
+                        "SMART_MONEY",
+                        win_rate=70,  # Estimated based on holding winners
+                        notes=f"Auto-discovered: holds {', '.join(c['tokens'][:3])}"
+                    )
+                    tracked += 1
+
+            print(f"\n✅ Auto-tracked {tracked} wallets")
+
+        return candidates
+
+    def scan_whale_activity(self, min_usd: float = 10000) -> List[Dict]:
+        """
+        Scan for large recent trades (whale activity)
+
+        Finds big buys/sells to spot where money is flowing
+        """
+        print(f"\n🐋 WHALE ACTIVITY SCANNER (>${min_usd:,.0f})")
+        print("=" * 60)
+
+        # Get trending tokens and check for large trades
+        trending = self.dex.get_trending()
+
+        whale_trades = []
+
+        print("Scanning trending tokens for whale activity...\n")
+
+        for token in trending[:10]:
+            addr = token.get("tokenAddress") or token.get("address", "")
+            if not addr:
+                continue
+
+            # Get token info
+            pair = self.dex.get_token(addr)
+            if not pair:
+                continue
+
+            symbol = pair.get("baseToken", {}).get("symbol", "???")
+            vol_24h = float(pair.get("volume", {}).get("h24", 0) or 0)
+
+            # High volume = whale activity
+            if vol_24h >= min_usd * 10:  # 10x threshold for significance
+                mc = float(pair.get("marketCap") or 0)
+                liq = float(pair.get("liquidity", {}).get("usd", 0) or 0)
+
+                whale_trades.append({
+                    "token": addr,
+                    "symbol": symbol,
+                    "volume_24h": vol_24h,
+                    "market_cap": mc,
+                    "liquidity": liq
+                })
+
+                vol_mc_ratio = (vol_24h / mc * 100) if mc > 0 else 0
+                print(f"   🐋 {symbol:10} | Vol: ${vol_24h:>12,.0f} | MC: ${mc:>12,.0f} | {vol_mc_ratio:.0f}% turnover")
+
+        print(f"\n✅ Found {len(whale_trades)} tokens with high whale activity")
+        return whale_trades
