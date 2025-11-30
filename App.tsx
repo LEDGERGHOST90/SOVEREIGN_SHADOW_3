@@ -9,6 +9,7 @@ import { LocalAgent } from './components/LocalAgent';
 import { DailyRecorder } from './components/DailyRecorder';
 import { KnowledgeGraph } from './components/KnowledgeGraph';
 import { SovereignProtocols } from './components/SovereignProtocols';
+import { Brain } from './components/Brain';
 import { StrategyProvider } from './context/StrategyContext';
 
 const App: React.FC = () => {
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/daily-recorder" element={<DailyRecorder />} />
             <Route path="/knowledge-graph" element={<KnowledgeGraph />} />
             <Route path="/protocols" element={<SovereignProtocols />} />
+            <Route path="/brain" element={<Brain />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Layout>

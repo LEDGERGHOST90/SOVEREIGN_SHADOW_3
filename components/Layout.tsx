@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Search, BrainCircuit, Menu, X, FolderOpen, BookOpen, Network, Shield } from 'lucide-react';
+import { LayoutDashboard, Search, BrainCircuit, Menu, X, FolderOpen, BookOpen, Network, Shield, Brain } from 'lucide-react';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
@@ -37,6 +37,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           <Link to="/" className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive('/')}`}>
             <LayoutDashboard size={20} />
             <span>Dashboard</span>
+          </Link>
+          <Link to="/brain" className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive('/brain')}`}>
+            <Brain size={20} />
+            <span>The Brain</span>
           </Link>
           <Link to="/analyze" className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive('/analyze')}`}>
             <Search size={20} />

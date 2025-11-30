@@ -163,3 +163,67 @@ export interface KnowledgeGraph {
   nodes: KnowledgeNode[];
   edges: KnowledgeEdge[];
 }
+
+// --- BRAIN: CENTRAL INTELLIGENCE COORDINATOR ---
+export type BrainState = 'idle' | 'thinking' | 'processing' | 'executing' | 'reflecting';
+
+export type ModuleType = 'A' | 'B' | 'C' | 'D' | 'E' | 'StrategyScout';
+
+export interface BrainThought {
+  id: string;
+  timestamp: number;
+  type: 'observation' | 'decision' | 'action' | 'reflection' | 'insight';
+  content: string;
+  sourceModule?: ModuleType;
+  confidence: number; // 0-100
+  relatedThoughts?: string[]; // IDs of related thoughts
+}
+
+export interface BrainMemory {
+  shortTerm: BrainThought[]; // Recent thoughts (last 50)
+  longTerm: BrainThought[]; // Important archived thoughts
+  workingContext: string; // Current focus/task context
+}
+
+export interface ModuleStatus {
+  module: ModuleType;
+  name: string;
+  status: 'active' | 'idle' | 'processing' | 'error';
+  lastActivity?: number;
+  currentTask?: string;
+  health: number; // 0-100
+}
+
+export interface BrainDirective {
+  id: string;
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  targetModule: ModuleType | 'all';
+  instruction: string;
+  status: 'pending' | 'executing' | 'completed' | 'failed';
+  createdAt: number;
+  completedAt?: number;
+  result?: string;
+}
+
+export interface BrainInsight {
+  id: string;
+  category: 'pattern' | 'anomaly' | 'opportunity' | 'risk' | 'optimization';
+  title: string;
+  description: string;
+  affectedModules: ModuleType[];
+  severity: 'info' | 'warning' | 'critical';
+  suggestedAction?: string;
+  timestamp: number;
+}
+
+export interface BrainSession {
+  id: string;
+  startedAt: number;
+  state: BrainState;
+  memory: BrainMemory;
+  moduleStatuses: ModuleStatus[];
+  activeDirectives: BrainDirective[];
+  insights: BrainInsight[];
+  totalThoughts: number;
+  decisionsToday: number;
+}
