@@ -1,0 +1,27 @@
+{
+  "campaign": "December 2025 - Week 1 Paper Trading",
+  "start_date": "2025-12-01",
+  "end_date": "2025-12-07",
+  "mode": "PAPER",
+  "starting_capital": 260.00,
+  "current_capital": 260.00,
+  "rules": {
+    "max_position_usd": 50,
+    "stop_loss_pct": 3,
+    "take_profit_pct": 5,
+    "max_concurrent_positions": 3,
+    "target_win_rate": 60
+  },
+  "summary": {
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0,
+    "total_pnl": 0,
+    "best_trade": null,
+    "worst_trade": null
+  },
+  "trades": [],
+  "signals_received": [],
+  "notes": "Week 1 objective: Test signal generation, validate strategy before live trading"
+}

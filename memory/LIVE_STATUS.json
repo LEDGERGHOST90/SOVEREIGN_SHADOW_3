@@ -1,0 +1,24 @@
+{
+  "last_updated": "2025-11-30T23:45:00",
+  "portfolio": {
+    "total_usd": 5433.87,
+    "ledger": 5715.91,
+    "exchanges": 78.90,
+    "aave_debt": -360.94,
+    "health_factor": 3.71
+  },
+  "december_campaign": {
+    "status": "READY",
+    "start_date": "2025-12-01",
+    "trading_capital": 260,
+    "debt_repaid": 300,
+    "phase": "Week 1 - Paper Trading"
+  },
+  "ai_council": {
+    "AURORA": "operational",
+    "GIO": "operational",
+    "ARCHITECT_PRIME": "operational"
+  },
+  "target": 50000,
+  "note": "December Campaign GO. Paper trading Dec 1-7."
+}

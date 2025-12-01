@@ -1,0 +1,114 @@
+# Reserved VM Deployments
+
+> Reserved VM Deployments publish your Replit App to an always-on cloud server.
+
+A Reserved VM deployment runs on a virtual machine (VM) which provides dedicated computing resources for
+your app. This deployment type offers predictable costs and performance without interruptions.
+
+They are ideal for the following use cases:
+
+* Memory-intensive background tasks
+* Chat app bots that must stay connected
+* Always-on API servers
+
+<Frame>
+  <img src="https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=1a205637a55a5721c7d3f20873936b38" alt="Reserved VM Deployments" data-og-width="1920" width="1920" data-og-height="1080" height="1080" data-path="images/deployments/reserved-vm/deployment-reserved-vm.jpg" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?w=280&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=b9c4f02132367ddb1d6a85689797636f 280w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?w=560&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=dff59514fe0470c437c00c5da856227f 560w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?w=840&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=7037be402c7804186047fa3723979a58 840w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?w=1100&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=9c146a738754a238d8b1894dc3cc2c1a 1100w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?w=1650&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=e1218baf21dfcfd32d6b2d7b9413abc9 1650w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/deployment-reserved-vm.jpg?w=2500&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=d8a00a3489bb90761a34a5be0623dcfe 2500w" />
+</Frame>
+
+## Features
+
+Reserved VM Deployments include the following features:
+
+* **Dedicated resources**: Get consistent app performance on reserved compute resources.
+* **Custom domains**: Configure a custom domain or use a `<app-name>.replit.app` URL to access your app.
+* **Computing resource options**: Choose the VM option that meets your app's performance needs.
+* **Configurable port mappings**: Define which ports your app exposes to the internet.
+* **Monitoring**: View logs and monitor your published app's status.
+
+## Usage
+
+You can access Reserved VM Deployments in the Deployments workspace tool.
+
+<Accordion title="How to access Reserved VM Deployments">
+  From the left **Tool dock**:
+
+  1. Select <img class="icon-svg" src="https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=5b2c72713cc17ac272098bcbfd624d84" alt="All tools icon" data-og-width="16" width="16" data-og-height="16" height="16" data-path="images/icons/workspace-all-tools-button.svg" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?w=280&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=284639f38f8e91da05d14611e44a9ae6 280w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?w=560&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=d0e802a9c50a81e5c825cf1ddce00a64 560w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?w=840&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=b5c4e38a7cf923221d2412e904bbdc94 840w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?w=1100&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=3b43a87adf314fbb300376b404ab8a22 1100w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?w=1650&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=a11f8a405c4156ff625219a372c2ceca 1650w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-all-tools-button.svg?w=2500&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=7c86d2f1bfa4611aeca168daf29d08ff 2500w" /> **All tools** to see a list of workspace tools.
+  2. Select <img class="icon-svg" src="https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=df3fa2573b451c54591523c9d9111db1" alt="Deployments icon" data-og-width="16" width="16" data-og-height="16" height="16" data-path="images/icons/deploy-icon.svg" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?w=280&fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=115e9383e0350a6ef201a41f78f8a19a 280w, https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?w=560&fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=667b93ae66d0b69569409fb90d9fc280 560w, https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?w=840&fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=ae927e5aadcb7a470ad726f0acb0f782 840w, https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?w=1100&fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=16ee8f7b3d9db6b4f74ea8c2ebb6730f 1100w, https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?w=1650&fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=ad04a5984543c13895fd30182294ec0a 1650w, https://mintcdn.com/replit/rBzGsKp9NcWJ7sib/images/icons/deploy-icon.svg?w=2500&fit=max&auto=format&n=rBzGsKp9NcWJ7sib&q=85&s=2449268bce371256727b17027eb180f3 2500w" /> **Deployments**.
+  3. Select the **Reserved VM** option and then select **Set up your published app**.
+
+  From the **Search bar**:
+
+  1. Select the <img class="icon-svg" src="https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=4a0eb8f6b17ff6761d53167334a68b30" alt="magnifying glass icon" data-og-width="16" width="16" data-og-height="16" height="16" data-path="images/icons/workspace-search-icon.svg" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?w=280&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=baa20919b2c8e7db2fad2562c732edd0 280w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?w=560&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=5fcfa3935da89ed6c1c6f893998c4f4a 560w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?w=840&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=2a24f3fcc4dd990d9062598eab165cff 840w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?w=1100&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=a3258e068d5ead6bacadcbe6e5785575 1100w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?w=1650&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=d08ebecb3063ed18a657beb563ac9c3c 1650w, https://mintcdn.com/replit/7jcTEkTXPQwUz2BL/images/icons/workspace-search-icon.svg?w=2500&fit=max&auto=format&n=7jcTEkTXPQwUz2BL&q=85&s=e63dd2009929a4b375b86e44ed6d7732 2500w" /> magnifying glass at the top to open the search tool
+  2. Type "Deployments" to locate the tool and select it from the results.
+  3. Select the **Reserved VM** option and then select **Set up your published app**.
+</Accordion>
+
+<Frame caption="Reserved VM configuration screen in the Deployments tool">
+  <img src="https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=879150faf99fffd3f52bb5eb9ec7fedf" alt="Reserved VM publishing options" data-og-width="2970" width="2970" data-og-height="2182" height="2182" data-path="images/deployments/reserved-vm/reserved-vm-deployment-options.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?w=280&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=89fdc41eb8cbac484b08ac2e1042b74d 280w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?w=560&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=a35b81f69f4d2360a66bbecd63b89a99 560w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?w=840&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=78414cdf4e338aa3f87c0a7df11d2a9e 840w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?w=1100&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=2ef2813c5debab3c99e96a9c99b87431 1100w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?w=1650&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=b5adc9156280d43e1c99b27551b2c992 1650w, https://mintcdn.com/replit/jSmYU1wBTvl8UMyc/images/deployments/reserved-vm/reserved-vm-deployment-options.png?w=2500&fit=max&auto=format&n=jSmYU1wBTvl8UMyc&q=85&s=e4c454f04b4d127eb114d1125919dcb4 2500w" />
+</Frame>
+
+### Machine configuration
+
+Select the CPU and RAM configuration for the machine that hosts your deployment. You can view the option's cost next to the selected machine size.
+
+### Primary domain
+
+Specify the subdomain part of the hostname for your published app. After you publish, you can access your published app at `https://<subdomain>.replit.app`.
+
+To learn how to use a custom domain, see [Custom Domains](cloud-services/deployments/custom-domains/).
+
+### Private deployment
+
+<Info>
+  The private published app feature is available for Teams and Enterprise plans
+  only.
+</Info>
+
+Private published apps grant permission to your app only to members of your team or organization.
+This control lets you toggle whether to make your published app private.
+
+To learn how to set up a private deployment, see [Private Deployments](/cloud-services/deployments/private-deployments/).
+
+### Build command
+
+Enter the shell command that compiles or sets up your app before running the Run command in the **Build command** field.
+For example, to optimize your JavaScript app for a production environment using Vite, you might add the `vite build` command.
+
+### Run command
+
+Enter the shell command that launches your task in the **Run command** field. This command should be similar to the one
+you use for your workflow. For example, to start a Flask app called "myApp", you might add the `flask --app myApp run` command.
+
+### Published app secrets
+
+Select **Add published app secret** to add environment variables or secrets your app needs to run securely.
+
+If your Replit App has environment variables or secrets, the Deployment tool adds them to the list automatically.
+
+### App type options
+
+Select one of the following options:
+
+* **Web server**: Select this option if publishing a web app or an app that users can connect to on the internet.
+* **Background worker**: Select this option if your app does not listen on a port or start a server.
+
+When you select **Web Server**, you can customize which ports to expose by performing the following actions:
+
+1. Expand the **Port configuration** section.
+2. Select **Networking pane to configure** to open the **Networking** tab, where you can manage the port mappings.
+
+For more information on configuring ports, see [Ports](/replit-workspace/ports/).
+
+## Next steps
+
+To learn more about publishing, see the following resources:
+
+* [Published App Monitoring](/cloud-services/deployments/monitoring-a-deployment/): Learn how to view logs and monitor your scheduled deployment.
+* [Publishing costs](/billing/deployment-pricing): View the costs associated with publishing.
+* [Pricing](https://replit.com/pricing/): View the pricing and allowances for each plan type.
+* [Usage Allowances](/billing/about-usage-based-billing/): Learn about scheduled deployment usage limits and billing units.
+
+
+---
+
+> To find navigation and other pages in this documentation, fetch the llms.txt file at: https://docs.replit.com/llms.txt

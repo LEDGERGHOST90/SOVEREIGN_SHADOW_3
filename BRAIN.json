@@ -232,7 +232,8 @@
     },
     "mcp_servers": {
       "shadow-sdk": "shadow_sdk/mcp_server.py",
-      "exchange-manager": "shadow_sdk/mcp_exchange_server.py"
+      "exchange-manager": "shadow_sdk/mcp_exchange_server.py",
+      "ds-star": "ds_star/mcp_server.py"
     }
   },
   "agents": {
@@ -468,6 +469,20 @@
         "shade_agent.py": "SHADE//AGENT - now has emotional veto power via council"
       },
       "core_mechanic": "Emotion -> Character -> Veto Decision"
+    },
+    "ds_star": {
+      "status": "operational",
+      "path": "ds_star/",
+      "description": "Decision Support - Strategic Trading Analysis & Research",
+      "modules": {
+        "synoptic_core": "Smart Asset Score (0-100)",
+        "architect_forge": "NL → Strategy code builder",
+        "oracle_interface": "NL → Charts and metrics",
+        "gatekeeper": "Data normalization (Sovereign Standard)",
+        "transparent_analyst": "Step-by-step reasoning"
+      },
+      "mcp_server": "ds_star/mcp_server.py",
+      "launcher_commands": ["dstest", "score BTC", "ask '...'"]
     },
     "meme_machine": {
       "status": "operational",

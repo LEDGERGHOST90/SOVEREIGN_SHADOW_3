@@ -7,17 +7,53 @@ Simple command interface for your trading system
 import os
 import sys
 import subprocess
+import json
 from datetime import datetime
+from pathlib import Path
+
+# Add project root to path
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 def clear():
     os.system('clear')
+
+def get_live_portfolio():
+    """Get live portfolio value from exchanges"""
+    total = 0.0
+    try:
+        # Try to read from live status file first (faster)
+        status_file = PROJECT_ROOT / "memory" / "LIVE_STATUS.json"
+        if status_file.exists():
+            with open(status_file) as f:
+                data = json.load(f)
+                if "portfolio" in data:
+                    return data["portfolio"].get("total_usd", 0)
+
+        # Fallback: Try Coinbase API
+        from exchanges.coinbase_connector import CoinbaseConnector
+        cb = CoinbaseConnector()
+        balances = cb.get_balances()
+        for asset, info in balances.items():
+            total += info.get("usd_value", 0)
+    except Exception:
+        # If all else fails, return placeholder
+        total = 0
+    return total
 
 def header():
     print("\n" + "="*70)
     print("🏴 SOVEREIGN SHADOW TRADING SYSTEM")
     print("="*70)
     print(f"⏰ {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"💰 Portfolio: $8,260 | 🎯 Target: $50,000")
+
+    # Get live portfolio
+    portfolio = get_live_portfolio()
+    if portfolio > 0:
+        print(f"💰 Portfolio: ${portfolio:,.2f} | 🎯 Target: $50,000")
+    else:
+        print(f"💰 Portfolio: [Run 'balance' to fetch] | 🎯 Target: $50,000")
+
     print("="*70 + "\n")
 
 def run(cmd):

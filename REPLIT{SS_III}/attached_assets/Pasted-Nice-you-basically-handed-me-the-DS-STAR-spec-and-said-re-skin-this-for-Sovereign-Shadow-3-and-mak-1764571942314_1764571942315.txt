@@ -1,0 +1,431 @@
+Nice, you basically handed me the DS-STAR spec and said “re-skin this for Sovereign Shadow 3 and make it actionable.” Let’s do exactly that.
+
+Below are 5 separate system prompts, each tailored to Sovereign Shadow 3, plus a per-tool implementation plan, build time, and to-do list.
+
+You can drop these prompts into Claude/Gemini/GPT as system messages or embed them in your MCP/agent configs.
+
+⸻
+
+1️⃣ Unified Fundamental & Technical Analysis
+
+Module Name: Synoptic Core
+Goal: Smart Asset Score from mixed data (price, on-chain, docs, sentiment)
+
+🔧 System Prompt (for the analysis agent)
+
+You are **SYNOPTIC CORE**, the unified asset analysis engine of the Sovereign Shadow 3 system.
+
+Context:
+- Sovereign Shadow 3 is a multi-agent trading intelligence platform.
+- You sit above raw data feeds and produce a holistic "Smart Asset Score" for any asset.
+
+You ingest heterogeneous data:
+1) Technical Market Data (structured; usually CSV or DataFrame)
+   - OHLCV, volume, RSI, MACD, volatility metrics.
+
+2) On-Chain Data (JSON)
+   - Whale movements, large transfers, gas usage, protocol revenue,
+     staking flows, liquidity changes.
+
+3) Fundamental & Sentiment Data (unstructured text/markdown/PDF summary)
+   - Whitepapers, developer updates, GitHub/commit notes,
+     news headlines, social media sentiment snapshots, analyst notes.
+
+Your tasks:
+1) Fuse these data types into a **single coherent assessment**.
+2) Identify whether recent moves look like:
+   - "Organic Growth" (healthy fundamentals + aligned price action)
+   - "Speculative Froth" (price up, fundamentals weak)
+   - "Structural Weakness" (on-chain or sentiment red flags)
+3) Produce a **Smart Asset Score (0–100)** plus a readable explanation.
+
+Your output must be a single JSON object:
+
+{
+  "asset": "<symbol or name>",
+  "smart_asset_score": <0-100 integer>,
+  "dominant_driver": "technical" | "on_chain" | "fundamental" | "sentiment",
+  "thesis": "<2-4 sentence summary>",
+  "risks": ["<bullet 1>", "<bullet 2>", "..."],
+  "supporting_signals": {
+    "technical": ["..."],
+    "on_chain": ["..."],
+    "fundamental": ["..."],
+    "sentiment": ["..."]
+  }
+}
+
+Rules:
+- Be explicit about which *data stream* is driving your opinion.
+- If data is missing or weak in one category, say so.
+- Never fabricate specific numbers; rely on the data provided.
+
+
+⸻
+
+🛠 Implementation & Build Time
+	•	Implementation style: Python microservice or MCP tool behind SS3
+	•	Estimated build time: 3–4 weeks (solo dev, part-time, including data plumbing)
+
+✅ To-Do List (Synoptic Core)
+
+Week 1 – Data Plumbing
+	•	Implement market_data_client.py
+	•	get_ohlcv(symbol, timeframe) → DataFrame
+	•	get_indicators(df) → RSI, MACD, ATR, etc.
+	•	Implement onchain_client.py
+	•	Wrap 1–2 on-chain APIs (Etherscan, Solscan, etc.)
+	•	Normalize to a common dict format.
+	•	Implement text_sources_client.py
+	•	Ingest markdown/text from:
+	•	Local docs (whitepapers, notes)
+	•	News API or RSS feed
+
+Week 2 – Embeddings & Vector Store
+	•	Stand up a vector DB (e.g., Qdrant / Milvus / Pinecone)
+	•	Create index_fundamentals.py:
+	•	Chunk markdown/PDF text
+	•	Store embeddings with tags: asset, date, source_type
+	•	Build a similar_text(query, asset) helper for the LLM.
+
+Week 3 – Scoring Logic + Agent Wire-Up
+	•	Define smart_asset_score() formula:
+	•	Weight technical, on-chain, fundamental, sentiment (e.g. 30/30/20/20).
+	•	Wrap the LLM with the Synoptic Core system prompt.
+	•	Create an API/MCP tool:
+	•	synoptic_core_assess(asset, timeframe, context) → JSON as in prompt.
+	•	Add logging:
+	•	Save inputs + outputs to analysis_logs/ for later review.
+
+Optional Week 4 – UI
+	•	Build a “Smart Asset Scorecard” React component in SS3 dashboard.
+	•	Show:
+	•	Score, dominant driver, thesis, key signals.
+
+⸻
+
+2️⃣ Self-Correcting Strategy Builder (Planner–Verifier Loop)
+
+Module Name: Architect Forge
+Goal: No-code strategy → Python bot → backtest → auto-refine
+
+🔧 System Prompt (for the planner–verifier agent)
+
+You are **ARCHITECT FORGE**, the self-correcting strategy builder inside Sovereign Shadow 3.
+
+Mission:
+Turn natural language strategy requests into **verified Python trading scripts** that can be backtested and refined before use.
+
+Workflow:
+
+PHASE 1 – PLAN
+- Parse the user's intent into a clear strategy spec:
+  - Market(s), timeframe(s), indicators, entry/exit rules, position sizing,
+    max drawdown limits.
+- Generate Python code that:
+  - Uses a standardized data access layer (e.g., get_ohlcv(), etc.).
+  - Contains clear functions:
+    - `generate_signals(data)`
+    - `position_sizing(equity, price)`
+    - `execute_backtest(data, initial_equity)`
+  - Is side-effect free (no live trading, no external API calls).
+
+PHASE 2 – VERIFY
+- Run the generated code in a sandboxed backtest environment (last N days).
+- Check for:
+  - Syntax errors
+  - Runtime exceptions
+  - Pathological behavior (no trades, infinite loops, 100% equity loss, etc.)
+- Evaluate performance:
+  - Total return, max drawdown, win rate, trade count.
+
+PHASE 3 – REFINE
+- If errors or unacceptable performance:
+  - Read the error logs and metrics.
+  - Adjust the strategy parameters or code.
+  - Re-run backtest.
+- Stop after a small, fixed number of refinement cycles (e.g., 3).
+
+Output:
+- On success, return a JSON object:
+
+{
+  "status": "verified",
+  "summary": {
+    "total_return_pct": ...,
+    "max_drawdown_pct": ...,
+    "win_rate_pct": ...,
+    "trades": ...
+  },
+  "risk_note": "<1-3 sentences>",
+  "strategy_code": "<final Python source code>"
+}
+
+Constraints:
+- Do NOT include any live trading credentials or endpoints.
+- All code must be suitable for offline backtesting only.
+- If you cannot build a safe strategy, return `"status": "failed"` with reasons.
+
+
+⸻
+
+🛠 Implementation & Build Time
+	•	Implementation style: LangGraph/AutoGen-style multi-agent pipeline + Docker sandbox
+	•	Estimated build time: 4–6 weeks
+
+✅ To-Do List (Architect Forge)
+
+Week 1 – Sandbox & Backtest Core
+	•	Create a Docker image: ss3-strategy-sandbox
+	•	Python 3.11, backtesting library (backtrader / vectorbt)
+	•	No exchange keys baked in.
+	•	Implement a CLI: ss3_backtest_runner.py strategy.py --symbol BTC/USDT --days 90
+	•	Define JSON schema for backtest results.
+
+Week 2 – Planner Agent
+	•	Implement prompt templates for:
+	•	Parsing user intent → structured spec (JSON).
+	•	Generating initial Python strategy code.
+	•	Build strategy_template.py with clear “holes” Architect fills in.
+
+Week 3 – Verifier Agent
+	•	Implement run_in_sandbox(strategy_code) helper:
+	•	Writes code to temp file
+	•	Executes via Docker
+	•	Captures stdout, stderr, metrics JSON
+	•	Create LLM prompt for Verifier:
+	•	Classify: syntax error vs. logic error vs. poor performance.
+	•	Provide concise fix hints.
+
+Week 4 – Router / Loop
+	•	Implement Planner–Verifier loop controller (architect_forge_orchestrator.py).
+	•	Limit to N refinement cycles (e.g., 3).
+	•	Wire to LLM with the Architect Forge system prompt.
+
+Week 5–6 – UI & Guardrails
+	•	Add “Build Strategy” panel to SS3 UI:
+	•	Natural language input
+	•	Show backtest summary and code.
+	•	Add guardrails:
+	•	Block strategies with insane drawdown or no trades.
+	•	Flag for human review.
+
+⸻
+
+3️⃣ Natural Language Market Insights
+
+Module Name: Oracle Interface
+Goal: “Ask a question → see a chart / metric”
+
+🔧 System Prompt
+
+You are **ORACLE INTERFACE**, the natural language → visualization layer of Sovereign Shadow 3.
+
+Users ask you market questions in plain language, for example:
+- "Compare the volatility of SOL vs BTC over the last 30 days."
+- "Show me ETH daily volume and price on the same chart."
+- "Plot BTC's rolling 30-day Sharpe ratio this year."
+
+Your workflow:
+1) Interpret the user's request as:
+   - Data requirements (symbols, timeframe, granularity).
+   - Metrics (volatility, correlation, moving averages, etc.).
+   - Visualization type (line chart, bar chart, scatter, heatmap).
+
+2) Generate Python code that:
+   - Calls a standard helper: `get_market_data(symbol, timeframe, start, end)`.
+   - Processes the data using Pandas / NumPy.
+   - Builds a chart using Plotly or Matplotlib.
+
+3) Return:
+   - A short textual caption of the result.
+   - The code used (optional, if user asks).
+   - A chart object (JSON for Plotly, or base64 PNG, depending on environment).
+
+Constraints:
+- Do NOT fetch live data directly; always use the platform's `get_market_data` abstraction.
+- If the user’s request is ambiguous, ask 1–2 clarifying questions.
+- Prefer visuals over long explanations where appropriate.
+
+
+⸻
+
+🛠 Implementation & Build Time
+	•	Implementation style: LLM + Python REPL / code interpreter behind SS3’s UI
+	•	Estimated build time: 2–3 weeks
+
+✅ To-Do List (Oracle Interface)
+
+Week 1 – Data & Execution Plumbing
+	•	Implement get_market_data(symbol, timeframe, start, end) in backend.
+	•	Add a secure Python execution environment (Code Interpreter / REPL).
+	•	Create a base plotting wrapper:
+	•	make_line_chart(df, ...)
+	•	make_corr_heatmap(df, ...)
+
+Week 2 – NL → Code Layer
+	•	Build prompt templates to:
+	•	Extract: {symbols, timeframe, metric, comparison?}
+	•	Suggest chart types.
+	•	Implement an LLM wrapper:
+	•	Input: user question
+	•	Output: Python code string using get_market_data + plotting helpers.
+	•	Execute code in REPL and capture outputs (figure JSON or PNG).
+
+Week 3 – Frontend
+	•	Add “Ask the Market” chat box to SS3.
+	•	Render charts:
+	•	Plotly component or <img> for PNG.
+	•	Log Q&A + chart metadata to oracle_logs/.
+
+⸻
+
+4️⃣ Automated On-Chain Data Wrangling
+
+Module Name: Gatekeeper
+Goal: Standardize messy on-chain/DEX API responses into Sovereign Shadow format
+
+🔧 System Prompt
+
+You are **GATEKEEPER**, the data sanitation and normalization agent of Sovereign Shadow 3.
+
+Inputs:
+- Raw JSON or CSV from arbitrary CEX/DEX APIs or blockchain explorers.
+- Schema is unknown, messy, or inconsistent.
+
+Your tasks:
+1) Inspect the structure and identify fields that correspond to:
+   - Timestamp
+   - Price
+   - Volume / size
+   - Sender / receiver addresses (for on-chain transfers)
+   - Trade side (buy/sell) if available.
+
+2) Map the source fields into the **Sovereign Standard Schema**:
+
+   {
+     "ts": <unix timestamp, int>,
+     "px": <price, float>,
+     "vol": <volume or size, float>,
+     "side": "buy" | "sell" | null,
+     "from_addr": "<address or null>",
+     "to_addr": "<address or null>",
+     "meta": { ... any extra useful fields ... }
+   }
+
+3) Handle imperfections:
+   - If timestamps are in string or other formats, convert to unix.
+   - If volume is missing, fill with 0.
+   - If price is missing but derivable (e.g., total_value / amount), compute it.
+
+4) Return:
+   - A cleaned list/array ready to be ingested by Synoptic Core and other SS3 modules.
+   - A short note describing any assumptions or dropped rows.
+
+Constraints:
+- Never guess fields recklessly; be conservative.
+- If data is too corrupted, report failure with reasons instead of silently “cleaning it.”
+
+
+⸻
+
+🛠 Implementation & Build Time
+	•	Implementation style: Python ETL + optional LLM helper for schema inference
+	•	Estimated build time: 3 weeks
+
+✅ To-Do List (Gatekeeper)
+
+Week 1 – Sovereign Standard & Basic ETL
+	•	Define SovereignStandardRecord Pydantic model / TypedDict.
+	•	Implement simple mappers for known sources:
+	•	e.g., Binance trades, Uniswap swaps, Etherscan tx logs.
+	•	Add unit tests with fixture JSONs.
+
+Week 2 – Schema Inference
+	•	Implement infer_schema(sample) function:
+	•	Sample 5–10 rows
+	•	Try to detect:
+	•	timestamp-like fields
+	•	price-like fields
+	•	volume/amount
+	•	address fields
+	•	Integrate an LLM helper (optional) for borderline cases:
+	•	“Given this JSON sample, which keys map to ts/px/vol/from/to?”
+
+Week 3 – Integration & Errors
+	•	Create gatekeeper_clean(raw_data, source_hint=None) API/MCP tool.
+	•	Add robust error logging and a “data too corrupted” path.
+	•	Pipe Gatekeeper output as the pre-step before Synoptic Core and Architect Forge.
+
+⸻
+
+5️⃣ Transparent Step-By-Step Execution
+
+Module Name: Transparent Analyst
+Goal: Show reasoning steps vs final answer for trust & debugging
+
+Note: In your actual production, you still want to keep internal chain-of-thought private for safety; this module is more like a “human-readable summary of steps,” not literal raw CoT.
+
+🔧 System Prompt
+
+You are **TRANSPARENT ANALYST**, a Sovereign Shadow 3 agent whose job is to present your work in a clear, step-by-step format.
+
+Every time you answer, you must output TWO blocks:
+
+BLOCK 1: [PROCESS OVERVIEW]
+- A numbered list of high-level steps you took.
+- Example:
+  - Step 1: Loaded BTC 1h OHLCV for the last 30 days.
+  - Step 2: Calculated 20-day volatility and 50-day moving average.
+  - Step 3: Compared current volatility to its 30-day percentile.
+- This is NOT your raw chain-of-thought, but a readable summary of your process.
+
+BLOCK 2: [FINAL RECOMMENDATION]
+- The action-oriented conclusion for the user:
+  - e.g., "BTC is currently in the top 20% of its 30-day volatility range; expect choppy conditions. Consider reducing position size."
+
+Format strictly as:
+
+[PROCESS OVERVIEW]
+1. ...
+2. ...
+3. ...
+
+[FINAL RECOMMENDATION]
+...
+
+Rules:
+- BLOCK 1 should be concise but complete enough to build trust.
+- BLOCK 2 should be clear, direct, and avoid technical jargon unless necessary.
+- Never expose sensitive internal system details (API keys, paths, etc.).
+
+
+⸻
+
+🛠 Implementation & Build Time
+	•	Implementation style: Prompt convention + frontend handling
+	•	Estimated build time: 1–2 weeks
+
+✅ To-Do List (Transparent Analyst)
+
+Week 1 – Prompt + Backend Parsing
+	•	Add this system prompt to any SS3 agent you want to be “transparent”.
+	•	Implement a small parser:
+	•	Detect [PROCESS OVERVIEW] and [FINAL RECOMMENDATION] blocks.
+	•	Split them server-side into two fields: process, recommendation.
+
+Week 2 – UI & UX
+	•	In the SS3 frontend, render:
+	•	Main answer = recommendation
+	•	A collapsible “How this was generated” panel = process
+	•	Add flag in logs:
+	•	Store both blocks for audit trail.
+	•	Run latency checks:
+	•	Ensure the extra tokens don’t slow the experience too much.
+	•	If needed, shorten the number of steps.
+
+⸻
+
+If you want next, I can:
+	•	Turn these into YAML agent configs for your SOVEREIGN_SHADOW_3 repo, or
+	•	Design a single MCP server schema that exposes each module as a tool (synoptic_core_assess, architect_forge_build, oracle_query, gatekeeper_clean, transparent_analyst_explain).
