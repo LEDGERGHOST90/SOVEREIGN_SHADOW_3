@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "last_updated": "2025-11-27T08:30:00Z",
+  "last_updated": "2025-11-30T17:44:30.843709",
   "system_name": "LegacyLoop",
   "portfolio": {
     "net_worth": 5133.87,
@@ -91,20 +91,28 @@
   "trading": {
     "journal_summary": {
       "total_trades": 1,
-      "win_rate": 100.0,
-      "total_pnl": 64.74
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl": -18.11,
+      "starting_capital": 500.0,
+      "current_capital": 471.89,
+      "drawdown_pct": -5.6
     },
     "last_trade": {
       "id": "T0001",
-      "symbol": "BTC/USDT",
+      "symbol": "ZEC/USDC",
       "type": "long",
-      "entry": 99100,
-      "exit": 103000,
-      "pnl": 64.74,
-      "date": "2025-11-04"
+      "entry": 452.85,
+      "exit": 436.0,
+      "size": 1.08202526,
+      "pnl": -18.11,
+      "date": "2025-11-30",
+      "notes": "Stop loss executed by Guardian at $430. Saved $34 vs holding to $404.",
+      "lesson": "Entry was premature - lacked confirmation. Defense was correct."
     },
     "psychology": {
-      "losses_today": 0,
+      "losses_today": 1,
       "trading_allowed": true
     },
     "strategies": {
@@ -131,26 +139,82 @@
     }
   },
   "session": {
-    "date": "2025-11-27",
+    "date": "2025-11-29",
     "accomplishments": [
-      "Deleted 1.4GB duplicates (ClaudeSDK, sovereign_legacy_loop, nested folders)",
-      "Consolidated memory - deleted scattered state files",
-      "Implemented file naming scheme (cmd_, core_, doc_, spec_, scan_, test_, demo_)",
-      "Renamed 15 loose files to consistent convention",
-      "Deleted 7 session artifacts (outdated .md files)",
-      "Moved MCP server to shadow_sdk, updated Claude Desktop config",
-      "Moved Ledgerlive folder to drive root",
-      "Built ShadowCouncil - personified trading psychology framework",
-      "Created 15 character YAML profiles (5 assets, 3 guardians, 7 platforms)",
-      "Created CRYPTODEX_ASSET_PODCAST.md for NotebookLM AI generation",
-      "Built council_loader.py for programmatic character access"
+      "Built Aurora - ElevenLabs voice assistant (Jessica voice)",
+      "Created 8 unique council voices (Architect, Elder, Banker, Ghost, Siren, Hostage, Mirror, SHADE)",
+      "Generated Vegas 808 trap casino alert sounds",
+      "Set up ntfy.sh push notifications to phone",
+      "Wired meme scanner to send push + voice alerts when tokens score 70+",
+      "Created speak.py for voice responses",
+      "Established interactive voice session style as default",
+      "Scanned Coinbase top performers (RAIN, KAS, QNT momentum)",
+      "Ran live meme_machine scans (MEME at 66, TWITCH at 62)",
+      "Built AURORA Neural Hub (FastAPI + React) - Claude's execution stack",
+      "Extracted GIO strategySynthai (175KB TypeScript) - Gemini's research stack",
+      "Established AI Council: AURORA (Executor) + GIO (Researcher)",
+      "Collaborated on December Battle Plan - Option C: Partial Repay + Swing",
+      "Unified strategy: $400 debt repay + $260 swing capital"
     ],
     "priorities": [
-      "REPAY AAVE DEBT ($660)",
-      "Continue folder cleanup (34 folders remaining)",
-      "NotebookLM integration for CryptoDex podcast"
+      "Execute $400 AAVE repayment TODAY",
+      "Paper trade week 1 (Dec 1-7)",
+      "Small live trades week 2 ($25/trade)",
+      "Scale to $50-100/trade if winning"
     ],
-    "next": "NotebookLM discussion + folder cleanup"
+    "next": "Execute Option C - AAVE repayment first"
+  },
+  "interaction_style": {
+    "mode": "voice_interactive",
+    "voice_assistant": "Aurora",
+    "voice_id": "cgSgspJ2msm6clMCkdW9",
+    "elevenlabs_enabled": true,
+    "speak_responses": true,
+    "alert_sounds": {
+      "primary": "vegas_trap.mp3",
+      "voice": "shadow_alert.mp3"
+    },
+    "push_notifications": {
+      "enabled": true,
+      "service": "ntfy.sh",
+      "topic": "sovereignshadow_dc4d2fa1"
+    }
+  },
+  "december_campaign": {
+    "start_date": "2025-12-01",
+    "end_date": "2025-12-31",
+    "starting_capital": 260,
+    "debt_repayment": 400,
+    "target_conservative": 350,
+    "target_aggressive": 500,
+    "mode": "balanced",
+    "strategy": "Option C: Partial Repay + Swing Trade",
+    "rules": {
+      "max_position_usd": 50,
+      "stop_loss_pct": 3,
+      "take_profit_pct": 5,
+      "max_concurrent_positions": 3,
+      "max_daily_loss_usd": 50,
+      "max_weekly_loss_usd": 100,
+      "min_health_factor": 2.0
+    },
+    "schedule": {
+      "week_1": "Paper trade + $400 AAVE repay",
+      "week_2": "Live small if paper >60% win rate",
+      "week_3": "Scale if profitable",
+      "week_4": "Review + plan January"
+    },
+    "success_metrics": {
+      "debt_reduction_target": 400,
+      "win_rate_target": 60,
+      "total_trades_target": 10,
+      "net_pnl_target": 50
+    },
+    "circuit_breakers": {
+      "daily_loss_limit": 50,
+      "weekly_loss_limit": 100,
+      "consecutive_losses_pause": 3
+    }
   },
   "config": {
     "apis": {
@@ -201,6 +265,73 @@
       "model": "gemini-2.5-flash",
       "alias": "ShadowMind",
       "path": "shadow_sdk/gemini.py"
+    }
+  },
+  "ai_council": {
+    "established": "2025-11-29",
+    "members": {
+      "AURORA": {
+        "powered_by": "Claude (Anthropic)",
+        "role": "The Executor",
+        "responsibilities": [
+          "Trade execution",
+          "Signal generation",
+          "Position management",
+          "Risk calculations",
+          "Voice/notification alerts",
+          "Code implementation"
+        ],
+        "stack": "neural_hub/ (FastAPI + React)",
+        "interface": "Cursor Terminal / Claude Code CLI",
+        "status": "operational"
+      },
+      "GIO": {
+        "powered_by": "Gemini (Google)",
+        "full_name": "Google Interpreting Operator",
+        "role": "The Researcher",
+        "responsibilities": [
+          "Market analysis",
+          "Sentiment tracking",
+          "Pattern recognition",
+          "Strategy code generation",
+          "Research synthesis"
+        ],
+        "stack": "strategySynthai/ (TypeScript + React)",
+        "interface": "Google AI Studio / Sovereign Command",
+        "status": "operational"
+      },
+      "ARCHITECT_PRIME": {
+        "powered_by": "GPT (OpenAI)",
+        "role": "The Integrator",
+        "responsibilities": [
+          "Cross-agent coherence",
+          "System architecture design",
+          "Workflow orchestration",
+          "Inter-agent communication standards",
+          "Blueprint and config generation",
+          "Ecosystem unification"
+        ],
+        "stack": "ChatGPT floating interface",
+        "interface": "ChatGPT Desktop / Web",
+        "status": "operational"
+      }
+    },
+    "collaboration_protocol": [
+      "GIO scans market conditions daily",
+      "GIO flags high-conviction setups to AURORA",
+      "AURORA generates technical signals",
+      "AURORA executes if signal confidence > 70%",
+      "Both AIs log to shared trade journal"
+    ],
+    "unified_recommendation": {
+      "strategy": "Option C: Partial Repay + Swing Trade",
+      "details": "Repay $400 debt (reduce bleed to ~$14/yr), keep $260 for swing trading",
+      "rationale": [
+        "Immediately reduces debt bleed by 60%",
+        "Maintains capital for proven swing strategy",
+        "Balances risk management with growth potential",
+        "Leverages AURORA's 100% win rate"
+      ]
     }
   },
   "projects": {
@@ -385,5 +516,22 @@
     "git_uncommitted": true,
     "lines_of_code": 52644,
     "python_files": 228
-  }
+  },
+  "council_motions": [
+    {
+      "id": "M20251130174430",
+      "source": "GIO",
+      "type": "market_analysis",
+      "content": "ZEC trade post-mortem: Entry was premature. Discipline breach confirmed.",
+      "confidence": 85,
+      "data": {
+        "trade_id": "T0001",
+        "pnl": -18.11,
+        "failure_mode": "SNIPER_MISFIRE"
+      },
+      "timestamp": "2025-11-30T17:44:30.843699",
+      "status": "pending",
+      "votes": []
+    }
+  ]
 }
