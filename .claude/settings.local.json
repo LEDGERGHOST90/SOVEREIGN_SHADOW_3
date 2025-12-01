@@ -94,7 +94,9 @@
       "Bash(ELEVENLABS_API_KEY=sk_ff99af0872a9d9420c0fd47d0fd4bc31d395f38260ea5d8e python3:*)",
       "Bash(open:*)",
       "Bash(\"ntfy.sh/sovereignshadow_dc4d2fa1\")",
-      "Bash(timeout 10 python3:*)"
+      "Bash(timeout 10 python3:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []
