@@ -4,7 +4,7 @@
 
 set -e
 
-PROJECT_ROOT="/Volumes/LegacySafe/SovereignShadow_II"
+PROJECT_ROOT="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 LOG_FILE="$PROJECT_ROOT/logs/maintenance/nightly_cleanup.log"
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 

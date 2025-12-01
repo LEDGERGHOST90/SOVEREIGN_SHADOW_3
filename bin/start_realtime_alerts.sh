@@ -9,7 +9,7 @@
 #   ./bin/start_realtime_alerts.sh status    # Check status
 #
 
-PROJECT_ROOT="/Volumes/LegacySafe/SovereignShadow_II"
+PROJECT_ROOT="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 PID_FILE="${PROJECT_ROOT}/logs/realtime_alerts.pid"
 LOG_FILE="${PROJECT_ROOT}/logs/realtime_alerts.log"
 

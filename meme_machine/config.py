@@ -6,10 +6,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment
-load_dotenv('/Volumes/LegacySafe/SovereignShadow_II/.env')
+load_dotenv('/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/.env')
 
 # Base paths
-BASE_DIR = Path('/Volumes/LegacySafe/SovereignShadow_II/meme_machine')
+BASE_DIR = Path('/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/meme_machine')
 LOG_DIR = BASE_DIR / 'logs'
 
 # API Keys

@@ -2,7 +2,7 @@
 # START CLAUDE SESSION - Ensures 100% Live Data
 # Usage: ./start_claude_session.sh
 
-cd /Volumes/LegacySafe/SovereignShadow_II
+cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🏴 SovereignShadow II - Session Starter"

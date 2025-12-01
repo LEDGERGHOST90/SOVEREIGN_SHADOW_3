@@ -26,7 +26,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s | %(levelname)s | %(message)s',
     handlers=[
-        logging.FileHandler('/Volumes/LegacySafe/SovereignShadow_II/logs/simple_trader.log'),
+        logging.FileHandler('/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/simple_trader.log'),
         logging.StreamHandler()
     ]
 )

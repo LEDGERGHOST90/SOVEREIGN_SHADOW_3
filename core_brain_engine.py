@@ -21,7 +21,7 @@ from typing import Dict, List, Optional, Any
 
 # Load environment
 from dotenv import load_dotenv
-load_dotenv('/Volumes/LegacySafe/SovereignShadow_II/.env')
+load_dotenv('/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/.env')
 
 import ccxt
 
@@ -29,7 +29,7 @@ import ccxt
 # CONFIGURATION
 # =============================================================================
 
-BASE_DIR = Path('/Volumes/LegacySafe/SovereignShadow_II')
+BASE_DIR = Path('/Volumes/LegacySafe/SOVEREIGN_SHADOW_3')
 STATE_FILE = BASE_DIR / 'brain_state.json'
 PSYCHOLOGY_FILE = BASE_DIR / 'logs' / 'psychology' / 'loss_streak.json'
 JOURNAL_FILE = BASE_DIR / 'logs' / 'trading' / 'brain_journal.json'

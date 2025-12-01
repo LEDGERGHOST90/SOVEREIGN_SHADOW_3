@@ -6,7 +6,7 @@
 # Usage: ./sovereign.sh
 #
 
-cd /Volumes/LegacySafe/SovereignShadow_II
+cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

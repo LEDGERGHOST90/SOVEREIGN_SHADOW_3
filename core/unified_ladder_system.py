@@ -82,7 +82,7 @@ class UnifiedLadderSystem:
     """
 
     def __init__(self):
-        self.base_path = Path("/Volumes/LegacySafe/SovereignShadow 2")
+        self.base_path = Path("/Volumes/LegacySafe/SOVEREIGN_SHADOW_3")
         self.logs_path = self.base_path / "logs" / "ladder_executions"
         self.logs_path.mkdir(parents=True, exist_ok=True)
 

@@ -3,26 +3,14 @@
   "last_updated": "2025-11-30T21:05:50.764468",
   "system_name": "LegacyLoop",
   "portfolio": {
-    "net_worth": 5433.87,
+    "net_worth": 5431.18,
     "snapshot_time": "2025-11-27T10:26:15.384177Z",
     "ledger": {
-      "total": 5715.91,
-      "wsteth": {
-        "value": 3040.25,
-        "note": "AAVE collateral"
-      },
-      "btc": {
-        "value": 1508.32
-      },
-      "xrp": {
-        "value": 1099.17
-      },
-      "usdc": {
-        "value": 53.61
-      },
-      "eth": {
-        "value": 14.56
-      }
+      "wstETH_aave": 3040.25,
+      "BTC": 1508.32,
+      "XRP": 1099.17,
+      "USDC": 53.61,
+      "ETH": 14.56
     },
     "exchanges": {
       "total": 78.9,
@@ -79,7 +67,35 @@
     },
     "cost_basis": {
       "xrp": 2.32
-    }
+    },
+    "exchange_balances": {
+      "coinbase": {},
+      "kraken": {
+        "PEPE": 41666.66,
+        "SOL": 0.0059233372,
+        "USDG": 1.25963558,
+        "XETH": 0.0003644201,
+        "XXDG": 2.52666899,
+        "ZUSD": 0.0037
+      },
+      "binance_us": {
+        "USDC": 73.16006075,
+        "RENDER": 0.0094344,
+        "PEPE": 372.32
+      }
+    },
+    "last_prices": {
+      "BTC": 86734,
+      "ETH": 2843.65,
+      "SOL": 127.14,
+      "XRP": 2.05,
+      "DOGE": 0.137289,
+      "PEPE": 4.16e-06
+    },
+    "exchange_total": 76.21,
+    "aave_debt": 360.94,
+    "ledger_total": 5715.91,
+    "ledger_net": 5354.97
   },
   "prices": {
     "btc": 91737.7,
@@ -181,41 +197,17 @@
     }
   },
   "december_campaign": {
-    "start_date": "2025-12-01",
-    "end_date": "2025-12-31",
-    "starting_capital": 260,
-    "debt_repayment": 300,
-    "target_conservative": 350,
-    "target_aggressive": 500,
-    "mode": "balanced",
-    "strategy": "Option C: Partial Repay + Swing Trade",
+    "week": 1,
+    "phase": "paper_trading",
+    "capital": 260,
     "rules": {
-      "max_position_usd": 50,
-      "stop_loss_pct": 3,
-      "take_profit_pct": 5,
-      "max_concurrent_positions": 3,
-      "max_daily_loss_usd": 50,
-      "max_weekly_loss_usd": 100,
-      "min_health_factor": 2.0
+      "max_position": 50,
+      "stop_loss": "3%",
+      "take_profit": "5%",
+      "go_live_threshold": "60% win rate"
     },
-    "schedule": {
-      "week_1": "Paper trade + $400 AAVE repay",
-      "week_2": "Live small if paper >60% win rate",
-      "week_3": "Scale if profitable",
-      "week_4": "Review + plan January"
-    },
-    "success_metrics": {
-      "debt_reduction_target": 400,
-      "win_rate_target": 60,
-      "total_trades_target": 10,
-      "net_pnl_target": 50
-    },
-    "circuit_breakers": {
-      "daily_loss_limit": 50,
-      "weekly_loss_limit": 100,
-      "consecutive_losses_pause": 3
-    },
-    "debt_repaid": true
+    "trades": 0,
+    "wins": 0
   },
   "config": {
     "apis": {
@@ -476,13 +468,17 @@
       "description": "Decision Support - Strategic Trading Analysis & Research",
       "modules": {
         "synoptic_core": "Smart Asset Score (0-100)",
-        "architect_forge": "NL → Strategy code builder",
-        "oracle_interface": "NL → Charts and metrics",
+        "architect_forge": "NL \u2192 Strategy code builder",
+        "oracle_interface": "NL \u2192 Charts and metrics",
         "gatekeeper": "Data normalization (Sovereign Standard)",
         "transparent_analyst": "Step-by-step reasoning"
       },
       "mcp_server": "ds_star/mcp_server.py",
-      "launcher_commands": ["dstest", "score BTC", "ask '...'"]
+      "launcher_commands": [
+        "dstest",
+        "score BTC",
+        "ask '...'"
+      ]
     },
     "meme_machine": {
       "status": "operational",
@@ -584,5 +580,14 @@
       "status": "pending",
       "votes": []
     }
+  ],
+  "last_session": "2025-12-01",
+  "next_session_todos": [
+    "Review overnight market movements",
+    "Check scheduled job logs (scanner, state updater)",
+    "Begin December Campaign Week 1 - Paper Trading Setup",
+    "Configure paper trading parameters ($260 capital)",
+    "Set up trade journal for December tracking",
+    "Test DS-STAR scoring on potential entries"
   ]
 }

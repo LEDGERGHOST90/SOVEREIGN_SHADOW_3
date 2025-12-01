@@ -17,7 +17,7 @@ echo "════════════════════════�
 echo ""
 
 # Base paths
-BASE_PATH="/Volumes/LegacySafe/SovereignShadow"
+BASE_PATH="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 LEGACY_LOOP="$BASE_PATH/sovereign_legacy_loop"
 SCRIPTS="$BASE_PATH/scripts"
 LOGS="$BASE_PATH/logs"
@@ -109,7 +109,7 @@ import ccxt
 from dotenv import load_dotenv
 from pathlib import Path
 
-env_path = Path("/Volumes/LegacySafe/SovereignShadow/.env.production")
+env_path = Path("/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/.env.production")
 load_dotenv(env_path)
 
 exchanges_tested = 0

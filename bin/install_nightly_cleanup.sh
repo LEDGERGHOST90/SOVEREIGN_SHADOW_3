@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install nightly cleanup LaunchD job
 
-PLIST_SOURCE="/Volumes/LegacySafe/SovereignShadow_II/config/com.sovereignshadow.nightly-cleanup.plist"
+PLIST_SOURCE="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/config/com.sovereignshadow.nightly-cleanup.plist"
 PLIST_DEST="$HOME/Library/LaunchAgents/com.sovereignshadow.nightly-cleanup.plist"
 
 echo "Installing nightly cleanup job..."
@@ -22,7 +22,7 @@ echo "To check status:"
 echo "   launchctl list | grep nightly-cleanup"
 echo ""
 echo "To run manually:"
-echo "   /Volumes/LegacySafe/SovereignShadow_II/bin/nightly_cleanup.sh"
+echo "   /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/bin/nightly_cleanup.sh"
 echo ""
 echo "To view logs:"
-echo "   tail -f /Volumes/LegacySafe/SovereignShadow_II/logs/maintenance/nightly_cleanup.log"
+echo "   tail -f /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/maintenance/nightly_cleanup.log"

@@ -6,7 +6,7 @@ echo "🏴 SOVEREIGN SHADOW - DAILY EMPIRE BACKUP"
 echo "=========================================="
 
 # Navigate to empire
-cd /Volumes/LegacySafe/SovereignShadow
+cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3
 
 # Capture current portfolio value
 echo "📊 Capturing portfolio snapshot..."

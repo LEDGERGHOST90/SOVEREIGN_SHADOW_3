@@ -5,7 +5,7 @@
 #
 
 # Navigate to project directory
-cd /Volumes/LegacySafe/SovereignShadow_II || exit 1
+cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3 || exit 1
 
 # Activate virtual environment if it exists
 if [ -d "venv" ]; then

@@ -15,7 +15,7 @@ if [ "$EUID" -ne 0 ]; then
     echo "❌ This script needs sudo to install the LaunchAgent"
     echo ""
     echo "Please run:"
-    echo "  sudo /Volumes/LegacySafe/SovereignShadow_II/bin/install_hourly_updates.sh"
+    echo "  sudo /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/bin/install_hourly_updates.sh"
     exit 1
 fi
 
@@ -28,7 +28,7 @@ echo "🏠 Home directory: $USER_HOME"
 echo ""
 
 # Source and destination paths
-SOURCE_PLIST="/Volumes/LegacySafe/SovereignShadow_II/config/com.sovereignshadow.state-updater.plist"
+SOURCE_PLIST="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/config/com.sovereignshadow.state-updater.plist"
 DEST_DIR="$USER_HOME/Library/LaunchAgents"
 DEST_PLIST="$DEST_DIR/com.sovereignshadow.state-updater.plist"
 
@@ -80,7 +80,7 @@ if sudo -u $ACTUAL_USER launchctl list | grep -q "sovereignshadow"; then
     echo "   - Disk space"
     echo ""
     echo "📝 Logs will be written to:"
-    echo "   /Volumes/LegacySafe/SovereignShadow_II/logs/persistent_state_updates.log"
+    echo "   /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/persistent_state_updates.log"
     echo ""
     echo "🎯 To check status:"
     echo "   launchctl list | grep sovereignshadow"

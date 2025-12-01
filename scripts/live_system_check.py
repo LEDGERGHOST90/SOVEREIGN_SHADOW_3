@@ -13,7 +13,7 @@ from datetime import datetime
 from pathlib import Path
 
 # Set base path
-BASE_PATH = Path("/Volumes/LegacySafe/SovereignShadow_II")
+BASE_PATH = Path("/Volumes/LegacySafe/SOVEREIGN_SHADOW_3")
 os.chdir(BASE_PATH)
 
 def get_live_status():

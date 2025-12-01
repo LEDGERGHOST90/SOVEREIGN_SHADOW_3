@@ -3,7 +3,7 @@
 
 set -e
 
-REPO_ROOT="/Volumes/LegacySafe/SovereignShadow"
+REPO_ROOT="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 MASTER_LOOP="$REPO_ROOT/MASTER_TRADING_LOOP.py"
 PID_FILE="$REPO_ROOT/logs/master_loop/master_loop.pid"
 LOG_DIR="$REPO_ROOT/logs/master_loop"

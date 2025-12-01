@@ -18,7 +18,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-BASE_PATH="/Volumes/LegacySafe/SovereignShadow_II"
+BASE_PATH="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 MODE="${1:-paper}"  # Default to paper trading
 
 echo -e "${BLUE}"

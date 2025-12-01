@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sovereign.scanner</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/bin/market_scanner_15min.py</string>
+    </array>
+
+    <key>StartInterval</key>
+    <integer>900</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/scanner_stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/scanner_stderr.log</string>
+
+    <key>WorkingDirectory</key>
+    <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>

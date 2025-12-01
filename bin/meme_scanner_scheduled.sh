@@ -7,7 +7,7 @@
 
 set -e
 
-PROJECT_ROOT="/Volumes/LegacySafe/SovereignShadow_II"
+PROJECT_ROOT="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 LOGS_DIR="${PROJECT_ROOT}/logs/meme_machine"
 TIMESTAMP=$(date +"%Y-%m-%d_%H%M")
 HOUR=$(date +"%H")

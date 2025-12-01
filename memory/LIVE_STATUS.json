@@ -1,9 +1,9 @@
 {
-  "last_updated": "2025-11-30T23:45:00",
+  "last_updated": "2025-12-01T02:06:07.119067",
   "portfolio": {
     "total_usd": 5433.87,
     "ledger": 5715.91,
-    "exchanges": 78.90,
+    "exchanges": 78.9,
     "aave_debt": -360.94,
     "health_factor": 3.71
   },
@@ -20,5 +20,19 @@
     "ARCHITECT_PRIME": "operational"
   },
   "target": 50000,
-  "note": "December Campaign GO. Paper trading Dec 1-7."
+  "note": "December Campaign GO. Paper trading Dec 1-7.",
+  "market_prices": {
+    "BTC": 86734,
+    "ETH": 2843.65,
+    "SOL": 127.14,
+    "XRP": 2.05,
+    "DOGE": 0.137289,
+    "PEPE": 4.16e-06
+  },
+  "exchange_total": 76.21,
+  "exchanges_checked": [
+    "coinbase",
+    "kraken",
+    "binance_us"
+  ]
 }

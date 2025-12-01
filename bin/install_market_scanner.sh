@@ -4,7 +4,7 @@
 
 set -e
 
-PROJECT_ROOT="/Volumes/LegacySafe/SovereignShadow_II"
+PROJECT_ROOT="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 PLIST_NAME="com.sovereignshadow.market-scanner.plist"
 PLIST_SOURCE="$PROJECT_ROOT/config/$PLIST_NAME"
 PLIST_DEST="$HOME/Library/LaunchAgents/$PLIST_NAME"

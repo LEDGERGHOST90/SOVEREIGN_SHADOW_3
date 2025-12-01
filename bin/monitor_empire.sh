@@ -17,8 +17,8 @@ while true; do
     # Show latest log entries
     echo ""
     echo "📊 Latest Activity:"
-    if [ -f "/Volumes/LegacySafe/SovereignShadow/logs/ai_enhanced/sovereign_shadow_unified.log" ]; then
-        tail -5 /Volumes/LegacySafe/SovereignShadow/logs/ai_enhanced/sovereign_shadow_unified.log
+    if [ -f "/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/ai_enhanced/sovereign_shadow_unified.log" ]; then
+        tail -5 /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/ai_enhanced/sovereign_shadow_unified.log
     fi
     
     echo ""

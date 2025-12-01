@@ -249,7 +249,7 @@ class DualSystemAnalyzer:
 
 if __name__ == "__main__":
     sdk_path = "/Volumes/LegacySafe/ClaudeSDK"
-    shadow_path = "/Volumes/LegacySafe/SovereignShadow_II"
+    shadow_path = "/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
 
     analyzer = DualSystemAnalyzer(sdk_path, shadow_path)
 
