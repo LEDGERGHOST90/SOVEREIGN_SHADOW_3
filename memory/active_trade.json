@@ -1,0 +1,18 @@
+{
+  "trade_id": "ZEC_BLITZ_001",
+  "symbol": "ZEC/USDC",
+  "side": "LONG",
+  "quantity": 1.08202526,
+  "entry_price": 452.84525335388196,
+  "cost_usd": 489.990003,
+  "current_price": 446.0,
+  "position_value": 482.58326596,
+  "unrealized_pnl": -7.406737039999996,
+  "unrealized_pnl_pct": -1.511609827680504,
+  "stop_loss": 415,
+  "take_profit": 520,
+  "status": "ACTIVE",
+  "executed_at": "2025-11-30T07:13:39.920950",
+  "strategy": "ZEC BLITZ",
+  "designed_by": "GIO (Gemini)"
+}

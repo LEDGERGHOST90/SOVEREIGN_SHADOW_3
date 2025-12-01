@@ -21,10 +21,25 @@ def header():
     print("="*70 + "\n")
 
 def run(cmd):
-    """Run command and show output"""
+    """Run command and show output with error handling"""
     print(f"\n🚀 Running: {cmd}\n")
     print("-"*70)
-    subprocess.run(cmd, shell=True, cwd="/Volumes/LegacySafe/SovereignShadow")
+    try:
+        result = subprocess.run(
+            cmd, 
+            shell=True, 
+            cwd="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3",
+            check=False,  # Don't raise on non-zero exit
+            timeout=300  # 5 minute timeout
+        )
+        if result.returncode != 0:
+            print(f"\n⚠️ Command exited with code {result.returncode}")
+    except subprocess.TimeoutExpired:
+        print("\n⏱️ Command timed out after 5 minutes")
+    except (BrokenPipeError, ConnectionResetError, OSError) as e:
+        print(f"\n⚠️ Terminal connection issue: {type(e).__name__}")
+    except Exception as e:
+        print(f"\n❌ Error running command: {e}")
     print("-"*70)
 
 def help_menu():
@@ -138,11 +153,18 @@ def main():
                 print(f"\n❌ Unknown command: '{cmd}'")
                 print("💡 Type 'help' to see available commands")
         
-        except KeyboardInterrupt:
+        except (KeyboardInterrupt, EOFError):
+            # Terminal disconnected or Ctrl+C
             print("\n\n👋 Goodbye!\n")
+            break
+        except (BrokenPipeError, ConnectionResetError, OSError) as e:
+            # Terminal connection lost
+            print(f"\n⚠️ Terminal connection lost: {type(e).__name__}")
+            print("👋 Goodbye!\n")
             break
         except Exception as e:
             print(f"\n❌ Error: {e}")
+            # Continue running after error
 
 if __name__ == "__main__":
     main()

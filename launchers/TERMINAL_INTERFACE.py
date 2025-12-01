@@ -30,9 +30,28 @@ def print_header():
 def run_command(cmd, description):
     print(f"\n🚀 {description}...")
     print("─" * 67)
-    result = subprocess.run(cmd, shell=True, cwd="/Volumes/LegacySafe/SovereignShadow")
-    print("─" * 67)
-    return result.returncode
+    try:
+        result = subprocess.run(
+            cmd, 
+            shell=True, 
+            cwd="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3",
+            check=False,  # Don't raise on non-zero exit
+            timeout=300  # 5 minute timeout
+        )
+        if result.returncode != 0:
+            print(f"\n⚠️ Command exited with code {result.returncode}")
+        return result.returncode
+    except subprocess.TimeoutExpired:
+        print("\n⏱️ Command timed out after 5 minutes")
+        return -1
+    except (BrokenPipeError, ConnectionResetError, OSError) as e:
+        print(f"\n⚠️ Terminal connection issue: {type(e).__name__}")
+        return -1
+    except Exception as e:
+        print(f"\n❌ Error running command: {e}")
+        return -1
+    finally:
+        print("─" * 67)
 
 def main():
     while True:
@@ -101,12 +120,22 @@ def main():
                 print(f"\n❌ Unknown command: {command}")
                 input("\n⏸️  Press Enter to continue...")
         
-        except KeyboardInterrupt:
+        except (KeyboardInterrupt, EOFError):
+            # Terminal disconnected or Ctrl+C
             print("\n\n👋 Goodbye\n")
+            sys.exit(0)
+        except (BrokenPipeError, ConnectionResetError, OSError) as e:
+            # Terminal connection lost
+            print(f"\n⚠️ Terminal connection lost: {type(e).__name__}")
+            print("👋 Goodbye\n")
             sys.exit(0)
         except Exception as e:
             print(f"\n❌ Error: {e}")
-            input("\n⏸️  Press Enter to continue...")
+            try:
+                input("\n⏸️  Press Enter to continue...")
+            except (EOFError, KeyboardInterrupt):
+                print("\n👋 Goodbye\n")
+                sys.exit(0)
 
 if __name__ == "__main__":
     main()

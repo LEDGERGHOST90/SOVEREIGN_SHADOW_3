@@ -1,0 +1,80 @@
+#!/bin/bash
+# Council Bridge Controller
+# Usage: council [start|stop|status|logs|install]
+
+PLIST_SRC="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/bin/council_bridge.plist"
+PLIST_DST="$HOME/Library/LaunchAgents/com.sovereignshadow.council-bridge.plist"
+BACKEND_DIR="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/neural_hub/backend"
+LOG_DIR="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs"
+
+case "$1" in
+    start)
+        echo "🌉 Starting Council Bridge..."
+        cd "$BACKEND_DIR"
+        source /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/venv/bin/activate 2>/dev/null || true
+        export GEMINI_API_KEY="AIzaSyCNBWSCqZsa0cuadDB7Ca7yzWVS5FvqcoI"
+        python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 &
+        sleep 2
+        if curl -s http://localhost:8000/api/ > /dev/null 2>&1; then
+            echo "✅ Council Bridge ONLINE at http://localhost:8000"
+            echo "   GIO: Connect to /api/council/sync"
+            echo "   AURORA: Reading BRAIN.json"
+        else
+            echo "❌ Failed to start"
+        fi
+        ;;
+    stop)
+        echo "🛑 Stopping Council Bridge..."
+        pkill -f "uvicorn main:app" 2>/dev/null
+        echo "✅ Stopped"
+        ;;
+    status)
+        if curl -s http://localhost:8000/api/ > /dev/null 2>&1; then
+            echo "✅ Council Bridge ONLINE"
+            curl -s http://localhost:8000/api/council/state | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+print(f\"   Status: {data.get('status')}\"
+      f\"\n   Motions: {len(data.get('active_motions', []))}\"
+      f\"\n   Net Worth: \${data.get('portfolio_snapshot', {}).get('net_worth', 'N/A')}\")
+"
+        else
+            echo "❌ Council Bridge OFFLINE"
+        fi
+        ;;
+    logs)
+        tail -f "$LOG_DIR/council_bridge.log" "$LOG_DIR/council_bridge_error.log" 2>/dev/null || echo "No logs yet"
+        ;;
+    install)
+        echo "📦 Installing Council Bridge LaunchAgent..."
+        mkdir -p "$HOME/Library/LaunchAgents"
+        cp "$PLIST_SRC" "$PLIST_DST"
+        launchctl load "$PLIST_DST"
+        echo "✅ Installed. Will auto-start on login."
+        ;;
+    uninstall)
+        echo "🗑️ Uninstalling Council Bridge LaunchAgent..."
+        launchctl unload "$PLIST_DST" 2>/dev/null
+        rm -f "$PLIST_DST"
+        echo "✅ Uninstalled"
+        ;;
+    test)
+        echo "🧪 Testing Council Sync..."
+        curl -s -X POST http://localhost:8000/api/council/sync \
+            -H "Content-Type: application/json" \
+            -d '{"source":"AURORA","type":"system_test","content":"Council bridge connectivity test","confidence":100}' \
+            | python3 -m json.tool
+        ;;
+    *)
+        echo "Council Bridge Controller"
+        echo "Usage: council [start|stop|status|logs|install|uninstall|test]"
+        echo ""
+        echo "  start     - Start the bridge server"
+        echo "  stop      - Stop the bridge server"
+        echo "  status    - Check if bridge is online"
+        echo "  logs      - Tail the log files"
+        echo "  install   - Install auto-start on login"
+        echo "  uninstall - Remove auto-start"
+        echo "  test      - Send test motion to Council"
+        ;;
+esac

@@ -2,17 +2,28 @@
 """
 🏴 Simple MCP Server for Sovereign Shadow
 Minimal working version for Claude Desktop - FIXED BrokenPipeError
+Enhanced with robust terminal disconnection handling
 """
 
 import asyncio
 import json
 import sys
 import os
+import signal
 from typing import Any, Dict, List
 
 # Force unbuffered stdout/stderr to prevent pipe issues
-sys.stdout.reconfigure(line_buffering=True)
-sys.stderr.reconfigure(line_buffering=True)
+try:
+    sys.stdout.reconfigure(line_buffering=True)
+    sys.stderr.reconfigure(line_buffering=True)
+except (AttributeError, OSError):
+    # Fallback for older Python versions or when reconfigure fails
+    # Just ensure we flush frequently
+    import atexit
+    def flush_streams():
+        sys.stdout.flush()
+        sys.stderr.flush()
+    atexit.register(flush_streams)
 
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -299,18 +310,41 @@ async def main():
                 write_stream, 
                 app.create_initialization_options()
             )
-    except BrokenPipeError:
-        log("BrokenPipeError caught - client disconnected")
-        pass
+    except (BrokenPipeError, ConnectionResetError, OSError) as e:
+        # Terminal disconnected - graceful shutdown
+        log(f"Terminal disconnected: {type(e).__name__}")
+        return
+    except asyncio.CancelledError:
+        log("Server cancelled - shutting down gracefully")
+        return
+    except EOFError:
+        log("EOFError - stdin closed, client disconnected")
+        return
     except Exception as e:
         log(f"Server error: {type(e).__name__}: {str(e)}")
-        raise
+        # Don't raise - allow graceful exit
+        return
+
+def signal_handler(signum, frame):
+    """Handle terminal signals gracefully"""
+    log(f"Received signal {signum} - shutting down gracefully")
+    sys.exit(0)
 
 if __name__ == "__main__":
+    # Register signal handlers for graceful shutdown
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+    if hasattr(signal, 'SIGPIPE'):
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)  # Let SIGPIPE behave normally
+    
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         log("Server stopped by user")
+        sys.exit(0)
+    except (BrokenPipeError, ConnectionResetError, EOFError) as e:
+        log(f"Terminal disconnected: {type(e).__name__}")
+        sys.exit(0)
     except Exception as e:
         log(f"Fatal error: {str(e)}")
         sys.exit(1)

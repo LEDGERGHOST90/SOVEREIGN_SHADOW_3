@@ -1,0 +1,79 @@
+#!/bin/bash
+# ============================================================================
+# SOVEREIGN SHADOW 3 - Desktop Launcher
+# ============================================================================
+# One-click startup for the entire SS3 ecosystem
+# ============================================================================
+
+SS3_ROOT="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3"
+BRAIN_FILE="$SS3_ROOT/BRAIN.json"
+LOG_DIR="$SS3_ROOT/logs"
+BACKEND_DIR="$SS3_ROOT/neural_hub/backend"
+FRONTEND_DIR="$SS3_ROOT/strategySynthai"
+
+# Create logs directory if needed
+mkdir -p "$LOG_DIR"
+
+# Log startup
+echo "$(date '+%Y-%m-%d %H:%M:%S') - SS3 Launcher initiated" >> "$LOG_DIR/launcher.log"
+
+# ============================================================================
+# 1. Start Council Bridge (Backend API) if not running
+# ============================================================================
+if ! curl -s http://localhost:8000/api/ > /dev/null 2>&1; then
+    echo "Starting Council Bridge..." >> "$LOG_DIR/launcher.log"
+    cd "$BACKEND_DIR"
+    source "$SS3_ROOT/venv/bin/activate" 2>/dev/null || true
+    export GEMINI_API_KEY="AIzaSyCNBWSCqZsa0cuadDB7Ca7yzWVS5FvqcoI"
+    nohup python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 > "$LOG_DIR/council_bridge.log" 2>&1 &
+    sleep 2
+fi
+
+# ============================================================================
+# 2. Start GIO Frontend if not running
+# ============================================================================
+if ! curl -s http://localhost:3000 > /dev/null 2>&1; then
+    if [ -d "$FRONTEND_DIR/node_modules" ]; then
+        echo "Starting GIO Frontend..." >> "$LOG_DIR/launcher.log"
+        cd "$FRONTEND_DIR"
+        nohup npm run dev > "$LOG_DIR/frontend.log" 2>&1 &
+        sleep 2
+    fi
+fi
+
+# ============================================================================
+# 3. Open Claude Code with Brain context (main interface)
+# ============================================================================
+osascript <<EOF
+tell application "Terminal"
+    activate
+    -- Create new window with SS3 directory and start Claude Code
+    do script "cd '$SS3_ROOT' && clear && printf '\\033[38;5;240m' && echo '
+     ██████  ██   ██  █████  ██████   ██████  ██     ██     ██ ██ ██
+    ██       ██   ██ ██   ██ ██   ██ ██    ██ ██     ██     ██ ██ ██
+    ███████  ███████ ███████ ██   ██ ██    ██ ██  █  ██     ██ ██ ██
+         ██ ██   ██ ██   ██ ██   ██ ██    ██ ██ ███ ██     ██ ██ ██
+    ██████  ██   ██ ██   ██ ██████   ██████   ███ ███      ██ ██ ██
+' && printf '\\033[38;5;93m' && echo '
+    ███████ ██   ██  █████  ██████   ██████  ██     ██     ██ ██ ██
+    ██      ██   ██ ██   ██ ██   ██ ██    ██ ██     ██     ██ ██ ██
+    ███████ ███████ ███████ ██   ██ ██    ██ ██  █  ██     ██ ██ ██
+         ██ ██   ██ ██   ██ ██   ██ ██    ██ ██ ███ ██     ██ ██ ██
+    ███████ ██   ██ ██   ██ ██████   ██████   ███ ███      ██ ██ ██
+' && printf '\\033[0m' && echo '' && echo '                    AI COUNCIL ONLINE' && echo '' && claude --print 'Read BRAIN.json and GIObrain.json. Quick status: portfolio, debt, motions. Start with BRAIN BLAST ACTIVATED'"
+end tell
+EOF
+
+# ============================================================================
+# 5. Open GIO Dashboard in browser after services are ready
+# ============================================================================
+sleep 3
+if curl -s http://localhost:3000 > /dev/null 2>&1; then
+    open "http://localhost:3000"
+fi
+
+# Log completion
+echo "$(date '+%Y-%m-%d %H:%M:%S') - SS3 Launcher complete" >> "$LOG_DIR/launcher.log"
+
+# Show notification
+osascript -e 'display notification "Council Bridge + GIO Frontend + Claude Code" with title "Sovereign Shadow 3" subtitle "BRAIN BLAST ACTIVATED"'

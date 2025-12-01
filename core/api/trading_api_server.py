@@ -117,36 +117,66 @@ class ConnectionManager:
     
     def __init__(self):
         self.active_connections: List[WebSocket] = []
+        self.reconnect_attempts: Dict[WebSocket, int] = {}
+        self.max_reconnect_attempts = 3
     
     async def connect(self, websocket: WebSocket):
-        await websocket.accept()
-        self.active_connections.append(websocket)
-        logger.info(f"🔌 WebSocket connected ({len(self.active_connections)} active)")
+        try:
+            await websocket.accept()
+            self.active_connections.append(websocket)
+            self.reconnect_attempts[websocket] = 0
+            logger.info(f"🔌 WebSocket connected ({len(self.active_connections)} active)")
+        except Exception as e:
+            logger.error(f"Failed to accept WebSocket connection: {e}")
+            raise
     
     def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
+        if websocket in self.active_connections:
+            self.active_connections.remove(websocket)
+        if websocket in self.reconnect_attempts:
+            del self.reconnect_attempts[websocket]
         logger.info(f"🔌 WebSocket disconnected ({len(self.active_connections)} active)")
     
     async def broadcast(self, message: dict):
-        """Broadcast message to all connected clients"""
+        """Broadcast message to all connected clients with reconnection handling"""
         dead_connections = []
-        for connection in self.active_connections:
+        for connection in self.active_connections[:]:  # Copy list to avoid modification during iteration
             try:
                 await connection.send_json(message)
+                # Reset reconnect attempts on successful send
+                if connection in self.reconnect_attempts:
+                    self.reconnect_attempts[connection] = 0
+            except (WebSocketDisconnect, ConnectionResetError, BrokenPipeError) as e:
+                logger.warning(f"WebSocket disconnected during broadcast: {type(e).__name__}")
+                dead_connections.append(connection)
             except Exception as e:
                 logger.warning(f"Failed to send to WebSocket: {e}")
-                dead_connections.append(connection)
+                # Track failed attempts
+                if connection in self.reconnect_attempts:
+                    self.reconnect_attempts[connection] += 1
+                    if self.reconnect_attempts[connection] >= self.max_reconnect_attempts:
+                        dead_connections.append(connection)
+                else:
+                    self.reconnect_attempts[connection] = 1
         
         # Clean up dead connections
         for dead in dead_connections:
             self.disconnect(dead)
     
     async def send_personal(self, websocket: WebSocket, message: dict):
-        """Send message to specific client"""
+        """Send message to specific client with error handling"""
         try:
             await websocket.send_json(message)
+            # Reset reconnect attempts on successful send
+            if websocket in self.reconnect_attempts:
+                self.reconnect_attempts[websocket] = 0
+        except (WebSocketDisconnect, ConnectionResetError, BrokenPipeError) as e:
+            logger.warning(f"WebSocket disconnected: {type(e).__name__}")
+            self.disconnect(websocket)
+            raise
         except Exception as e:
             logger.error(f"Failed to send personal message: {e}")
+            raise
 
 
 # ============================================================================
@@ -486,7 +516,11 @@ class TradingAPIServer:
                             "data": stats
                         })
             
-            except WebSocketDisconnect:
+            except (WebSocketDisconnect, ConnectionResetError, BrokenPipeError) as e:
+                logger.info(f"WebSocket disconnected: {type(e).__name__}")
+                self.ws_manager.disconnect(websocket)
+            except asyncio.CancelledError:
+                logger.info("WebSocket connection cancelled")
                 self.ws_manager.disconnect(websocket)
             except Exception as e:
                 logger.error(f"WebSocket error: {e}")

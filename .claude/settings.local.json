@@ -85,7 +85,16 @@
       "WebFetch(domain:cosmos.network)",
       "Bash(ln:*)",
       "Bash(echo:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(python:*)",
+      "Bash(osascript:*)",
+      "Bash(afplay:*)",
+      "Bash(say -v \"Samantha\" \"Sovereign Shadow Alert. Snipe signal detected. Check your scanner.\")",
+      "Bash(say -v \"Alex\" -r 200 \"ALERT. Snipe signal. Token above 70. Execute now.\")",
+      "Bash(ELEVENLABS_API_KEY=sk_ff99af0872a9d9420c0fd47d0fd4bc31d395f38260ea5d8e python3:*)",
+      "Bash(open:*)",
+      "Bash(\"ntfy.sh/sovereignshadow_dc4d2fa1\")",
+      "Bash(timeout 10 python3:*)"
     ],
     "deny": [],
     "ask": []

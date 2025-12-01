@@ -1,0 +1,26 @@
+{
+  "last_prices": {},
+  "alerts_today": [
+    {
+      "type": "price_1h",
+      "symbol": "BTC",
+      "tier": "core",
+      "message": "BTC PUMPING 6.5% in 1 hour! Test alert.",
+      "change": 6.5,
+      "price": 95000.0,
+      "priority": "high",
+      "timestamp": "2025-11-29T02:39:23.480260"
+    },
+    {
+      "type": "price_1h",
+      "symbol": "BTC",
+      "tier": "core",
+      "message": "BTC PUMPING 6.5% in 1 hour! Test alert.",
+      "change": 6.5,
+      "price": 95000.0,
+      "priority": "high",
+      "timestamp": "2025-11-29T02:39:52.634972"
+    }
+  ],
+  "updated": "2025-11-29T02:40:05.213217"
+}

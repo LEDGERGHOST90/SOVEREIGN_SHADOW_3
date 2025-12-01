@@ -158,29 +158,36 @@ class DataLoader:
         dates = pd.date_range(start=start, end=end, freq=freq)
         n_candles = len(dates)
 
-        # Asset-specific parameters
+        # Asset-specific parameters (realistic daily volatility)
         asset_params = {
-            'BTC': {'base_price': 100000, 'daily_vol': 0.03, 'trend': 0.0001},
-            'ETH': {'base_price': 3200, 'daily_vol': 0.04, 'trend': 0.0002},
-            'SOL': {'base_price': 235, 'daily_vol': 0.05, 'trend': 0.0003},
-            'XRP': {'base_price': 2.1, 'daily_vol': 0.06, 'trend': 0.0001}
+            'BTC': {'base_price': 95000, 'daily_vol': 0.02},
+            'ETH': {'base_price': 3300, 'daily_vol': 0.025},
+            'SOL': {'base_price': 230, 'daily_vol': 0.035},
+            'XRP': {'base_price': 1.40, 'daily_vol': 0.04}
         }
 
-        params = asset_params.get(asset, {'base_price': 100, 'daily_vol': 0.04, 'trend': 0})
+        params = asset_params.get(asset, {'base_price': 100, 'daily_vol': 0.03})
 
-        # Generate price series (geometric Brownian motion)
-        returns = np.random.normal(
-            params['trend'],
-            params['daily_vol'] / np.sqrt(24),  # Scale by time
-            n_candles
-        )
+        # Scale volatility by timeframe
+        timeframe_scale = {
+            '15m': np.sqrt(1/96),   # 96 15min periods per day
+            '4h': np.sqrt(1/6),     # 6 4h periods per day
+            '1d': 1.0
+        }
+        vol_scale = timeframe_scale.get(timeframe, 1.0)
+        scaled_vol = params['daily_vol'] * vol_scale
 
-        # Add some trend
-        trend = np.linspace(0, params['trend'] * n_candles, n_candles)
-        returns = returns + trend
+        # Generate price series (geometric Brownian motion - no trend to avoid overflow)
+        returns = np.random.normal(0, scaled_vol, n_candles)
 
-        # Calculate prices
-        prices = params['base_price'] * np.exp(np.cumsum(returns))
+        # Clip extreme returns to prevent overflow
+        returns = np.clip(returns, -0.15, 0.15)
+
+        # Calculate prices with cumulative returns
+        cum_returns = np.cumsum(returns)
+        # Clip cumulative returns to keep prices reasonable
+        cum_returns = np.clip(cum_returns, -1.0, 1.0)
+        prices = params['base_price'] * np.exp(cum_returns)
 
         # Generate OHLC
         data = []

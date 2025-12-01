@@ -1,0 +1,43 @@
+{
+  "created": "2025-11-30",
+  "strategy": "ZEC BLITZ",
+  "designed_by": "GIO (Gemini)",
+  "approved": true,
+  "approved_time": "2025-11-30T07:05:00Z",
+  "trade": {
+    "id": "ZEC_BLITZ_001",
+    "asset": "ZEC",
+    "pair": "ZEC/USD",
+    "direction": "LONG",
+    "entry_type": "MARKET",
+    "entry_price": 443,
+    "position_size_usd": 500,
+    "quantity_zec": 1.129,
+    "stop_loss": 415,
+    "stop_loss_pct": -6.3,
+    "take_profit": 520,
+    "take_profit_pct": 17.4,
+    "risk_usd": 31,
+    "reward_usd": 87,
+    "rr_ratio": 2.8,
+    "exchange": "binance_us_or_kraken",
+    "status": "APPROVED - PENDING EXECUTION"
+  },
+  "profit_distribution": {
+    "if_tp_hit": {
+      "profit_to_sol": "50%",
+      "profit_to_btc": "25%",
+      "profit_to_eth": "25%",
+      "base_capital": "USDC reload"
+    },
+    "if_sl_hit": {
+      "remaining": "USDC - wait for next setup"
+    },
+    "destination": "Ledger cold storage"
+  },
+  "rationale": {
+    "volume": "$635M (highest momentum)",
+    "narrative": "Privacy coin heating up",
+    "risk_reward": "2.8:1 favorable"
+  }
+}
