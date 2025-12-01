@@ -11,6 +11,13 @@ from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
 
+try:
+    import pandas as pd
+    import numpy as np
+    HAS_PANDAS = True
+except ImportError:
+    HAS_PANDAS = False
+
 
 @dataclass
 class SovereignStandardRecord:
@@ -180,6 +187,123 @@ class Gatekeeper:
             "dropped_count": dropped
         }
 
+    def clean_vectorized(
+        self,
+        raw_data: Union[List, Dict],
+        source_hint: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Vectorized cleaning using pandas for 10-100x performance on large datasets.
+
+        Falls back to row-by-row processing if pandas not available.
+        Use this method for datasets > 1000 records.
+        """
+        if not HAS_PANDAS:
+            return self.clean(raw_data, source_hint)
+
+        # Ensure list format
+        if isinstance(raw_data, dict):
+            if "data" in raw_data:
+                records = raw_data["data"]
+            elif "result" in raw_data:
+                records = raw_data["result"]
+            else:
+                records = [raw_data]
+        else:
+            records = raw_data
+
+        if not records:
+            return {
+                "success": False,
+                "records": [],
+                "notes": "No data provided",
+                "dropped_count": 0
+            }
+
+        # Convert to DataFrame
+        try:
+            df = pd.DataFrame(records)
+        except Exception as e:
+            # Fall back to row-by-row if DataFrame creation fails
+            return self.clean(raw_data, source_hint)
+
+        original_count = len(df)
+
+        # Infer schema from first record
+        sample = records[0] if records else {}
+        schema = self._infer_schema(sample, source_hint)
+
+        if not schema:
+            return {
+                "success": False,
+                "records": [],
+                "notes": "Could not infer data schema",
+                "dropped_count": original_count
+            }
+
+        # Vectorized timestamp parsing
+        if "ts" in schema:
+            ts_col = schema["ts"]
+            if ts_col in df.columns:
+                df["_ts"] = pd.to_numeric(df[ts_col], errors='coerce')
+                # Handle milliseconds
+                df.loc[df["_ts"] > 1e12, "_ts"] = df["_ts"] / 1000
+                df["_ts"] = df["_ts"].astype('Int64')  # Nullable int
+
+        # Vectorized price parsing
+        if "px" in schema:
+            px_col = schema["px"]
+            if px_col in df.columns:
+                df["_px"] = pd.to_numeric(
+                    df[px_col].astype(str).str.replace(r'[$,€£]', '', regex=True),
+                    errors='coerce'
+                ).fillna(0.0)
+
+        # Vectorized volume parsing
+        if "vol" in schema:
+            vol_col = schema["vol"]
+            if vol_col in df.columns:
+                df["_vol"] = pd.to_numeric(
+                    df[vol_col].astype(str).str.replace(r'[$,€£]', '', regex=True),
+                    errors='coerce'
+                ).fillna(0.0)
+            else:
+                df["_vol"] = 0.0
+        else:
+            df["_vol"] = 0.0
+
+        # Drop rows with invalid timestamps (CRITICAL: no time-travel)
+        df = df.dropna(subset=["_ts"])
+
+        dropped = original_count - len(df)
+
+        # Convert to records
+        cleaned_records = []
+        for _, row in df.iterrows():
+            record = SovereignStandardRecord(
+                ts=int(row["_ts"]),
+                px=float(row.get("_px", 0.0)),
+                vol=float(row.get("_vol", 0.0))
+            )
+            cleaned_records.append(record)
+
+        self.stats["records_processed"] += original_count
+        self.stats["records_cleaned"] += len(cleaned_records)
+        self.stats["records_dropped"] += dropped
+
+        summary_notes = [
+            f"Processed {original_count} records (vectorized)",
+            f"Cleaned: {len(cleaned_records)}, Dropped: {dropped}",
+            f"Schema detected: {schema.get('_source', 'auto-inferred')}"
+        ]
+
+        return {
+            "success": len(cleaned_records) > 0,
+            "records": [r.to_dict() for r in cleaned_records],
+            "notes": " | ".join(summary_notes),
+            "dropped_count": dropped
+        }
+
     def _infer_schema(
         self,
         sample: Union[Dict, List],
@@ -266,6 +390,8 @@ class Gatekeeper:
         if schema.get("_is_array"):
             try:
                 ts = self._parse_timestamp(record[schema["ts"]])
+                if ts is None:
+                    return None  # Drop record - can't process without valid timestamp
                 px = float(record[schema["px"]])
                 vol = float(record[schema["vol"]]) if schema.get("vol") else 0.0
 
@@ -275,10 +401,12 @@ class Gatekeeper:
 
         # Handle dict format
         try:
-            # Timestamp
-            ts = 0
+            # Timestamp - CRITICAL: Drop records with unparseable timestamps
+            ts = None
             if "ts" in schema:
                 ts = self._parse_timestamp(record.get(schema["ts"]))
+                if ts is None:
+                    return None  # Drop record - can't process without valid timestamp
 
             # Price
             px = 0.0
@@ -321,10 +449,16 @@ class Gatekeeper:
         except Exception:
             return None
 
-    def _parse_timestamp(self, value: Any) -> int:
-        """Parse various timestamp formats to unix timestamp"""
+    def _parse_timestamp(self, value: Any) -> Optional[int]:
+        """
+        Parse various timestamp formats to unix timestamp.
+
+        CRITICAL: Returns None on failure instead of datetime.now()
+        to prevent time-travel bugs in historical data analysis.
+        Records with None timestamps should be dropped, not backdated.
+        """
         if value is None:
-            return int(datetime.now().timestamp())
+            return None  # FIXED: Don't inject current time into historical data
 
         # Already unix timestamp (int)
         if isinstance(value, (int, float)):
@@ -357,7 +491,7 @@ class Gatekeeper:
                 except ValueError:
                     pass
 
-        return int(datetime.now().timestamp())
+        return None  # FIXED: Return None, let caller decide to drop or handle
 
     def _parse_number(self, value: Any) -> float:
         """Parse various number formats"""

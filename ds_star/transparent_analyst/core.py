@@ -97,46 +97,69 @@ class TransparentAnalyst:
 
     def parse_llm_response(self, response: str) -> AnalysisResult:
         """
-        Parse an LLM response that follows the Transparent Analyst format
+        Parse an LLM response that follows the Transparent Analyst format.
 
-        Expects:
-        [PROCESS OVERVIEW]
-        1. ...
-        2. ...
-
-        [FINAL RECOMMENDATION]
-        ...
+        Handles various LLM formatting styles:
+        - [PROCESS OVERVIEW]
+        - **PROCESS OVERVIEW**
+        - ## PROCESS OVERVIEW
+        - ### Process Overview
+        - PROCESS OVERVIEW:
         """
         process = []
         recommendation = ""
 
-        # Extract process overview
-        process_match = re.search(
-            r'\[PROCESS OVERVIEW\](.*?)(?:\[FINAL RECOMMENDATION\]|$)',
-            response,
-            re.DOTALL | re.IGNORECASE
-        )
-        if process_match:
-            process_text = process_match.group(1).strip()
-            # Parse numbered steps
-            steps = re.findall(r'^\s*\d+\.\s*(.+)$', process_text, re.MULTILINE)
-            if steps:
-                process = steps
-            else:
-                # Fallback: split by newlines
-                process = [line.strip() for line in process_text.split('\n') if line.strip()]
+        # Flexible patterns for PROCESS OVERVIEW section
+        # Handles: [PROCESS OVERVIEW], **PROCESS OVERVIEW**, ## PROCESS OVERVIEW, etc.
+        process_patterns = [
+            r'(?:\[|\*\*|#{1,3}\s*)?\s*PROCESS\s+OVERVIEW\s*(?:\]|\*\*|:)?\s*(.*?)(?=(?:\[|\*\*|#{1,3}\s*)?\s*(?:FINAL\s+)?RECOMMENDATION|$)',
+            r'(?:STEPS|ANALYSIS\s+STEPS|PROCESS)\s*:?\s*(.*?)(?=(?:FINAL\s+)?RECOMMENDATION|CONCLUSION|$)',
+        ]
 
-        # Extract recommendation
-        rec_match = re.search(
-            r'\[FINAL RECOMMENDATION\](.*?)$',
-            response,
-            re.DOTALL | re.IGNORECASE
-        )
-        if rec_match:
-            recommendation = rec_match.group(1).strip()
-        else:
-            # Fallback: use everything after process or the whole response
-            recommendation = response if not process else "See analysis above."
+        for pattern in process_patterns:
+            process_match = re.search(pattern, response, re.DOTALL | re.IGNORECASE)
+            if process_match:
+                process_text = process_match.group(1).strip()
+                # Parse numbered steps (handle various bullet styles)
+                steps = re.findall(r'^\s*(?:\d+\.|-|\*|•)\s*(.+)$', process_text, re.MULTILINE)
+                if steps:
+                    process = [s.strip() for s in steps if s.strip()]
+                    break
+                else:
+                    # Fallback: split by newlines
+                    lines = [line.strip() for line in process_text.split('\n') if line.strip()]
+                    if lines:
+                        process = lines
+                        break
+
+        # Flexible patterns for RECOMMENDATION section
+        recommendation_patterns = [
+            r'(?:\[|\*\*|#{1,3}\s*)?\s*(?:FINAL\s+)?RECOMMENDATION\s*(?:\]|\*\*|:)?\s*(.*?)$',
+            r'(?:CONCLUSION|SUMMARY|VERDICT)\s*:?\s*(.*?)$',
+        ]
+
+        for pattern in recommendation_patterns:
+            rec_match = re.search(pattern, response, re.DOTALL | re.IGNORECASE)
+            if rec_match:
+                recommendation = rec_match.group(1).strip()
+                # Clean up any trailing formatting
+                recommendation = re.sub(r'\s*\*+\s*$', '', recommendation)
+                break
+
+        # Final fallback if no sections found
+        if not process and not recommendation:
+            # Try to intelligently split the response
+            lines = response.strip().split('\n')
+            if len(lines) > 3:
+                # Assume first half is process, last paragraph is recommendation
+                midpoint = len(lines) // 2
+                process = [l.strip() for l in lines[:midpoint] if l.strip()]
+                recommendation = ' '.join(l.strip() for l in lines[midpoint:] if l.strip())
+            else:
+                recommendation = response.strip()
+
+        if not recommendation:
+            recommendation = "See analysis above." if process else response.strip()
 
         return AnalysisResult(
             process_overview=process,
