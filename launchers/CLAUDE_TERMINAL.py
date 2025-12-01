@@ -50,28 +50,33 @@ def help_menu():
   scan         - Scan for arbitrage opportunities
   market       - View market intelligence (Shadow Scope)
   prices       - Check current prices across exchanges
-  
+
 💰 PORTFOLIO
   balance      - Check exchange balances
   portfolio    - View complete portfolio
   aave         - Check Aave position & health factor
-  
+
 ⚡ TRADING
   trade        - Execute manual trade
   test         - Test trading system (no real trades)
   strategies   - List all 9 trading strategies
-  
+
+🧠 DS-STAR (AI Analysis)
+  score BTC    - Get Smart Asset Score (0-100)
+  ask "..."    - Ask market questions (e.g. ask "ETH trend?")
+  dstest       - Test all DS-STAR modules
+
 🤖 SYSTEM
   status       - System status & running processes
   validate     - Validate API connections
   logs         - View recent logs
-  
+
 📚 HELP
   help         - Show this menu
   clear        - Clear screen
   exit         - Exit terminal
 
-🎯 QUICK START: Type 'test' to test the system
+🎯 QUICK START: Type 'dstest' to test the AI analysis system
 """)
 
 def main():
@@ -132,7 +137,19 @@ def main():
             
             elif cmd == 'strategies':
                 run("python3 -c \"from strategy_knowledge_base import StrategyKnowledgeBase; kb = StrategyKnowledgeBase(); [print(f'⚡ {s.name} - {s.description}') for s in kb.get_all_strategies().values()]\"")
-            
+
+            # DS-STAR (AI ANALYSIS)
+            elif cmd == 'dstest':
+                run("python3 ds_star/mcp_server.py --test")
+
+            elif cmd.startswith('score '):
+                asset = cmd.split(' ', 1)[1].upper()
+                run(f"python3 -c \"from ds_star import SynopticCore; r = SynopticCore().assess('{asset}'); print(f'🎯 {asset} Score: {{r.smart_asset_score}}/100'); print(f'📊 Technical: {{r.components.get(\\\"technical\\\", 0)}}/100'); print(f'⛓️ On-Chain: {{r.components.get(\\\"on_chain\\\", 0)}}/100'); print(f'📈 Trend: {{r.recommendation}}')\"")
+
+            elif cmd.startswith('ask '):
+                question = cmd.split(' ', 1)[1].strip('"').strip("'")
+                run(f"python3 -c \"from ds_star import OracleInterface; r = OracleInterface().query('{question}'); print(r.get('caption', 'No answer'))\"")
+
             # SYSTEM
             elif cmd == 'status':
                 print("\n⚡ SYSTEM STATUS:")
