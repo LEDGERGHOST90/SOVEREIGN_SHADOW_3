@@ -678,6 +678,266 @@ async def broadcast_signal(signal):
             pass
 
 # =============================================================================
+# UNIFIED SOVEREIGN ENDPOINT (For AbacusAI Dashboard)
+# =============================================================================
+
+@app.get("/api/sovereign/unified")
+async def get_unified_state():
+    """
+    Single endpoint that returns EVERYTHING for external dashboards.
+    AbacusAI, Replit, or any dashboard can pull all data with one call.
+
+    Returns: BRAIN.json + live prices + positions + signals + system status
+    """
+    try:
+        # Load BRAIN.json
+        brain_path = PROJECT_ROOT / "BRAIN.json"
+        brain_data = {}
+        if brain_path.exists():
+            brain_data = json.loads(brain_path.read_text())
+
+        # Get live prices
+        prices = {}
+        try:
+            prices = await app.state.market.get_prices(["BTC", "ETH", "SOL", "XRP", "DOGE", "PEPE"])
+        except:
+            prices = brain_data.get("prices", {})
+
+        # Get active signals
+        signals = []
+        try:
+            signals = await app.state.signals.get_signals("pending")
+        except:
+            pass
+
+        # Get positions
+        positions = []
+        try:
+            sys.path.insert(0, str(PROJECT_ROOT / "strategies"))
+            from swing_trade_engine import SwingTradeEngine, SwingConfig, TradeMode
+            config = SwingConfig(mode=TradeMode.PAPER)
+            engine = SwingTradeEngine(config)
+            open_positions = engine.position_mgr.get_open_positions()
+            positions = [
+                {
+                    "id": p.id,
+                    "symbol": p.symbol,
+                    "entry_price": p.entry_price,
+                    "quantity": p.quantity,
+                    "stop_loss": p.stop_loss,
+                    "take_profit_1": p.take_profit_1,
+                    "status": p.status
+                }
+                for p in open_positions
+            ]
+        except:
+            pass
+
+        # Load pending strategies from content ingestion
+        pending_strategies = []
+        strategies_dir = PROJECT_ROOT / "content_ingestion" / "strategies"
+        if strategies_dir.exists():
+            for f in strategies_dir.glob("*.json"):
+                try:
+                    data = json.loads(f.read_text())
+                    if data.get("requires_review"):
+                        pending_strategies.append({
+                            "file": f.name,
+                            "source": data.get("source", "unknown"),
+                            "confidence": data.get("confidence", 0),
+                            "indicators": data.get("indicators", [])
+                        })
+                except:
+                    pass
+
+        # December campaign status
+        campaign = brain_data.get("december_campaign", {
+            "status": "ACTIVE",
+            "mode": "paper",
+            "capital": 260,
+            "max_position": 50,
+            "stop_loss_pct": 3,
+            "win_rate_target": 60
+        })
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "status": "online",
+            "version": "3.0.0",
+
+            # Portfolio
+            "portfolio": {
+                "net_worth": brain_data.get("portfolio", {}).get("net_worth", 0),
+                "ledger_total": brain_data.get("portfolio", {}).get("ledger_total", 0),
+                "exchange_total": brain_data.get("portfolio", {}).get("exchange_total", 0),
+                "aave_debt": brain_data.get("portfolio", {}).get("aave_debt", 0),
+                "health_factor": brain_data.get("portfolio", {}).get("aave", {}).get("health_factor", 0),
+                "allocation": brain_data.get("portfolio", {}).get("allocation", {})
+            },
+
+            # Live prices
+            "prices": prices,
+
+            # Trading
+            "signals": {
+                "pending": len(signals) if isinstance(signals, list) else 0,
+                "items": signals[:5] if isinstance(signals, list) else []
+            },
+            "positions": {
+                "open": len(positions),
+                "items": positions
+            },
+
+            # Strategy pipeline
+            "strategies": {
+                "pending_review": len(pending_strategies),
+                "items": pending_strategies[:5]
+            },
+
+            # Campaign
+            "campaign": campaign,
+
+            # System health
+            "system": {
+                "neural_hub": "online",
+                "market_scanner": "scheduled",
+                "state_updater": "scheduled",
+                "last_brain_update": brain_data.get("last_updated", "unknown")
+            }
+        }
+
+    except Exception as e:
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "status": "error",
+            "error": str(e)
+        }
+
+
+@app.get("/api/sovereign/brain")
+async def get_brain():
+    """Direct access to BRAIN.json"""
+    brain_path = PROJECT_ROOT / "BRAIN.json"
+    if brain_path.exists():
+        return json.loads(brain_path.read_text())
+    return {"error": "BRAIN.json not found"}
+
+
+@app.post("/api/sovereign/ingest")
+async def ingest_content(url: str, content_type: str = "youtube"):
+    """
+    Ingest content from external sources
+    Triggers content pipeline for strategy extraction
+    """
+    try:
+        if content_type == "youtube":
+            sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+            from youtube_transcriptor import YouTubeTranscriptor
+
+            transcriptor = YouTubeTranscriptor()
+            strategy = transcriptor.process_video(url)
+
+            if strategy:
+                return {
+                    "status": "success",
+                    "message": "Content processed and strategy extracted",
+                    "strategy": strategy
+                }
+            else:
+                return {
+                    "status": "partial",
+                    "message": "Downloaded but extraction failed"
+                }
+        else:
+            return {"status": "error", "message": f"Unknown content type: {content_type}"}
+
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+@app.get("/api/sovereign/github")
+async def get_github_status():
+    """
+    Get GitHub repository status via git CLI
+    Returns recent commits, uncommitted changes, and repo info
+    """
+    import subprocess
+
+    try:
+        # Recent commits
+        commits_result = subprocess.run(
+            ["git", "log", "--oneline", "-10"],
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True
+        )
+        commits = []
+        if commits_result.returncode == 0:
+            for line in commits_result.stdout.strip().split('\n'):
+                if line:
+                    parts = line.split(' ', 1)
+                    commits.append({
+                        "hash": parts[0],
+                        "message": parts[1] if len(parts) > 1 else ""
+                    })
+
+        # Uncommitted changes
+        status_result = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True
+        )
+        changes = []
+        if status_result.returncode == 0:
+            for line in status_result.stdout.strip().split('\n'):
+                if line:
+                    status = line[:2].strip()
+                    filepath = line[3:]
+                    changes.append({
+                        "status": status,
+                        "file": filepath
+                    })
+
+        # Remote info
+        remote_result = subprocess.run(
+            ["git", "remote", "get-url", "origin"],
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True
+        )
+        remote_url = ""
+        if remote_result.returncode == 0:
+            # Strip credentials from URL for display
+            url = remote_result.stdout.strip()
+            if "@" in url:
+                url = "https://github.com/" + url.split("@github.com/")[1] if "@github.com/" in url else url
+            remote_url = url
+
+        # Branch
+        branch_result = subprocess.run(
+            ["git", "branch", "--show-current"],
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True
+        )
+        branch = branch_result.stdout.strip() if branch_result.returncode == 0 else "unknown"
+
+        return {
+            "repository": "LEDGERGHOST90/SOVEREIGN_SHADOW_3",
+            "url": remote_url.replace(".git", ""),
+            "branch": branch,
+            "recent_commits": commits[:5],
+            "uncommitted_changes": len(changes),
+            "changes": changes[:10],
+            "last_commit": commits[0] if commits else None
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# =============================================================================
 # MAIN
 # =============================================================================
 
