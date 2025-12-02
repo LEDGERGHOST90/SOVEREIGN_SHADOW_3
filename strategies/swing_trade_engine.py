@@ -45,27 +45,27 @@ class TradeMode(Enum):
 
 @dataclass
 class SwingConfig:
-    """Swing trade configuration"""
+    """Swing trade configuration - December 2025 Campaign"""
     # Capital
-    portfolio_value: float = 500.0
+    portfolio_value: float = 260.0       # December campaign capital
     risk_per_trade_pct: float = 2.0      # Risk 2% per trade
 
     # Entry conditions
     rsi_oversold: float = 30.0           # RSI below this = oversold
     rsi_overbought: float = 70.0         # RSI above this = overbought
-    volume_spike_multiplier: float = 2.0 # Volume must be 2x average
+    volume_spike_multiplier: float = 1.5 # Volume must be 1.5x average
     ema_period: int = 20                 # 20-period EMA
 
     # Exit conditions
-    stop_loss_pct: float = 15.0          # 15% stop loss
-    take_profit_1_pct: float = 30.0      # TP1 at 30%
-    take_profit_2_pct: float = 75.0      # TP2 at 75%
+    stop_loss_pct: float = 3.0           # 3% stop loss (December rules)
+    take_profit_1_pct: float = 5.0       # TP1 at 5% (December rules)
+    take_profit_2_pct: float = 10.0      # TP2 at 10%
     tp1_sell_pct: float = 50.0           # Sell 50% at TP1
 
     # Risk management
-    max_positions: int = 5               # Max concurrent positions
-    max_daily_loss_usd: float = 150.0    # Stop trading after $150 loss/day
-    max_position_usd: float = 100.0      # Max $100 per position
+    max_positions: int = 3               # Max 3 concurrent (December rules)
+    max_daily_loss_usd: float = 25.0     # Stop after $25 loss/day (~10% of capital)
+    max_position_usd: float = 50.0       # Max $50 per position (December rules)
 
     # Mode
     mode: TradeMode = TradeMode.PAPER
