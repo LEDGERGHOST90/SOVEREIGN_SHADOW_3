@@ -938,6 +938,163 @@ async def get_github_status():
 
 
 # =============================================================================
+# ALPHA SOURCES (Sentiment + On-Chain + Sniper)
+# =============================================================================
+
+@app.get("/api/alpha/sentiment")
+async def get_sentiment(symbols: str = "BTC,ETH,SOL,XRP"):
+    """
+    Get social sentiment for symbols
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+        from sentiment_scanner import SentimentScanner
+
+        scanner = SentimentScanner()
+        symbol_list = [s.strip().upper() for s in symbols.split(',')]
+        results = scanner.scan_watchlist(symbol_list)
+
+        return results
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/alpha/sentiment/signals")
+async def get_sentiment_signals():
+    """
+    Get trading signals from sentiment
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+        from sentiment_scanner import SentimentScanner
+
+        scanner = SentimentScanner()
+        return {"signals": scanner.get_trading_signals()}
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/alpha/onchain")
+async def get_onchain():
+    """
+    Get on-chain analytics (DEX volume, TVL flows)
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+        from onchain_monitor import OnChainMonitor
+
+        monitor = OnChainMonitor()
+        return monitor.run_full_scan()
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/alpha/onchain/signals")
+async def get_onchain_signals():
+    """
+    Get trading signals from on-chain data
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+        from onchain_monitor import OnChainMonitor
+
+        monitor = OnChainMonitor()
+        return monitor.get_onchain_signals()
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/alpha/sniper/{chain}")
+async def get_sniper_targets(chain: str = "solana", min_liquidity: float = 5000):
+    """
+    Get snipeable new token launches
+
+    Args:
+        chain: solana, ethereum, bsc
+        min_liquidity: Minimum liquidity in USD
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+        from onchain_monitor import OnChainMonitor
+
+        monitor = OnChainMonitor()
+        tokens = monitor.scan_new_tokens(chain, min_liquidity)
+
+        # Convert to dict
+        from dataclasses import asdict
+        return {
+            "chain": chain,
+            "min_liquidity": min_liquidity,
+            "count": len(tokens),
+            "snipeable": len([t for t in tokens if t.snipe_eligible]),
+            "tokens": [asdict(t) for t in tokens[:20]]
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/alpha/combined")
+async def get_combined_alpha():
+    """
+    Get ALL alpha signals in one call
+    Sentiment + On-Chain + Sniper opportunities
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "content_ingestion"))
+
+        results = {
+            "timestamp": datetime.now().isoformat(),
+            "sentiment": {},
+            "onchain": {},
+            "sniper": {}
+        }
+
+        # Sentiment
+        try:
+            from sentiment_scanner import SentimentScanner
+            scanner = SentimentScanner()
+            results["sentiment"] = {
+                "data": scanner.scan_watchlist(['BTC', 'ETH', 'SOL', 'XRP']),
+                "signals": scanner.get_trading_signals()
+            }
+        except Exception as e:
+            results["sentiment"] = {"error": str(e)}
+
+        # On-chain
+        try:
+            from onchain_monitor import OnChainMonitor
+            monitor = OnChainMonitor()
+            results["onchain"] = monitor.get_onchain_signals()
+        except Exception as e:
+            results["onchain"] = {"error": str(e)}
+
+        # Sniper (Solana by default)
+        try:
+            from onchain_monitor import OnChainMonitor
+            from dataclasses import asdict
+            monitor = OnChainMonitor()
+            tokens = monitor.scan_new_tokens('solana', 5000)
+            snipeable = [t for t in tokens if t.snipe_eligible]
+            results["sniper"] = {
+                "chain": "solana",
+                "opportunities": len(snipeable),
+                "top_5": [asdict(t) for t in snipeable[:5]]
+            }
+        except Exception as e:
+            results["sniper"] = {"error": str(e)}
+
+        return results
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# =============================================================================
 # MAIN
 # =============================================================================
 
