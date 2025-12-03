@@ -1,0 +1,7 @@
+#!/bin/bash
+# DEBT DESTROYER LAUNCHER
+# Usage: ./debt_destroyer
+
+cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3
+source venv/bin/activate
+python bin/debt_destroyer.py "$@"

@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-12-01T21:24:24.999594",
+  "market_fear_greed": {
+    "value": 23,
+    "classification": "Extreme Fear",
+    "timestamp": "1764633600",
+    "interpretation": "FEAR - Consider accumulating"
+  },
+  "trending": [
+    {
+      "symbol": "MON",
+      "name": "Monad",
+      "market_cap_rank": 207,
+      "score": 0
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "market_cap_rank": 1,
+      "score": 1
+    },
+    {
+      "symbol": "ZEC",
+      "name": "Zcash",
+      "market_cap_rank": 32,
+      "score": 2
+    },
+    {
+      "symbol": "RLS",
+      "name": "Rayls",
+      "market_cap_rank": 776,
+      "score": 3
+    },
+    {
+      "symbol": "SOL",
+      "name": "Solana",
+      "market_cap_rank": 7,
+      "score": 4
+    }
+  ],
+  "symbols": {
+    "BTC": {
+      "symbol": "BTC",
+      "score": -2.05,
+      "source": "aggregate",
+      "mentions": 0,
+      "trend": "neutral",
+      "timestamp": "2025-12-01T21:24:26.095215",
+      "raw_data": {
+        "coingecko": {
+          "coin_id": "bitcoin",
+          "symbol": "BTC",
+          "sentiment_up_pct": 58.93,
+          "sentiment_down_pct": 41.07,
+          "twitter_followers": 0,
+          "reddit_subscribers": 0,
+          "reddit_active_48h": 0
+        },
+        "fear_greed": {
+          "value": 23,
+          "classification": "Extreme Fear",
+          "timestamp": "1764633600",
+          "interpretation": "FEAR - Consider accumulating"
+        },
+        "trending": true
+      }
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "score": 3.46,
+      "source": "aggregate",
+      "mentions": 0,
+      "trend": "neutral",
+      "timestamp": "2025-12-01T21:24:26.784791",
+      "raw_data": {
+        "coingecko": {
+          "coin_id": "ethereum",
+          "symbol": "ETH",
+          "sentiment_up_pct": 66.96,
+          "sentiment_down_pct": 33.040000000000006,
+          "twitter_followers": 0,
+          "reddit_subscribers": 0,
+          "reddit_active_48h": 0
+        },
+        "fear_greed": {
+          "value": 23,
+          "classification": "Extreme Fear",
+          "timestamp": "1764633600",
+          "interpretation": "FEAR - Consider accumulating"
+        },
+        "trending": false
+      }
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "score": 19.18,
+      "source": "aggregate",
+      "mentions": 0,
+      "trend": "neutral",
+      "timestamp": "2025-12-01T21:24:27.401025",
+      "raw_data": {
+        "coingecko": {
+          "coin_id": "solana",
+          "symbol": "SOL",
+          "sentiment_up_pct": 77.27,
+          "sentiment_down_pct": 22.730000000000004,
+          "twitter_followers": 0,
+          "reddit_subscribers": 0,
+          "reddit_active_48h": 0
+        },
+        "fear_greed": {
+          "value": 23,
+          "classification": "Extreme Fear",
+          "timestamp": "1764633600",
+          "interpretation": "FEAR - Consider accumulating"
+        },
+        "trending": true
+      }
+    }
+  }
+}

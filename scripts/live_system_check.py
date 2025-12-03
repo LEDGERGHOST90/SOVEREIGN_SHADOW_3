@@ -21,7 +21,7 @@ def get_live_status():
 
     status = {
         "check_timestamp": datetime.now().isoformat(),
-        "system": "SovereignShadow_II",
+        "system": "SOVEREIGN_SHADOW_3",
         "status": "LIVE_CHECK_COMPLETE"
     }
 

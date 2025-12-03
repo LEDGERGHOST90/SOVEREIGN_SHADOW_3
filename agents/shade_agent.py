@@ -10,7 +10,7 @@ Now integrated with Sovereign Shadow Council for character-aware messaging.
 When trades are blocked, SHADE references the appropriate council members.
 
 Based on NetworkChuck Trading Education System
-Integrated into SovereignShadow_II
+Integrated into SOVEREIGN_SHADOW_3 (SS_III)
 
 Author: SovereignShadow Trading System
 Created: 2025-11-04

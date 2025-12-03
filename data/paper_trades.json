@@ -1,0 +1,99 @@
+{
+  "open": [
+    {
+      "id": "PT0001",
+      "symbol": "BTC",
+      "ladder_orders": [
+        {
+          "level": 1,
+          "price": 92087.0,
+          "size": 0.00018098826834044617,
+          "value": 16.666666666666668,
+          "filled": true,
+          "fill_time": "2025-12-02T10:23:20.795413"
+        },
+        {
+          "level": 2,
+          "price": 90705.69499999999,
+          "size": 0.00018374443486339714,
+          "value": 16.666666666666668,
+          "filled": false,
+          "fill_time": null
+        },
+        {
+          "level": 3,
+          "price": 89324.39,
+          "size": 0.00018658584364994452,
+          "value": 16.666666666666668,
+          "filled": false,
+          "fill_time": null
+        }
+      ],
+      "avg_entry": 92087,
+      "total_size": 0.00018098826834044617,
+      "total_value": 16.666666666666668,
+      "hard_stop": 84858.1705,
+      "take_profit": 99453.96,
+      "trailing_stop": null,
+      "trailing_high": 92087,
+      "score": 80,
+      "reasons": [
+        "laggard",
+        "healthy"
+      ],
+      "entry_time": "2025-12-02T10:23:20.795625",
+      "status": "active"
+    },
+    {
+      "id": "PT0002",
+      "symbol": "AVAX",
+      "ladder_orders": [
+        {
+          "level": 1,
+          "price": 13.68,
+          "size": 1.2183235867446396,
+          "value": 16.666666666666668,
+          "filled": true,
+          "fill_time": "2025-12-02T10:23:21.093694"
+        },
+        {
+          "level": 2,
+          "price": 13.4748,
+          "size": 1.2368767378118166,
+          "value": 16.666666666666668,
+          "filled": false,
+          "fill_time": null
+        },
+        {
+          "level": 3,
+          "price": 13.269599999999999,
+          "size": 1.256003697674886,
+          "value": 16.666666666666668,
+          "filled": false,
+          "fill_time": null
+        }
+      ],
+      "avg_entry": 13.68,
+      "total_size": 1.2183235867446396,
+      "total_value": 16.666666666666668,
+      "hard_stop": 12.606119999999999,
+      "take_profit": 14.7744,
+      "trailing_stop": null,
+      "trailing_high": 13.68,
+      "score": 80,
+      "reasons": [
+        "laggard",
+        "healthy"
+      ],
+      "entry_time": "2025-12-02T10:23:21.093730",
+      "status": "active"
+    }
+  ],
+  "closed": [],
+  "pending_ladders": [],
+  "stats": {
+    "wins": 0,
+    "losses": 0,
+    "total_pnl": 0
+  }
+}

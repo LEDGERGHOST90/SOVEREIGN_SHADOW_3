@@ -1,0 +1,15 @@
+#!/bin/bash
+# 忍 SHADOW NINJA - SS_III Desktop Launcher
+# Launches Debt Destroyer in Terminal with full ninja aesthetic
+
+cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3
+
+# Launch in a new Terminal window with custom profile
+osascript <<EOF
+tell application "Terminal"
+    activate
+    set newTab to do script "cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3 && source venv/bin/activate && python bin/debt_destroyer.py"
+    set current settings of newTab to settings set "Basic"
+    set custom title of newTab to "忍 SHADOW NINJA - MISSION 001"
+end tell
+EOF
