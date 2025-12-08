@@ -1,0 +1,60 @@
+{
+  "date": "2025-12-07",
+  "last_updated": "2025-12-07T13:25:00",
+  "portfolio": {
+    "net_worth": 5500,
+    "ledger": 5715.91,
+    "exchanges": 150,
+    "aave_debt": -360.94,
+    "health_factor": 3.71
+  },
+  "prices": {
+    "BTC": 91458,
+    "ETH": 3128,
+    "SOL": 135,
+    "XRP": 2.09,
+    "ZEC": 347
+  },
+  "mission": {
+    "codename": "DEBT_DESTROYER",
+    "target": 661.46,
+    "progress": 57,
+    "progress_pct": 8.6,
+    "phase": "LIVE",
+    "paper_pnl": 13.73,
+    "live_pnl": 43
+  },
+  "live_positions": {
+    "ZEC": {"qty": 0.142, "entry": 347.82, "tp": 363, "sl": 335.59, "status": "BRACKET_ACTIVE"},
+    "SOL": {"qty": 0.85, "entry": 134, "status": "OPEN"},
+    "BTC": {"qty": 0.00126, "entry": 92250, "status": "OPEN"}
+  },
+  "paper_stats": {
+    "total": 11,
+    "closed": 4,
+    "wins": 4,
+    "losses": 0,
+    "win_rate": 100,
+    "pnl": 13.73
+  },
+  "zec_record": {
+    "trades": 4,
+    "wins": 2,
+    "losses": 1,
+    "open": 1
+  },
+  "session": {
+    "accomplishments": [
+      "Implemented Shadow naming convention",
+      "Restructured LegacySafe drive",
+      "Set ZEC bracket order (TP $363 / SL $335.59)",
+      "Loaded full agent state",
+      "Transitioned to LIVE trading"
+    ]
+  },
+  "tomorrow": [
+    "Monitor ZEC bracket",
+    "Check SOL/BTC positions",
+    "Run morning signal scan"
+  ]
+}

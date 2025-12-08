@@ -17,7 +17,7 @@ class MarketDataClient:
     Uses CCXT for exchange data access
     """
 
-    def __init__(self, exchange_id: str = "binance"):
+    def __init__(self, exchange_id: str = "kraken"):
         try:
             self.exchange = getattr(ccxt, exchange_id)({
                 'enableRateLimit': True,

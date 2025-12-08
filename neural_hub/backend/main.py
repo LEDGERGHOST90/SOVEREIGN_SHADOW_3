@@ -1095,6 +1095,922 @@ async def get_combined_alpha():
 
 
 # =============================================================================
+# HYBRID SYSTEM - Siphon Protocol, Profit Tracker, Ladder, Sniper Bridge
+# =============================================================================
+
+HYBRID_SYSTEM_PATH = PROJECT_ROOT / "hybrid_system"
+
+
+@app.get("/api/sovereign/siphon")
+async def get_siphon_status():
+    """
+    Get Cold Storage Siphon status
+    Shows profit tracking and 30% withdrawal status
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from cold_storage_siphon import ColdStorageSiphon
+
+        siphon = ColdStorageSiphon()
+
+        # Get profit calculations from each exchange
+        exchange_status = {}
+        for exchange_name in ['coinbase', 'kraken']:
+            try:
+                profit_data = siphon.calculate_profits(exchange_name)
+                exchange_status[exchange_name] = profit_data
+            except Exception as e:
+                exchange_status[exchange_name] = {"error": str(e)}
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "status": "active",
+            "siphon_percentage": 30,
+            "min_withdrawal_threshold": siphon.MIN_PROFIT_TO_WITHDRAW,
+            "daily_limit": siphon.DAILY_WITHDRAWAL_LIMIT,
+            "daily_used": siphon.daily_withdrawal_total,
+            "ledger_addresses": {
+                k: f"{v[:10]}...{v[-6:]}" for k, v in siphon.LEDGER_ADDRESSES.items()
+            },
+            "exchanges": exchange_status,
+            "withdrawal_history": siphon.get_withdrawal_history()[-10:]
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/sovereign/siphon/dry-run")
+async def run_siphon_dry_run():
+    """
+    Run siphon in dry-run mode (simulate withdrawals)
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from cold_storage_siphon import ColdStorageSiphon
+
+        siphon = ColdStorageSiphon()
+        results = siphon.auto_siphon_profits(dry_run=True)
+
+        return {
+            "status": "dry_run_complete",
+            "results": results
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/sovereign/siphon/execute")
+async def execute_siphon(confirm: bool = False):
+    """
+    Execute LIVE siphon (requires confirmation)
+    WARNING: This will initiate real withdrawals to Ledger
+    """
+    if not confirm:
+        return {
+            "status": "blocked",
+            "message": "Must pass confirm=true to execute live withdrawal",
+            "warning": "This will withdraw real funds to your Ledger!"
+        }
+
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from cold_storage_siphon import ColdStorageSiphon
+
+        siphon = ColdStorageSiphon()
+        results = siphon.auto_siphon_profits(dry_run=False)
+
+        return {
+            "status": "executed",
+            "results": results
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/sovereign/profit")
+async def get_profit_status():
+    """
+    Get profit tracking status
+    Shows P&L across all exchanges and 30% cold storage allocation
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from profit_tracker import ProfitTracker
+
+        tracker = ProfitTracker()
+        balances = tracker.fetch_exchange_balances()
+        report = tracker.calculate_profits(balances)
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "report": report
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/sovereign/profit/recommendations")
+async def get_profit_recommendations():
+    """
+    Get cold storage withdrawal recommendations
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from profit_tracker import ProfitTracker
+
+        tracker = ProfitTracker()
+        balances = tracker.fetch_exchange_balances()
+        report = tracker.calculate_profits(balances)
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "total_profit": report["totals"]["total_profit"],
+            "cold_storage_allocation": report["totals"]["cold_storage_allocation"],
+            "recommendations": report["recommendations"]
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+class LadderSignal(BaseModel):
+    """Signal for ladder deployment"""
+    symbol: str
+    entry_price: float
+    entry_low: Optional[float] = None
+    entry_high: Optional[float] = None
+    tp1_price: float
+    tp2_price: Optional[float] = None
+    tp3_price: Optional[float] = None
+    sl_price: Optional[float] = None
+
+
+@app.get("/api/sovereign/ladder")
+async def get_ladder_status():
+    """
+    Get Unified Ladder System status
+    Shows active ladders and their execution state
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from unified_ladder_system import UnifiedLadderSystem
+
+        ladder = UnifiedLadderSystem()
+        active = ladder.get_active_ladders()
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "status": "active",
+            "min_ray_score": ladder.min_ray_score,
+            "min_tp1_roi": ladder.min_tp1_roi,
+            "max_drawdown": ladder.max_drawdown,
+            "active_ladders": active
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/sovereign/ladder/validate")
+async def validate_ladder_signal(signal: LadderSignal):
+    """
+    Validate a signal for ladder deployment
+    Returns ray score and validation status
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from unified_ladder_system import UnifiedLadderSystem
+
+        ladder = UnifiedLadderSystem()
+
+        signal_dict = {
+            "symbol": signal.symbol,
+            "entry_price": signal.entry_price,
+            "entry_low": signal.entry_low or signal.entry_price * 0.995,
+            "entry_high": signal.entry_high or signal.entry_price * 1.005,
+            "tp1_price": signal.tp1_price,
+            "tp2_price": signal.tp2_price or signal.tp1_price * 1.10,
+            "tp3_price": signal.tp3_price or signal.tp1_price * 1.25,
+            "sl_price": signal.sl_price or signal.entry_price * 0.93
+        }
+
+        is_valid, rejection_reasons = ladder.validate_signal(signal_dict)
+        ray_score = ladder.calculate_ray_score(signal_dict)
+
+        return {
+            "valid": is_valid,
+            "ray_score": ray_score,
+            "rejection_reasons": rejection_reasons,
+            "signal_with_validation": signal_dict.get("validation", {})
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/sovereign/ladder/deploy")
+async def deploy_ladder(signal: LadderSignal, capital: float = 100, mode: str = "paper"):
+    """
+    Deploy a ladder for a signal
+
+    Args:
+        signal: The trade signal
+        capital: Capital to allocate (default $100)
+        mode: 'paper' or 'live'
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from unified_ladder_system import UnifiedLadderSystem
+
+        ladder = UnifiedLadderSystem()
+
+        signal_dict = {
+            "symbol": signal.symbol,
+            "entry_price": signal.entry_price,
+            "entry_low": signal.entry_low or signal.entry_price * 0.995,
+            "entry_high": signal.entry_high or signal.entry_price * 1.005,
+            "tp1_price": signal.tp1_price,
+            "tp2_price": signal.tp2_price or signal.tp1_price * 1.10,
+            "tp3_price": signal.tp3_price or signal.tp1_price * 1.25,
+            "sl_price": signal.sl_price or signal.entry_price * 0.93
+        }
+
+        result = ladder.deploy_ladder(signal_dict, capital, mode)
+
+        return result
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/sovereign/sniper-bridge")
+async def get_sniper_bridge_status():
+    """
+    Get Shadow Sniper Bridge status
+    Shows connection to desktop sniper system
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from shadow_sniper_bridge import ShadowSniperBridge
+
+        bridge = ShadowSniperBridge()
+        status = bridge.check_shadow_sniper_status()
+        pnl = bridge.read_shadow_sniper_pnl()
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "status": status,
+            "pnl_data": pnl
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/sovereign/sniper-bridge/sync")
+async def sync_sniper_bridge():
+    """
+    Sync Shadow Sniper data to profit tracker
+    """
+    try:
+        sys.path.insert(0, str(HYBRID_SYSTEM_PATH))
+        from shadow_sniper_bridge import ShadowSniperBridge
+
+        bridge = ShadowSniperBridge()
+        success = bridge.sync_to_profit_tracker()
+
+        return {
+            "status": "synced" if success else "failed",
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# =============================================================================
+# TRADING SWARM ENDPOINTS
+# =============================================================================
+
+SWARM_CONFIG_PATH = PROJECT_ROOT / "config" / "swarm_config.json"
+BIN_PATH = PROJECT_ROOT / "bin"
+
+@app.get("/api/swarm/status")
+async def get_swarm_status():
+    """
+    Get Trading Swarm status
+    Shows swarm config, psychology state, recent scans
+    """
+    try:
+        result = {
+            "timestamp": datetime.now().isoformat(),
+            "swarm_type": "trading_swarm"
+        }
+
+        # Load swarm config
+        if SWARM_CONFIG_PATH.exists():
+            with open(SWARM_CONFIG_PATH) as f:
+                config = json.load(f)
+            result["config"] = {
+                "mode": config.get("mode"),
+                "risk_rules": config.get("risk_rules", {}).get("position_sizing", {}),
+                "december_targets": config.get("december_targets", {})
+            }
+        else:
+            result["config"] = {"error": "Config not found"}
+
+        # Check psychology/strikes
+        loss_log = PROJECT_ROOT / "logs" / "psychology" / "loss_streak.json"
+        if loss_log.exists():
+            with open(loss_log) as f:
+                psych_data = json.load(f)
+            today = datetime.now().strftime("%Y-%m-%d")
+            strikes = psych_data.get("count", 0) if psych_data.get("date") == today else 0
+        else:
+            strikes = 0
+
+        result["psychology"] = {
+            "strikes": strikes,
+            "max_strikes": 3,
+            "trading_allowed": strikes < 3,
+            "status": "CLEAR" if strikes < 3 else "LOCKED"
+        }
+
+        # Recent scan logs
+        log_dir = PROJECT_ROOT / "logs" / "swarm"
+        if log_dir.exists():
+            scans = sorted(log_dir.glob("scan_*.json"), reverse=True)[:5]
+            result["recent_scans"] = [s.name for s in scans]
+        else:
+            result["recent_scans"] = []
+
+        return result
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/swarm/scan")
+async def run_swarm_scan(scan_type: str = "breakout"):
+    """
+    Trigger a swarm scan cycle
+
+    Scan types:
+    - breakout: High momentum plays
+    - kings: Top performers
+    - trending: Trending tokens
+    - smart-buys: Value opportunities
+    - full: All scan types
+    """
+    import subprocess
+
+    try:
+        if scan_type == "full":
+            cmd = ["python3", str(BIN_PATH / "trading_swarm.py"), "--scan"]
+        else:
+            cmd = ["python3", "-m", "meme_machine", f"--{scan_type}", "--min-score", "70"]
+
+        result = subprocess.run(
+            cmd,
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True,
+            timeout=120
+        )
+
+        return {
+            "status": "completed",
+            "scan_type": scan_type,
+            "output": result.stdout[-2000:] if len(result.stdout) > 2000 else result.stdout,
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except subprocess.TimeoutExpired:
+        return {"status": "timeout", "scan_type": scan_type}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/swarm/intelligence")
+async def get_swarm_intelligence():
+    """
+    Get Swarm Intelligence Bridge data
+    Shows AI swarm P&L aggregation (Agent Swarm, Shadow Army, Hive Mind)
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "hybrid_system"))
+        from swarm_intelligence_bridge import SwarmIntelligenceBridge
+
+        bridge = SwarmIntelligenceBridge()
+        status = bridge.check_swarm_systems_status()
+        aggregated = bridge.aggregate_swarm_pnl()
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "systems_status": status,
+            "aggregated_pnl": aggregated
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/swarm/intelligence/sync")
+async def sync_swarm_intelligence():
+    """
+    Sync Swarm Intelligence data to profit tracker
+    """
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "hybrid_system"))
+        from swarm_intelligence_bridge import SwarmIntelligenceBridge
+
+        bridge = SwarmIntelligenceBridge()
+        success = bridge.sync_to_profit_tracker()
+
+        return {
+            "status": "synced" if success else "failed",
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/swarm/smart-signals")
+async def get_smart_signals():
+    """
+    Get latest smart signals (proven alpha sources)
+    Fear & Greed + Funding Rates + DEX Volume + Sentiment
+    """
+    try:
+        signals_file = PROJECT_ROOT / "logs" / "smart_signals.json"
+
+        if signals_file.exists():
+            with open(signals_file) as f:
+                signals = json.load(f)
+            return signals
+        else:
+            return {
+                "error": "No smart signals found",
+                "hint": "Run: python3 bin/smart_signals.py"
+            }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/swarm/smart-signals/generate")
+async def generate_smart_signals():
+    """
+    Generate fresh smart signals from proven alpha sources
+    """
+    import subprocess
+
+    try:
+        result = subprocess.run(
+            ["python3", str(BIN_PATH / "smart_signals.py")],
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True,
+            timeout=60
+        )
+
+        # Read the generated signals
+        signals_file = PROJECT_ROOT / "logs" / "smart_signals.json"
+        if signals_file.exists():
+            with open(signals_file) as f:
+                signals = json.load(f)
+            return {
+                "status": "generated",
+                "signals": signals
+            }
+        else:
+            return {
+                "status": "error",
+                "output": result.stdout
+            }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/swarm/best-signals")
+async def get_best_signals():
+    """
+    Get latest best signals scan (70 assets)
+    """
+    try:
+        signals_file = PROJECT_ROOT / "logs" / "best_signals.json"
+
+        if signals_file.exists():
+            with open(signals_file) as f:
+                signals = json.load(f)
+            return signals
+        else:
+            return {
+                "error": "No best signals found",
+                "hint": "Run: python3 bin/best_signals.py"
+            }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# =============================================================================
+# MARKET TICKER ENDPOINTS
+# =============================================================================
+
+@app.get("/api/ticker/prices")
+async def get_market_ticker():
+    """
+    Get real-time prices for all watched assets
+    Similar to birdeye.io heat map data
+    """
+    import requests
+
+    try:
+        # Watchlist
+        symbols = ["BTC", "ETH", "SOL", "XRP", "BNB", "DOGE", "ADA", "AVAX",
+                   "LINK", "DOT", "SHIB", "LTC", "UNI", "AAVE", "MATIC", "ATOM"]
+
+        # CoinGecko IDs
+        cg_ids = {
+            "BTC": "bitcoin", "ETH": "ethereum", "SOL": "solana", "XRP": "ripple",
+            "BNB": "binancecoin", "DOGE": "dogecoin", "ADA": "cardano", "AVAX": "avalanche-2",
+            "LINK": "chainlink", "DOT": "polkadot", "SHIB": "shiba-inu", "LTC": "litecoin",
+            "UNI": "uniswap", "AAVE": "aave", "MATIC": "matic-network", "ATOM": "cosmos"
+        }
+
+        ids = [cg_ids[s] for s in symbols if s in cg_ids]
+        url = f"https://api.coingecko.com/api/v3/simple/price?ids={','.join(ids)}&vs_currencies=usd&include_24hr_change=true"
+
+        resp = requests.get(url, timeout=10)
+        data = resp.json()
+
+        # Format response
+        prices = {}
+        for symbol in symbols:
+            cg_id = cg_ids.get(symbol)
+            if cg_id and cg_id in data:
+                change = data[cg_id].get("usd_24h_change", 0)
+                prices[symbol] = {
+                    "price": data[cg_id].get("usd", 0),
+                    "change_24h": change,
+                    "heat": "hot" if change > 5 else "warm" if change > 0 else "cool" if change > -5 else "cold"
+                }
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "prices": prices
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/ticker/portfolio")
+async def get_portfolio_ticker():
+    """
+    Get portfolio values with real-time prices
+    Includes Ledger cold storage
+    """
+    import requests
+
+    try:
+        # Load BRAIN.json for holdings
+        brain_path = PROJECT_ROOT / "BRAIN.json"
+        if brain_path.exists():
+            with open(brain_path) as f:
+                brain = json.load(f)
+        else:
+            brain = {}
+
+        # Ledger holdings
+        ledger = brain.get("ledger_holdings", {
+            "BTC": 0.0157,
+            "wstETH": 0.897,
+            "XRP": 456.0,
+            "USDC": 53.61
+        })
+
+        # Get prices
+        cg_ids = {
+            "BTC": "bitcoin", "ETH": "ethereum", "wstETH": "wrapped-steth",
+            "XRP": "ripple", "SOL": "solana"
+        }
+
+        ids = [cg_ids[s] for s in ledger.keys() if s in cg_ids]
+        if ids:
+            url = f"https://api.coingecko.com/api/v3/simple/price?ids={','.join(ids)}&vs_currencies=usd&include_24hr_change=true"
+            resp = requests.get(url, timeout=10)
+            prices = resp.json()
+        else:
+            prices = {}
+
+        # Calculate values
+        portfolio = {}
+        total_value = 0
+
+        for symbol, amount in ledger.items():
+            cg_id = cg_ids.get(symbol)
+            if cg_id and cg_id in prices:
+                price = prices[cg_id].get("usd", 0)
+                change = prices[cg_id].get("usd_24h_change", 0)
+            elif symbol == "USDC":
+                price = 1.0
+                change = 0
+            else:
+                price = 0
+                change = 0
+
+            value = amount * price
+            total_value += value
+
+            portfolio[symbol] = {
+                "amount": amount,
+                "price": price,
+                "value": value,
+                "change_24h": change
+            }
+
+        # AAVE debt
+        aave_debt = brain.get("aave_debt", 360.94)
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "holdings": portfolio,
+            "total_value": total_value,
+            "aave_debt": aave_debt,
+            "net_worth": total_value - aave_debt
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/sovereign/complete")
+async def get_complete_system_status():
+    """
+    MASTER ENDPOINT - Get ENTIRE system status in one call
+
+    Includes:
+    - Portfolio (BRAIN.json)
+    - Prices
+    - Signals
+    - Positions
+    - Alpha sources (sentiment, on-chain, sniper)
+    - Siphon protocol
+    - Profit tracker
+    - Ladder system
+    - Sniper bridge
+    - Trading Swarm
+    - Market Ticker
+    - System health
+    """
+    try:
+        result = {
+            "timestamp": datetime.now().isoformat(),
+            "version": "3.1.0-complete-with-swarm",
+            "status": "online"
+        }
+
+        # Base unified state
+        try:
+            unified = await get_unified_state()
+            result["unified"] = unified
+        except Exception as e:
+            result["unified"] = {"error": str(e)}
+
+        # Siphon Protocol
+        try:
+            siphon = await get_siphon_status()
+            result["siphon"] = siphon
+        except Exception as e:
+            result["siphon"] = {"error": str(e)}
+
+        # Profit Tracker
+        try:
+            profit = await get_profit_status()
+            result["profit"] = profit
+        except Exception as e:
+            result["profit"] = {"error": str(e)}
+
+        # Ladder System
+        try:
+            ladder = await get_ladder_status()
+            result["ladder"] = ladder
+        except Exception as e:
+            result["ladder"] = {"error": str(e)}
+
+        # Sniper Bridge
+        try:
+            sniper = await get_sniper_bridge_status()
+            result["sniper_bridge"] = sniper
+        except Exception as e:
+            result["sniper_bridge"] = {"error": str(e)}
+
+        # Alpha Sources
+        try:
+            alpha = await get_combined_alpha()
+            result["alpha"] = alpha
+        except Exception as e:
+            result["alpha"] = {"error": str(e)}
+
+        # Trading Swarm
+        try:
+            swarm = await get_swarm_status()
+            result["swarm"] = swarm
+        except Exception as e:
+            result["swarm"] = {"error": str(e)}
+
+        # Smart Signals
+        try:
+            signals = await get_smart_signals()
+            result["smart_signals"] = signals
+        except Exception as e:
+            result["smart_signals"] = {"error": str(e)}
+
+        # Market Ticker
+        try:
+            ticker = await get_market_ticker()
+            result["ticker"] = ticker
+        except Exception as e:
+            result["ticker"] = {"error": str(e)}
+
+        # Portfolio Ticker
+        try:
+            portfolio = await get_portfolio_ticker()
+            result["portfolio_ticker"] = portfolio
+        except Exception as e:
+            result["portfolio_ticker"] = {"error": str(e)}
+
+        return result
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# =============================================================================
+# AURORA NOTIFICATION ENDPOINTS
+# =============================================================================
+
+NTFY_TOPIC = "ntfy.sh/sovereignshadow_dc4d2fa1"
+
+class NotificationRequest(BaseModel):
+    message: str
+    title: Optional[str] = "Sovereign Shadow"
+    priority: Optional[str] = "default"
+    tags: Optional[List[str]] = None
+
+
+@app.post("/api/aurora/push")
+async def send_push_notification(notification: NotificationRequest):
+    """
+    Send push notification via ntfy.sh
+    """
+    import requests as req
+
+    try:
+        headers = {
+            "Title": notification.title,
+            "Priority": notification.priority
+        }
+
+        if notification.tags:
+            headers["Tags"] = ",".join(notification.tags)
+
+        resp = req.post(
+            f"https://{NTFY_TOPIC}",
+            data=notification.message,
+            headers=headers,
+            timeout=10
+        )
+
+        return {
+            "status": "sent" if resp.status_code == 200 else "failed",
+            "code": resp.status_code,
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/aurora/speak")
+async def aurora_speak(message: str):
+    """
+    Make Aurora speak (macOS text-to-speech)
+    Falls back to system voice if ElevenLabs not configured
+    """
+    import subprocess
+
+    try:
+        # Use macOS say command
+        subprocess.run(["say", "-v", "Samantha", message], check=True, timeout=30)
+        return {
+            "status": "spoken",
+            "message": message,
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.post("/api/aurora/alert")
+async def aurora_alert(symbol: str, action: str, confidence: int, reason: str = ""):
+    """
+    Send full alert (push + voice) for trading signal
+    """
+    import requests as req
+    import subprocess
+
+    try:
+        # Push notification
+        title = f"{action} Signal: {symbol}"
+        message = f"{symbol} {action} ({confidence}%)"
+        if reason:
+            message += f"\n{reason}"
+
+        tags = ["chart_with_upwards_trend", "money_mouth_face"] if "BUY" in action else ["warning"]
+        priority = "high" if confidence >= 80 else "default"
+
+        headers = {
+            "Title": title,
+            "Priority": priority,
+            "Tags": ",".join(tags)
+        }
+
+        push_resp = req.post(
+            f"https://{NTFY_TOPIC}",
+            data=message,
+            headers=headers,
+            timeout=10
+        )
+
+        # Voice alert for high confidence
+        voice_status = "skipped"
+        if confidence >= 80:
+            try:
+                speech = f"Alert! High confidence {action.lower()} signal on {symbol}. {confidence} percent confidence."
+                subprocess.run(["say", "-v", "Samantha", speech], check=True, timeout=30)
+                voice_status = "spoken"
+            except:
+                voice_status = "failed"
+
+        return {
+            "push_status": "sent" if push_resp.status_code == 200 else "failed",
+            "voice_status": voice_status,
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@app.get("/api/aurora/watch/start")
+async def start_aurora_watch(background_tasks: BackgroundTasks):
+    """
+    Start Aurora signal watching in background
+    Monitors for high-confidence signals and sends alerts
+    """
+    async def watch_loop():
+        import time
+        import requests as req
+
+        while True:
+            try:
+                # Get smart signals
+                resp = req.get(f"http://localhost:8000/api/swarm/smart-signals", timeout=15)
+                data = resp.json()
+
+                if "market_state" in data:
+                    fng = data["market_state"]["fear_greed"]["value"]
+
+                    # Alert at extremes
+                    if fng <= 25 or fng >= 75:
+                        title = "EXTREME FEAR" if fng <= 25 else "EXTREME GREED"
+                        msg = f"Fear & Greed at {fng}"
+                        req.post(
+                            f"https://{NTFY_TOPIC}",
+                            data=msg,
+                            headers={"Title": title, "Priority": "urgent"},
+                            timeout=10
+                        )
+
+                time.sleep(300)  # Check every 5 minutes
+
+            except Exception as e:
+                time.sleep(60)
+
+    background_tasks.add_task(watch_loop)
+    return {"status": "Aurora watching started"}
+
+
+# =============================================================================
 # MAIN
 # =============================================================================
 

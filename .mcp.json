@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ds-star": {
+      "command": "python3",
+      "args": ["ds_star/mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "/Volumes/LegacySafe/SS_III"
+      }
+    }
+  }
+}

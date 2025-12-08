@@ -1,0 +1,344 @@
+{
+  "mission_id": "MISSION_001",
+  "codename": "DEBT_DESTROYER",
+  "created": "2025-12-01",
+  "status": "active",
+  "phase": "paper_trading",
+  "objective": {
+    "description": "Paper trade to prove capability to generate $661.46 profit for AAVE debt repayment",
+    "target_profit": 661.46,
+    "currency": "USD",
+    "deadline": null,
+    "success_criteria": {
+      "paper_profit": 661.46,
+      "win_rate_min": 60,
+      "trades_min": 10
+    }
+  },
+  "capital": {
+    "allocated": 545.08,
+    "source": [
+      "coinbase",
+      "binance_us"
+    ],
+    "breakdown": {
+      "coinbase": 471.91,
+      "binance_us": 73.17
+    },
+    "rules": {
+      "max_position": 500,
+      "stop_loss_pct": 3,
+      "take_profit_pct": 5
+    }
+  },
+  "progress": {
+    "paper_trades": 9,
+    "paper_wins": 4,
+    "paper_losses": 5,
+    "paper_pnl": -3.77,
+    "paper_win_rate": 44.4,
+    "best_trade": 4.786525656090873,
+    "worst_trade": -4.069767441860463,
+    "avg_win": 0,
+    "avg_loss": 0
+  },
+  "milestones": [
+    {
+      "pct": 25,
+      "target": 165.37,
+      "reached": false,
+      "date": null
+    },
+    {
+      "pct": 50,
+      "target": 330.73,
+      "reached": false,
+      "date": null
+    },
+    {
+      "pct": 75,
+      "target": 496.1,
+      "reached": false,
+      "date": null
+    },
+    {
+      "pct": 100,
+      "target": 661.46,
+      "reached": false,
+      "date": null
+    }
+  ],
+  "paper_trades": [
+    {
+      "id": "PT001",
+      "symbol": "BTC",
+      "direction": "long",
+      "entry_price": 87133,
+      "stop_loss": 84519.01,
+      "take_profit": 91489.65,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-01T22:57:50.430951",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.1%) - Activity increasing"
+      ],
+      "exit_price": 91974,
+      "exit_time": "2025-12-02T10:46:45.295254",
+      "pnl": 2.78,
+      "pnl_pct": 5.56,
+      "close_reason": "TAKE PROFIT HIT"
+    },
+    {
+      "id": "PT002",
+      "symbol": "ETH",
+      "direction": "long",
+      "entry_price": 2813.42,
+      "stop_loss": 2729.02,
+      "take_profit": 2954.09,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-01T22:57:50.433120",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.1%) - Activity increasing"
+      ],
+      "exit_price": 3019.6,
+      "exit_time": "2025-12-02T10:46:45.298366",
+      "pnl": 3.66,
+      "pnl_pct": 7.33,
+      "close_reason": "TAKE PROFIT HIT"
+    },
+    {
+      "id": "PT003",
+      "symbol": "SOL",
+      "direction": "long",
+      "entry_price": 127.65,
+      "stop_loss": 123.82,
+      "take_profit": 134.03,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-01T22:57:50.435903",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.1%) - Activity increasing"
+      ],
+      "exit_price": 139.87,
+      "exit_time": "2025-12-02T10:46:45.301557",
+      "pnl": 4.79,
+      "pnl_pct": 9.57,
+      "close_reason": "TAKE PROFIT HIT"
+    },
+    {
+      "id": "PT004",
+      "symbol": "BTC",
+      "direction": "long",
+      "entry_price": 91974,
+      "stop_loss": 89214.78,
+      "take_profit": 96572.7,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "open",
+      "entry_time": "2025-12-02T10:46:46.542476",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.2%) - Activity increasing"
+      ],
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": null,
+      "pnl_pct": null
+    },
+    {
+      "id": "PT005",
+      "symbol": "ETH",
+      "direction": "long",
+      "entry_price": 3019.6,
+      "stop_loss": 2929.01,
+      "take_profit": 3170.58,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "open",
+      "entry_time": "2025-12-02T10:46:46.544421",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.2%) - Activity increasing"
+      ],
+      "exit_price": null,
+      "exit_time": null,
+      "pnl": null,
+      "pnl_pct": null
+    },
+    {
+      "id": "PT006",
+      "symbol": "SOL",
+      "direction": "long",
+      "entry_price": 139.87,
+      "stop_loss": 135.67,
+      "take_profit": 146.86,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-02T10:46:46.545868",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.2%) - Activity increasing"
+      ],
+      "exit_price": 132.01,
+      "exit_time": "2025-12-07T16:10:44.943714",
+      "pnl": -2.81,
+      "pnl_pct": -5.62,
+      "close_reason": "STOP LOSS HIT"
+    },
+    {
+      "id": "PT007",
+      "symbol": "XRP",
+      "direction": "long",
+      "entry_price": 2.17,
+      "stop_loss": 2.1,
+      "take_profit": 2.28,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-02T10:58:00.000000",
+      "signal_confidence": 80,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "DEX volume surging (+54.2%) - Activity increasing"
+      ],
+      "exit_price": 2.04,
+      "exit_time": "2025-12-07T16:10:44.945907",
+      "pnl": -3.0,
+      "pnl_pct": -5.99,
+      "close_reason": "STOP LOSS HIT"
+    },
+    {
+      "id": "PT008",
+      "symbol": "RENDER",
+      "direction": "long",
+      "entry_price": 1.72,
+      "stop_loss": 1.67,
+      "take_profit": 1.81,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-02T11:00:00.000000",
+      "signal_confidence": 75,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "AI/GPU narrative strength"
+      ],
+      "exit_price": 1.58,
+      "exit_time": "2025-12-07T16:10:44.947480",
+      "pnl": -4.07,
+      "pnl_pct": -8.14,
+      "close_reason": "STOP LOSS HIT"
+    },
+    {
+      "id": "PT009",
+      "symbol": "SUI",
+      "direction": "long",
+      "entry_price": 1.6,
+      "stop_loss": 1.55,
+      "take_profit": 1.68,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-02T11:00:00.000000",
+      "signal_confidence": 75,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "L1 momentum play"
+      ],
+      "exit_price": 1.68,
+      "exit_time": "2025-12-02T20:23:21.908480",
+      "pnl": 2.5,
+      "pnl_pct": 5.0,
+      "close_reason": "TAKE PROFIT HIT"
+    },
+    {
+      "id": "PT010",
+      "symbol": "BONK",
+      "direction": "long",
+      "entry_price": 9.8e-06,
+      "stop_loss": 9.51e-06,
+      "take_profit": 1.029e-05,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-02T11:00:00.000000",
+      "signal_confidence": 70,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "Solana meme momentum"
+      ],
+      "exit_price": 9.09e-06,
+      "exit_time": "2025-12-07T16:10:44.949257",
+      "pnl": -3.62,
+      "pnl_pct": -7.24,
+      "close_reason": "STOP LOSS HIT"
+    },
+    {
+      "id": "PT011",
+      "symbol": "WIF",
+      "direction": "long",
+      "entry_price": 0.4,
+      "stop_loss": 0.388,
+      "take_profit": 0.42,
+      "position_size": 50,
+      "position_value": 50,
+      "status": "closed",
+      "entry_time": "2025-12-02T11:00:00.000000",
+      "signal_confidence": 70,
+      "signal_action": "BUY",
+      "signal_reasons": [
+        "FEAR (23) - Good accumulation zone",
+        "Solana meme momentum"
+      ],
+      "exit_price": 0.367971,
+      "exit_time": "2025-12-07T16:10:44.950797",
+      "pnl": -4.0,
+      "pnl_pct": -8.01,
+      "close_reason": "STOP LOSS HIT"
+    }
+  ],
+  "agents_assigned": [
+    "AURORA",
+    "GIO"
+  ],
+  "phase_transitions": {
+    "paper_to_live": {
+      "conditions": [
+        "win_rate >= 60%",
+        "trades >= 10",
+        "no_catastrophic_loss"
+      ],
+      "approval_required": "COMMANDER"
+    }
+  },
+  "notes": [
+    "Mission 1 of December Campaign",
+    "Use proven strategies: momentum, support/resistance",
+    "GIO provides signals, AURORA validates and logs",
+    "No live capital until paper phase proves profitable"
+  ]
+}

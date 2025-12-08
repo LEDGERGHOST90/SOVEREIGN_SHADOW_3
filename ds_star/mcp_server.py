@@ -184,15 +184,35 @@ class DSStarMCPServer:
         for line in sys.stdin:
             try:
                 request = json.loads(line)
+                method = request.get("method")
 
-                if request.get("method") == "tools/list":
+                # MCP Protocol: initialize handshake
+                if method == "initialize":
+                    response = {
+                        "jsonrpc": "2.0",
+                        "id": request.get("id"),
+                        "result": {
+                            "protocolVersion": "2024-11-05",
+                            "capabilities": {"tools": {}},
+                            "serverInfo": {
+                                "name": self.name,
+                                "version": self.version
+                            }
+                        }
+                    }
+
+                # MCP Protocol: initialized notification (no response)
+                elif method == "notifications/initialized":
+                    continue
+
+                elif method == "tools/list":
                     response = {
                         "jsonrpc": "2.0",
                         "id": request.get("id"),
                         "result": {"tools": self.get_tools_schema()}
                     }
 
-                elif request.get("method") == "tools/call":
+                elif method == "tools/call":
                     params = request.get("params", {})
                     name = params.get("name")
                     arguments = params.get("arguments", {})
@@ -209,7 +229,7 @@ class DSStarMCPServer:
                     response = {
                         "jsonrpc": "2.0",
                         "id": request.get("id"),
-                        "error": {"code": -32601, "message": f"Method not found: {request.get('method')}"}
+                        "error": {"code": -32601, "message": f"Method not found: {method}"}
                     }
 
                 print(json.dumps(response))

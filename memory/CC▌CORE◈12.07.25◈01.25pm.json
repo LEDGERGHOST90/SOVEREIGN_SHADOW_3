@@ -1,0 +1,33 @@
+{
+  "identity": "SOVEREIGN_SHADOW_3",
+  "mantra": "SMILING THRU THE CHAOS",
+  "last_updated": "2025-12-07T13:25:00",
+  "wallets": {
+    "eth": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
+    "btc": "bc1qlpkhy9lzh6qwjhc0muhlrzqf3vfrhgezmjp0kx",
+    "xrp": "rGvSX7BMyuzkghXbaJqLHk529pYE2j5WR3",
+    "sol": "RovUJaZwiZ1X36sEW7TBmhie5unzPmxtMg1ATwFtGVk"
+  },
+  "apis": {
+    "coinbase": "ACTIVE",
+    "kraken": "ACTIVE",
+    "binance_us": "ACTIVE",
+    "ledger": "MANUAL"
+  },
+  "council": {
+    "AURORA": {"engine": "Claude", "role": "Executor", "status": "operational"},
+    "GIO": {"engine": "Gemini", "role": "Researcher", "status": "operational"},
+    "ARCHITECT_PRIME": {"engine": "GPT", "role": "Integrator", "status": "operational"}
+  },
+  "rules": {
+    "max_position": 50,
+    "stop_loss_pct": 3,
+    "take_profit_pct": 5,
+    "go_live_threshold": 60
+  },
+  "cost_basis": {
+    "xrp": 2.32,
+    "zec": 347.82
+  },
+  "target": 50000
+}
