@@ -122,6 +122,7 @@ config/cdp_api*.json
 config/*_api*.json
 config/ladder_*.json
 config/exchange_*.json
+config/gen-lang-client*.json
 
 # -----------------------------------------------------------------------------
 # 🎯 TRADING STRATEGIES - PROPRIETARY
