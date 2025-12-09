@@ -4,7 +4,9 @@
       "WebSearch",
       "Bash(claude mcp add:*)",
       "Bash(claude mcp remove:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Google API key + session notes\n\n- Added GOOGLE_API_KEY to .env.CORRECTED (gitignored)\n- Updated Claude Code permissions\n- Added 2025-12-09 gold extraction session notes\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Google API key + session notes\n\n- Added GOOGLE_API_KEY to .env.CORRECTED (gitignored)\n- Updated Claude Code permissions\n- Added 2025-12-09 gold extraction session notes\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git rebase:*)",
+      "Bash(wc:*)"
     ],
     "deny": [],
     "ask": []
