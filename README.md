@@ -1,58 +1,57 @@
-# 🏴 Sovereign Shadow 3 Trading System
+# 🏴 Sovereign Shadow 3 README
 
-**Philosophy:** "Fearless. Bold. Smiling through chaos."
+Welcome to the official documentation and operator’s guide for Sovereign Shadow 3—a comprehensive, AI-powered cryptocurrency trading platform.
 
-## 🎯 System Overview
+---
 
-AI-powered cryptocurrency trading system with multi-agent council architecture for automated analysis, signal generation, and portfolio management.
+## Purpose
 
-### 💰 Capital Structure (December 1, 2025)
-- **Net Worth:** $5,433.87
-- **AAVE Debt:** -$360.94
-- **Health Factor:** 3.71
-- **Trading Capital:** $260
+This README exists to give users and contributors a thorough understanding of the Sovereign Shadow 3 system. It introduces the philosophy, structure, tools, and processes that run beneath the surface of the platform. Whether you are running the system, developing enhancements, or simply exploring its capabilities, this guide is your central navigation point.
 
-#### 🔐 Ledger (Cold Storage): $5,715.91
-| Asset | Amount | Value |
-|-------|--------|-------|
-| wstETH | (collateral) | $3,040.25 |
-| BTC | 0.0164 | $1,508.32 |
-| XRP | 501.9 | $1,099.17 |
-| USDC | 53.61 | $53.61 |
-| ETH | 0.0048 | $14.56 |
+---
 
-#### 🏦 Coinbase: $1.93
-| Asset | Amount |
-|-------|--------|
-| USDC | 1.93 |
+## Theme
 
-#### 🦑 Kraken: $3.79
-| Asset | Amount |
-|-------|--------|
-| PEPE | 41,666.66 |
-| SOL | 0.0059 |
-| USDG | 1.26 |
-| ETH | 0.00036 |
-| DOGE | 2.53 |
-| USD | 0.0037 |
+Sovereign Shadow 3 is engineered for disciplined, transparent, and adaptive trading in volatile crypto markets. At its heart is a multi-agent council: a collection of AI, analytics, strategy, and psychology engines designed to work in tandem, promoting rigorous decision-making and continuous improvement. This approach is about more than just gains—it embodies a philosophy of resilience, responsibility, and calculated risk—summed up in the ethos:
 
-#### 🔶 Binance US: $73.18
-| Asset | Amount |
-|-------|--------|
-| USDC | 73.16 |
-| RENDER | 0.0094 |
-| PEPE | 372.32 |
+> "Fearless. Bold. Smiling through chaos."
 
-### 🧠 AI Council
-| Agent | Role | Stack |
-|-------|------|-------|
-| **AURORA** | The Executor | Claude + Neural Hub (FastAPI) |
-| **GIO** | The Researcher | Gemini 2.5 Flash + strategySynthai |
-| **ARCHITECT_PRIME** | The Integrator | GPT + System Architecture |
+All rules, routines, and safeguards present in the system reflect this guiding principle. Every feature and workflow is documented here for clarity and replicability.
 
-### 🌐 Dashboards
-- **Cloud Dashboard:** https://sovereignnshadowii.abacusai.app
-- **Neural Hub API:** http://localhost:8000
+---
+
+## What This README Covers
+
+- **System Philosophy:** Defining the approach and mindset of Sovereign Shadow 3.
+- **Architecture Overview:** Explaining how AI agents and subsystems collaborate for decision support, analysis, trading, and learning.
+- **Capital and Account Management:** Describing how funds, assets, and risks are managed across multiple exchanges and storage solutions.
+- **Agent Council Roles:** Documenting specialized agents, from trade execution to psychology enforcement, and how each contributes to overall strategy.
+- **Setup & Operations:** Quick-start guides and detailed instructions for deploying and maintaining every part of the stack—cloud, desktop, and local.
+- **Safety and Risk Controls:** Outlining strict risk management, validation steps, paper trading enforcement, and emotional discipline.
+- **Project Structure & Files:** Mapping directories, code modules, and major data files, for both developers and auditors.
+- **API Integrations & Notifications:** Listing connected exchanges, supported automations, and push/voice notification endpoints.
+- **Performance & Campaigns:** Showcasing how trading performance is recorded, campaigns run, and lessons learned are integrated back into the system.
+- **Ongoing Learning:** Introducing the built-in education and mentorship layer that ensures continuous user growth and compliance before live trades.
+
+---
+
+## Who This Is For
+
+- **Operators:** For those actively trading or simulating trades and requiring clarity on system logic and limiters.
+- **Developers:** For those wishing to customize, extend, or audit the platform's open architecture and agents.
+- **Reviewers:** For anyone assessing security, strategy, or compliance within an advanced crypto automation workflow.
+
+---
+
+## How To Use This File
+
+Read from top to bottom to get a holistic vision; jump to specific sections for technical procedures or in-depth explanations. Update references and figures as the system evolves—this is your working blueprint.
+
+---
+
+*"Built for adaptation, governed by discipline, and open to scrutiny. Welcome to Sovereign Shadow 3."*
+
+---- **Neural Hub API:** http://localhost:8000
 - **GIO Frontend:** http://localhost:3000
 - **SS_III Dashboard:** http://localhost:5001
 
