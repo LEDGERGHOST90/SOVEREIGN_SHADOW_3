@@ -215,3 +215,4 @@ SOVEREIGN_SHADOW_3/
 ECO_SYSTEM_4/exchanges/Sovereign-Shadow-3-DS-STAR-Platform.zip
 ECO_SYSTEM_4/Shadow_3--11.30.25.zip
 *.zip
+.config/replit/.semgrep/

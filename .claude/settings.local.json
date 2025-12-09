@@ -96,7 +96,17 @@
       "Bash(\"ntfy.sh/sovereignshadow_dc4d2fa1\")",
       "Bash(timeout 10 python3:*)",
       "Bash(git remote set-url:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(grep:*)",
+      "Bash(du:*)",
+      "Bash(ARCHIVE_PATH=\"/Volumes/LegacySafe/ARCHIVE▌HistoryBook/LegacyLoop{ARCHIVES}/Shadow.Archive/SovereignShadow_Archive_2025-10-23/SovereignShadow_2_BACKUP_20251103/ClaudeSDK\")",
+      "Bash(DEST_PATH=\"/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/core/exchanges\")",
+      "Bash(__NEW_LINE__ cp \"$ARCHIVE_PATH/coinbase_advanced_trade_correct.py\" \"$DEST_PATH/\")",
+      "Bash(__NEW_LINE__ cp \"$ARCHIVE_PATH/coinbase_advanced_trade_official.py\" \"$DEST_PATH/\")",
+      "Bash(DEST_PATH=\"/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/core/integrations\":*)",
+      "Bash(__NEW_LINE__ cp \"$ARCHIVE_PATH/ledger_sovereign_integration.py\" \"$DEST_PATH/\")",
+      "Bash(git reset:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nPhase 1 Complete: Rescue valuable code from archives\n\n- Added core/exchanges/ with Coinbase JWT/ECDSA auth fix\n- Added core/mcp_servers/ with 3 MCP server integrations\n- Added core/scanners/ with DEX, whale, meme scanners\n- Added core/arbitrage/ with cross-exchange arb engine\n- Added core/ledger/ with hardware wallet integration\n- Added core/defi/ with MetaMask monitor\n- Added core/ai/ with Gemini integrations\n- Added Claude Code permissions config\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
