@@ -24,7 +24,10 @@ if ! curl -s http://localhost:8000/api/ > /dev/null 2>&1; then
     echo "Starting Council Bridge..." >> "$LOG_DIR/launcher.log"
     cd "$BACKEND_DIR"
     source "$SS3_ROOT/venv/bin/activate" 2>/dev/null || true
-    export GEMINI_API_KEY="AIzaSyCNBWSCqZsa0cuadDB7Ca7yzWVS5FvqcoI"
+    # Load from .env file
+    if [ -f "/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/.env" ]; then
+        export $(grep -v '^#' /Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/.env | xargs)
+    fi
     nohup python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 > "$LOG_DIR/council_bridge.log" 2>&1 &
     sleep 2
 fi

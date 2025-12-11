@@ -6,29 +6,18 @@
     <string>com.sovereignshadow.council-bridge</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/bin/python3</string>
-        <string>-m</string>
-        <string>uvicorn</string>
-        <string>main:app</string>
-        <string>--host</string>
-        <string>0.0.0.0</string>
-        <string>--port</string>
-        <string>8000</string>
+        <string>/bin/bash</string>
+        <string>/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/bin/council_bridge_launcher.sh</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/neural_hub/backend</string>
+    <string>/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/neural_hub/backend</string>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/council_bridge.log</string>
+    <string>/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/logs/council_bridge.log</string>
     <key>StandardErrorPath</key>
-    <string>/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs/council_bridge_error.log</string>
-    <key>EnvironmentVariables</key>
-    <dict>
-        <key>GEMINI_API_KEY</key>
-        <string>AIzaSyCNBWSCqZsa0cuadDB7Ca7yzWVS5FvqcoI</string>
-    </dict>
+    <string>/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/logs/council_bridge_error.log</string>
 </dict>
 </plist>
