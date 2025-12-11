@@ -2,21 +2,22 @@
 # Council Bridge Controller
 # Usage: council [start|stop|status|logs|install]
 
-PLIST_SRC="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/bin/council_bridge.plist"
+SS3_ROOT="/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform"
+PLIST_SRC="$SS3_ROOT/bin/council_bridge.plist"
 PLIST_DST="$HOME/Library/LaunchAgents/com.sovereignshadow.council-bridge.plist"
-BACKEND_DIR="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/neural_hub/backend"
-LOG_DIR="/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/logs"
+BACKEND_DIR="$SS3_ROOT/neural_hub/backend"
+LOG_DIR="$SS3_ROOT/logs"
 
 case "$1" in
     start)
         echo "🌉 Starting Council Bridge..."
-        cd "$BACKEND_DIR"
-        source /Volumes/LegacySafe/SOVEREIGN_SHADOW_3/venv/bin/activate 2>/dev/null || true
+        cd "$BACKEND_DIR" || { echo "❌ Backend dir not found: $BACKEND_DIR"; exit 1; }
+        source "$SS3_ROOT/venv/bin/activate" 2>/dev/null || true
         # Load from .env file
-        if [ -f "/Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/.env" ]; then
-            export $(grep -v '^#' /Volumes/LegacySafe/Shadow-3-Legacy-Loop-Platform/.env | xargs)
+        if [ -f "$SS3_ROOT/.env" ]; then
+            export $(grep -v '^#' "$SS3_ROOT/.env" | grep -v '^$' | xargs)
         fi
-        python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 &
+        /opt/homebrew/bin/python3 -m uvicorn main:app --host 0.0.0.0 --port 8000 &
         sleep 2
         if curl -s http://localhost:8000/api/ > /dev/null 2>&1; then
             echo "✅ Council Bridge ONLINE at http://localhost:8000"
