@@ -1,0 +1,29 @@
+{
+  "strategy_name": "RSIReversion",
+  "type": "mean_reversion",
+  "description": "RSI mean reversion - enters when RSI oversold (<30) and rising, exits when overbought (>70)",
+  "suitable_regimes": ["choppy_volatile", "choppy_calm"],
+  "timeframes": ["15m", "1h", "4h"],
+  "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "stop_loss_percent": 1.0,
+  "take_profit_percent": 2.0,
+  "risk_reward_ratio": 2.0,
+  "indicators_required": ["rsi_14"],
+  "entry_conditions": [
+    "RSI < 30 (oversold)",
+    "RSI rising (reversal starting)"
+  ],
+  "exit_conditions": [
+    "Take profit: 2% gain",
+    "Stop loss: 1% loss",
+    "RSI > 70 (overbought)"
+  ],
+  "backtested": false,
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "strategy_name": "ElderReversion",
+  "type": "mean_reversion",
+  "description": "Elder Ray indicator reversion strategy - enters when Bull Power negative but rising, exits when positive",
+  "suitable_regimes": ["choppy_volatile", "choppy_calm"],
+  "timeframes": ["15m", "1h", "4h"],
+  "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "stop_loss_percent": 1.0,
+  "take_profit_percent": 2.0,
+  "risk_reward_ratio": 2.0,
+  "indicators_required": [
+    "ema_13",
+    "elder_ray"
+  ],
+  "entry_conditions": [
+    "Bull Power < 0 (bears exhausted)",
+    "Bull Power rising (reversal starting)",
+    "Price above EMA-13 (uptrend context)"
+  ],
+  "exit_conditions": [
+    "Take profit: 2% gain",
+    "Stop loss: 1% loss",
+    "Bull Power > 0 for 2 candles (reversal complete)"
+  ],
+  "backtested": false,
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0,
+    "sharpe_ratio": 0,
+    "max_drawdown": 0
+  },
+  "created_date": "2024-12-13",
+  "last_updated": "2024-12-13"
+}
