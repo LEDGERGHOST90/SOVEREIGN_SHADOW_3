@@ -1,0 +1,15 @@
+{
+  "strategy_name": "CandlestickPattern",
+  "type": "scalping",
+  "suitable_regimes": ["choppy_volatile", "trending_calm"],
+  "timeframes": ["15m", "1h"],
+  "assets": ["BTC/USDT", "ETH/USDT"],
+  "risk_per_trade": 0.005,
+  "max_position_size": 0.05,
+  "indicators_required": ["open", "high", "low", "close"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "strategy_name": "TimeAndSales",
+  "type": "scalping",
+  "suitable_regimes": ["trending_volatile", "choppy_volatile"],
+  "timeframes": ["tick"],
+  "assets": ["BTC/USDT"],
+  "risk_per_trade": 0.005,
+  "max_position_size": 0.05,
+  "indicators_required": ["time_sales"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}
