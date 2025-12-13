@@ -5,7 +5,7 @@ import sys
 import os
 
 # Add workspace to path to allow importing strategies
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 class BacktestEngine:
     def __init__(self, historical_data_path, performance_tracker):

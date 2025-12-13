@@ -1,4 +1,4 @@
-# Sovereign Shadow II - Autonomous Trading System
+# Sovereign III - Autonomous Trading System
 
 ## Project Structure
 - `core/`: Core infrastructure (Exchange Connectors, Intelligence, Orchestrator)
