@@ -1,4 +1,4 @@
-# Sovereign Shadow II - Core Dependencies
+# Sovereign II - Core Dependencies
 
 # Core Framework
 python>=3.11
