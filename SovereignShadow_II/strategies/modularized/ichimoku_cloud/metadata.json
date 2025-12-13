@@ -1,0 +1,15 @@
+{
+  "strategy_name": "IchimokuCloud",
+  "type": "trend_following",
+  "suitable_regimes": ["trending_calm", "trending_volatile"],
+  "timeframes": ["4h", "1d"],
+  "assets": ["BTC/USDT", "ETH/USDT"],
+  "risk_per_trade": 0.015,
+  "max_position_size": 0.15,
+  "indicators_required": ["high", "low", "close"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

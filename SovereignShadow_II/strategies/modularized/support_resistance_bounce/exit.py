@@ -1,0 +1,16 @@
+class SupportResistanceBounceExit:
+    def __init__(self):
+        self.name = "sr_bounce_exit"
+    
+    def generate_signal(self, df, entry_price):
+        current_price = df['close'].iloc[-1]
+        pnl_percent = ((current_price - entry_price) / entry_price) * 100
+        
+        # Tighter take profit for range trading
+        if pnl_percent >= 4.0:
+            return {'signal': 'SELL', 'reason': 'TAKE_PROFIT', 'pnl': pnl_percent}
+        
+        if pnl_percent <= -2.0:
+            return {'signal': 'SELL', 'reason': 'STOP_LOSS', 'pnl': pnl_percent}
+            
+        return {'signal': 'HOLD', 'pnl': pnl_percent}
