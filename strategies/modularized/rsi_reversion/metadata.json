@@ -1,0 +1,13 @@
+{
+    "strategy_name": "RSIReversion",
+    "strategy_type": "mean_reversion",
+    "suitable_regimes": ["choppy_volatile", "trending_bear"],
+    "timeframes": ["15m", "1h"],
+    "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+    "risk_per_trade": 0.01,
+    "max_position_size": 0.08,
+    "indicators_required": ["rsi_14"],
+    "description": "Mean reversion using RSI oversold bounces",
+    "author": "SovereignShadow",
+    "version": "1.0.0"
+}

@@ -1,0 +1,13 @@
+{
+    "strategy_name": "BandedStochastic",
+    "strategy_type": "mean_reversion",
+    "suitable_regimes": ["choppy_volatile", "choppy_calm"],
+    "timeframes": ["15m", "1h"],
+    "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+    "risk_per_trade": 0.01,
+    "max_position_size": 0.08,
+    "indicators_required": ["stochastic", "bollinger_bands"],
+    "description": "Combines Stochastic oscillator oversold with Bollinger Band lower touches",
+    "author": "SovereignShadow",
+    "version": "1.0.0"
+}

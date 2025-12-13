@@ -1,0 +1,13 @@
+{
+    "strategy_name": "VolatilityBreakout",
+    "strategy_type": "breakout",
+    "suitable_regimes": ["choppy_calm"],
+    "timeframes": ["1h", "4h"],
+    "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+    "risk_per_trade": 0.015,
+    "max_position_size": 0.10,
+    "indicators_required": ["atr"],
+    "description": "Breakout strategy after volatility compression",
+    "author": "SovereignShadow",
+    "version": "1.0.0"
+}

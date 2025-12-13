@@ -1,0 +1,18 @@
+{
+    "strategy_name": "ElderReversion",
+    "strategy_type": "mean_reversion",
+    "suitable_regimes": ["choppy_volatile", "choppy_calm"],
+    "timeframes": ["15m", "1h"],
+    "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+    "risk_per_trade": 0.01,
+    "max_position_size": 0.10,
+    "indicators_required": ["elder_ray", "ema_13"],
+    "description": "Mean reversion strategy using Elder Ray Bull/Bear Power. Enters when Bull Power is negative but price is above EMA-13, indicating short-term weakness in an uptrend.",
+    "author": "SovereignShadow",
+    "version": "1.0.0",
+    "performance_expectations": {
+        "target_win_rate": 0.55,
+        "target_expectancy": 0.5,
+        "avg_trade_duration": "4-12 hours"
+    }
+}

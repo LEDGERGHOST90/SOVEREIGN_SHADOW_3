@@ -1,0 +1,13 @@
+{
+    "strategy_name": "TrendFollowEMA",
+    "strategy_type": "trend_following",
+    "suitable_regimes": ["trending_bull"],
+    "timeframes": ["1h", "4h"],
+    "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "XRP/USDT"],
+    "risk_per_trade": 0.015,
+    "max_position_size": 0.12,
+    "indicators_required": ["ema_9", "ema_21", "ema_50"],
+    "description": "Trend following strategy using triple EMA alignment. Enters when fast EMA > medium EMA > slow EMA with price above all.",
+    "author": "SovereignShadow",
+    "version": "1.0.0"
+}
