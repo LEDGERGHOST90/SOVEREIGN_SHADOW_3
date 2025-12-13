@@ -1,4 +1,4 @@
-# Sovereign III - Autonomous Trading System
+# Sovereign Shadow II - Autonomous Trading System
 
 ## Project Structure
 - `core/`: Core infrastructure (Exchange Connectors, Intelligence, Orchestrator)
@@ -12,7 +12,7 @@
     - Intelligence: Regime Detector, Strategy Selector, Performance Tracker implemented.
     - Orchestrator: Master loop implemented.
 - **Agent 1**: ElderReversion strategy modularized and tested.
-- **Agent 9 (Backtest)**: Backtest Engine implemented and verified.
+- **Agent 2**: Strategies 11-20 modularized (BreakoutRetest, SupportResistance, Fibonacci, MACD, Stochastic, Ichimoku, ParabolicSAR, ADX, ATR, VWAP).
 
 ## How to Run
 1. Install dependencies:
