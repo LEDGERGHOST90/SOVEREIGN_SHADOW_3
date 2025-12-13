@@ -1,10 +1,10 @@
-# Sovereign Shadow II - Autonomous Trading System
+# SS_III - Autonomous Trading System
 
 **Skills-Based AI Architecture with Continuous Learning**
 
 ## Overview
 
-Sovereign Shadow II is an autonomous trading system implementing the **D.O.E. Pattern**:
+SS_III is an autonomous trading system implementing the **D.O.E. Pattern**:
 
 - **Directive Layer**: Market Regime Detector (classifies market conditions)
 - **Orchestration Layer**: AI Strategy Selector (picks best strategy for regime)
@@ -14,7 +14,7 @@ Sovereign Shadow II is an autonomous trading system implementing the **D.O.E. Pa
 ## Architecture
 
 ```
-SovereignShadow_II/
+SS_III/
 ├── core/
 │   ├── exchange_connectors/    # Exchange API connectors
 │   │   ├── base_connector.py
@@ -131,4 +131,4 @@ strategies/modularized/{strategy_name}/
 
 ## License
 
-Proprietary - Sovereign Shadow II
+Proprietary - SS_III

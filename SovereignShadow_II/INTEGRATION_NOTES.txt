@@ -169,7 +169,7 @@ print(f"Selected: {selection['selected_strategy']}")
 
 - **Strategies**: `strategies/modularized/{strategy_name}/`
 - **Database**: `data/performance.db`
-- **Logs**: `logs/sovereign_shadow.log`
+- **Logs**: `logs/ss_iii.log`
 - **Config**: `.env` file (copy from `.env.example`)
 
 ## Next Steps

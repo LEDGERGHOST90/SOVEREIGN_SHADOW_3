@@ -1,12 +1,12 @@
-# Sovereign Shadow II - Deployment Guide
+# SS_III - Deployment Guide
 
 ## Quick Start
 
 ### 1. Environment Setup
 
 ```bash
-# Clone/copy the SovereignShadow_II directory
-cd SovereignShadow_II
+# Clone/copy the SS_III directory
+cd SS_III
 
 # Install dependencies
 pip install -r requirements.txt
@@ -101,7 +101,7 @@ See `INTEGRATION_NOTES.txt` for detailed templates.
 ## Monitoring
 
 **Logs:**
-- Location: `logs/sovereign_shadow.log`
+- Location: `logs/ss_iii.log`
 - Level: INFO (configurable via LOG_LEVEL env var)
 
 **Database:**
@@ -171,7 +171,7 @@ Before enabling live trading:
 
 For issues or questions:
 1. Check `INTEGRATION_NOTES.txt` for integration details
-2. Review logs in `logs/sovereign_shadow.log`
+2. Review logs in `logs/ss_iii.log`
 3. Check database for trade history and performance metrics
 
 ## Next Steps
