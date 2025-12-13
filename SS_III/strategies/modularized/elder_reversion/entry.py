@@ -20,7 +20,7 @@ class ElderReversionEntry:
         current_ema = ema_13.iloc[-1]
         
         if current_bull < 0 and current_price > current_ema:
-            confidence = min(abs(current_bull / current_price) * 1000, 100)
+            confidence = min(abs(current_bull / max(current_price, 0.0001)) * 1000, 100)
             return {
                 'signal': 'BUY',
                 'confidence': confidence,

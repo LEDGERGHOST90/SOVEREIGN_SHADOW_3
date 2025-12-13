@@ -8,9 +8,12 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 class BacktestEngine:
-    def __init__(self, historical_data_path, performance_tracker):
+    def __init__(self, historical_data_path, performance_tracker, initial_capital=10000, slippage=0.001, commission=0.001):
         self.data = self._load_historical_data(historical_data_path)
         self.tracker = performance_tracker
+        self.initial_capital = initial_capital
+        self.slippage = slippage
+        self.commission = commission
     
     def _load_historical_data(self, path):
         """Load Raymond's 1,896 transactions from Jan-Aug 2024"""
@@ -63,9 +66,12 @@ class BacktestEngine:
             df = df[df['timestamp'] <= end_date]
         
         # Backtest simulation
-        portfolio_value = 10000  # Starting capital
+        portfolio_value = self.initial_capital  # Starting capital
         trades = []
         position = None
+        
+        if len(df) < 100:
+             return {'error': 'Insufficient data for backtest (need 100+ candles)'}
         
         for i in range(100, len(df)):  # Need 100 candles for indicators
             current_slice = df.iloc[i-100:i]
@@ -90,17 +96,30 @@ class BacktestEngine:
                         'take_profit': position_sizing['take_profit_price']
                     }
             
-            # Check for exit signal if in position
-            else:
-                exit_signal = exit_logic.generate_signal(
-                    current_slice, position['entry_price']
-                )
+        # Risk: Exit if Stop Loss or Take Profit hit
+            if position:
+                current_price = current_slice['close'].iloc[-1]
+                
+                # Stop Loss
+                if current_price <= position['stop_loss']:
+                    exit_signal = {'signal': 'SELL', 'reason': 'STOP_LOSS'}
+                
+                # Take Profit
+                elif current_price >= position['take_profit']:
+                    exit_signal = {'signal': 'SELL', 'reason': 'TAKE_PROFIT'}
+                
+                # Strategy Exit
+                else:
+                    exit_signal = exit_logic.generate_signal(
+                        current_slice, position['entry_price']
+                    )
                 
                 if exit_signal['signal'] == 'SELL':
-                    exit_price = current_slice['close'].iloc[-1]
-                    pnl = (exit_price - position['entry_price']) * position['quantity']
-                    pnl_percent = ((exit_price - position['entry_price']) / 
-                                  position['entry_price']) * 100
+                    exit_price = current_slice['close'].iloc[-1] * (1 - self.slippage)
+                    gross_pnl = (exit_price - position['entry_price']) * position['quantity']
+                    cost = (position['entry_price'] * position['quantity'] * self.commission) + (exit_price * position['quantity'] * self.commission)
+                    pnl = gross_pnl - cost
+                    pnl_percent = (pnl / (position['entry_price'] * position['quantity'])) * 100
                     
                     trades.append({
                         'entry_time': position['entry_time'],
@@ -130,7 +149,7 @@ class BacktestEngine:
                 'total_trades': len(trades),
                 'win_rate': win_rate,
                 'avg_pnl_percent': sum(t['pnl_percent'] for t in trades) / len(trades),
-                'total_pnl_usd': portfolio_value - 10000,
+                'total_pnl_usd': portfolio_value - self.initial_capital,
                 'sharpe_ratio': self._calculate_sharpe(trades),
                 'max_drawdown': self._calculate_max_drawdown(trades),
                 'trades': trades

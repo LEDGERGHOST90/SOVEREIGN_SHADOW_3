@@ -37,7 +37,7 @@ class AdxTrendFilterEntry:
         plus_di = 100 * (plus_dm_s.rolling(window=self.period).mean() / atr)
         minus_di = 100 * (minus_dm_s.rolling(window=self.period).mean() / atr)
         
-        dx = 100 * abs(plus_di - minus_di) / (plus_di + minus_di)
+        dx = 100 * abs(plus_di - minus_di) / (plus_di + minus_di + 0.0001)
         adx = dx.rolling(window=self.period).mean()
         
         curr_adx = adx.iloc[-1]

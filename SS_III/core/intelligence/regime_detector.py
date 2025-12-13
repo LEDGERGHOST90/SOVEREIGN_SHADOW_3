@@ -16,6 +16,12 @@ class MarketRegimeDetector:
         if df is None or df.empty:
             return "unknown"
 
+        # Modifying the dataframe in place can cause warnings. We'll work on a copy if we need to return it, 
+        # or just calculate series. Since we don't return the modified DF, local vars are fine, 
+        # but let's be safe and copy if we were to modify `df`.
+        # Here we are assigning to `df` columns, which is a modification.
+        df = df.copy()
+
         # Calculate Indicators if not present
         if 'ATR' not in df.columns:
             df['ATR'] = self._calculate_atr(df)
@@ -30,7 +36,7 @@ class MarketRegimeDetector:
         
         # Volatility Detection
         # Normalize ATR by price to get percentage volatility
-        volatility_pct = last_row['ATR'] / last_row['close']
+        volatility_pct = last_row['ATR'] / max(last_row['close'], 0.0001)
         is_volatile = volatility_pct > 0.015 # Threshold for crypto (1.5%) - adjustable
         
         if is_volatile:
@@ -49,7 +55,7 @@ class MarketRegimeDetector:
     def _is_trending(self, df):
         # ADX would be better, but using EMA separation for now
         last_row = df.iloc[-1]
-        ema_diff = abs(last_row['EMA_50'] - last_row['EMA_200']) / last_row['close']
+        ema_diff = abs(last_row['EMA_50'] - last_row['EMA_200']) / max(last_row['close'], 0.0001)
         return ema_diff > 0.005 # 0.5% separation
 
     def _calculate_atr(self, df, period=14):
