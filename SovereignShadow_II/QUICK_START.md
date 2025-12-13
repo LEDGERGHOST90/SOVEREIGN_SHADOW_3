@@ -1,4 +1,4 @@
-# Sovereign II - Quick Start Guide
+# Sovereign Shadow II - Quick Start Guide
 
 ## 🚀 Agent 0 Mission: COMPLETE ✅
 
@@ -22,13 +22,13 @@ All core infrastructure has been built and is ready for Agents 1-9.
 ## Quick Test (Without API Keys)
 
 ```bash
-cd Sovereign_II
+cd SovereignShadow_II
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Test imports (no API keys needed)
-python -c "from core import SovereignOrchestrator; print('✅ Imports successful')"
+python -c "from core import SovereignShadowOrchestrator; print('✅ Imports successful')"
 ```
 
 ## Next Steps
@@ -99,7 +99,7 @@ python main.py
 ## File Structure
 
 ```
-Sovereign_II/
+SovereignShadow_II/
 ├── core/                          # Core system components
 │   ├── exchange_connectors/      # Exchange APIs
 │   ├── intelligence/              # AI components

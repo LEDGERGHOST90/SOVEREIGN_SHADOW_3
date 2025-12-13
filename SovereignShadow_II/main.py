@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sovereign II - Main Entry Point
+Sovereign Shadow II - Main Entry Point
 Autonomous Trading System with Skills-Based AI Architecture
 """
 
@@ -10,14 +10,14 @@ import os
 import sys
 from pathlib import Path
 
-from core import SovereignOrchestrator
+from core import SovereignShadowOrchestrator
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('logs/sovereign.log'),
+        logging.FileHandler('logs/sovereign_shadow.log'),
         logging.StreamHandler(sys.stdout)
     ]
 )
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 async def main():
     """Main entry point"""
     logger.info("=" * 60)
-    logger.info("SOVEREIGN II - AUTONOMOUS TRADING SYSTEM")
+    logger.info("SOVEREIGN SHADOW II - AUTONOMOUS TRADING SYSTEM")
     logger.info("=" * 60)
     
     # Check environment variables
@@ -50,7 +50,7 @@ async def main():
     Path('strategies/modularized').mkdir(parents=True, exist_ok=True)
     
     # Initialize orchestrator
-    orchestrator = SovereignOrchestrator(
+    orchestrator = SovereignShadowOrchestrator(
         db_path="data/performance.db",
         strategies_path="strategies/modularized",
         use_sandbox=use_sandbox
@@ -69,7 +69,7 @@ async def main():
         logger.error(f"Fatal error: {e}", exc_info=True)
     finally:
         await orchestrator.stop()
-        logger.info("Sovereign II shutdown complete")
+        logger.info("Sovereign Shadow II shutdown complete")
 
 
 if __name__ == "__main__":
