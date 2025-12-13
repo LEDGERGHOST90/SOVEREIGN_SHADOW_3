@@ -1,0 +1,15 @@
+{
+  "strategy_name": "CashAndCarryArbitrage",
+  "type": "arbitrage",
+  "suitable_regimes": ["trending_volatile"],
+  "timeframes": ["1d"],
+  "assets": ["BTC/USDT", "BTC-FUTURE"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["spot_close", "future_close"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

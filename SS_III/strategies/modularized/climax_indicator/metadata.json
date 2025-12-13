@@ -1,0 +1,15 @@
+{
+  "strategy_name": "ClimaxIndicator",
+  "type": "reversal",
+  "suitable_regimes": ["trending_volatile"],
+  "timeframes": ["15m", "1h"],
+  "assets": ["BTC/USDT", "ETH/USDT"],
+  "risk_per_trade": 0.015,
+  "max_position_size": 0.10,
+  "indicators_required": ["volume", "close", "high", "low"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

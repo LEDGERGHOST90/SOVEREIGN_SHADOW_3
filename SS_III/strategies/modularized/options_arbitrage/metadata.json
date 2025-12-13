@@ -1,0 +1,15 @@
+{
+  "strategy_name": "OptionsArbitrage",
+  "type": "arbitrage",
+  "suitable_regimes": ["trending_volatile", "choppy_volatile"],
+  "timeframes": ["tick"],
+  "assets": ["BTC-OPTIONS"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["options_chain"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

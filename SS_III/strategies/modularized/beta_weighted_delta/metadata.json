@@ -1,0 +1,15 @@
+{
+  "strategy_name": "BetaWeightedDelta",
+  "type": "portfolio_hedging",
+  "suitable_regimes": ["choppy_volatile"],
+  "timeframes": ["1d"],
+  "assets": ["BTC/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["beta", "portfolio_delta"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

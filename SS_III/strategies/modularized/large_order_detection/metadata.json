@@ -1,0 +1,15 @@
+{
+  "strategy_name": "LargeOrderDetection",
+  "type": "order_flow",
+  "suitable_regimes": ["trending_calm"],
+  "timeframes": ["tick"],
+  "assets": ["BTC/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["order_book"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

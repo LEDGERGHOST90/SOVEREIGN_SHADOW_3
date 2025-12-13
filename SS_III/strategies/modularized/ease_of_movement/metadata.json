@@ -1,0 +1,15 @@
+{
+  "strategy_name": "EaseOfMovement",
+  "type": "volume",
+  "suitable_regimes": ["trending_calm"],
+  "timeframes": ["4h", "1d"],
+  "assets": ["BTC/USDT", "ETH/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["volume", "high", "low"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

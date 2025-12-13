@@ -1,0 +1,15 @@
+{
+  "strategy_name": "PerpetualBasisTrade",
+  "type": "arbitrage",
+  "suitable_regimes": ["trending_volatile"],
+  "timeframes": ["1h"],
+  "assets": ["BTC/USDT", "BTC-PERP"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["spot_close", "perp_close"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

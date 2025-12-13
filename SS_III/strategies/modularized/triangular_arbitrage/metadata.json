@@ -1,0 +1,15 @@
+{
+  "strategy_name": "TriangularArbitrage",
+  "type": "arbitrage",
+  "suitable_regimes": ["choppy_volatile"],
+  "timeframes": ["tick"],
+  "assets": ["BTC/USDT", "ETH/BTC", "ETH/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["multi_asset_close"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

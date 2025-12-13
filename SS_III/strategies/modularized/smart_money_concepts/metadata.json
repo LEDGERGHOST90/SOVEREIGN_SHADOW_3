@@ -1,0 +1,15 @@
+{
+  "strategy_name": "SmartMoneyConceptsEntry",
+  "type": "smart_money",
+  "suitable_regimes": ["trending_calm"],
+  "timeframes": ["1h", "4h"],
+  "assets": ["BTC/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["complex"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

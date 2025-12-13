@@ -1,0 +1,6 @@
+class ElliottWaveImpulseExit:
+    def __init__(self):
+        self.name = "ew_impulse_exit"
+    
+    def generate_signal(self, df, entry_price):
+        return {'signal': 'HOLD', 'pnl': 0}

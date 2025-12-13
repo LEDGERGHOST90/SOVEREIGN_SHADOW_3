@@ -12,7 +12,8 @@
     - Intelligence: Regime Detector, Strategy Selector, Performance Tracker implemented.
     - Orchestrator: Master loop implemented.
 - **Agent 1**: ElderReversion strategy modularized and tested.
-- **Agent 3**: Strategies 21-30 modularized (Keltner, Donchian, PriceActionSwing, Candlestick, VolumeProfile, MarketProfile, OrderFlow, Delta, CVD, TimeAndSales).
+- **Agent 8**: Strategies 71-80 modularized (Pairs, Coint, TriArb, CrossExchange, Funding, Basis, CashCarry, Options, VolArb, Calendar).
+- **Agent 9 (Backtest)**: Backtest Engine implemented and verified.
 
 ## How to Run
 1. Install dependencies:
