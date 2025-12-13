@@ -1,0 +1,15 @@
+{
+  "strategy_name": "TrendFollowEMA",
+  "type": "trend_following",
+  "suitable_regimes": ["trending_bull"],
+  "timeframes": ["15m", "1h"],
+  "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.1,
+  "indicators_required": ["ema_20", "ema_50"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

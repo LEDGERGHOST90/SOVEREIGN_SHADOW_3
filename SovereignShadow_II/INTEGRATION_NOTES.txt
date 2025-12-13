@@ -1,0 +1,15 @@
+SovereignShadow_II integration notes
+
+- This package is intentionally isolated from legacy modules.
+- Exchange connectivity is via CCXT wrappers in `core/exchange_connectors/ccxt_connectors.py`.
+- Orchestrator defaults to FAKE data if no API keys are present.
+- PerformanceTracker uses SQLite at $SS2_DB_PATH (defaults to /workspace/SovereignShadow_II/state/performance.db).
+
+Environment safety gates (must be set for live orders):
+- ENV=production
+- ALLOW_LIVE_EXCHANGE=1
+
+Sandbox/FAKE defaults:
+- USE_SANDBOX=true
+- ENV=development
+- ALLOW_LIVE_EXCHANGE=0

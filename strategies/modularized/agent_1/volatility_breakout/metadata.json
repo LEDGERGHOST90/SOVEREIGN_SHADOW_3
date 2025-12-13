@@ -1,0 +1,15 @@
+{
+  "strategy_name": "VolatilityBreakout",
+  "type": "breakout",
+  "suitable_regimes": ["trending_bull", "choppy_volatile"],
+  "timeframes": ["15m", "1h"],
+  "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.1,
+  "indicators_required": ["atr_14", "ema_20"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}

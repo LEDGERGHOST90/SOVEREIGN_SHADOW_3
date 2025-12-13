@@ -1,0 +1,1 @@
+"""TrendFollowEMA strategy modules."""

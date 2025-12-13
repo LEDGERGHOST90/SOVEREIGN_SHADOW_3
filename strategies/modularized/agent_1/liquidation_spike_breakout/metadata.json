@@ -1,0 +1,15 @@
+{
+  "strategy_name": "LiquidationSpikeBreakout",
+  "type": "breakout",
+  "suitable_regimes": ["choppy_volatile"],
+  "timeframes": ["5m", "15m"],
+  "assets": ["BTC/USDT", "ETH/USDT", "SOL/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.08,
+  "indicators_required": ["volume", "atr_14", "rolling_high"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}
