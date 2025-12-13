@@ -1,0 +1,23 @@
+# INTEGRATION NOTES
+
+## Agent 0: System Architect
+- Core infrastructure is deployed.
+- `Orchestrator` is ready to cycle through regimes and strategies.
+- `CoinbaseAdvancedConnector` is implemented with sandbox support.
+- `PerformanceTracker` is initialized with SQLite.
+
+## Agent 1: Strategy Modularizer
+- Implemented `ElderReversion` and `DynamicCrossfire`.
+- Each strategy follows the strict Entry/Exit/Risk module pattern.
+- Metadata JSONs are included.
+
+## Agent 9: Backtest Engine
+- `BacktestEngine` is functional.
+- Supports dynamic loading of strategy modules.
+- Calculates Win Rate, Sharpe Ratio, Max Drawdown.
+- Verified with integration tests on dummy data.
+
+## Next Steps
+1. Agents 2-8 need to implement the remaining 70+ strategies following the `ElderReversion` template.
+2. `MarketRegimeDetector` logic should be refined with more robust indicators (ADX, Volatility thresholds).
+3. Connectors for other exchanges (OKX, Kraken) need to be implemented inheriting from `BaseExchangeConnector`.
