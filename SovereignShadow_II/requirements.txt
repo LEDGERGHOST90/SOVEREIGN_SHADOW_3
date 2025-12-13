@@ -1,0 +1,26 @@
+# Sovereign Shadow II - Core Dependencies
+
+# Core Framework
+python>=3.11
+
+# Exchange APIs
+ccxt>=4.1.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Async HTTP
+aiohttp>=3.8.0
+
+# Configuration
+python-dotenv>=1.0.0
+
+# Logging
+colorlog>=6.7.0
+
+# Date/Time
+python-dateutil>=2.8.2
+
+# Cryptography (for Coinbase JWT)
+cryptography>=41.0.0

@@ -1,0 +1,2 @@
+# This directory will contain modularized strategies from Agents 1-8
+# Each strategy should have: entry.py, exit.py, risk.py, metadata.json

@@ -1,0 +1,187 @@
+# INTEGRATION NOTES FOR AGENTS 1-9
+
+## Agent 0 (System Architect) - COMPLETE
+
+✅ Core infrastructure built:
+- Exchange connector framework (Coinbase implemented)
+- Performance Tracker (SQLite database)
+- Market Regime Detector
+- AI Strategy Selector
+- Master Orchestrator
+
+## Integration Points for Agents 1-9
+
+### For Agents 1-8 (Strategy Modularizers)
+
+**Strategy Structure Required:**
+```
+strategies/modularized/{strategy_name}/
+    ├── entry.py          # Entry signal module
+    ├── exit.py           # Exit signal module
+    ├── risk.py           # Risk management module
+    └── metadata.json     # Strategy metadata (REQUIRED)
+```
+
+**Entry Module Template:**
+```python
+class {StrategyName}Entry:
+    def __init__(self):
+        self.name = "{strategy_name}_entry"
+        self.indicators = ['indicator1', 'indicator2']
+    
+    def generate_signal(self, df):
+        """
+        Args:
+            df: DataFrame with columns: timestamp, open, high, low, close, volume
+        
+        Returns:
+            {
+                'signal': 'BUY' | 'NEUTRAL',
+                'confidence': 0-100,
+                'price': float,
+                'reasoning': str
+            }
+        """
+        # Implementation here
+        return {'signal': 'NEUTRAL', 'confidence': 0}
+```
+
+**Exit Module Template:**
+```python
+class {StrategyName}Exit:
+    def __init__(self):
+        self.name = "{strategy_name}_exit"
+    
+    def generate_signal(self, df, entry_price):
+        """
+        Args:
+            df: DataFrame with OHLCV data
+            entry_price: Entry price for position
+        
+        Returns:
+            {
+                'signal': 'SELL' | 'HOLD',
+                'reason': str,
+                'pnl': float (percent)
+            }
+        """
+        # Implementation here
+        return {'signal': 'HOLD', 'pnl': 0.0}
+```
+
+**Risk Module Template:**
+```python
+class {StrategyName}Risk:
+    def __init__(self):
+        self.max_position_size = 0.10  # 10% of portfolio
+        self.stop_loss_percent = 1.0
+        self.take_profit_percent = 2.0
+    
+    def calculate_position_size(self, portfolio_value, current_price, atr):
+        """
+        Returns:
+            {
+                'position_value_usd': float,
+                'quantity': float,
+                'stop_loss_price': float,
+                'take_profit_price': float
+            }
+        """
+        # Implementation here
+        pass
+```
+
+**Metadata JSON Template:**
+```json
+{
+  "strategy_name": "StrategyName",
+  "type": "mean_reversion" | "trend_following" | "breakout" | "arbitrage",
+  "suitable_regimes": ["choppy_volatile", "choppy_calm", "trending_up", "trending_down"],
+  "timeframes": ["15m", "1h"],
+  "assets": ["BTC/USDT", "ETH/USDT"],
+  "risk_per_trade": 0.01,
+  "max_position_size": 0.10,
+  "indicators_required": ["indicator1", "indicator2"],
+  "performance_history": {
+    "total_trades": 0,
+    "win_rate": 0,
+    "avg_pnl_percent": 0
+  }
+}
+```
+
+### For Agent 9 (Backtest Engine)
+
+**Backtest Engine Location:**
+```
+core/backtesting/backtest_engine.py
+```
+
+**Integration Points:**
+1. Load historical data from `data/historical/` directory
+2. Test all strategies from `strategies/modularized/`
+3. Write results to Performance Tracker database
+4. Generate performance reports in `backtest_results/`
+
+**Expected Output:**
+- Performance metrics for each strategy per regime
+- Top 10 strategies per regime ranking
+- CSV/JSON reports for analysis
+
+## Testing Integration
+
+**Test Strategy Loading:**
+```python
+from core.intelligence import AIStrategySelector
+from core.intelligence import PerformanceTracker
+
+tracker = PerformanceTracker("data/performance.db")
+selector = AIStrategySelector(tracker, "strategies/modularized")
+
+# Check available strategies
+strategies = selector.get_available_strategies()
+print(f"Available strategies: {strategies}")
+```
+
+**Test Regime Detection:**
+```python
+from core.intelligence import MarketRegimeDetector
+import pandas as pd
+
+detector = MarketRegimeDetector()
+# Load price data
+df = pd.read_csv("data/historical/BTC_USDT_15m.csv")
+regime = detector.detect_regime(df, timeframe='15m')
+print(f"Detected regime: {regime['regime']}")
+```
+
+**Test Strategy Selection:**
+```python
+selection = selector.select_strategy(
+    regime='choppy_volatile',
+    symbol='BTC/USDT',
+    timeframe='15m'
+)
+print(f"Selected: {selection['selected_strategy']}")
+```
+
+## File Locations
+
+- **Strategies**: `strategies/modularized/{strategy_name}/`
+- **Database**: `data/performance.db`
+- **Logs**: `logs/sovereign_shadow.log`
+- **Config**: `.env` file (copy from `.env.example`)
+
+## Next Steps
+
+1. **Agents 1-8**: Create modularized strategies following templates above
+2. **Agent 9**: Build backtest engine and test all strategies
+3. **Agent 0**: Run integration tests once strategies are ready
+4. **All**: Coordinate via this file and README.md
+
+## Questions?
+
+Refer to:
+- `README.md` for system overview
+- `core/orchestrator.py` for execution flow
+- `core/intelligence/strategy_selector.py` for selection logic
