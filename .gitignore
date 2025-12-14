@@ -49,6 +49,8 @@ ENV/
 # -----------------------------------------------------------------------------
 .vscode/
 .idea/
+.obsidian/
+.pytest_cache/
 *.swp
 *.swo
 *~
@@ -212,9 +214,29 @@ temp/
 # ✅ Clear all logs with sensitive data
 # ✅ No database URLs exposed
 # =============================================================================
+# -----------------------------------------------------------------------------
+# LEGACY/DUPLICATE DIRECTORIES - NEVER COMMIT
+# -----------------------------------------------------------------------------
 SOVEREIGN_SHADOW_3/
+ECO_SYSTEM_4/
+ECO_REPLIT*/
+REPLIT*/
+SovereignShadow_II/
+Sov.Shade*/
+salvage/
+strategySynthai/
+ladder_systems/
+ShadowCouncil/
+Brain/
+
+# Broken directory names
+*--LadderEngine--*
+
+# Zip files
+*.zip
 ECO_SYSTEM_4/exchanges/Sovereign-Shadow-3-DS-STAR-Platform.zip
 ECO_SYSTEM_4/Shadow_3--11.30.25.zip
-*.zip
+
+# Replit
 .config/replit/.semgrep/
 config/.env.unified
