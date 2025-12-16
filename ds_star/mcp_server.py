@@ -14,6 +14,8 @@ Tools:
 import json
 import sys
 import asyncio
+import os
+import requests
 from pathlib import Path
 from typing import Any
 
@@ -89,6 +91,16 @@ class DSStarMCPServer:
                     "description": {"type": "string", "description": "Description of analysis to perform"}
                 },
                 "handler": self._handle_transparent
+            },
+            "get_replit_sync": {
+                "description": "Fetch live portfolio from Shadow.AI Replit - all exchanges, AAVE position, balances",
+                "parameters": {},
+                "handler": self._handle_replit_sync
+            },
+            "get_brain_state": {
+                "description": "Read current BRAIN.json state - portfolio, wallets, mission, agents",
+                "parameters": {},
+                "handler": self._handle_brain_state
             }
         }
 
@@ -172,6 +184,25 @@ class DSStarMCPServer:
         result = self.transparent.analyze_with_context(context)
 
         return self.transparent.format_for_ui(result)
+
+    async def _handle_replit_sync(self, args: dict) -> dict:
+        """Handle get_replit_sync tool - fetch live data from Shadow.AI Replit"""
+        replit_url = os.getenv("REPLIT_API_URL", "https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev")
+        try:
+            response = requests.get(f"{replit_url}/api/brain/sync", timeout=10)
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as e:
+            return {"error": f"Failed to fetch from Replit: {str(e)}"}
+
+    async def _handle_brain_state(self, args: dict) -> dict:
+        """Handle get_brain_state tool - read local BRAIN.json"""
+        brain_path = Path(__file__).parent.parent / "BRAIN.json"
+        try:
+            with open(brain_path) as f:
+                return json.load(f)
+        except Exception as e:
+            return {"error": f"Failed to read BRAIN.json: {str(e)}"}
 
     def run_stdio(self):
         """Run MCP server over stdio"""

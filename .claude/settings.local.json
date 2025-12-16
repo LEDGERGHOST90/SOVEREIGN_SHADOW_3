@@ -13,7 +13,16 @@
       "Bash(ls:*)",
       "Bash(pip3 show:*)",
       "Bash(# Run once now and check last airdrop /Volumes/LegacySafe/SS_III/bin/scrngrab.sh # Check SCRNGRAB folder mkdir -p ~/Desktop/SCRNGRAB echo \"\"=== SCRNGRAB Contents (latest first) ===\"\" ls -lt ~/Desktop/SCRNGRAB/)",
-      "Bash(git check-ignore:*)"
+      "Bash(git check-ignore:*)",
+      "Bash(pkill:*)",
+      "Bash(pkill -f \"Tailscale status\")",
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+      "Bash(curl:*)",
+      "Bash(done)",
+      "Bash(brew install:*)",
+      "Bash(chmod:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
