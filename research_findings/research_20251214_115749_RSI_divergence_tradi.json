@@ -1,0 +1,23 @@
+{
+  "topic": "RSI divergence trading",
+  "timestamp": "2025-12-14T11:57:49.454793",
+  "findings": {
+    "topic": "RSI divergence trading",
+    "potential_strategies": [
+      {
+        "name": "RSI Divergence",
+        "entry": [
+          "RSI < 30 with price higher low"
+        ],
+        "exit": [
+          "RSI > 70 or 5% profit"
+        ],
+        "timeframe": "4h"
+      }
+    ],
+    "key_indicators": [
+      "RSI"
+    ],
+    "notes": "Research pending for: RSI divergence trading"
+  }
+}

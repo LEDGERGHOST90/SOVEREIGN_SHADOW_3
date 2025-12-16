@@ -1,0 +1,25 @@
+{
+  "recording": {
+    "id": "test_001",
+    "title": "BTC Market Analysis - December 2025"
+  },
+  "timestamp": "2025-12-15T23:30:00Z",
+  "analysis": {
+    "ticker": "BTC",
+    "sentiment": {
+      "direction": "bullish",
+      "score": 0.75
+    },
+    "signals": [
+      "Price holding above $100k support",
+      "Volume increasing on breakout",
+      "RSI showing momentum"
+    ],
+    "key_insights": [
+      "Institutional accumulation continuing",
+      "ETF inflows remain strong",
+      "Next resistance at $110k"
+    ],
+    "summary": "Bitcoin showing bullish momentum with strong support at $100k. Consider accumulating on dips."
+  }
+}

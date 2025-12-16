@@ -1,0 +1,23 @@
+{
+  "topic": "volume profile trading",
+  "timestamp": "2025-12-14T11:57:50.959549",
+  "findings": {
+    "topic": "volume profile trading",
+    "potential_strategies": [
+      {
+        "name": "Volume Breakout",
+        "entry": [
+          "Price breaks above POC with 2x avg volume"
+        ],
+        "exit": [
+          "Price returns to POC"
+        ],
+        "timeframe": "1h"
+      }
+    ],
+    "key_indicators": [
+      "Volume Profile"
+    ],
+    "notes": "Research pending for: volume profile trading"
+  }
+}

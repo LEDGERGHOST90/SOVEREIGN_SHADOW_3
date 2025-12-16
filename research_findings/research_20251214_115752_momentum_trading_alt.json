@@ -1,0 +1,23 @@
+{
+  "topic": "momentum trading altcoins",
+  "timestamp": "2025-12-14T11:57:52.964824",
+  "findings": {
+    "topic": "momentum trading altcoins",
+    "potential_strategies": [
+      {
+        "name": "Momentum Surge",
+        "entry": [
+          "Price > 20 EMA, RSI > 50, Volume spike"
+        ],
+        "exit": [
+          "RSI > 80 or trailing stop 3%"
+        ],
+        "timeframe": "15m"
+      }
+    ],
+    "key_indicators": [
+      "Momentum"
+    ],
+    "notes": "Research pending for: momentum trading altcoins"
+  }
+}

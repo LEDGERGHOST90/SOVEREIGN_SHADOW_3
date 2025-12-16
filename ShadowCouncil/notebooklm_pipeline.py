@@ -43,7 +43,7 @@ class NotebookLMPipeline:
         self.output_dir = PROJECT_ROOT / "daily_reports" / "notebooklm"
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        self.character_guide = PROJECT_ROOT / "ShadowCouncil" / "CRYPTODEX_ASSET_PODCAST.md"
+        self.character_guide = PROJECT_ROOT / "ShadowCouncil" / "characters" / "CRYPTODEX_ASSET_PODCAST.md"
         self.briefing_generator = BriefingGenerator()
 
     def refresh_live_data(self) -> bool:

@@ -1,0 +1,24 @@
+{
+  "topic": "swing trading cryptocurrency",
+  "timestamp": "2025-12-14T11:57:51.962192",
+  "findings": {
+    "topic": "swing trading cryptocurrency",
+    "potential_strategies": [
+      {
+        "name": "Swing Support Bounce",
+        "entry": [
+          "Price touches major support with bullish candle"
+        ],
+        "exit": [
+          "Price reaches resistance or -3% stop"
+        ],
+        "timeframe": "4h"
+      }
+    ],
+    "key_indicators": [
+      "Support/Resistance",
+      "Fibonacci"
+    ],
+    "notes": "Research pending for: swing trading cryptocurrency"
+  }
+}

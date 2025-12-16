@@ -7,7 +7,13 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd Google API key + session notes\n\n- Added GOOGLE_API_KEY to .env.CORRECTED (gitignored)\n- Updated Claude Code permissions\n- Added 2025-12-09 gold extraction session notes\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git rebase:*)",
       "Bash(wc:*)",
-      "Bash(du:*)"
+      "Bash(du:*)",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(pip3 show:*)",
+      "Bash(# Run once now and check last airdrop /Volumes/LegacySafe/SS_III/bin/scrngrab.sh # Check SCRNGRAB folder mkdir -p ~/Desktop/SCRNGRAB echo \"\"=== SCRNGRAB Contents (latest first) ===\"\" ls -lt ~/Desktop/SCRNGRAB/)",
+      "Bash(git check-ignore:*)"
     ],
     "deny": [],
     "ask": []
