@@ -1,503 +1,115 @@
 {
-  "version": "1.2",
-  "last_updated": "2025-12-02T08:25:00.000000",
-  "system_name": "LegacyLoop",
+  "version": "3.0",
+  "last_updated": "2025-12-15T20:46:48.062647",
+  "system_location": "/Volumes/LegacySafe/SS_III/",
   "portfolio": {
     "net_worth": 5433.87,
-    "snapshot_time": "2025-12-02T08:25:00.000000",
+    "snapshot_time": "2025-12-06",
     "ledger": {
       "total": 5715.91,
-      "last_refresh": "2025-12-01T22:41:00.811626",
-      "source": "blockchain_apis",
-      "BTC": 0.01653069,
-      "BTC_usd": 1508.32,
-      "ETH": 0.004799448228797688,
-      "ETH_usd": 14.56,
-      "wstETH": 0.84,
-      "wstETH_usd": 3040.25,
-      "USDC": 53.632606,
-      "USDC_usd": 53.61,
-      "XRP": 497.364772,
-      "XRP_usd": 1099.17,
-      "SOL": 0.000910885,
-      "SOL_usd": 0.0
+      "AAVE_wstETH": 3040.25,
+      "BTC": 1508.32,
+      "XRP": 1099.17,
+      "USDC": 53.61,
+      "ETH": 14.56
     },
     "exchanges": {
-      "total": 78.9,
-      "snapshot_source": "API",
-      "snapshot_time": "2025-12-02T08:25:00Z",
-      "kraken": {
-        "balances": {
-          "PEPE": 41666.66,
-          "SOL": 0.00592334,
-          "USDG": 1.26,
-          "ETH": 0.00036442,
-          "DOGE": 2.52666899
-        },
-        "total_usd": 3.54
-      },
-      "binance_us": {
-        "balances": {
-          "USDC": 73.16,
-          "RENDER": 0.0094344
-        },
-        "total_usd": 73.17
-      },
-      "coinbase": {
-        "balances": {
-          "ETH": 6.61e-06,
-          "USDC": 2.19
-        },
-        "total_usd": 2.19
-      }
+      "total": 595.76,
+      "kraken": 2.65,
+      "binance_us": 73.16,
+      "coinbase": 519.95
     },
     "aave": {
-      "collateral": 3040.25,
-      "debt": 360.94,
-      "health_factor": 3.71,
-      "net": 2679.31,
-      "source": "blockchain_api",
-      "note": "Reduced from $660 via $300 manual repayment on Nov 30"
-    },
-    "allocation": {
-      "current": {
-        "eth": 53.4,
-        "btc": 26.4,
-        "sol": 0.0,
-        "xrp": 19.2
-      },
-      "target": {
-        "btc": 40,
-        "eth": 30,
-        "sol": 20,
-        "xrp": 10
-      }
-    },
-    "cost_basis": {
-      "xrp": 2.32
-    },
-    "exchange_total": 78.9,
-    "aave_debt": 360.94,
-    "ledger_total": 5715.91,
-    "ledger_net": 5354.97
-  },
-  "prices": {
-    "BTC": 91458,
-    "ETH": 3128,
-    "XRP": 2.09,
-    "SOL": 135,
-    "ZEC": 347,
-    "wstETH": 4350,
-    "USDC": 1.0,
-    "updated": "2025-12-07T13:25:00.000000"
-  },
-  "trading": {
-    "journal_summary": {
-      "total_trades": 15,
-      "wins": 6,
-      "losses": 1,
-      "win_rate": 85.7,
-      "total_pnl": 56.73,
-      "starting_capital": 500.0,
-      "current_capital": 471.89,
-      "drawdown_pct": -5.6
-    },
-    "last_trade": {
-      "id": "T0001",
-      "symbol": "ZEC/USDC",
-      "type": "long",
-      "entry": 452.85,
-      "exit": 436.0,
-      "size": 1.08202526,
-      "pnl": -18.11,
-      "date": "2025-11-30",
-      "notes": "Stop loss executed by Guardian at $430. Saved $34 vs holding to $404.",
-      "lesson": "Entry was premature - lacked confirmation. Defense was correct."
-    },
-    "psychology": {
-      "losses_today": 0,
-      "trading_allowed": true
-    },
-    "strategies": {
-      "threshold_rebalancer_15pct": {
-        "status": "incubating",
-        "trades": 0
-      },
-      "rl_dqn_momentum": {
-        "status": "incubating",
-        "trades": 0
-      },
-      "btc_eth_pair_trading": {
-        "status": "incubating",
-        "trades": 0
-      },
-      "volatility_breakout_dip": {
-        "status": "incubating",
-        "trades": 0
-      },
-      "fear_greed_contrarian": {
-        "status": "incubating",
-        "trades": 0
-      }
+      "collateral": 3211.76,
+      "debt": 662.23,
+      "health_factor": 3.93
     }
   },
-  "session": {
-    "date": "2025-12-02",
-    "accomplishments": [
-      "Created ShadowNinja.app desktop launcher",
-      "Designed modern S3 icon (crimson S + silver 3)",
-      "Implemented HD quality icon rendering (2048\u21921024px)",
-      "Added multi-layer drop shadow for floating effect",
-      "Built debt_destroyer.py mission dashboard",
-      "Deployed launcher to Desktop"
-    ],
-    "priorities": [
-      "Paper trade setup (Dec 1-7)",
-      "Signal generation via GIO",
-      "Track paper P&L in dashboard",
-      "Complete DEBT_DESTROYER mission"
-    ],
-    "next": "Begin paper trading phase with Debt Destroyer"
+  "wallets": {
+    "eth": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
+    "btc": "bc1qlpkhy9lzh6qwjhc0muhlrzqf3vfrhgezmjp0kx",
+    "xrp": "rGvSX7BMyuzkghXbaJqLHk529pYE2j5WR3",
+    "sol": "RovUJaZwiZ1X36sEW7TBmhie5unzPmxtMg1ATwFtGVk"
   },
-  "interaction_style": {
-    "mode": "voice_interactive",
-    "voice_assistant": "Aurora",
-    "voice_id": "cgSgspJ2msm6clMCkdW9",
-    "elevenlabs_enabled": true,
-    "speak_responses": true,
-    "alert_sounds": {
-      "primary": "vegas_trap.mp3",
-      "voice": "shadow_alert.mp3"
+  "credentials_location": "ECO_SYSTEM_4/.env",
+  "systems": {
+    "ECO_SYSTEM_4": {
+      "location": "ECO_SYSTEM_4/",
+      "entry_point": "ECO_SYSTEM_4/main.py",
+      "purpose": "6-stage autonomous trading pipeline",
+      "files": 4878,
+      "skill": ".claude/skills/eco-system/SKILL.md"
     },
-    "push_notifications": {
-      "enabled": true,
-      "service": "ntfy.sh",
-      "topic": "sovereignshadow_dc4d2fa1"
-    }
-  },
-  "december_campaign": {
-    "week": 1,
-    "phase": "paper_trading",
-    "capital": 78.9,
-    "capital_source": [
-      "coinbase",
-      "binance_us",
-      "kraken"
-    ],
-    "capital_breakdown": {
-      "coinbase": 2.19,
-      "binance_us": 73.17,
-      "kraken": 3.54
-    },
-    "rules": {
-      "max_position": 50,
-      "stop_loss": "3%",
-      "take_profit": "5%",
-      "go_live_threshold": "60% win rate"
-    },
-    "trades": 0,
-    "wins": 0
-  },
-  "active_mission": {
-    "id": "MISSION_001",
-    "codename": "DEBT_DESTROYER",
-    "objective": "Paper trade to acquire profit for AAVE debt repayment",
-    "target_profit": 661.46,
-    "current_profit": -3.77,
-    "progress_pct": -0.6,
-    "status": "active",
-    "phase": "paper_trading",
-    "agents": [
-      "AURORA",
-      "GIO"
-    ],
-    "gateway_unlocks": {
-      "description": "Success unlocks full automation - heavy artillery deployment",
-      "on_success": [
-        "LIVE_TRADING_ENABLED",
-        "AUTO_SIGNAL_EXECUTION",
-        "24/7_SWARM_OPERATIONS",
-        "PROFIT_SIPHON_TO_COMMANDER"
-      ],
-      "requirement": {
-        "paper_profit_target": 661.46,
-        "min_win_rate": 60,
-        "min_trades": 10
-      }
-    },
-    "profit_destination": "COMMANDER_ONLY",
-    "mission_file": "data/missions/mission_001_aave_debt.json",
-    "launcher": "ShadowNinja.app"
-  },
-  "config": {
-    "apis": {
-      "coinbase": "ACTIVE",
-      "kraken": "ACTIVE",
-      "binance_us": "ACTIVE (IPv4)",
-      "okx": "DISABLED",
-      "ledger": "MANUAL"
-    },
-    "wallets": {
-      "cold_storage_over_50": {
-        "BTC": {
-          "address": "HD_WALLET_MULTI_ADDRESS",
-          "balance": 0.01653069,
-          "usd": 1508.32,
-          "source": "blockchain_api"
-        },
-        "USDC": {
-          "address": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
-          "balance": 53.632606,
-          "usd": 53.63,
-          "source": "blockchain_api"
-        },
-        "XRP": {
-          "address": "rGvSX7BMyuzkghXbaJqLHk529pYE2j5WR3",
-          "balance": 497.364772,
-          "usd": 1099.17,
-          "source": "blockchain_api"
-        }
-      },
-      "eth": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
-      "btc": "bc1qlpkhy9lzh6qwjhc0muhlrzqf3vfrhgezmjp0kx",
-      "xrp": "rGvSX7BMyuzkghXbaJqLHk529pYE2j5WR3",
-      "sol": "RovUJaZwiZ1X36sEW7TBmhie5unzPmxtMg1ATwFtGVk",
-      "ltc": "ltc1qdsjynq5gm2d8k3s3498ll8mz7ru7lqwwq5qypy",
-      "sui": "0xc2e0b018e0bbe4f6d925bbf8b9a3626a19387462ab8eff0b99a797d1fb50d371"
-    },
-    "mcp_servers": {
-      "shadow-sdk": "shadow_sdk/mcp_server.py",
-      "exchange-manager": "shadow_sdk/mcp_exchange_server.py",
-      "ds-star": "ds_star/mcp_server.py"
-    }
-  },
-  "agents": {
-    "shade_agent": {
-      "alias": "SHADE//AGENT",
-      "path": "agents/shade_agent.py",
-      "role": "strategy_enforcement"
-    },
-    "psychology_tracker": {
-      "alias": "MIND//LOCK",
-      "path": "agents/psychology_tracker.py",
-      "role": "emotion_monitoring"
-    },
-    "trade_journal": {
-      "alias": "LEDGER//ECHO",
-      "path": "agents/trade_journal.py",
-      "role": "trade_logging"
-    },
-    "portfolio_rebalancer": {
-      "path": "agents/portfolio_rebalancer.py",
-      "role": "rebalancing"
-    },
-    "rl_agent": {
-      "path": "agents/rl_rebalancing_agent.py",
-      "role": "ml_recommendations"
-    }
-  },
-  "ai_services": {
-    "gemini": {
-      "status": "active",
-      "model": "gemini-2.5-flash",
-      "alias": "ShadowMind",
-      "path": "shadow_sdk/gemini.py"
-    }
-  },
-  "ai_council": {
-    "established": "2025-11-29",
-    "members": {
-      "AURORA": {
-        "powered_by": "Claude (Anthropic)",
-        "role": "The Executor",
-        "responsibilities": [
-          "Trade execution",
-          "Signal generation",
-          "Position management",
-          "Risk calculations",
-          "Voice/notification alerts",
-          "Code implementation"
-        ],
-        "stack": "neural_hub/ (FastAPI + React)",
-        "interface": "Cursor Terminal / Claude Code CLI",
-        "status": "operational"
-      },
-      "GIO": {
-        "powered_by": "Gemini (Google)",
-        "full_name": "Google Interpreting Operator",
-        "role": "The Researcher",
-        "responsibilities": [
-          "Market analysis",
-          "Sentiment tracking",
-          "Pattern recognition",
-          "Strategy code generation",
-          "Research synthesis"
-        ],
-        "stack": "strategySynthai/ (TypeScript + React)",
-        "interface": "Google AI Studio / Sovereign Command",
-        "status": "operational"
-      },
-      "ARCHITECT_PRIME": {
-        "powered_by": "GPT (OpenAI)",
-        "role": "The Integrator",
-        "responsibilities": [
-          "Cross-agent coherence",
-          "System architecture design",
-          "Workflow orchestration",
-          "Inter-agent communication standards",
-          "Blueprint and config generation",
-          "Ecosystem unification"
-        ],
-        "stack": "ChatGPT floating interface",
-        "interface": "ChatGPT Desktop / Web",
-        "status": "operational"
-      }
-    },
-    "collaboration_protocol": [
-      "GIO scans market conditions daily",
-      "GIO flags high-conviction setups to AURORA",
-      "AURORA generates technical signals",
-      "AURORA executes if signal confidence > 70%",
-      "Both AIs log to shared trade journal"
-    ],
-    "unified_recommendation": {
-      "strategy": "Option C: Partial Repay + Swing Trade",
-      "details": "Repaid $300 debt (Nov 30), keep remaining for swing trading",
-      "rationale": [
-        "Immediately reduced debt bleed by 45%",
-        "Maintains capital for proven swing strategy",
-        "Balances risk management with growth potential",
-        "DEBT_DESTROYER mission active"
-      ]
-    }
-  },
-  "projects": {
-    "shadow_ninja": {
-      "status": "operational",
-      "path": "ShadowNinja.app/",
-      "description": "Desktop launcher for DEBT_DESTROYER mission",
-      "icon": {
-        "design": "Modern S3 monogram",
-        "colors": {
-          "S": "Crimson red with gradient",
-          "3": "Silver/white with gradient"
-        },
-        "background": "Dark gradient with floating shadow",
-        "quality": "HD (2048px \u2192 1024px LANCZOS)"
-      },
-      "locations": [
-        "~/Desktop/ShadowNinja.app",
-        "/Volumes/LegacySafe/SOVEREIGN_SHADOW_3/ShadowNinja.app"
-      ]
-    },
-    "shadow_council": {
-      "status": "operational",
-      "path": "ShadowCouncil/",
-      "description": "Personified decision framework for trading psychology"
-    },
-    "ds_star": {
-      "status": "operational",
-      "path": "ds_star/",
-      "description": "Decision Support - Strategic Trading Analysis & Research",
+    "core": {
+      "location": "core/",
+      "files": 151,
+      "subdirectories": 30,
       "modules": {
-        "synoptic_core": "Smart Asset Score (0-100)",
-        "architect_forge": "NL \u2192 Strategy code builder",
-        "oracle_interface": "NL \u2192 Charts and metrics",
-        "gatekeeper": "Data normalization (Sovereign Standard)",
-        "transparent_analyst": "Step-by-step reasoning"
-      },
-      "mcp_server": "ds_star/mcp_server.py"
+        "agents": "core/agents/ - 12 trading agents",
+        "banking": "core/banking/ - 50 wallet/wealth modules",
+        "autonomous": "core/autonomous/ - 8 24/7 loops",
+        "swarm": "core/swarm/ - 11 swarm agents",
+        "ai": "core/ai/ - 5 AI integration modules"
+      }
+    },
+    "AAVE_system": {
+      "location": "AAVE_system/",
+      "files": 12,
+      "purpose": "DeFi ladder, siphon, profit tracking",
+      "skill": ".claude/skills/aave-system/SKILL.md"
     },
     "meme_machine": {
-      "status": "operational",
-      "path": "meme_machine/",
-      "features": [
-        "dexscreener",
-        "breakout_scoring",
-        "smart_money",
-        "pumpfun"
-      ]
+      "location": "meme_machine/",
+      "files": 12,
+      "purpose": "Token scanning, whale tracking",
+      "skill": ".claude/skills/meme-machine/SKILL.md"
     },
-    "strategy_scout": {
-      "status": "operational",
-      "url": "https://sovereignnshadowii.abacusai.app",
-      "platform": "AbacusAI"
-    }
-  },
-  "services": {
+    "ds_star": {
+      "location": "ds_star/",
+      "files": 15,
+      "purpose": "Analysis tools, strategy builder",
+      "skill": ".claude/skills/ds-star/SKILL.md"
+    },
+    "agents": {
+      "location": "agents/",
+      "files": 15,
+      "purpose": "Specialized trading agents"
+    },
     "neural_hub": {
-      "status": "operational",
-      "port": 8000
+      "location": "neural_hub/",
+      "files": 6,
+      "purpose": "Gemini AI integration"
     },
-    "market_ticker": {
-      "status": "operational",
-      "script": "bin/market_ticker.py"
+    "exchanges": {
+      "location": "exchanges/",
+      "files": 8,
+      "purpose": "Exchange connectors"
     },
-    "smart_signals": {
-      "status": "operational",
-      "script": "bin/smart_signals.py"
-    },
-    "trading_swarm": {
-      "status": "operational",
-      "script": "bin/trading_swarm.py"
-    },
-    "aurora_alerts": {
-      "status": "operational",
-      "script": "bin/aurora_alerts.py"
-    },
-    "debt_destroyer": {
-      "status": "operational",
-      "script": "bin/debt_destroyer.py",
-      "launcher": "ShadowNinja.app"
+    "web_api": {
+      "location": "web_api/",
+      "entry_point": "web_api/app.py",
+      "files": 4,
+      "purpose": "Flask REST API"
     }
   },
-  "council_motions": [
-    {
-      "id": "M20251202082500",
-      "source": "AURORA",
-      "type": "status_update",
-      "content": "ShadowNinja.app launcher deployed with modern S3 icon. DEBT_DESTROYER mission dashboard operational. Ready for paper trading phase.",
-      "confidence": 100,
-      "data": {
-        "launcher_path": "~/Desktop/ShadowNinja.app",
-        "icon_design": "Modern S3 monogram (crimson S + silver 3)",
-        "features": [
-          "HD quality icon (2048\u21921024px)",
-          "Floating drop shadow effect",
-          "Dark gradient background",
-          "Top gloss polish"
-        ]
-      },
-      "timestamp": "2025-12-02T08:25:00.000000",
-      "status": "completed",
-      "votes": []
-    }
-  ],
-  "last_session": "2025-12-02",
-  "persistence": {
-    "launch_agents": {
-      "com.sovereign.neuralhub": {
-        "path": "~/Library/LaunchAgents/com.sovereign.neuralhub.plist",
-        "runs": "Neural Hub API on port 8000",
-        "auto_start": true,
-        "keep_alive": true
-      },
-      "com.sovereign.aurora": {
-        "path": "~/Library/LaunchAgents/com.sovereign.aurora.plist",
-        "runs": "Aurora Alert System (24/7 monitoring)",
-        "auto_start": true,
-        "keep_alive": true
-      }
-    },
-    "resume_command": "Read BRAIN.json and continue from last session",
-    "status": "ACTIVE - Services persist across reboots"
+  "apis": {
+    "coinbase": "ACTIVE",
+    "kraken": "ACTIVE",
+    "binance_us": "ACTIVE",
+    "ledger": "MANUAL",
+    "anthropic": "ACTIVE",
+    "google_gemini": "ACTIVE",
+    "elevenlabs": "ACTIVE"
   },
-  "next_session_todos": [
-    "Run sovereign_workflow.py --signals for morning scan",
-    "Start aurora_alerts.py --watch for 24/7 monitoring",
-    "Open market_ticker.py for live heat map",
-    "Begin paper trading with smart signals",
-    "Launch ShadowNinja.app for DEBT_DESTROYER dashboard",
-    "Monitor Fear & Greed for entry opportunities"
-  ]
+  "current_goal": "Test trading automations with $500 Coinbase deposit",
+  "agents": {
+    "swarm_agent": {
+      "status": "idle",
+      "last_run": "2025-12-13T14:39:37.845973"
+    },
+    "risk_agent": {
+      "status": "idle",
+      "last_run": "2025-12-15T20:46:48.062640"
+    }
+  }
 }
