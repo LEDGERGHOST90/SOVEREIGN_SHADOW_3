@@ -1,0 +1,5 @@
+/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/test/__init__.py:8: FutureWarning: The argument 'infer_datetime_format' is deprecated and will be removed in a future version. A strict version of it is now the default, see https://pandas.pydata.org/pdeps/0004-consistent-to-datetime-parsing.html. You can safely remove this argument.
+  return pd.read_csv(join(dirname(__file__), filename),
+/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/test/__init__.py:8: FutureWarning: The argument 'infer_datetime_format' is deprecated and will be removed in a future version. A strict version of it is now the default, see https://pandas.pydata.org/pdeps/0004-consistent-to-datetime-parsing.html. You can safely remove this argument.
+  return pd.read_csv(join(dirname(__file__), filename),
+

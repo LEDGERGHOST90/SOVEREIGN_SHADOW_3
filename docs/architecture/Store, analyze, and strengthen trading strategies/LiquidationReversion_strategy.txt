@@ -1,0 +1,33 @@
+STRATEGY_NAME: LiquidationReversion  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Counter-Trend Focus**: The strategy aims to capitalize on mean-reversion opportunities when price approaches detected liquidation clusters, indicating potential exhaustion in the prevailing trend.  
+2. **Order Book Delta Imbalances**: Liquidation clusters are identified via order book delta imbalances, highlighting areas where forced liquidations may occur, creating potential reversal zones.  
+3. **Bollinger Bandwidth Filter**: Trades are only taken when the 1-hour Bollinger Bandwidth is below its 10th percentile, indicating extremely low volatility and potential compression before a reversal.  
+4. **Keltner Channel Exit**: Positions are exited on volatility expansion signals, specifically when price breaks out of the Keltner Channel, suggesting the end of the mean-reversion phase.  
+
+**Entry Rules:**  
+1. **Liquidation Cluster Detection**: Identify zones where order book delta imbalances suggest high liquidation activity (e.g., large bid/ask imbalances or clustered stop orders).  
+2. **Bollinger Bandwidth Confirmation**: Ensure the 1-hour Bollinger Bandwidth is below its 10th percentile (historically calculated) to confirm low volatility and potential reversal conditions.  
+3. **Price Proximity**: Enter a counter-trend position (long or short) when price approaches the detected liquidation cluster zone.  
+
+**Exit Rules:**  
+1. **Keltner Channel Break**: Exit the trade when price breaks out of the Keltner Channel (upper band for short trades, lower band for long trades), signaling volatility expansion and potential trend continuation.  
+2. **Stop-Loss Placement**: Use a tight stop-loss just beyond the liquidation cluster zone to limit downside if the reversal fails.  
+
+**Risk Management:**  
+1. **Position Sizing**: Risk no more than 1-2% of capital per trade, given the counter-trend nature of the strategy.  
+2. **Stop-Loss**: Place stops beyond the liquidation cluster to avoid being caught in false reversals.  
+3. **Volatility Filter**: Avoid trading if Bollinger Bandwidth is not in the bottom 10th percentile, ensuring only high-probability setups are taken.  
+
+**Required Indicators:**  
+1. **Order Book Delta Analysis**: To detect liquidation clusters (e.g., cumulative delta or bid/ask volume imbalances).  
+2. **Bollinger Bands (1-hour)**: Specifically, the Bandwidth indicator (BB width = (Upper Band - Lower Band) / Middle Band).  
+3. **Keltner Channel**: For volatility-based exits (typically using a 20-period ATR and 20-period EMA).  
+
+**Additional Notes:**  
+- This strategy performs best in ranging or consolidating markets where liquidation clusters are more likely to trigger reversals.  
+- Avoid using it during strong trending phases unless Bollinger Bandwidth is extremely compressed.  
+- Backtest the 10th percentile threshold for Bollinger Bandwidth to ensure it aligns with the asset’s historical volatility characteristics.

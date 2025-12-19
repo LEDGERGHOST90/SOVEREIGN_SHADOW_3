@@ -1,0 +1,36 @@
+STRATEGY_NAME: DeltaClusterBreakout  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Liquidation Cluster Identification:** The strategy focuses on detecting liquidity clusters in the order book, specifically looking for delta imbalances (buy/sell pressure discrepancies) that indicate potential breakout zones.  
+2. **Volatility Contraction Filter:** Trades are only considered during periods of low volatility (contraction), as this often precedes explosive moves when liquidity is taken.  
+3. **High-Volume Node Confirmation:** Entry requires price rejection from a high-volume node (a price level with significant historical or current trading activity), confirming the validity of the breakout.  
+4. **Dynamic Trailing Stops:** Exits are managed using a trailing stop based on the normalized Average True Range (ATR), adjusting for current market conditions to lock in profits while allowing for trend continuation.  
+
+**Entry Rules:**  
+- **Signal Generation:** Wait for a delta imbalance in the order book (e.g., large buy/sell orders absorbed) during a volatility contraction phase (e.g., Bollinger Band squeeze or low ATR).  
+- **Confirmation:** Price must reject a high-volume node (e.g., VWAP, POC from Volume Profile, or a significant order block) with strong volume.  
+- **Entry Trigger:** Enter on a breakout candle closing beyond the high-volume node, preferably with increasing delta or volume confirmation.  
+
+**Exit Rules:**  
+- **Trailing Stop:** Use a dynamic trailing stop based on a multiple of the normalized ATR (e.g., 1.5x ATR). Adjust the stop as price moves in favor of the trade.  
+- **Profit Targets:** Optional partial exits at key resistance/support levels or Fibonacci extensions, but the primary exit mechanism is the trailing stop.  
+
+**Risk Management:**  
+- **Position Sizing:** Risk no more than 1-2% of capital per trade.  
+- **Stop Loss:** Initial stop placed below the high-volume node (for long) or above it (for short), with a buffer (e.g., 0.5x ATR) to avoid premature stops.  
+- **Volatility Adjustment:** Reduce position size or avoid trades if ATR exceeds a threshold, indicating unstable conditions.  
+
+**Required Indicators/Tools:**  
+1. **Order Book Delta Imbalance:** Tools like footprint charts or delta-based indicators to spot liquidity clusters.  
+2. **Volume Profile/VWAP:** To identify high-volume nodes and significant price levels.  
+3. **ATR (Average True Range):** For volatility contraction detection and trailing stop calculations.  
+4. **Bollinger Bands or Keltner Channels (Optional):** To confirm volatility contraction phases.  
+
+**Unique Aspects:**  
+- Combines order flow (delta imbalances) with volume-based price action for high-probability breakouts.  
+- Dynamic trailing stops adapt to market volatility, optimizing risk-reward.  
+- Focuses on "liquidity grabs" during low volatility, a niche often missed by traditional breakout systems.  
+
+**Note:** This strategy performs best in markets with clear order book transparency (e.g., futures, crypto) and requires real-time data feeds for delta analysis. Backtest with tick data for accuracy.

@@ -1,0 +1,63 @@
+STRATEGY_NAME: FlowVolatilityBreakout
+
+STRATEGY_DETAILS:
+This strategy combines trend strength analysis with exchange netflow divergence to identify high-probability breakout opportunities during low liquidity periods, using dynamic volatility-based exits.
+
+Key Components:
+1. ADX (Average Directional Index) - Measures trend strength (use 14-period)
+2. Exchange Netflow Divergence - Compares price action with exchange inflows/outflows
+3. Chande Volatility Trailing Stop - Dynamic exit mechanism (default 22-period, 3x multiplier)
+4. Liquidity Analysis - Focuses on low-volume trading periods
+
+Entry Rules:
+1. Trend Confirmation:
+   - ADX > 25 indicates strong trend
+   - Price must be above 200EMA for longs, below for shorts
+
+2. Netflow Divergence:
+   - Bullish: Price makes lower low while netflow makes higher low
+   - Bearish: Price makes higher high while netflow makes lower high
+
+3. Breakout Timing:
+   - Enter when price breaks recent swing high/low (last 3-5 candles)
+   - Only trade during identified low liquidity periods (typically overnight or lunch hours)
+
+Exit Rules:
+1. Primary Exit:
+   - Chande Volatility Trailing Stop (22,3)
+   - Adjusts stop based on recent volatility
+
+2. Secondary Exit:
+   - ADX reversal (when ADX turns down after peak)
+   - Netflow reversal (when flows contradict position direction)
+
+Risk Management:
+1. Position Sizing:
+   - 1-2% risk per trade
+   - Adjust position size based on Chande volatility reading
+
+2. Stop Placement:
+   - Initial stop: 1.5x recent average true range
+   - Never move stop further away
+
+3. Trade Filter:
+   - Only take trades where netflow divergence is >2 standard deviations from mean
+   - Minimum ADX reading of 25 required
+
+Required Indicators:
+1. ADX (14 period)
+2. Exchange Netflow Data (preferably with 20-period MA)
+3. Chande Volatility Trailing Stop (22,3)
+4. Volume Profile (for liquidity analysis)
+5. 200 EMA (trend filter)
+
+Special Considerations:
+- Works best on 4H and daily timeframes
+- Most effective on major crypto pairs (BTC, ETH)
+- Requires clean netflow data from reliable exchange APIs
+- Backtest across different liquidity regimes before live trading
+
+Optimization Tips:
+- Adjust ADX threshold based on asset volatility
+- Test different Chande parameters (18-26 periods)
+- Combine with seasonal liquidity patterns for better timing

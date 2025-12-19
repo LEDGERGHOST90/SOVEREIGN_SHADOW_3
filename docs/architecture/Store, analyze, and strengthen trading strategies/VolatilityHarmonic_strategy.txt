@@ -1,0 +1,41 @@
+STRATEGY_NAME: VolatilityHarmonic  
+
+STRATEGY_DETAILS:  
+The VolatilityHarmonic strategy capitalizes on the cyclical nature of volatility by combining two key metrics: the normalized VIX-VVIX spread and Bollinger Band width of the S&P 500. The strategy identifies extreme conditions in volatility metrics to signal potential mean-reversion or expansion opportunities.  
+
+**Key Components:**  
+1. **VIX-VVIX Spread Normalization:**  
+   - Calculate the spread between the VIX (market volatility index) and VVIX (volatility of VIX).  
+   - Normalize this spread using a z-score relative to a 3-month rolling window to identify statistical extremes.  
+
+2. **Bollinger Band Width Analysis:**  
+   - Compute the Bollinger Band width for the S&P 500 (using a 20-day moving average and 2 standard deviations).  
+   - Normalize the Bollinger Band width using a z-score relative to a 3-month rolling window.  
+
+**Entry Rules:**  
+- **Long Entry (Volatility Expansion):**  
+  - Trigger when both the VIX-VVIX spread z-score and Bollinger Band width z-score are below -2 (indicating extreme contraction).  
+  - Expect a reversion to mean or expansion in volatility.  
+
+- **Short Entry (Volatility Contraction):**  
+  - Trigger when both z-scores are above +2 (indicating extreme expansion).  
+  - Expect a reversion to mean or contraction in volatility.  
+
+**Exit Rules:**  
+- **Take-Profit:**  
+  - Close the position when either z-score crosses back to zero (neutral level).  
+- **Stop-Loss:**  
+  - Set a dynamic stop-loss at 1.5x the average true range (ATR) of the S&P 500 over the past 14 days to account for changing volatility conditions.  
+
+**Risk Management:**  
+- Position sizing based on 1-2% of capital per trade.  
+- Avoid overlapping trades in the same direction to prevent overexposure.  
+- Monitor the 3-month rolling window for structural breaks or regime shifts in volatility behavior.  
+
+**Required Indicators:**  
+1. VIX and VVIX indices.  
+2. Bollinger Bands (20-day MA, 2 standard deviations) for the S&P 500.  
+3. Z-score calculation for both metrics (3-month lookback).  
+4. Average True Range (ATR) for stop-loss placement.  
+
+This strategy is designed for mean-reversion traders who specialize in volatility cycles, with a focus on statistically significant extremes in volatility metrics. The combination of VIX-VVIX spread and Bollinger Band width provides a robust filter for high-probability setups.

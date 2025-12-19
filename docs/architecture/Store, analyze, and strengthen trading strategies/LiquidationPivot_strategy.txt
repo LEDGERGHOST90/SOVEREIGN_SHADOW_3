@@ -1,0 +1,30 @@
+STRATEGY_NAME: LiquidationPivot  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Volume-Weighted Pivot Point (48-hour):** Acts as a dynamic support/resistance level, weighted by trading volume to reflect true market interest.  
+2. **Liquidation Volume Spike (10x):** Identifies extreme market conditions where forced liquidations may trigger cascading price movements.  
+3. **Order Book Imbalance Analysis:** Detects liquidity clusters (high-density order zones) to pinpoint profit targets.  
+
+**Entry Rules:**  
+- **Short Trigger:** Enter a short position when:  
+  - Price breaks below the 48-hour volume-weighted pivot point.  
+  - Liquidation volume spikes to 10x its recent average (e.g., 10x the 24-hour median).  
+  - Confirmation via a closing candle below the pivot point.  
+
+**Exit Rules:**  
+- **Profit Target:** Exit at the nearest liquidity cluster below the entry, identified via order book imbalance (e.g., large bid/ask volume disparity).  
+- **Stop-Loss:** Place above the broken pivot point or at a recent swing high, whichever is closer.  
+
+**Risk Management:**  
+- Position size capped at 1-2% of capital per trade.  
+- Stop-loss must be set immediately after entry to limit downside.  
+- Avoid trading during low-liquidity periods (e.g., weekends, holidays).  
+
+**Required Indicators/Tools:**  
+1. Volume-weighted pivot point (48-hour calculation).  
+2. Liquidation volume tracker (e.g., exchange API or on-chain data).  
+3. Real-time order book depth analysis (to identify liquidity clusters).  
+
+**Unique Edge:** Combines liquidation-driven momentum with institutional-level pivot points, targeting high-probability breakdowns into untapped liquidity zones.

@@ -1,0 +1,64 @@
+STRATEGY_NAME: BandSync Momentum
+
+STRATEGY_DETAILS:
+The BandSync Momentum strategy is a trend-following approach that leverages Bollinger Bands and their moving average midpoint to identify high-probability momentum trades. The strategy focuses on key support and resistance levels derived from the Bollinger Bands' structure, ensuring alignment with the prevailing trend.
+
+### Key Strategy Components:
+1. **Bollinger Bands**: Used to define dynamic support and resistance levels.
+   - Upper Band: Acts as resistance in uptrends.
+   - Lower Band: Acts as support in downtrends.
+   - Moving Average Midpoint: The midpoint between the upper and lower bands, serving as a key reference level.
+
+2. **Price Action**: Confirms entries when price touches or breaks key Bollinger Band levels.
+
+3. **Momentum Filter**: Ensures trades are taken in the direction of the prevailing trend.
+
+---
+
+### Entry Rules:
+1. **Long Entry**:
+   - Price must touch or approach the **lower Bollinger Band** (support).
+   - The moving average midpoint must be trending upward, confirming bullish momentum.
+   - Enter long when price bounces off the lower band and shows signs of upward momentum (e.g., bullish candlestick patterns).
+
+2. **Short Entry**:
+   - Price must break above the **upper Bollinger Band** (resistance).
+   - The moving average midpoint must be trending downward, confirming bearish momentum.
+   - Enter short when price breaks above the upper band and shows signs of downward momentum (e.g., bearish candlestick patterns).
+
+---
+
+### Exit Rules:
+1. **Long Exit**:
+   - Exit when price reaches the **upper Bollinger Band** (resistance).
+   - Alternatively, exit if the moving average midpoint flattens or reverses direction.
+
+2. **Short Exit**:
+   - Exit when price reaches the **lower Bollinger Band** (support).
+   - Alternatively, exit if the moving average midpoint flattens or reverses direction.
+
+---
+
+### Risk Management:
+1. **Stop Loss**:
+   - For long positions: Place stop loss slightly below the lower Bollinger Band.
+   - For short positions: Place stop loss slightly above the upper Bollinger Band.
+
+2. **Position Sizing**:
+   - Risk no more than 1-2% of the trading capital per trade.
+
+3. **Take Profit**:
+   - Use the opposite Bollinger Band as a take-profit target.
+   - Alternatively, trail the stop loss to lock in profits as the trend progresses.
+
+---
+
+### Required Indicators:
+1. **Bollinger Bands** (20-period, 2 standard deviations).
+2. **Moving Average Midpoint** (calculated as the midpoint between the upper and lower Bollinger Bands).
+3. **Candlestick Patterns** (for confirmation of momentum).
+
+---
+
+### Summary:
+The BandSync Momentum strategy is designed to capitalize on strong trends by aligning entries with key Bollinger Band levels and confirming momentum through the moving average midpoint. By focusing on high-probability setups and implementing strict risk management, this strategy aims to capture significant price movements while minimizing drawdowns.

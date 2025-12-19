@@ -1,0 +1,38 @@
+STRATEGY_NAME: BandwidthBreakout  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Bollinger Band Width Contraction:** The strategy identifies periods of low volatility when the Bollinger Band width (difference between upper and lower bands) on the 4-hour chart contracts below its 10-period moving average. This signals a potential breakout.  
+2. **Volume Surge Confirmation:** A breakout is only valid if accompanied by a surge in trading volume exceeding the 50-period median volume, ensuring the move has strong participation.  
+3. **Keltner Channel Filter:** The 20-period Keltner Channel acts as a dynamic support/resistance level for trade exits, preventing false breakouts.  
+
+**Entry Rules:**  
+- Enter a **long** position when:  
+  1. Bollinger Band width is below its 10-period average (indicating contraction).  
+  2. Price breaks above the upper Bollinger Band.  
+  3. Volume exceeds the 50-period median.  
+- Enter a **short** position when:  
+  1. Bollinger Band width is below its 10-period average.  
+  2. Price breaks below the lower Bollinger Band.  
+  3. Volume exceeds the 50-period median.  
+
+**Exit Rules:**  
+- **Profit Target:** Close the trade at a 2:1 risk-reward ratio (e.g., if stop loss is 50 pips, take profit at 100 pips).  
+- **Stop Loss:**  
+  - For longs: Exit if price closes below the lower Keltner Channel.  
+  - For shorts: Exit if price closes above the upper Keltner Channel.  
+- **Trailing Stop (Optional):** Adjust stop loss to breakeven once price reaches 1:1 risk-reward.  
+
+**Risk Management:**  
+- Risk per trade should not exceed 1-2% of the account balance.  
+- Avoid trading during major economic news events to prevent false breakouts.  
+- Only trade liquid assets with tight spreads to minimize slippage.  
+
+**Required Indicators:**  
+1. **Bollinger Bands (20,2)** – To measure volatility contraction and breakout levels.  
+2. **Volume (50-period median)** – To confirm breakout strength.  
+3. **Keltner Channel (20,1.5)** – For dynamic exit signals.  
+
+**Unique Edge:**  
+This strategy combines volatility contraction (Bollinger Band width), volume confirmation, and a secondary channel (Keltner) for filtering, reducing false signals common in pure breakout systems. The 2:1 reward ratio ensures positive expectancy over time.

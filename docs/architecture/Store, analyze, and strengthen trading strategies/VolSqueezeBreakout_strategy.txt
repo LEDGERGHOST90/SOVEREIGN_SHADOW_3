@@ -1,0 +1,42 @@
+STRATEGY_NAME: VolSqueezeBreakout
+
+STRATEGY_DETAILS:
+The VolSqueezeBreakout strategy is a volatility-based trading approach that capitalizes on periods of low volatility followed by high-volume breakouts. The strategy uses Bollinger Bands and volume analysis to identify potential breakout opportunities.
+
+Key Strategy Components:
+1. Bollinger Bands (20-period, 2 standard deviations)
+2. Volume analysis (20-day average volume)
+3. Volatility squeeze detection (narrowest Bollinger Band width in 30 days)
+4. Volume spike confirmation (2x 20-day average volume)
+
+Entry Rules:
+1. Identify when Bollinger Bands contract to their narrowest point in the last 30 days
+2. Wait for price to break above the upper band or below the lower band
+3. Confirm the breakout with a volume spike exceeding 2x the 20-day average volume
+4. Enter long position on upper band breakout or short position on lower band breakout
+
+Exit Rules:
+1. For long positions: Exit when price closes below the middle Bollinger Band (20-period SMA)
+2. For short positions: Exit when price closes above the middle Bollinger Band
+3. Alternatively, use a trailing stop based on the opposite Bollinger Band
+
+Risk Management:
+1. Set stop-loss at 1.5x the average true range (ATR) from entry point
+2. Risk no more than 1-2% of account equity per trade
+3. Use position sizing based on stop-loss distance
+4. Consider implementing a maximum daily loss limit (e.g., 5% of account)
+
+Required Indicators:
+1. Bollinger Bands (20,2)
+2. Volume indicator
+3. Average True Range (ATR) for stop-loss calculation
+4. 20-day moving average of volume
+
+Additional Considerations:
+- Best suited for liquid markets with clear trends
+- Works well on daily and 4-hour timeframes
+- Combine with fundamental analysis for better context
+- Avoid trading during major news events when volatility may be erratic
+- Monitor for false breakouts by waiting for confirmation candle closes
+
+This strategy is particularly effective in trending markets and can be adapted to various asset classes, including stocks, forex, and commodities. The combination of volatility contraction, breakout confirmation, and volume spike filtering helps increase the probability of successful trades while managing risk effectively.

@@ -1,0 +1,162 @@
+🌙 Bollinger Bands initialized 🚀
+✨ Price touched lower band with upward momentum at 18147.39 🌙
+🚀 Long Entry: Buy at 18147.39, SL at 17965.932870988574, Size: 55
+✨ Price touched lower band with upward momentum at 20664.45 🌙
+🚀 Long Entry: Buy at 20664.45, SL at 20462.131028292777, Size: 48
+🌙 Long Exit: Sell at 20685.8 🚀
+✨ Price broke above upper band with downward momentum at 21285.37 🌙
+🚀 Short Entry: Sell at 21285.37, SL at 21495.76321870957, Size: 47
+🌙 Short Exit: Buy to cover at 21255.3 🚀
+✨ Price touched lower band with upward momentum at 20767.18 🌙
+🚀 Long Entry: Buy at 20767.18, SL at 20572.497652647427, Size: 48
+✨ Price broke above upper band with downward momentum at 22997.43 🌙
+🚀 Short Entry: Sell at 22997.43, SL at 23211.765100946013, Size: 43
+🌙 Short Exit: Buy to cover at 22996.03 🚀
+✨ Price broke above upper band with downward momentum at 22836.03 🌙
+🚀 Short Entry: Sell at 22836.03, SL at 23061.194401172965, Size: 44
+✨ Price broke above upper band with downward momentum at 22974.99 🌙
+🚀 Short Entry: Sell at 22974.99, SL at 23194.221185910523, Size: 44
+✨ Price touched lower band with upward momentum at 22893.35 🌙
+🚀 Long Entry: Buy at 22893.35, SL at 22668.07886319127, Size: 44
+✨ Price broke above upper band with downward momentum at 21919.87 🌙
+🚀 Short Entry: Sell at 21919.87, SL at 22137.353461690385, Size: 46
+✨ Price broke above upper band with downward momentum at 21703.72 🌙
+🚀 Short Entry: Sell at 21703.72, SL at 21920.683948556605, Size: 46
+🌙 Short Exit: Buy to cover at 21705.24 🚀
+✨ Price touched lower band with upward momentum at 21794.14 🌙
+🚀 Long Entry: Buy at 21794.14, SL at 21581.68172188428, Size: 46
+✨ Price touched lower band with upward momentum at 24003.76 🌙
+🚀 Long Entry: Buy at 24003.76, SL at 23777.93384007132, Size: 42
+✨ Price broke above upper band with downward momentum at 22422.24 🌙
+🚀 Short Entry: Sell at 22422.24, SL at 22645.514261655222, Size: 45
+✨ Price touched lower band with upward momentum at 22070.0 🌙
+🚀 Long Entry: Buy at 22070.0, SL at 21892.238935109497, Size: 45
+✨ Price touched lower band with upward momentum at 26182.02 🌙
+🚀 Long Entry: Buy at 26182.02, SL at 25993.951612225326, Size: 38
+✨ Price broke above upper band with downward momentum at 27647.85 🌙
+🚀 Short Entry: Sell at 27647.85, SL at 27870.84893395197, Size: 36
+🌙 Short Exit: Buy to cover at 27562.01 🚀
+✨ Price touched lower band with upward momentum at 27251.62 🌙
+🚀 Long Entry: Buy at 27251.62, SL at 26984.67898646391, Size: 37
+✨ Price touched lower band with upward momentum at 27927.93 🌙
+🚀 Long Entry: Buy at 27927.93, SL at 27649.335306641035, Size: 36
+✨ Price touched lower band with upward momentum at 28167.69 🌙
+🚀 Long Entry: Buy at 28167.69, SL at 27896.662686984164, Size: 36
+✨ Price touched lower band with upward momentum at 28179.9 🌙
+🚀 Long Entry: Buy at 28179.9, SL at 27907.323602687353, Size: 35
+🌙 Long Exit: Sell at 28250.76 🚀
+✨ Price touched lower band with upward momentum at 28101.87 🌙
+🚀 Long Entry: Buy at 28101.87, SL at 27823.715267668536, Size: 36
+✨ Price broke above upper band with downward momentum at 30341.04 🌙
+🚀 Short Entry: Sell at 30341.04, SL at 30636.38649587971, Size: 33
+✨ Price touched lower band with upward momentum at 30377.02 🌙
+🚀 Long Entry: Buy at 30377.02, SL at 30078.60102325854, Size: 33
+✨ Price touched lower band with upward momentum at 28809.83 🌙
+🚀 Long Entry: Buy at 28809.83, SL at 28550.14531705932, Size: 35
+✨ Price touched lower band with upward momentum at 29378.4 🌙
+🚀 Long Entry: Buy at 29378.4, SL at 29106.557003555354, Size: 34
+✨ Price touched lower band with upward momentum at 28717.38 🌙
+🚀 Long Entry: Buy at 28717.38, SL at 28434.58053158581, Size: 35
+✨ Price touched lower band with upward momentum at 26862.33 🌙
+🚀 Long Entry: Buy at 26862.33, SL at 26598.6526094712, Size: 37
+🌙 Long Exit: Sell at 26850.26 🚀
+✨ Price broke above upper band with downward momentum at 26738.89 🌙
+🚀 Short Entry: Sell at 26738.89, SL at 26998.735331661323, Size: 37
+🌙 Short Exit: Buy to cover at 26750.09 🚀
+✨ Price touched lower band with upward momentum at 26801.12 🌙
+🚀 Long Entry: Buy at 26801.12, SL at 26539.733638911635, Size: 37
+✨ Price touched lower band with upward momentum at 26120.56 🌙
+🚀 Long Entry: Buy at 26120.56, SL at 25869.203739725697, Size: 38
+✨ Price broke above upper band with downward momentum at 27803.23 🌙
+🚀 Short Entry: Sell at 27803.23, SL at 28080.31274551227, Size: 36
+✨ Price broke above upper band with downward momentum at 27169.89 🌙
+🚀 Short Entry: Sell at 27169.89, SL at 27440.08340938084, Size: 37
+✨ Price broke above upper band with downward momentum at 26565.26 🌙
+🚀 Short Entry: Sell at 26565.26, SL at 26824.454666121783, Size: 38
+✨ Price broke above upper band with downward momentum at 30795.67 🌙
+🚀 Short Entry: Sell at 30795.67, SL at 31067.582844439978, Size: 32
+🌙 Short Exit: Buy to cover at 30771.55 🚀
+✨ Price touched lower band with upward momentum at 30449.19 🌙
+🚀 Long Entry: Buy at 30449.19, SL at 30183.859283490798, Size: 33
+✨ Price broke above upper band with downward momentum at 31211.81 🌙
+🚀 Short Entry: Sell at 31211.81, SL at 31522.747196589262, Size: 32
+✨ Price touched lower band with upward momentum at 30226.38 🌙
+🚀 Long Entry: Buy at 30226.38, SL at 29924.235367063367, Size: 33
+✨ Price touched lower band with upward momentum at 31132.63 🌙
+🚀 Long Entry: Buy at 31132.63, SL at 30824.838594655816, Size: 32
+✨ Price broke above upper band with downward momentum at 25956.42 🌙
+🚀 Short Entry: Sell at 25956.42, SL at 26212.286965058633, Size: 39
+✨ Price touched lower band with upward momentum at 27574.47 🌙
+🚀 Long Entry: Buy at 27574.47, SL at 27385.998144106594, Size: 36
+✨ Price touched lower band with upward momentum at 25651.87 🌙
+🚀 Long Entry: Buy at 25651.87, SL at 25400.66842767465, Size: 39
+✨ Price touched lower band with upward momentum at 25820.32 🌙
+🚀 Long Entry: Buy at 25820.32, SL at 25566.120123546065, Size: 39
+✨ Price broke above upper band with downward momentum at 26559.09 🌙
+🚀 Short Entry: Sell at 26559.09, SL at 26824.346263132164, Size: 38
+✨ Price broke above upper band with downward momentum at 27166.56 🌙
+🚀 Short Entry: Sell at 27166.56, SL at 27431.545994231554, Size: 37
+✨ Price broke above upper band with downward momentum at 26580.77 🌙
+🚀 Short Entry: Sell at 26580.77, SL at 26846.397086579695, Size: 38
+✨ Price touched lower band with upward momentum at 27615.69 🌙
+🚀 Long Entry: Buy at 27615.69, SL at 27346.35245364866, Size: 36
+✨ Price broke above upper band with downward momentum at 27469.76 🌙
+🚀 Short Entry: Sell at 27469.76, SL at 27729.447943006246, Size: 36
+🌙 Short Exit: Buy to cover at 27450.92 🚀
+✨ Price touched lower band with upward momentum at 26854.96 🌙
+🚀 Long Entry: Buy at 26854.96, SL at 26596.67585678974, Size: 37
+✨ Price broke above upper band with downward momentum at 26895.95 🌙
+🚀 Short Entry: Sell at 26895.95, SL at 27161.924496989956, Size: 37
+✨ Price broke above upper band with downward momentum at 28379.8 🌙
+🚀 Short Entry: Sell at 28379.8, SL at 28658.67066863112, Size: 35
+✨ Price touched lower band with upward momentum at 28363.21 🌙
+🚀 Long Entry: Buy at 28363.21, SL at 28080.78978409714, Size: 35
+✨ Price touched lower band with upward momentum at 28365.21 🌙
+🚀 Long Entry: Buy at 28365.21, SL at 28082.819113863025, Size: 35
+✨ Price touched lower band with upward momentum at 34614.72 🌙
+🚀 Long Entry: Buy at 34614.72, SL at 34270.63883178606, Size: 29
+✨ Price touched lower band with upward momentum at 34034.44 🌙
+🚀 Long Entry: Buy at 34034.44, SL at 33707.397116794826, Size: 29
+✨ Price touched lower band with upward momentum at 34382.29 🌙
+🚀 Long Entry: Buy at 34382.29, SL at 34039.39313042027, Size: 29
+✨ Price touched lower band with upward momentum at 35222.05 🌙
+🚀 Long Entry: Buy at 35222.05, SL at 34884.11266764951, Size: 28
+🌙 Long Exit: Sell at 35178.63 🚀
+✨ Price touched lower band with upward momentum at 34950.91 🌙
+🚀 Long Entry: Buy at 34950.91, SL at 34626.712897618534, Size: 29
+✨ Price touched lower band with upward momentum at 37178.3 🌙
+🚀 Long Entry: Buy at 37178.3, SL at 36807.49935630596, Size: 27
+✨ Price touched lower band with upward momentum at 36886.16 🌙
+🚀 Long Entry: Buy at 36886.16, SL at 36522.25460755573, Size: 27
+Start                     2023-01-01 00:00:00
+End                       2023-11-20 19:15:00
+Duration                    323 days 19:15:00
+Exposure Time [%]                    0.074036
+Equity Final [$]                 985175.46272
+Equity Peak [$]                     1000000.0
+Return [%]                          -1.482454
+Buy & Hold Return [%]                127.7687
+Return (Ann.) [%]                   -1.668475
+Volatility (Ann.) [%]                0.632668
+Sharpe Ratio                              0.0
+Sortino Ratio                             0.0
+Calmar Ratio                              0.0
+Max. Drawdown [%]                   -1.482454
+Avg. Drawdown [%]                   -1.482454
+Max. Drawdown Duration      309 days 11:00:00
+Avg. Drawdown Duration      309 days 11:00:00
+# Trades                                   11
+Win Rate [%]                        18.181818
+Best Trade [%]                       0.096812
+Worst Trade [%]                     -0.335607
+Avg. Trade [%]                      -0.136184
+Max. Trade Duration           0 days 00:30:00
+Avg. Trade Duration           0 days 00:17:00
+Profit Factor                         0.09335
+Expectancy [%]                      -0.136106
+SQN                                 -3.456464
+_strategy                    BandSyncMomentum
+_equity_curve                             ...
+_trades                       Size  EntryB...
+dtype: object
+

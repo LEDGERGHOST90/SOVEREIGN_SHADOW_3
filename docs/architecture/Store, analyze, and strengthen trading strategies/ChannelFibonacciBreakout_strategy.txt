@@ -1,0 +1,38 @@
+STRATEGY_NAME: ChannelFibonacciBreakout
+
+STRATEGY_DETAILS:
+1. Key Strategy Components:
+- Combines Bollinger Bands and Keltner Channels to create a hybrid volatility channel
+- Uses volume confirmation to validate breakout signals
+- Incorporates Fibonacci retracement levels from recent swing points as profit targets
+- Focuses on breakouts from established trading ranges
+
+2. Entry Rules:
+- Long Entry: When price closes ABOVE the upper combined Bollinger-Keltner band AND volume is above 20-period average
+- Short Entry: When price closes BELOW the lower combined Bollinger-Keltner band AND volume is above 20-period average
+- Recent swing points (high/low) must be established within the last 20 bars
+
+3. Exit Rules:
+- Primary Profit Target: 38.2% Fibonacci retracement level from recent swing high to swing low (for longs) or swing low to swing high (for shorts)
+- Secondary Profit Target: 61.8% Fibonacci retracement level
+- Stop Loss: Opposite side of the breakout channel band (upper band for shorts, lower band for longs)
+
+4. Risk Management:
+- Position sizing based on distance between entry and stop loss
+- Maximum risk per trade: 1-2% of account
+- Trailing stop can be implemented after price reaches 38.2% target
+- No new entries if 3 consecutive losing trades occur
+
+5. Required Indicators:
+- Bollinger Bands (20-period, 2 standard deviations)
+- Keltner Channels (20-period, 1.5 ATR multiplier)
+- Volume indicator (20-period average)
+- Fibonacci retracement tool
+- Recent swing point identification (20-bar lookback)
+
+6. Additional Notes:
+- Works best on 1H or 4H timeframes for swing trading
+- More reliable in trending market conditions
+- Requires clear recent swing points for Fibonacci levels
+- Volume confirmation helps filter false breakouts
+- Combine with overall market trend for higher probability trades

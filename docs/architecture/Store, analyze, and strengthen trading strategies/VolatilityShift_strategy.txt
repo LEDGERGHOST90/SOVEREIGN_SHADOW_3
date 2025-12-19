@@ -1,0 +1,32 @@
+STRATEGY_NAME: VolatilityShift
+
+STRATEGY_DETAILS:
+The VolatilityShift strategy is designed to capitalize on significant changes in market volatility by combining Bollinger Bandwidth expansion with a momentum reset signal from the MACD histogram flip. This strategy is particularly effective in identifying potential breakout opportunities when these signals occur below the 200-day volume-weighted moving average (VWMA), indicating a potential shift in market conditions.
+
+Key Strategy Components:
+1. Bollinger Bandwidth Expansion: Measures the width of the Bollinger Bands, which expands during periods of increased volatility.
+2. MACD Histogram Flip: Indicates a momentum reset when the MACD histogram changes direction.
+3. 200-Day Volume-Weighted Moving Average (VWMA): Acts as a filter to ensure trades are taken in a specific market context.
+
+Entry Rules:
+1. Bollinger Bandwidth Expansion: Wait for the Bollinger Bandwidth to expand significantly, indicating a potential increase in volatility.
+2. MACD Histogram Flip: Confirm the momentum reset by observing a flip in the MACD histogram (from positive to negative or vice versa).
+3. 200-Day VWMA: Ensure both signals occur below the 200-day VWMA to filter out less significant moves.
+
+Exit Rules:
+1. Take Profit: Set a take profit level based on a multiple of the average true range (ATR) or a fixed percentage gain.
+2. Stop Loss: Place a stop loss below the recent swing low (for long positions) or above the recent swing high (for short positions).
+3. Trailing Stop: Use a trailing stop to lock in profits as the trade moves in your favor.
+
+Risk Management:
+1. Position Sizing: Determine position size based on a fixed percentage of your total capital (e.g., 1-2% per trade).
+2. Risk-Reward Ratio: Aim for a minimum risk-reward ratio of 1:2 to ensure profitable trades outweigh losing ones.
+3. Diversification: Avoid over-concentration in a single asset or market to spread risk.
+
+Required Indicators:
+1. Bollinger Bands: To measure bandwidth expansion.
+2. MACD (Moving Average Convergence Divergence): To identify momentum resets via histogram flips.
+3. 200-Day Volume-Weighted Moving Average (VWMA): To filter trades based on market context.
+4. Average True Range (ATR): Optional, for setting take profit levels.
+
+By following these rules and using the specified indicators, the VolatilityShift strategy aims to identify and capitalize on significant volatility regime shifts, providing a structured approach to trading in dynamic market conditions.

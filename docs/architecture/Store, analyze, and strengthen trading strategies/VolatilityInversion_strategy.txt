@@ -1,0 +1,42 @@
+STRATEGY_NAME: VolatilityInversion  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **VIX Term Structure Analysis:** The strategy focuses on the inversion of the VIX term structure (when near-term VIX futures are higher than longer-term futures), signaling potential short-term volatility spikes.  
+2. **Realized vs. Implied Volatility Comparison:** The strategy triggers when realized volatility (actual market volatility) drops below the 10-day historical implied volatility (market expectations).  
+3. **Contango Exit Condition:** The trade is exited when VIX futures shift into contango (longer-term futures higher than near-term) exceeding 5%, indicating a normalization of volatility expectations.  
+
+**Entry Rules:**  
+- **Short Volatility Position:** Enter when:  
+  - VIX term structure is inverted (near-term futures > longer-term futures).  
+  - Realized volatility (e.g., 10-day historical standard deviation of SPX returns) falls below the 10-day historical implied volatility (derived from VIX or options pricing).  
+
+**Exit Rules:**  
+- **Contango Threshold:** Close the short volatility position when:  
+  - VIX futures term structure shifts to contango (longer-term futures > near-term futures) by more than 5%.  
+  - Alternatively, consider exiting if realized volatility spikes above implied volatility again.  
+
+**Risk Management:**  
+1. **Position Sizing:** Allocate a fixed percentage of capital (e.g., 1-2%) per trade to avoid overexposure.  
+2. **Stop-Loss:** Implement a stop-loss if VIX spikes unexpectedly (e.g., if VIX rises more than 20% from entry).  
+3. **Time Decay Consideration:** Since short volatility benefits from time decay, avoid holding positions too long if contango doesn’t materialize.  
+
+**Required Indicators:**  
+1. **VIX Futures Term Structure:** Monitor near-term (e.g., VX1) vs. longer-term (e.g., VX2) futures to detect inversion/contango.  
+2. **Realized Volatility:** Calculate 10-day historical volatility of SPX returns.  
+3. **Implied Volatility:** Track 10-day historical average of VIX or ATM option-implied volatility.  
+4. **Contango/Backwardation Gauge:** Measure the percentage difference between VIX futures maturities.  
+
+**Additional Notes:**  
+- This strategy thrives in calm markets where volatility expectations are overstated (inversion + high implied volatility).  
+- Avoid using during macroeconomic events (e.g., FOMC, earnings season) that could disrupt volatility patterns.  
+- Backtest across multiple volatility regimes to validate robustness.  
+
+**Example Workflow:**  
+1. VIX term structure inverts (VX1 > VX2).  
+2. SPX 10-day realized volatility drops below 10-day implied volatility.  
+3. Short VIX futures or sell volatility (e.g., via options spreads).  
+4. Exit when VX2 > VX1 by 5% or more.  
+
+This strategy capitalizes on mean-reverting volatility regimes while mitigating risk through clear structural triggers.

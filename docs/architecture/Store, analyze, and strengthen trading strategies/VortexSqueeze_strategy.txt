@@ -1,0 +1,38 @@
+STRATEGY_NAME: VortexSqueeze  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Vortex Indicator (VI+ and VI-):** Measures trend direction and strength. A bullish signal occurs when VI+ crosses above VI-, indicating potential upward momentum.  
+2. **Keltner Channel:** A volatility-based envelope that helps identify "squeeze" conditions when the channel narrows, suggesting reduced volatility and potential breakout opportunities.  
+3. **RSI (14-day):** Used to identify overbought conditions (RSI > 70) for exit signals.  
+
+**Entry Rules:**  
+- Go **LONG** when:  
+  - The Keltner Channel is narrowing (indicating a squeeze).  
+  - The Vortex Indicator's VI+ line crosses **above** VI-.  
+- Confirm the entry with price closing above the Keltner Channel's middle line (EMA) for additional confidence.  
+
+**Exit Rules:**  
+- **Take Profit:** Exit the trade when the 14-day RSI exceeds 70 (overbought condition).  
+- **Stop Loss:** Place a stop-loss below the recent swing low or below the lower Keltner Channel band to limit downside risk.  
+
+**Risk Management:**  
+- Position sizing should align with a maximum risk of 1-2% per trade.  
+- Avoid entering during high-impact news events that may cause erratic volatility.  
+- Monitor the Keltner Channel width—wider channels may indicate higher volatility and increased risk.  
+
+**Required Indicators:**  
+1. Vortex Indicator (VI+ and VI-).  
+2. Keltner Channel (default settings: 20-period EMA, 2x ATR width).  
+3. RSI (14-period).  
+
+**Additional Notes:**  
+- This strategy performs best in trending markets after consolidation (squeeze phases).  
+- Backtest on multiple timeframes (e.g., 1H, 4H, daily) to validate robustness.  
+- Combine with volume analysis to confirm breakout strength.  
+
+**Why "VortexSqueeze"?**  
+- "Vortex" highlights the core indicator (VI+/VI- crossover).  
+- "Squeeze" reflects the Keltner Channel narrowing, a critical setup for the strategy.  
+- The name is unique and avoids generic terms while clearly describing the strategy's mechanics.

@@ -1,0 +1,32 @@
+STRATEGY_NAME: LiquidationSpikeEngulf  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Short Liquidations Spike:** The strategy focuses on detecting a significant 24-hour spike in short liquidations, indicating potential forced buying pressure.  
+2. **Bullish Engulfing Pattern:** Confirms the reversal signal with a classic bullish engulfing candlestick pattern, suggesting strong buying momentum.  
+3. **ATR-Based Exit:** Uses the Average True Range (ATR) to set a dynamic profit target at 1.5x the ATR above the entry price, adapting to market volatility.  
+
+**Entry Rules:**  
+- **Trigger Condition:** A 24-hour spike in short liquidations (e.g., exceeding a predefined threshold or a significant deviation from the average).  
+- **Confirmation:** A bullish engulfing candlestick pattern must form on the same or next candle after the liquidation spike.  
+- **Entry Point:** Enter long at the close of the bullish engulfing candle.  
+
+**Exit Rules:**  
+- **Profit Target:** Exit the trade when the price reaches 1.5x the ATR (calculated at entry) above the entry price.  
+- **Stop-Loss:** Consider using a trailing stop or a fixed stop below the low of the engulfing candle for risk management.  
+
+**Risk Management:**  
+- **Position Sizing:** Allocate a fixed percentage of capital per trade (e.g., 1-2%) to limit risk.  
+- **Stop-Loss:** Place a stop-loss below the low of the engulfing candle or use a volatility-based stop (e.g., 0.5x ATR below entry).  
+- **Avoid Overtrading:** Only take signals that meet both the liquidation spike and engulfing pattern criteria strictly.  
+
+**Required Indicators:**  
+1. **Short Liquidations Data:** Requires access to a reliable source for 24-hour short liquidation metrics (e.g., CryptoQuant, Glassnode).  
+2. **Bullish Engulfing Pattern:** Standard candlestick pattern detection.  
+3. **Average True Range (ATR):** 14-period ATR recommended for volatility adjustment.  
+
+**Notes:**  
+- This strategy is particularly suited for volatile markets (e.g., cryptocurrencies) where liquidation events are frequent and impactful.  
+- Backtest to validate the optimal thresholds for liquidation spikes and ATR multipliers.  
+- Combine with additional filters (e.g., volume confirmation, trend alignment) to reduce false signals.

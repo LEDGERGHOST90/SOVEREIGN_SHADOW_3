@@ -1,0 +1,33 @@
+STRATEGY_NAME: VolumetricCross  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **EMA Crossover:** The strategy uses the 50-period EMA crossing above the 200-period EMA (Golden Cross) as a primary trend confirmation signal.  
+2. **Volume Spike:** Requires a high-volume spike to validate the crossover, ensuring strong momentum behind the trend shift.  
+3. **RSI Overbought Exit:** Uses the RSI crossing below 70 to exit long positions, capturing overbought conditions and potential reversals.  
+
+**Entry Rules:**  
+- Enter a long position when:  
+  1. The 50-period EMA crosses above the 200-period EMA (Golden Cross).  
+  2. Volume is significantly higher than the average volume (e.g., 1.5x–2x the 20-period average volume).  
+
+**Exit Rules:**  
+- Exit the long position when:  
+  1. The RSI (14-period) crosses below 70, indicating overbought conditions.  
+  2. Optional: Use a trailing stop (e.g., 2x ATR) to protect profits if the RSI does not trigger an exit.  
+
+**Risk Management:**  
+1. **Stop-Loss:** Place a stop-loss below the recent swing low or use a fixed percentage (e.g., 2–3% below entry).  
+2. **Position Sizing:** Risk no more than 1–2% of capital per trade.  
+3. **Avoid Low-Volume Crosses:** Only trade high-volume crossovers to filter out false signals.  
+
+**Required Indicators:**  
+1. 50-period Exponential Moving Average (EMA).  
+2. 200-period Exponential Moving Average (EMA).  
+3. Relative Strength Index (RSI, 14-period).  
+4. Volume indicator (e.g., 20-period average volume for comparison).  
+
+**Additional Notes:**  
+- This strategy works best in trending markets; avoid sideways or choppy conditions.  
+- Backtest to optimize volume spike thresholds and RSI settings for specific assets.  
+- Combine with price action (e.g., breakout above resistance) for higher confidence entries.

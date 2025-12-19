@@ -1,0 +1,33 @@
+STRATEGY_NAME: VolBand Surge
+
+STRATEGY_DETAILS:
+The VolBand Surge strategy combines Bollinger Band contraction analysis with volume profile imbalances to identify high-probability breakout trades. It focuses on key support/resistance levels and uses volume confirmation to validate breakouts, while managing exits based on mean reversion or volatility expansion signals.
+
+Key Components:
+1. Bollinger Bands (20-day, 2σ) - Identifies periods of contraction (low volatility) and potential breakout zones.
+2. Volume Profile Imbalance - Detects significant volume surges at key levels, confirming breakout strength.
+3. Support/Resistance Levels - Acts as critical zones for trade execution.
+4. Breakout Confirmation - Requires price to close outside the Bollinger Band with volume confirmation.
+
+Entry Rules:
+1. Wait for Bollinger Band contraction (narrowing bands) near a key support/resistance level.
+2. Monitor volume profile for a surge in volume imbalance (e.g., 2x average volume).
+3. Enter a long trade when price breaks above the upper Bollinger Band with confirming volume.
+4. Enter a short trade when price breaks below the lower Bollinger Band with confirming volume.
+
+Exit Rules:
+1. Mean Reversion Exit: Close the trade when price returns inside the Bollinger Band.
+2. Volatility Expansion Exit: Close the trade when Bollinger Bands widen significantly (e.g., 1.5x the contraction width).
+3. Stop Loss: Place a stop loss just outside the opposite Bollinger Band.
+
+Risk Management:
+1. Position sizing based on 1-2% risk per trade.
+2. Use a trailing stop if volatility expands favorably.
+3. Avoid trading during major news events or low liquidity periods.
+
+Required Indicators:
+1. Bollinger Bands (20-period, 2σ)
+2. Volume Profile or Volume Imbalance Indicator
+3. Support/Resistance Levels (manual or automated)
+
+This strategy is ideal for traders looking to capitalize on breakout opportunities with strong volume confirmation while managing risk through volatility-based exits.

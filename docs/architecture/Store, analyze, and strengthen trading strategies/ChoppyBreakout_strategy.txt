@@ -1,0 +1,28 @@
+STRATEGY_NAME: ChoppyBreakout  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Choppiness Index (CI) Filter:** Identifies low-choppiness (trending) conditions when CI < 35.  
+2. **Donchian Channel Breakout:** Confirms bullish momentum when price closes above the 20-day upper Donchian Channel.  
+3. **ATR-Based Trailing Stop:** Exits trades with a dynamic 5% trailing stop based on Average True Range (ATR) to lock in profits and limit losses.  
+
+**Entry Rules:**  
+- **Condition 1:** Choppiness Index (CI) drops below 35 (indicating reduced market noise).  
+- **Condition 2:** Price closes above the 20-day Donchian Channel upper band (breakout confirmation).  
+- **Action:** Enter long on the next candle’s open.  
+
+**Exit Rules:**  
+- **Trailing Stop:** Set a 5% trailing stop based on ATR (e.g., if ATR is $2, trail stop at 5% × $2 = $0.10 below the highest high since entry).  
+- **Optional Time Exit:** Close trade after X days if trailing stop isn’t hit (user-defined).  
+
+**Risk Management:**  
+- **Position Sizing:** Allocate a fixed % of capital per trade (e.g., 1–2%).  
+- **Stop Placement:** Initial stop can be set below the Donchian Channel lower band or recent swing low for added safety.  
+
+**Required Indicators:**  
+1. **Choppiness Index (CI):** 14-period default (adjustable).  
+2. **Donchian Channel:** 20-day period (upper/lower bands).  
+3. **Average True Range (ATR):** 14-period for trailing stop calculation.  
+
+**Unique Edge:** Combines volatility contraction (CI) with breakout momentum (Donchian) and adaptive risk control (ATR stop), ideal for trending markets with low false breakouts.

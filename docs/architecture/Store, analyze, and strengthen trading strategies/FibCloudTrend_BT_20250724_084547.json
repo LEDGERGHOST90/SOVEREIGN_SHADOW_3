@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "",
+  "stderr": "  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_13_2025/backtests/FibCloudTrend_BT.py\", line 83\n    self.buy(size=position_size, sl=sl_price,\n            ^\nSyntaxError: '(' was never closed\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_13_2025/backtests/FibCloudTrend_BT.py` failed. (See above for error)\n",
+  "execution_time": 0.457373,
+  "timestamp": "2025-07-24T08:45:47.470685"
+}

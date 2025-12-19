@@ -1,0 +1,38 @@
+STRATEGY_NAME: SqueezeAccumulation
+
+STRATEGY_DETAILS:
+This strategy combines Bollinger Band compression with Herrick Payoff Index momentum to identify high-probability breakout opportunities during accumulation/distribution phases.
+
+Key Components:
+1. Bollinger Bands (20,2) - Identifies periods of low volatility (squeeze)
+2. Herrick Payoff Index (HPI) - Measures money flow and accumulation/distribution
+3. Price Action - Confirms breakout direction
+4. Swing Points - Defines stop-loss levels
+
+Entry Rules:
+1. Wait for Bollinger Band squeeze (bands within 1.5x ATR of 20-period moving average)
+2. Confirm HPI spike above 0.5 (accumulation) or below -0.5 (distribution)
+3. Enter long on breakout above upper band (accumulation) or short below lower band (distribution)
+
+Exit Rules:
+1. Take profit at 1.5x ATR from entry point
+2. Trail stop to breakeven after 0.5x ATR profit
+3. Exit if HPI reverses direction (crosses back through zero)
+
+Risk Management:
+1. Stop-loss placed at most recent swing low (long) or swing high (short)
+2. Position size limited to 1-2% of capital per trade
+3. No trades during major economic news events
+
+Required Indicators:
+1. Bollinger Bands (20,2)
+2. Herrick Payoff Index (default settings)
+3. ATR (14) for volatility measurement
+4. Swing high/low detector
+
+Optimization Tips:
+1. Adjust HPI thresholds based on asset volatility
+2. Test different ATR multiples for squeeze definition
+3. Consider adding volume confirmation for stronger signals
+
+This strategy works best in ranging markets transitioning to trends, capturing early momentum while maintaining tight risk control through the Bollinger Band squeeze setup.

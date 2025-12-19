@@ -1,0 +1,38 @@
+STRATEGY_NAME: BandwidthPOC  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Bollinger Band Width Contraction:** The strategy identifies periods of low volatility when the Bollinger Band width contracts below a historical percentile (e.g., 20th percentile), signaling a potential breakout.  
+2. **Volume Profile POC Confirmation:** The strategy requires a prominent Point of Control (POC) in the volume profile, indicating a strong price level where significant trading activity has occurred.  
+3. **Volume Surge Entry:** Entries are triggered only when a confirmed surge in volume accompanies the breakout, validating the move.  
+
+**Entry Rules:**  
+1. **Setup:**  
+   - Bollinger Band width must be below a predefined historical percentile (e.g., 20th percentile), indicating contraction.  
+   - Volume profile must show a clear and prominent POC near the current price.  
+2. **Trigger:**  
+   - Price breaks above/below the Bollinger Band (upper/lower) with a surge in volume (e.g., volume > 1.5x the 20-period average).  
+   - The breakout candle should close outside the Bollinger Band to confirm the move.  
+
+**Exit Rules:**  
+1. **Take Profit:**  
+   - Use a fixed risk-reward ratio (e.g., 2:1 or 3:1) based on the initial stop-loss distance.  
+   - Alternatively, exit when Bollinger Band width expands significantly (e.g., above the 80th percentile), indicating volatility exhaustion.  
+2. **Stop Loss:**  
+   - Place stop-loss just below/above the POC level for long/short trades, or inside the Bollinger Band (e.g., mid-band) to filter false breakouts.  
+
+**Risk Management:**  
+1. Position size should be calculated based on the stop-loss distance to limit risk per trade (e.g., 1-2% of capital).  
+2. Avoid trading during major news events or low-liquidity periods to prevent erratic volume spikes.  
+
+**Required Indicators:**  
+1. **Bollinger Bands (20,2):** To measure volatility contraction/expansion.  
+2. **Volume Profile:** To identify the Point of Control (POC).  
+3. **Volume Moving Average (e.g., 20-period):** To confirm volume surges.  
+4. **Historical Percentile Calculator (for Bollinger Band width):** To quantify contraction levels.  
+
+**Additional Notes:**  
+- This strategy works best in trending markets after consolidation phases.  
+- Backtest to optimize the Bollinger Band width percentile and volume surge multiplier for your specific asset/timeframe.  
+- Combine with price action (e.g., rejection wicks at POC) for higher-probability setups.

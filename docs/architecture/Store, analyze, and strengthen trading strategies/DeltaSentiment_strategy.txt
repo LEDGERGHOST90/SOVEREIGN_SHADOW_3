@@ -1,0 +1,46 @@
+STRATEGY_NAME: DeltaSentiment
+
+STRATEGY_DETAILS:
+The DeltaSentiment strategy is a sophisticated momentum-contrarian approach that leverages institutional sentiment and liquidity dynamics to identify trading opportunities. It focuses on the interplay between high liquidity and institutional sentiment, as captured by the 20-day delta-neutral VIX futures spread, to determine long and short positions.
+
+### Key Strategy Components:
+1. **Momentum-Contrarian Framework**: The strategy combines momentum (longing high-liquidity contracts) and contrarian (shorting contracts with inverse institutional sentiment) elements.
+2. **Institutional Sentiment Analysis**: Uses the 20-day delta-neutral VIX futures spread as a proxy for institutional sentiment. A widening spread indicates bearish sentiment, while a narrowing spread suggests bullish sentiment.
+3. **Liquidity Focus**: Prioritizes contracts with high liquidity to ensure smoother execution and reduced slippage.
+
+### Entry Rules:
+1. **Long Entry**:
+   - Identify contracts with high liquidity (e.g., high trading volume or tight bid-ask spreads).
+   - Confirm bullish institutional sentiment by observing a narrowing 20-day delta-neutral VIX futures spread.
+   - Enter a long position when both conditions are met.
+
+2. **Short Entry**:
+   - Identify contracts with high liquidity.
+   - Confirm bearish institutional sentiment by observing a widening 20-day delta-neutral VIX futures spread.
+   - Enter a short position when both conditions are met.
+
+### Exit Rules:
+1. **Long Exit**:
+   - Exit the long position if the 20-day delta-neutral VIX futures spread begins to widen, indicating a shift to bearish sentiment.
+   - Alternatively, exit if liquidity in the contract deteriorates significantly.
+
+2. **Short Exit**:
+   - Exit the short position if the 20-day delta-neutral VIX futures spread begins to narrow, indicating a shift to bullish sentiment.
+   - Alternatively, exit if liquidity in the contract deteriorates significantly.
+
+### Risk Management:
+1. **Position Sizing**: Use a fixed percentage of capital (e.g., 1-2%) per trade to limit exposure.
+2. **Stop-Loss**: Set a stop-loss at a predefined percentage (e.g., 2-3%) below the entry price for long positions and above the entry price for short positions.
+3. **Diversification**: Avoid overconcentration in a single contract or sector by diversifying across multiple high-liquidity instruments.
+
+### Required Indicators:
+1. **20-Day Delta-Neutral VIX Futures Spread**: Tracks institutional sentiment by measuring the spread between VIX futures contracts adjusted for delta neutrality.
+2. **Liquidity Metrics**: Includes trading volume, bid-ask spreads, and order book depth to identify high-liquidity contracts.
+3. **Price Data**: Historical and real-time price data for the contracts being traded.
+
+### Additional Notes:
+- The strategy is best suited for traders with access to institutional-grade data and tools for analyzing VIX futures spreads and liquidity metrics.
+- Regular monitoring of the 20-day delta-neutral VIX futures spread is crucial, as institutional sentiment can shift rapidly.
+- Backtesting is recommended to validate the strategy's performance under different market conditions.
+
+By combining liquidity analysis with institutional sentiment, the DeltaSentiment strategy aims to capitalize on mispricings and sentiment-driven market movements while minimizing execution risks.

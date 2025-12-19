@@ -1,0 +1,34 @@
+STRATEGY_NAME: VoltaMomentum  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **Volatility-Adjusted Momentum**: Combines momentum (Rate of Change) with volatility (Bollinger Bandwidth) to identify high-probability entries.  
+2. **3-Day Rate of Change (ROC)**: Measures short-term price momentum.  
+3. **Bollinger Bandwidth Expansion**: Tracks volatility expansion as a confirmation signal.  
+4. **10-Day Average Bandwidth**: Acts as a dynamic threshold for volatility breakout confirmation.  
+
+**Entry Rules:**  
+1. **Momentum Trigger**: 3-day ROC must exceed a predefined threshold (e.g., >2% for bullish, <-2% for bearish).  
+2. **Volatility Expansion**: Bollinger Bandwidth must break above its 10-day moving average, signaling increased volatility.  
+3. **Direction Alignment**: Enter long if ROC is positive and bandwidth expands; enter short if ROC is negative and bandwidth expands.  
+
+**Exit Rules:**  
+1. **Volatility Contraction**: Exit when Bollinger Bandwidth closes below its 10-day average, indicating reduced momentum.  
+2. **Trailing Stop**: Optional trailing stop (e.g., 2x ATR) to protect profits during extended trends.  
+
+**Risk Management:**  
+1. **Position Sizing**: Use fixed fractional or volatility-based sizing (e.g., 1-2% risk per trade).  
+2. **Stop-Loss**: Initial stop at recent swing low/high or based on ATR (e.g., 1.5x ATR).  
+3. **Time Exit**: Close trades after 5 days if no volatility contraction occurs.  
+
+**Required Indicators:**  
+1. **3-Day Rate of Change (ROC)**  
+2. **Bollinger Bands (20,2) + Bandwidth Calculation**  
+   - Bandwidth = (Upper Band - Lower Band) / Middle Band  
+3. **10-Day Simple Moving Average of Bandwidth**  
+4. **Optional**: ATR (14) for stop-loss/trailing stop.  
+
+**Unique Edge:**  
+- Filters momentum trades with volatility expansion, reducing false breakouts.  
+- Exits early during low volatility, preserving capital.  
+- Adapts to changing market conditions via dynamic bandwidth threshold.

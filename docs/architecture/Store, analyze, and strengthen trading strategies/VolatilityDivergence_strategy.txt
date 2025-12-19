@@ -1,0 +1,70 @@
+STRATEGY_NAME: VolatilityDivergence
+
+STRATEGY_DETAILS:
+
+### Key Strategy Components
+This VolatilityDivergence strategy is designed to capture high-probability breakouts from consolidation phases by combining volatility contraction indicators with moving average filters and RSI divergence signals. The core idea is to wait for periods of low volatility (indicating consolidation and potential energy buildup), confirm directional bias through RSI divergence (where price action and RSI momentum disagree, signaling exhaustion and impending reversal/breakout), and use moving averages to validate the consolidation range and breakout direction. It focuses on trending markets post-consolidation, avoiding choppy conditions, and is suitable for timeframes like 1-hour or 4-hour charts on liquid assets (e.g., forex majors, indices, or stocks with high volume).
+
+The strategy leverages:
+- **Volatility measurement** to detect squeezes (low volatility periods ripe for breakouts).
+- **Moving averages** to define the consolidation range and filter trend alignment.
+- **RSI divergence** as a momentum confirmation to increase the probability of a sustained breakout, reducing false signals.
+
+Backtesting should emphasize assets with frequent consolidation patterns, and the strategy performs best in ranging-to-trending transitions.
+
+### Required Indicators
+1. **Bollinger Bands (BB)**: Period 20, standard deviation 2. Used for volatility assessment—narrow bands indicate consolidation (squeeze), while expansion signals breakout potential.
+2. **Exponential Moving Averages (EMAs)**: Short-term EMA (9-period) and long-term EMA (21-period). These define the consolidation range (price trading sideways between EMAs) and confirm breakout direction (price crossing above/below both EMAs).
+3. **Relative Strength Index (RSI)**: Period 14, levels at 30/70. Used to identify divergence—bullish divergence (price lower lows, RSI higher lows) or bearish divergence (price higher highs, RSI lower highs) during consolidation.
+4. **Average True Range (ATR)**: Period 14. For dynamic stop-loss and take-profit sizing based on volatility (e.g., stop = 1.5x ATR).
+
+All indicators are standard and available on platforms like TradingView, MT4/5, or Python libraries (e.g., TA-Lib).
+
+### Entry Rules
+Entries are only taken during or immediately after confirmed consolidation with RSI divergence, ensuring high-probability setups. Wait for all conditions to align to filter out noise.
+
+1. **Identify Consolidation (Volatility Filter)**:
+   - Bollinger Bands width (upper band - lower band) < 0.5x the 20-period average BB width, indicating a squeeze (low volatility, price coiling).
+   - Price must be trading sideways between the 9-EMA and 21-EMA for at least 10-15 bars, with no clear trend (EMAs flat or intertwined).
+
+2. **Confirm RSI Divergence (Momentum Signal)**:
+   - **Bullish Setup**: During consolidation, price forms at least two lower lows, but RSI forms higher lows (below 50 level, ideally near 30-40 oversold). This signals weakening downside momentum and potential upside breakout.
+   - **Bearish Setup**: During consolidation, price forms at least two higher highs, but RSI forms lower highs (above 50 level, ideally near 60-70 overbought). This signals weakening upside momentum and potential downside breakout.
+   - Divergence must be "hidden" (stronger signal for continuation post-consolidation) rather than regular, but both are acceptable if clear.
+
+3. **Breakout Entry Trigger**:
+   - **Long Entry**: Price closes above the upper Bollinger Band AND above both 9-EMA and 21-EMA, with bullish RSI divergence confirmed in the prior consolidation. Enter on the close of the breakout candle or next bar open.
+   - **Short Entry**: Price closes below the lower Bollinger Band AND below both 9-EMA and 21-EMA, with bearish RSI divergence confirmed. Enter similarly.
+   - Volume confirmation (optional but recommended): Breakout candle volume > 1.5x the 10-period average to validate momentum.
+   - Avoid entries if overall market trend opposes (e.g., no longs if price is below a 200-period SMA).
+
+Maximum 1-2 positions open at a time; skip setups if no divergence is present, even in squeezes.
+
+### Exit Rules
+Exits balance profit capture with protection against reversals, using a combination of trailing mechanisms and volatility-based targets.
+
+1. **Take-Profit (TP)**:
+   - Initial TP: 2x ATR from entry (e.g., for long, TP = entry + 2x ATR). This captures the initial breakout expansion.
+   - Trailing TP: Once price reaches 1x ATR profit, trail the stop to breakeven + 0.5x ATR. Then trail using the 9-EMA (exit long if price closes below 9-EMA) or BB middle band for dynamic adjustment.
+   - Alternative: Scale out—close 50% at 1.5x ATR, let the rest run with trailing stop until opposite EMA crossover.
+
+2. **Stop-Loss (SL)**:
+   - Initial SL: For longs, place below the most recent swing low in consolidation or lower Bollinger Band (whichever is farther), adjusted to 1.5x ATR from entry. For shorts, above recent swing high or upper BB.
+   - Never risk more than 1-2% of account per trade; adjust position size accordingly (e.g., position size = (account risk % * capital) / (SL distance in pips/points)).
+
+3. **Early Exit Signals**:
+   - Exit if RSI shows opposite divergence post-entry (e.g., bearish divergence on a long trade).
+   - Time-based exit: Close after 10-20 bars if no progress (avoids stagnation).
+   - Global filter: Exit all positions if a major news event (e.g., NFP) approaches or if BB squeeze reforms without breakout.
+
+### Risk Management
+- **Position Sizing**: Risk no more than 1% of total account equity per trade, calculated as: Position Size = (Account Balance * Risk %) / (Entry - SL distance). Use ATR for normalization across assets.
+- **Maximum Drawdown Control**: Limit consecutive losses to 3 trades; pause trading if drawdown exceeds 5% in a session. Overall portfolio risk: No more than 3% exposure across all open trades.
+- **Win Rate and R:R Expectations**: Targets 55-65% win rate with 1.5:1 to 2:1 reward-to-risk ratio, emphasizing quality over quantity (2-5 setups per week on 4H charts).
+- **Additional Safeguards**:
+  - Trade only during high-liquidity sessions (e.g., London/New York overlap for forex).
+  - Backtest on at least 5 years of data, optimizing BB deviation (1.5-2.5) and EMA periods (7-12 short, 18-25 long) without overfitting.
+  - Avoid over-optimization: Use walk-forward analysis to ensure robustness in varying volatility regimes (e.g., low-vol environments like 2020 vs. high-vol like 2022).
+  - Journal all trades, noting divergence strength and volatility context for refinement.
+
+This strategy excels in identifying "coiled spring" breakouts but may underperform in prolonged trends without consolidation. Implement with alerts for squeezes and manual divergence scanning for best results.

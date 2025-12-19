@@ -1,0 +1,92 @@
+{
+  "timestamp": "2025-12-18T16:31:44.460240",
+  "capital": 734,
+  "signals": {
+    "BTC": {
+      "symbol": "BTC",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50.97442778831041,
+      "entry_price": 85397,
+      "stop_loss": 87958.91,
+      "take_profit": 81127.15,
+      "position_size": 25.49,
+      "reasoning": "BTC in High Volatility Trend regime. 24h change: -1.0%. ADX: 27.5. Recommended: SHORT with 51% confidence.",
+      "sources": [
+        "CoinGecko",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T16:31:45.388002"
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50.41725476217408,
+      "entry_price": 2822.92,
+      "stop_loss": 2907.6076000000003,
+      "take_profit": 2681.774,
+      "position_size": 25.21,
+      "reasoning": "ETH in High Volatility Trend regime. 24h change: -0.4%. ADX: 35.9. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "CoinGecko",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T16:31:45.759048"
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 119.26,
+      "stop_loss": 122.8378,
+      "take_profit": 113.297,
+      "position_size": 15.0,
+      "reasoning": "SOL in Unknown regime. 24h change: -3.4%. ADX: 0.0. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "CoinGecko",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T16:31:46.037446"
+    },
+    "XRP": {
+      "symbol": "XRP",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T16:31:46.129965"
+    },
+    "AAVE": {
+      "symbol": "AAVE",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T16:31:46.230314"
+    }
+  },
+  "summary": {
+    "long": [],
+    "short": [
+      "BTC",
+      "ETH"
+    ],
+    "neutral": [
+      "SOL",
+      "XRP",
+      "AAVE"
+    ]
+  }
+}

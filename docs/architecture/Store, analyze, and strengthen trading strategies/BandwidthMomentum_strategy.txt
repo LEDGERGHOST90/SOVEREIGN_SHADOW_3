@@ -1,0 +1,44 @@
+STRATEGY_NAME: BandwidthMomentum
+
+STRATEGY_DETAILS:
+This strategy combines Bollinger Band width analysis with Chande Momentum Oscillator signals to identify high-probability breakout opportunities during periods of market contraction.
+
+Key Components:
+1. Bollinger Band Width: Measures market volatility by calculating the percentage difference between upper and lower bands (Bandwidth = (Upper Band - Lower Band)/Middle Band)
+2. Chande Momentum Oscillator (CMO): A momentum indicator comparing upward and downward price movements over a specified period
+3. Signal Line: Typically a moving average of the CMO (often 9-period SMA)
+
+Entry Rules:
+1. Wait for Bollinger Band width to show contraction (narrowing bands indicating reduced volatility)
+2. When CMO crosses above its signal line during this contraction phase:
+   - Enter long position on next candle open
+3. When CMO crosses below its signal line during contraction:
+   - Enter short position on next candle open
+
+Exit Rules:
+1. For long positions:
+   - Exit when CMO crosses below signal line
+   - OR when Bollinger Band width expands significantly (suggesting volatility breakout)
+2. For short positions:
+   - Exit when CMO crosses above signal line
+   - OR when Bollinger Band width expands significantly
+
+Risk Management:
+1. Position sizing: Risk no more than 1-2% of capital per trade
+2. Stop-loss: Place below recent swing low (long) or above swing high (short)
+3. Trailing stops: Consider moving stop to break-even after favorable move
+4. Maximum consecutive losses: Implement after 3-5 losing trades
+
+Required Indicators:
+1. Bollinger Bands (20,2 standard deviation typical settings)
+2. Bollinger Band Width indicator
+3. Chande Momentum Oscillator (14-period typical)
+4. Signal Line (9-period SMA of CMO)
+
+Optimization Considerations:
+1. Test different periods for CMO (14 vs 20)
+2. Experiment with signal line length (9 vs 14)
+3. Adjust Bollinger Band settings (20,2 vs 20,1.5)
+4. Define "significant" bandwidth expansion (e.g., 20% increase from entry width)
+
+This strategy works best in ranging markets transitioning to trending phases, capitalizing on the momentum that often follows periods of low volatility. The combination of volatility contraction and momentum confirmation provides a robust framework for breakout trading.

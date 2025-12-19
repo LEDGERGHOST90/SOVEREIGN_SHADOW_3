@@ -1,0 +1,32 @@
+STRATEGY_NAME: VolatilityEMA  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **EMA Crossover System:** Uses the 50-period EMA and 200-period EMA to identify bullish trends.  
+2. **Volatility Filter:** Incorporates the VIX (Volatility Index) to ensure trades are executed in low-volatility environments (VIX < 15).  
+3. **Exit Conditions:** Monitors VIX spikes (> 20) or EMA crossover reversals to close positions.  
+
+**Entry Rules:**  
+- **Long Entry:** Triggered when the 50-period EMA crosses above the 200-period EMA (Golden Cross).  
+- **Volatility Confirmation:** The VIX must be below 15 at the time of the crossover.  
+
+**Exit Rules:**  
+- **Volatility-Based Exit:** Close the position if the VIX rises above 20, indicating increased market risk.  
+- **EMA Reversal Exit:** Exit if the 50-period EMA crosses back below the 200-period EMA (Death Cross).  
+
+**Risk Management:**  
+- **Stop-Loss:** Optional—consider a trailing stop or fixed percentage stop (e.g., 5-8%) to protect gains.  
+- **Position Sizing:** Adjust trade size based on volatility; smaller positions if VIX is near 15.  
+
+**Required Indicators:**  
+1. **50-period Exponential Moving Average (EMA)**  
+2. **200-period Exponential Moving Average (EMA)**  
+3. **VIX (Volatility Index)**  
+
+**Additional Notes:**  
+- Best suited for trending markets; may underperform in choppy or high-volatility conditions.  
+- Works well on daily or higher timeframes for swing or position trading.  
+- Backtest to confirm performance across different asset classes (e.g., stocks, ETFs).  
+
+This strategy combines trend-following (EMA crossover) with volatility awareness (VIX filter) for higher-probability setups.

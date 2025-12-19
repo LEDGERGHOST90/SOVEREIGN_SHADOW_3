@@ -1,0 +1,56 @@
+STRATEGY_NAME: VortexDivergence
+
+STRATEGY_DETAILS:
+The VortexDivergence strategy combines the Vortex Indicator, Elder's Force Index, and Fibonacci retracement levels to identify high-probability trend continuation opportunities with divergence confirmation. This strategy focuses on aligning trend direction with volume-backed momentum divergences and uses Fibonacci levels for precise exit points.
+
+### Key Strategy Components:
+1. **Vortex Indicator**: Confirms the trend direction (VI+ for uptrend, VI- for downtrend).
+2. **Elder's Force Index**: Measures the strength of price movement relative to volume, used to identify divergences.
+3. **Volume Analysis**: Increasing volume during divergence signals stronger confirmation.
+4. **Fibonacci Retracement Levels**: Anchored to recent swing highs/lows for exit targets.
+
+### Entry Rules:
+1. **Uptrend Entry**:
+   - Vortex Indicator shows VI+ > VI- (uptrend confirmation).
+   - Price makes a higher high, but Elder's Force Index makes a lower high (bearish divergence).
+   - Volume increases during the divergence.
+   - Enter long on a pullback with confirmation from price action (e.g., bullish candlestick pattern).
+
+2. **Downtrend Entry**:
+   - Vortex Indicator shows VI- > VI+ (downtrend confirmation).
+   - Price makes a lower low, but Elder's Force Index makes a higher low (bullish divergence).
+   - Volume increases during the divergence.
+   - Enter short on a pullback with confirmation from price action (e.g., bearish candlestick pattern).
+
+### Exit Rules:
+1. **Fibonacci Retracement Levels**:
+   - Anchor Fibonacci levels to the most recent swing high and swing low.
+   - Exit long positions at key Fibonacci levels (e.g., 38.2%, 50%, or 61.8% retracement).
+   - Exit short positions at key Fibonacci levels (e.g., 38.2%, 50%, or 61.8% retracement).
+
+2. **Stop Loss**:
+   - Place stop loss below the recent swing low for long positions.
+   - Place stop loss above the recent swing high for short positions.
+
+### Risk Management:
+1. **Position Sizing**:
+   - Risk no more than 1-2% of the trading account on any single trade.
+2. **Risk-Reward Ratio**:
+   - Aim for a minimum 1:2 risk-reward ratio based on Fibonacci levels.
+3. **Trailing Stop**:
+   - Consider using a trailing stop to lock in profits as the trade moves in your favor.
+
+### Required Indicators:
+1. **Vortex Indicator (VI+ and VI-)**:
+   - Used to confirm trend direction.
+2. **Elder's Force Index**:
+   - Used to identify divergences between price and momentum.
+3. **Volume Indicator**:
+   - Used to confirm increasing volume during divergence.
+4. **Fibonacci Retracement Tool**:
+   - Used to identify exit levels based on recent swing extremes.
+
+### Additional Notes:
+- This strategy works best in trending markets. Avoid using it during choppy or sideways market conditions.
+- Always wait for confirmation from price action (e.g., candlestick patterns) before entering a trade.
+- Backtest the strategy on multiple timeframes to identify the most suitable market conditions and asset classes.

@@ -1,0 +1,3 @@
+/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/CoTrendalNeutral_BT.py:52: UserWarning: Data index is not datetime. Assuming simple periods, but `pd.DateTimeIndex` is advised.
+  bt = Backtest(data, CoTrendalNeutral, cash=1000000, commission=0.002)
+

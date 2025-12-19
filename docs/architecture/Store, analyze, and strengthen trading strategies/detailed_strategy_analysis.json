@@ -1,0 +1,20 @@
+      "versions_count": 5,
+      "json_results_count": 0,
+      "has_doc": false,
+      "has_pkg": true,
+      "type": "Breakout",
+      "risk_per_trade": 0.02,
+      "indicators": [
+        "SMA",
+        "RSI",
+        "ATR",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit",
+        "Trailing Stop"
+      ]
+    }
+  ]
+}

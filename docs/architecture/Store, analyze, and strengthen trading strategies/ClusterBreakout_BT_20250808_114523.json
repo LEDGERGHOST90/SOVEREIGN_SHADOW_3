@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "",
+  "stderr": "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/ClusterBreakout_BT.py:53: UserWarning: Data index is not datetime. Assuming simple periods, but `pd.DateTimeIndex` is advised.\n  bt = Backtest(data, ClusterBreakout, cash=1_000_000, commission=.002)\nTraceback (most recent call last):\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/ClusterBreakout_BT.py\", line 54, in <module>\n    stats = bt.run()\n  File \"/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/backtesting.py\", line 1170, in run\n    strategy.next()\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/ClusterBreakout_BT.py\", line 22, in next\n    position_size = int(round(1_000_000 * 0.01 / risk))\nTypeError: type _Array doesn't define __round__ method\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/ClusterBreakout_BT.py` failed. (See above for error)\n",
+  "execution_time": 1.164344,
+  "timestamp": "2025-08-08T11:45:23.874648"
+}

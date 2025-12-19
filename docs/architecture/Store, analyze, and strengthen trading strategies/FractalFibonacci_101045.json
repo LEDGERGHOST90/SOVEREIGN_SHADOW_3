@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "",
+  "stderr": "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/07_24_2025/backtests_package/FractalFibonacci_PKG.py:111: UserWarning: Some prices are larger than initial cash value. Note that fractional trading is not supported. If you want to trade Bitcoin, increase initial cash, or trade \u03bcBTC or satoshis instead (GH-134).\n  bt = Backtest(data, FractalFibonacci, commission=.002, exclusive_orders=True)\nTraceback (most recent call last):\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/07_24_2025/backtests_package/FractalFibonacci_PKG.py\", line 112, in <module>\n    stats = bt.run()\n  File \"/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/backtesting.py\", line 1139, in run\n    strategy.init()\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/07_24_2025/backtests_package/FractalFibonacci_PKG.py\", line 10, in init\n    self.data.df = self.data.df.drop(columns=[col for col in self.data.df.columns if 'unnamed' in col.lower()])\nAttributeError: can't set attribute 'df'\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/07_24_2025/backtests_package/FractalFibonacci_PKG.py` failed. (See above for error)\n",
+  "execution_time": 1.572328,
+  "timestamp": "2025-07-24T10:10:45.143591"
+}

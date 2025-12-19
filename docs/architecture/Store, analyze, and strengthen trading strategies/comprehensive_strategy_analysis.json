@@ -1,0 +1,3668 @@
+{
+  "analysis_date": "2025-12-13",
+  "total_strategies": 34,
+  "average_score": 77.38235294117646,
+  "strategies": [
+    {
+      "name": "BandwidthPulse",
+      "type": "Breakout",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 1,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "ATR",
+        "BBANDS",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "ContangoDivergence",
+      "type": "Arbitrage",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "ATR",
+        "VIX"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "DeltaBandBreakout",
+      "type": "Breakout",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "BBANDS",
+        "OBV",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "DynamicCrossfire",
+      "type": "Trend Following",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 3,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Trend Following Enhancements",
+          "actions": [
+            "Add ADX > 25 filter to confirm strong trend",
+            "Implement pullback entry instead of breakout entry",
+            "Add higher timeframe trend confirmation",
+            "Use multiple EMAs for trend strength assessment",
+            "Implement trend exhaustion detection (RSI divergence)"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "RSI",
+        "ADX"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "FibroVoltaic",
+      "type": "Volatility",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 0,
+      "critical_issues": 0,
+      "weaknesses": [],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "SMA",
+        "ATR",
+        "Fibonacci"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit",
+        "Trailing Stop"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "GammaReversion",
+      "type": "Mean Reversion",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "Volume",
+        "VWAP"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "GannSMAConvergence",
+      "type": "Mean Reversion",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 0,
+      "critical_issues": 0,
+      "weaknesses": [],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "ATR"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit",
+        "Trailing Stop"
+      ],
+      "versions": 2
+    },
+    {
+      "name": "LiquidationSpikeBreakout",
+      "type": "Breakout",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "ATR",
+        "BBANDS",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "MomentumBandwidth",
+      "type": "Volatility",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "ATR",
+        "CMO"
+      ],
+      "features": [
+        "Stop Loss",
+        "Trailing Stop"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "VolCliffArbitrage",
+      "type": "Arbitrage",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "ADX",
+        "ATR",
+        "BBANDS"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit"
+      ],
+      "versions": 6
+    },
+    {
+      "name": "VolatilityBandit",
+      "type": "Volatility",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "ATR"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "VolatilityBreakout",
+      "type": "Breakout",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 3,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "RSI",
+        "BBANDS"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 5
+    },
+    {
+      "name": "VolatilityDivergence",
+      "type": "Mean Reversion",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 1,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "SMA",
+        "RSI",
+        "ATR",
+        "BBANDS",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit"
+      ],
+      "versions": 10
+    },
+    {
+      "name": "VolatilityFilteredEMA",
+      "type": "Volatility",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "ATR",
+        "VIX"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "VolumePulseBreakout",
+      "type": "Breakout",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 1,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "RSI",
+        "ATR",
+        "BBANDS",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "VolumetricBreakout",
+      "type": "Breakout",
+      "score": 100,
+      "grade": "A",
+      "weaknesses_count": 0,
+      "critical_issues": 0,
+      "weaknesses": [],
+      "recommendations": [
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "RSI",
+        "ATR",
+        "Volume"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit",
+        "Trailing Stop"
+      ],
+      "versions": 5
+    },
+    {
+      "name": "VoltaicDivergence",
+      "type": "Mean Reversion",
+      "score": 98,
+      "grade": "A",
+      "weaknesses_count": 3,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "SMA",
+        "RSI",
+        "ATR",
+        "BBANDS"
+      ],
+      "features": [
+        "Stop Loss"
+      ],
+      "versions": 4
+    },
+    {
+      "name": "FractalFibonacci",
+      "type": "Breakout",
+      "score": 93,
+      "grade": "A",
+      "weaknesses_count": 4,
+      "critical_issues": 0,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "RSI",
+        "MACD",
+        "Fibonacci"
+      ],
+      "features": [
+        "Stop Loss",
+        "Take Profit"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "VolatilityCompression",
+      "type": "Volatility",
+      "score": 85,
+      "grade": "A",
+      "weaknesses_count": 2,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "SMA",
+        "ATR"
+      ],
+      "features": [
+        "Trailing Stop"
+      ],
+      "versions": 1
+    },
+    {
+      "name": "DualMomentumFisher",
+      "type": "Trend Following",
+      "score": 73,
+      "grade": "B",
+      "weaknesses_count": 4,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Trend Following Enhancements",
+          "actions": [
+            "Add ADX > 25 filter to confirm strong trend",
+            "Implement pullback entry instead of breakout entry",
+            "Add higher timeframe trend confirmation",
+            "Use multiple EMAs for trend strength assessment",
+            "Implement trend exhaustion detection (RSI divergence)"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "EMA",
+        "Fisher"
+      ],
+      "features": [],
+      "versions": 1
+    },
+    {
+      "name": "BandedRSI_Trend",
+      "type": "Trend Following",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Trend Following Enhancements",
+          "actions": [
+            "Add ADX > 25 filter to confirm strong trend",
+            "Implement pullback entry instead of breakout entry",
+            "Add higher timeframe trend confirmation",
+            "Use multiple EMAs for trend strength assessment",
+            "Implement trend exhaustion detection (RSI divergence)"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "BandedReversion",
+      "type": "Mean Reversion",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "BandwidthMomentum",
+      "type": "Volatility",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "DynamicVWAPTrend",
+      "type": "Trend Following",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Trend Following Enhancements",
+          "actions": [
+            "Add ADX > 25 filter to confirm strong trend",
+            "Implement pullback entry instead of breakout entry",
+            "Add higher timeframe trend confirmation",
+            "Use multiple EMAs for trend strength assessment",
+            "Implement trend exhaustion detection (RSI divergence)"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "ElderReversion",
+      "type": "Mean Reversion",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "FibonacciDivergence",
+      "type": "Mean Reversion",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "FisherBandConvergence",
+      "type": "Mean Reversion",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Mean Reversion Enhancements",
+          "actions": [
+            "Add oversold/overbought confirmation (RSI < 30 or > 70)",
+            "Implement Bollinger Band width filter (only trade in low vol)",
+            "Add mean reversion zone identification",
+            "Use multiple mean reversion indicators (RSI + BB + Stoch)",
+            "Implement quick exit if mean reversion fails"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "VolatilityCorridorPutter",
+      "type": "Volatility",
+      "score": 53,
+      "grade": "C",
+      "weaknesses_count": 6,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Volatility Strategy Enhancements",
+          "actions": [
+            "Add volatility percentile ranking (trade extremes)",
+            "Implement volatility expansion/contraction detection",
+            "Add correlation to VIX or crypto volatility index",
+            "Use Bollinger Band width for volatility measurement",
+            "Implement volatility breakout confirmation"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [
+        "VIX"
+      ],
+      "features": [],
+      "versions": 1
+    },
+    {
+      "name": "BandedStochastic",
+      "type": "Breakout",
+      "score": 43,
+      "grade": "C",
+      "weaknesses_count": 7,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "BandwidthBreakout",
+      "type": "Breakout",
+      "score": 43,
+      "grade": "C",
+      "weaknesses_count": 7,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "ChannelFibonacciBreakout",
+      "type": "Breakout",
+      "score": 43,
+      "grade": "C",
+      "weaknesses_count": 7,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "ChoppyBreakout",
+      "type": "Breakout",
+      "score": 43,
+      "grade": "C",
+      "weaknesses_count": 7,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "DeltaClusterBreakout",
+      "type": "Breakout",
+      "score": 43,
+      "grade": "C",
+      "weaknesses_count": 7,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    },
+    {
+      "name": "FlowVolatilityBreakout",
+      "type": "Breakout",
+      "score": 43,
+      "grade": "C",
+      "weaknesses_count": 7,
+      "critical_issues": 1,
+      "weaknesses": [
+        {
+          "category": "Risk Management",
+          "issue": "No explicit risk per trade defined",
+          "severity": "HIGH",
+          "impact": "Uncontrolled position sizing can lead to catastrophic losses"
+        },
+        {
+          "category": "Risk Management",
+          "issue": "No stop loss mechanism detected",
+          "severity": "CRITICAL",
+          "impact": "Unlimited downside risk on each trade"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No take profit mechanism",
+          "severity": "MEDIUM",
+          "impact": "May miss optimal exit points, reducing profitability"
+        },
+        {
+          "category": "Exit Strategy",
+          "issue": "No trailing stop for profit protection",
+          "severity": "LOW",
+          "impact": "Cannot lock in profits during favorable moves"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Limited indicator diversity",
+          "severity": "MEDIUM",
+          "impact": "Single-indicator strategies prone to false signals"
+        },
+        {
+          "category": "Market Adaptation",
+          "issue": "No volatility-based indicators",
+          "severity": "MEDIUM",
+          "impact": "Strategy may not adapt to changing market conditions"
+        },
+        {
+          "category": "Signal Quality",
+          "issue": "Breakout strategy without volume confirmation",
+          "severity": "HIGH",
+          "impact": "False breakouts more likely without volume validation"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "category": "Risk Management Enhancement",
+          "actions": [
+            "Implement fixed 1-2% risk per trade based on account equity",
+            "Add dynamic position sizing based on ATR (Average True Range)",
+            "Implement maximum daily drawdown limit (e.g., 6% of equity)",
+            "Add correlation checks to avoid overexposure to similar assets",
+            "Implement Kelly Criterion for optimal position sizing"
+          ]
+        },
+        {
+          "priority": "CRITICAL",
+          "category": "Stop Loss Implementation",
+          "actions": [
+            "Add ATR-based stop loss (2-3x ATR from entry)",
+            "Implement swing low/high stop placement for trend strategies",
+            "Add time-based stop (exit if no movement after N bars)",
+            "Consider volatility-adjusted stops that widen in choppy markets",
+            "Implement break-even stop after 1:1 risk/reward achieved"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Exit Strategy Optimization",
+          "actions": [
+            "Implement scaled exits (take 50% at 2R, let 50% run)",
+            "Add trailing stop using ATR or percentage-based method",
+            "Use opposite signal as exit trigger",
+            "Implement time-based exits for mean reversion strategies",
+            "Add profit target based on historical average win size"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Signal Quality Improvement",
+          "actions": [
+            "Add volume confirmation for all entry signals",
+            "Implement multi-timeframe analysis (confirm on higher TF)",
+            "Add regime filter (trend vs. range detection)",
+            "Use RSI divergence for reversal confirmation",
+            "Implement signal strength scoring system"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Market Regime Adaptation",
+          "actions": [
+            "Add ADX filter to distinguish trending vs. ranging markets",
+            "Implement volatility regime detection (high/low vol periods)",
+            "Adjust parameters dynamically based on ATR percentile",
+            "Add correlation analysis to detect market regime shifts",
+            "Implement separate parameter sets for different regimes"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Breakout-Specific Enhancements",
+          "actions": [
+            "Add volume surge requirement (2-3x average volume)",
+            "Implement false breakout filter (wait for retest)",
+            "Add volatility contraction detection before breakout",
+            "Use multiple timeframe breakout confirmation",
+            "Implement breakout strength measurement"
+          ]
+        },
+        {
+          "priority": "MEDIUM",
+          "category": "Portfolio Integration",
+          "actions": [
+            "Test strategy on BTC, ETH, and major altcoins separately",
+            "Implement asset-specific parameter optimization",
+            "Add correlation filters to avoid simultaneous correlated trades",
+            "Consider strategy allocation based on market regime",
+            "Implement portfolio-level risk management"
+          ]
+        },
+        {
+          "priority": "HIGH",
+          "category": "Validation & Robustness",
+          "actions": [
+            "Perform walk-forward analysis (out-of-sample testing)",
+            "Test across multiple market cycles (bull, bear, sideways)",
+            "Implement Monte Carlo simulation for drawdown analysis",
+            "Add parameter sensitivity analysis",
+            "Test on multiple cryptocurrencies for robustness"
+          ]
+        }
+      ],
+      "indicators": [],
+      "features": [],
+      "versions": 0
+    }
+  ],
+  "summary": {
+    "grade_distribution": {
+      "A": 19,
+      "B": 1,
+      "C": 14,
+      "D": 0
+    },
+    "critical_issues_total": 16,
+    "top_5_strategies": [
+      "BandwidthPulse",
+      "ContangoDivergence",
+      "DeltaBandBreakout",
+      "DynamicCrossfire",
+      "FibroVoltaic"
+    ],
+    "needs_urgent_attention": [
+      "VolatilityCompression",
+      "DualMomentumFisher",
+      "BandedRSI_Trend",
+      "BandedReversion",
+      "BandwidthMomentum",
+      "DynamicVWAPTrend",
+      "ElderReversion",
+      "FibonacciDivergence",
+      "FisherBandConvergence",
+      "VolatilityCorridorPutter",
+      "BandedStochastic",
+      "BandwidthBreakout",
+      "ChannelFibonacciBreakout",
+      "ChoppyBreakout",
+      "DeltaClusterBreakout",
+      "FlowVolatilityBreakout"
+    ]
+  }
+}

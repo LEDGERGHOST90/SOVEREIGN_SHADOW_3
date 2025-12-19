@@ -1,0 +1,36 @@
+STRATEGY_NAME: ElderReversion  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Mean-Reversion Approach**: The strategy capitalizes on temporary price extremes, expecting prices to revert toward the mean.  
+2. **Elder Force Index**: A momentum oscillator combining price movement and volume to confirm reversals.  
+3. **Bollinger Bands**: Used to identify oversold conditions (price below the lower band) and define exit points (middle band).  
+4. **ADX Filter**: Ensures low trend strength (ADX < 25), avoiding trades during strong trends.  
+
+**Entry Rules:**  
+- **Condition 1**: Price must be below the lower Bollinger Band (oversold).  
+- **Condition 2**: Elder Force Index (EFI) crosses above its signal line (typically a moving average of EFI).  
+- **Condition 3**: ADX must be below 25, confirming weak trend strength.  
+
+**Exit Rules:**  
+- **Profit Target**: Middle Bollinger Band (mean reversion target).  
+- **Stop-Loss**: Optional: ATR-based stop or fixed percentage below entry.  
+- **Early Exit**: EFI reverses direction (crosses below signal line) before reaching the middle band.  
+
+**Risk Management:**  
+1. **Position Sizing**: Use fixed fractional or volatility-based sizing (e.g., 1-2% risk per trade).  
+2. **Stop-Loss**: Recommended if not exiting solely at the middle band (e.g., 1.5x ATR below entry).  
+3. **Trade Filter**: Only trade when ADX < 25 to avoid counter-trend risks.  
+
+**Required Indicators:**  
+1. **Bollinger Bands** (20-period SMA, 2 standard deviations).  
+2. **Elder Force Index** (13-period EMA for signal line).  
+3. **ADX** (14-period, threshold at 25).  
+
+**Unique Aspects:**  
+- Combines volume (EFI) with volatility (Bollinger Bands) for high-probability reversals.  
+- ADX acts as a trend filter, reducing false signals in directional markets.  
+- Exits at the mean (middle band), aligning with mean-reversion principles.  
+
+**Note**: Backtest optimal parameters for EFI signal line and ADX threshold. Avoid trading during earnings or high-impact news.

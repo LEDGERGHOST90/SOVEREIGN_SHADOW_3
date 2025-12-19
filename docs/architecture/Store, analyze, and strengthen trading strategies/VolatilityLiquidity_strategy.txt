@@ -1,0 +1,31 @@
+STRATEGY_NAME: VolatilityLiquidity
+
+STRATEGY_DETAILS:
+The VolatilityLiquidity strategy is designed to capitalize on breakouts during low-liquidity hours, using a combination of volatility-adjusted Donchian Channels and tick volume momentum divergence for confirmation. This strategy is particularly effective in markets where liquidity drops significantly during certain hours, leading to more pronounced price movements.
+
+Key Strategy Components:
+1. **Volatility-Adjusted Donchian Channel**: This indicator adjusts the traditional Donchian Channel based on market volatility, providing dynamic support and resistance levels that are more responsive to current market conditions.
+2. **Tick Volume Momentum Divergence**: This component analyzes the relationship between tick volume and price movement. A divergence occurs when price moves in one direction while tick volume moves in the opposite direction, signaling potential reversals or continuations.
+3. **Low-Liquidity Hours**: The strategy focuses on trading during specific hours when market liquidity is lower, which can lead to more significant price movements and breakouts.
+
+Entry Rules:
+1. **Breakout Confirmation**: Enter a trade when the price exceeds the upper or lower bound of the volatility-adjusted Donchian Channel.
+2. **Divergence Confirmation**: Ensure that there is a divergence between tick volume momentum and price movement. For example, if the price breaks above the Donchian Channel upper bound, tick volume should be decreasing, indicating a potential continuation of the breakout.
+
+Exit Rules:
+1. **Profit Target**: Set a profit target based on a multiple of the average true range (ATR) or a fixed percentage of the entry price.
+2. **Stop Loss**: Place a stop loss just below the Donchian Channel bound that was breached for long positions, or above the bound for short positions.
+3. **Time-Based Exit**: Exit the trade if the price does not move in the expected direction within a specified time frame, such as the end of the low-liquidity trading session.
+
+Risk Management:
+1. **Position Sizing**: Use a fixed percentage of the trading capital for each trade, typically between 1-2%, to manage risk.
+2. **Risk-Reward Ratio**: Aim for a minimum risk-reward ratio of 1:2, ensuring that potential profits outweigh potential losses.
+3. **Diversification**: Avoid concentrating all trades in a single asset or market to spread risk.
+
+Required Indicators:
+1. **Volatility-Adjusted Donchian Channel**: Custom indicator that adjusts the Donchian Channel based on market volatility.
+2. **Tick Volume Momentum**: Indicator that measures the momentum of tick volume and compares it to price movement.
+3. **Average True Range (ATR)**: Used to set profit targets and stop-loss levels based on market volatility.
+4. **Time-Based Filters**: Tools to identify and trade only during low-liquidity hours.
+
+By combining these elements, the VolatilityLiquidity strategy aims to identify high-probability breakout opportunities during periods of reduced market activity, leveraging the increased potential for significant price movements.

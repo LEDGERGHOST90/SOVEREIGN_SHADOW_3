@@ -1,0 +1,78 @@
+STRATEGY_NAME: MomentumBreakout
+
+STRATEGY_DETAILS:
+The MomentumBreakout strategy is designed to capitalize on strong trending markets by combining moving average crossovers, trend strength confirmation, and volatility-based exits. Here's a detailed breakdown of the strategy:
+
+### Key Components:
+1. **Trend Identification (EMA Crossover)**:
+   - Uses the 50-period EMA crossing above the 200-period EMA to identify a bullish trend.
+   - This crossover signals a potential shift in market momentum.
+
+2. **Trend Strength Confirmation (ADX)**:
+   - Requires the ADX (Average Directional Index) to rise above 25 to confirm the strength of the trend.
+   - This ensures the strategy only trades in markets with strong directional momentum.
+
+3. **Volatility-Based Stop-Loss (ATR)**:
+   - Uses a 2x ATR (Average True Range) stop-loss to manage risk dynamically based on market volatility.
+   - This adapts to changing market conditions and protects against excessive losses.
+
+4. **Overbought/Oversold Exit (RSI)**:
+   - Exits trades when the 5-period RSI crosses above 70 (overbought) or below 30 (oversold).
+   - This helps capture profits before potential reversals.
+
+---
+
+### Entry Rules:
+1. Wait for the 50-period EMA to cross above the 200-period EMA (bullish crossover).
+2. Confirm the trend strength by ensuring the ADX is above 25 and rising.
+3. Enter a long position on the next candle after both conditions are met.
+
+---
+
+### Exit Rules:
+1. **Stop-Loss Exit**:
+   - Place a stop-loss at 2x the current ATR value below the entry price.
+   - This ensures risk is proportional to market volatility.
+
+2. **RSI Exit**:
+   - Exit the trade if the 5-period RSI crosses above 70 (overbought) or below 30 (oversold).
+   - This captures profits during extreme price movements.
+
+---
+
+### Risk Management:
+1. **Position Sizing**:
+   - Use a fixed percentage of capital (e.g., 1-2%) per trade to manage risk.
+2. **Stop-Loss**:
+   - The 2x ATR stop-loss ensures risk is adjusted for current market volatility.
+3. **Avoid Overtrading**:
+   - Only trade when both the EMA crossover and ADX conditions are met.
+
+---
+
+### Required Indicators:
+1. **50-period EMA** (Exponential Moving Average):
+   - Identifies short-term momentum.
+2. **200-period EMA**:
+   - Identifies long-term trend direction.
+3. **ADX (Average Directional Index)**:
+   - Confirms trend strength.
+4. **ATR (Average True Range)**:
+   - Sets dynamic stop-loss levels.
+5. **5-period RSI (Relative Strength Index)**:
+   - Identifies overbought/oversold conditions for exits.
+
+---
+
+### Example Trade:
+1. **Setup**:
+   - 50 EMA crosses above 200 EMA.
+   - ADX rises above 25.
+2. **Entry**:
+   - Buy on the next candle after the crossover and ADX confirmation.
+3. **Stop-Loss**:
+   - Set at 2x ATR below the entry price.
+4. **Exit**:
+   - Close the trade if RSI crosses above 70 or below 30, or if the stop-loss is hit.
+
+This strategy is ideal for trending markets and avoids choppy or sideways conditions by relying on the ADX filter. The combination of EMA crossovers, trend strength confirmation, and volatility-based exits makes it a robust approach for capturing sustained price movements.

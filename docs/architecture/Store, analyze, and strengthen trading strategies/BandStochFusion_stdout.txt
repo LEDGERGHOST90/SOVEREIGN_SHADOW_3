@@ -1,0 +1,3 @@
+🌙 Moon Dev: Data loaded successfully! Starting backtest... ✨
+🌙 Moon Dev Error: `data` must be a pandas.DataFrame with columns 'Open', 'High', 'Low', 'Close', and (optionally) 'Volume'
+

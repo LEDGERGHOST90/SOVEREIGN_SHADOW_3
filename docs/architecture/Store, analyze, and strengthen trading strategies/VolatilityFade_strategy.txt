@@ -1,0 +1,37 @@
+STRATEGY_NAME: VolatilityFade
+
+STRATEGY_DETAILS:
+The VolatilityFade strategy is designed to capitalize on short-term price spikes by fading them when specific technical conditions are met. This strategy combines the ADX indicator, Chaikin Oscillator, ATR trailing stop, and volume profile analysis to identify high-probability mean-reversion opportunities.
+
+### Key Components:
+1. **ADX (Average Directional Index)**: Measures the strength of a trend. A value below 20 indicates a weak or non-trending market, which is ideal for fading price spikes.
+2. **Chaikin Oscillator**: A momentum indicator that combines price and volume. A cross below zero signals bearish momentum, aligning with the strategy's fade approach.
+3. **ATR (Average True Range)**: Used to set a trailing stop at 1.5x the ATR to manage risk and lock in profits.
+4. **4-Hour Volume Profile Imbalance Zone**: Confirms exits by identifying areas of significant volume imbalance, which often act as support or resistance levels.
+
+### Entry Rules:
+1. Wait for the ADX to fall below 20, indicating a lack of strong trend.
+2. Confirm bearish momentum with the Chaikin Oscillator crossing below zero.
+3. Enter a short position when both conditions are met, targeting the fade of the short-term price spike.
+
+### Exit Rules:
+1. Use a trailing stop set at 1.5x the ATR to protect profits and limit losses.
+2. Confirm the exit when price reaches a 4-hour volume profile imbalance zone, which acts as a strong support level for the fade.
+
+### Risk Management:
+1. Position sizing should be based on the ATR to ensure risk per trade is within acceptable limits (e.g., 1-2% of account equity).
+2. The trailing stop ensures dynamic risk management, adjusting as the trade progresses.
+3. Avoid trading during high-impact news events or periods of extreme volatility to reduce false signals.
+
+### Required Indicators:
+1. ADX (14-period default setting)
+2. Chaikin Oscillator (default settings)
+3. ATR (14-period default setting)
+4. Volume Profile (4-hour timeframe)
+
+### Additional Notes:
+- This strategy works best in ranging or low-volatility markets. Avoid using it during strong trending conditions.
+- Backtest the strategy on multiple instruments and timeframes to ensure robustness.
+- Combine with fundamental analysis or other technical filters to improve accuracy in specific market conditions. 
+
+The VolatilityFade strategy is a disciplined approach to fading short-term price spikes, leveraging a combination of momentum, volatility, and volume analysis to identify high-probability setups.

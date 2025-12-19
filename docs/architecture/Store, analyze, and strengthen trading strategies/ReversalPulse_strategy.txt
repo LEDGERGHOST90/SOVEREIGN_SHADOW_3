@@ -1,0 +1,38 @@
+STRATEGY_NAME: ReversalPulse
+
+STRATEGY_DETAILS:
+The ReversalPulse strategy is designed to identify potential trend reversals and capitalize on early momentum shifts while avoiding strong trending markets. It combines the power of moving average crossovers with the ADX indicator to filter out high-trending conditions and focus on emerging reversals.
+
+Key Strategy Components:
+1. 50-period EMA (Exponential Moving Average)
+2. 200-period EMA (Exponential Moving Average)
+3. ADX (Average Directional Index) with threshold levels at 20 and 40
+
+Entry Rules:
+1. Wait for the 50-period EMA to cross above the 200-period EMA (Golden Cross)
+2. Confirm that the ADX is below 20, indicating a weak trend and potential reversal
+3. Enter a long position when both conditions are met
+
+Exit Rules:
+1. Monitor the ADX for trend strength
+2. Exit the position when ADX rises above 40, indicating strong trend continuation
+3. Alternatively, consider exiting if the 50-period EMA crosses back below the 200-period EMA
+
+Risk Management:
+1. Use a stop-loss below the most recent swing low
+2. Position size should be calculated based on risk tolerance (e.g., 1-2% of account per trade)
+3. Consider using a trailing stop to lock in profits as the trade moves in your favor
+
+Required Indicators:
+1. 50-period EMA (Exponential Moving Average)
+2. 200-period EMA (Exponential Moving Average)
+3. ADX (Average Directional Index) with levels at 20 and 40
+
+Additional Considerations:
+- This strategy works best in ranging or consolidating markets
+- Avoid using during strong trending conditions (when ADX is above 40)
+- Combine with price action analysis for additional confirmation
+- Consider using on higher timeframes (4-hour or daily) for more reliable signals
+- Backtest thoroughly to understand performance in different market conditions
+
+The ReversalPulse strategy is particularly effective for traders looking to catch early trend reversals while avoiding the choppiness of strong trending markets. The combination of EMA crossovers with ADX filtering provides a systematic approach to identifying potential trend changes with reduced risk of false signals.

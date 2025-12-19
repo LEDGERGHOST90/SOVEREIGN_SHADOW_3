@@ -1,0 +1,30 @@
+STRATEGY_NAME: LiquiBand Breakout  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Bollinger Band Width Contraction:** Identifies periods of low volatility where the Bollinger Bands narrow significantly, often preceding strong breakout moves.  
+2. **Liquidation Clusters:** Focuses on high liquidation zones (areas where many stop-loss orders are likely clustered), which can amplify breakout momentum.  
+3. **Breakout Confirmation:** Requires a close beyond the Bollinger Band to confirm the breakout, reducing false signals.  
+4. **Mean Reversion Exit:** Exits trades when price reverts to the opposite Bollinger Band, capturing the majority of the breakout move.  
+
+**Entry Rules:**  
+1. **Setup:** Wait for Bollinger Band width to contract significantly (e.g., below a 20-period moving average of the width).  
+2. **Liquidation Zone Proximity:** Ensure the contraction occurs near a high liquidation cluster (identified via order flow tools or volume profile).  
+3. **Entry Trigger:** Enter long on a *close above the upper Bollinger Band* or short on a *close below the lower Bollinger Band*.  
+
+**Exit Rules:**  
+1. **Profit Target:** Exit the trade when price touches the *opposite Bollinger Band* (e.g., exit long when price reaches the lower band).  
+2. **Stop-Loss:** Place a stop-loss just beyond the breakout candle’s extreme (e.g., below the low for long entries, above the high for short entries).  
+
+**Risk Management:**  
+1. **Position Sizing:** Risk no more than 1-2% of capital per trade.  
+2. **Stop-Loss Discipline:** Strict adherence to stop levels to avoid large drawdowns during false breakouts.  
+3. **Avoid Overcrowded Breakouts:** If liquidation clusters are too obvious, be cautious of potential traps (use volume confirmation).  
+
+**Required Indicators:**  
+1. **Bollinger Bands (20,2)** – To identify contraction and breakout levels.  
+2. **Bollinger Band Width** – To measure contraction (e.g., width < moving average of width).  
+3. **Order Flow/Volume Profile Tools** – To detect high liquidation zones (e.g., cumulative delta, volume nodes).  
+
+**Unique Edge:** Combines volatility contraction with liquidity-driven momentum, filtering out weak breakouts and focusing on high-probability moves.

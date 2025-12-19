@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/ClusterBreakout_BT.py\", line 47, in <module>\n    bt = Backtest(data, ClusterBreakout, cash=1000000, commission=0.002)\n  File \"/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/backtesting.py\", line 1067, in __init__\n    raise ValueError(\"`data` must be a pandas.DataFrame with columns \"\nValueError: `data` must be a pandas.DataFrame with columns 'Open', 'High', 'Low', 'Close', and (optionally) 'Volume'\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/ClusterBreakout_BT.py` failed. (See above for error)\n",
+  "execution_time": 1.055228,
+  "timestamp": "2025-08-08T12:30:04.539050"
+}

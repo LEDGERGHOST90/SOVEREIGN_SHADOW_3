@@ -1,0 +1,36 @@
+STRATEGY_NAME: VoltaicCompression  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Volatility Contraction Detection**: Uses Keltner Channels (typically 20-period EMA with ATR-based bands) to identify periods of narrowing price range, signaling potential breakout opportunities.  
+2. **Volume Confirmation**: Relies on TICK volume (NYSE TICK index or similar) to validate breakout strength—entries require a surge in volume to confirm the breakout direction.  
+3. **Dynamic Exit Mechanism**: Employs a Chandelier Stop (e.g., 3x ATR trailing from recent high/low) to lock in profits and limit losses, adapting to market volatility.  
+
+**Entry Rules:**  
+- **Long Entry**:  
+  1. Keltner Channels narrow (e.g., upper and lower bands contract to within 1.5x ATR of the midline).  
+  2. Price breaks above the upper Keltner band.  
+  3. TICK volume surges above a threshold (e.g., +800 or 1 standard deviation above its 20-period average).  
+- **Short Entry**:  
+  1. Keltner Channels narrow (same contraction criteria as above).  
+  2. Price breaks below the lower Keltner band.  
+  3. TICK volume drops below a threshold (e.g., -800 or 1 standard deviation below its 20-period average).  
+
+**Exit Rules:**  
+- **Profit-Taking**: Trail Chandelier Stop (e.g., 3x ATR from the highest close since entry for longs, lowest close for shorts).  
+- **Stop-Loss**: Initial stop at 2x ATR from entry price if the Chandelier Stop hasn’t yet activated.  
+- **Time-Based Exit**: Close position if no follow-through within 3 bars (e.g., price fails to extend beyond the breakout bar’s range).  
+
+**Risk Management:**  
+- Position sizing: Risk ≤1% of capital per trade (stop distance determines share size).  
+- Avoid trading during low-volume periods (e.g., midday lulls or pre-holiday sessions).  
+- Filter out sideways markets by requiring Keltner Channel width to drop below its 20-period median before entry.  
+
+**Required Indicators:**  
+1. **Keltner Channels** (20-period EMA, 1.5x ATR band width).  
+2. **TICK Volume** (NYSE TICK index or equivalent, with 20-period moving average and standard deviation bands).  
+3. **Chandelier Exit** (3x ATR trailing stop).  
+4. **ATR (14-period)** for volatility measurement and stop calculations.  
+
+**Unique Edge:** Combines volatility compression (Keltner) with volume-fueled breakouts (TICK), avoiding false signals common in pure price-based systems. The Chandelier Stop ensures adaptive risk control in trending markets.

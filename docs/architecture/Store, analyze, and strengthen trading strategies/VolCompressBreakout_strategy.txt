@@ -1,0 +1,53 @@
+STRATEGY_NAME: VolCompress Breakout
+
+STRATEGY_DETAILS:
+This strategy combines volatility compression detection with volume confirmation and Ichimoku-based trend following for high-probability breakout trades.
+
+Key Components:
+1. Volatility Measurement: Bollinger Band Width (BBW) contraction below historical percentile threshold
+2. Volume Confirmation: Relative volume surge above normal levels
+3. Breakout Trigger: First close outside Bollinger Bands
+4. Trend Following Exit: Ichimoku Kijun-sen (base line) cross
+
+Indicator Requirements:
+1. Bollinger Bands (20,2 standard deviations)
+2. Bollinger Band Width (BBW) - (Upper Band - Lower Band)/Middle Band
+3. Volume (compared to X-day average)
+4. Ichimoku Cloud (specifically Kijun-sen line)
+
+Entry Rules:
+1. BBW must contract below its 20th percentile (or other optimized threshold) of historical values
+2. Current volume must be > 1.5x the 20-day average volume
+3. Price must close outside Bollinger Bands (upper for long, lower for short)
+4. All conditions must occur simultaneously
+
+Exit Rules:
+1. For long positions: Close below Kijun-sen line
+2. For short positions: Close above Kijun-sen line
+3. Optional: Time-based exit if no Kijun-sen cross occurs within X bars
+
+Risk Management:
+1. Position sizing based on volatility (ATR-based)
+2. Initial stop loss:
+   - Longs: Below recent swing low or below lower Bollinger Band
+   - Shorts: Above recent swing high or above upper Bollinger Band
+3. Trailing stop activates after price moves X% in favor
+4. Maximum risk per trade (1-2% of capital)
+
+Optimization Considerations:
+1. BBW percentile threshold (15th-25th typically works well)
+2. Volume multiplier (1.3x-2.0x range)
+3. Bollinger Band parameters (20,2 is standard but can be tested)
+4. Kijun-sen period (default 26 may need adjustment)
+
+Strategy Advantages:
+1. Captures explosive moves after low volatility periods
+2. Volume confirmation filters false breakouts
+3. Ichimoku exit keeps traders in strong trends
+4. Works across multiple timeframes and instruments
+
+Implementation Notes:
+1. Requires historical BBW percentile calculation
+2. Best combined with sector/market context
+3. Performs well in trending markets, may struggle in choppy conditions
+4. Backtest should include various volatility regimes

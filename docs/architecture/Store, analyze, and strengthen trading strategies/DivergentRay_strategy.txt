@@ -1,0 +1,40 @@
+STRATEGY_NAME: DivergentRay
+
+STRATEGY_DETAILS:
+The DivergentRay strategy is a bearish divergence-based approach that combines Elder Ray Bull Power, volume analysis, and ADX to identify high-probability shorting opportunities. The strategy focuses on spotting weakening bullish momentum and potential reversals in trending markets.
+
+Key Components:
+1. Elder Ray Bull Power: Measures the strength of bullish momentum
+2. Volume: Confirms weakening participation in the trend
+3. ADX (Average Directional Index): Ensures the market is trending (>25)
+4. 5-period SMA of Bull Power: Used for exit signals
+
+Entry Rules:
+1. Identify a divergence where price makes higher highs while Bull Power makes lower highs
+2. Confirm declining volume during the divergence formation
+3. Ensure ADX > 25 (indicating a strong trend)
+4. Enter short when all conditions align
+
+Exit Rules:
+1. Close the short position when Bull Power crosses above its 5-period SMA
+2. Alternatively, consider exiting if ADX drops below 25 (trend weakening)
+
+Risk Management:
+1. Set stop-loss above the recent swing high
+2. Use position sizing based on account risk tolerance (e.g., 1-2% per trade)
+3. Consider using a trailing stop based on Bull Power movements
+4. Avoid trading during low liquidity periods
+
+Required Indicators:
+1. Elder Ray Bull Power
+2. Volume indicator
+3. ADX (14-period default)
+4. 5-period SMA of Bull Power
+
+Additional Considerations:
+- This strategy works best in trending markets
+- Combine with price action confirmation for better accuracy
+- Backtest on multiple timeframes to find optimal settings
+- Be cautious of false divergences in choppy markets
+
+The DivergentRay strategy is particularly effective for traders looking to capitalize on trend exhaustion and potential reversals in strongly trending markets. The combination of momentum divergence, volume confirmation, and trend strength makes it a robust approach for bearish setups.

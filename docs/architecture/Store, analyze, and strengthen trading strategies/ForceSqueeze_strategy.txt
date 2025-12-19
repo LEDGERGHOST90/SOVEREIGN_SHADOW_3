@@ -1,0 +1,32 @@
+STRATEGY_NAME: ForceSqueeze  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **Elder Force Index (EFI):** Measures the strength behind price movements by combining price changes and volume. A cross above zero signals bullish momentum.  
+2. **Bollinger Band Width Contraction:** Indicates low volatility and potential breakout conditions. Calculated as (Upper Band - Lower Band) / Middle Band (SMA).  
+3. **Volatility Expansion Exit:** Uses a 10-day average of Bollinger Band width to detect increased volatility, signaling a potential trend exhaustion.  
+
+**Entry Rules:**  
+- Go **LONG** when:  
+  - EFI crosses **above zero** (confirming bullish momentum).  
+  - Bollinger Band width is **contracting** (current width < previous width).  
+
+**Exit Rules:**  
+- Close the position when:  
+  - Bollinger Band width **expands beyond its 10-day average** (volatility surge).  
+  - Optional: Trail stop-loss using the lower Bollinger Band to lock in profits.  
+
+**Risk Management:**  
+- **Stop-Loss:** Place below the recent swing low or the lower Bollinger Band.  
+- **Position Sizing:** Risk ≤ 1-2% of capital per trade.  
+- **Filter:** Avoid trading during major news events to prevent false signals.  
+
+**Required Indicators:**  
+1. Elder Force Index (default settings: 13-period EMA).  
+2. Bollinger Bands (20-period SMA, 2 standard deviations).  
+3. Bollinger Band Width (derived from bands).  
+4. 10-day SMA of Bollinger Band width (for exit trigger).  
+
+**Unique Edge:** Combines momentum (EFI) with volatility cycles (Bollinger contraction/expansion) for high-probability breakouts. Works best in ranging markets transitioning to trends.  
+
+**Note:** Backtest optimal parameters for EFI period and Bollinger Band settings based on asset class (e.g., 20-period for stocks, 50-period for crypto).

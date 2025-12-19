@@ -1,0 +1,50 @@
+STRATEGY_NAME: VolatilityClusterBreakout
+
+STRATEGY_DETAILS:
+The VolatilityClusterBreakout strategy is a sophisticated approach that combines Bollinger Bandwidth analysis with order book liquidity clusters to identify high-probability breakout opportunities during periods of low volatility. The strategy focuses on entering trades when volatility is extremely compressed and exiting based on mean reversion or liquidity depletion signals.
+
+### Key Strategy Components:
+1. **Bollinger Bandwidth Percentile**: Measures the relative width of Bollinger Bands compared to historical data. A percentile under 10 indicates extreme volatility contraction.
+2. **Order Book Liquidity Clusters**: Identifies significant liquidity zones in the order book that act as potential support/resistance levels.
+3. **Breakout Confirmation**: Requires a close beyond the Bollinger Band to confirm the breakout.
+4. **Mean Reversion/Liquidity Depletion Exit**: Exits trades when price reverts to the mean or when liquidity zones are depleted.
+
+---
+
+### Entry Rules:
+1. **Volatility Contraction**: Wait for the Bollinger Bandwidth percentile to drop below 10, indicating extreme compression.
+2. **Liquidity Cluster Alignment**: Identify a strong liquidity cluster in the order book that aligns with the breakout direction.
+3. **Breakout Confirmation**: Enter a long position if the price closes above the upper Bollinger Band or a short position if it closes below the lower Bollinger Band.
+4. **Risk Management**: Place a stop-loss just beyond the opposite Bollinger Band or at a predefined risk percentage (e.g., 1-2% of account equity).
+
+---
+
+### Exit Rules:
+1. **Mean Reversion Exit**: Close the trade if the price reverts to the 20-period moving average (middle Bollinger Band).
+2. **Liquidity Depletion Exit**: Exit the trade if the price reaches and depletes a significant liquidity cluster in the order book.
+3. **Trailing Stop**: Use a trailing stop to lock in profits if the price moves significantly in your favor.
+
+---
+
+### Risk Management:
+1. **Position Sizing**: Use a fixed percentage of account equity per trade (e.g., 1-2%).
+2. **Stop-Loss Placement**: Place stop-loss orders beyond the opposite Bollinger Band or at a predefined risk level.
+3. **Risk-Reward Ratio**: Aim for a minimum risk-reward ratio of 1:2 or higher.
+4. **Avoid Overtrading**: Only take trades during periods of extreme volatility contraction (Bollinger Bandwidth percentile < 10).
+
+---
+
+### Required Indicators:
+1. **Bollinger Bands**: Set to a 20-period moving average with 2 standard deviations.
+2. **Bollinger Bandwidth Percentile**: Calculated as the percentile rank of the current bandwidth relative to historical data.
+3. **Order Book Analysis Tool**: To identify liquidity clusters and significant support/resistance levels.
+4. **Moving Average (20-period)**: Used for mean reversion exit signals.
+
+---
+
+### Additional Notes:
+- This strategy works best in markets with clear liquidity zones and strong mean-reverting tendencies.
+- Backtest the strategy on historical data to optimize parameters and confirm its effectiveness in your chosen market.
+- Combine this strategy with fundamental or sentiment analysis for higher accuracy in trending markets.
+
+By focusing on volatility contraction and liquidity clusters, the VolatilityClusterBreakout strategy aims to capitalize on high-probability breakout opportunities while managing risk effectively.

@@ -1,0 +1,75 @@
+STRATEGY_NAME: VortexVolumeBreakout
+
+STRATEGY_DETAILS:
+The VortexVolumeBreakout strategy combines trend confirmation from the Vortex Indicator, volume analysis using Elder's Volume Force, and momentum-based exits via the KST Momentum oscillator. This approach focuses on high-probability breakout trades with clear entry and exit signals.
+
+### Key Strategy Components:
+1. **Vortex Indicator**: Identifies trend direction and potential trend shifts.
+2. **Elder's Volume Force**: Confirms breakout strength through volume surges.
+3. **KST Momentum Oscillator (3-day EMA)**: Provides exit signals based on momentum reversals.
+
+---
+
+### Entry Rules:
+1. **Trend Confirmation**:
+   - Wait for the Vortex Indicator to show a trend shift:
+     - VI+ (positive trend) crosses above VI- (negative trend) for a bullish breakout.
+     - VI- crosses above VI+ for a bearish breakout.
+2. **Volume Surge**:
+   - Confirm the breakout with a surge in Elder's Volume Force:
+     - Volume Force must be above its 20-period EMA.
+     - A sharp increase in volume (e.g., 2x the average volume) strengthens the signal.
+3. **Price Action**:
+   - Enter the trade when price breaks above a recent high (for bullish trades) or below a recent low (for bearish trades).
+
+---
+
+### Exit Rules:
+1. **Momentum Reversal**:
+   - Monitor the 3-day EMA of the KST Momentum oscillator.
+   - Exit the trade when the KST EMA reverses direction:
+     - For long trades, exit when the KST EMA turns downward.
+     - For short trades, exit when the KST EMA turns upward.
+2. **Stop Loss**:
+   - Place a stop loss below the breakout level (for long trades) or above the breakout level (for short trades).
+   - Adjust the stop loss to breakeven once the trade moves in your favor by 1.5x the initial risk.
+
+---
+
+### Risk Management:
+1. **Position Sizing**:
+   - Risk no more than 1-2% of your trading capital per trade.
+2. **Stop Loss**:
+   - Set the stop loss based on the volatility of the asset (e.g., 1x ATR or below the breakout level).
+3. **Take Profit**:
+   - Use a trailing stop or exit based on the KST Momentum reversal.
+   - Alternatively, set a risk-reward ratio of at least 2:1.
+
+---
+
+### Required Indicators:
+1. **Vortex Indicator (VI)**:
+   - VI+ and VI- lines to identify trend direction.
+2. **Elder's Volume Force**:
+   - Volume Force line and its 20-period EMA for volume confirmation.
+3. **KST Momentum Oscillator**:
+   - KST line and its 3-day EMA for momentum-based exits.
+
+---
+
+### Example Setup:
+1. **Bullish Breakout**:
+   - VI+ crosses above VI-.
+   - Elder's Volume Force surges above its 20-period EMA.
+   - Price breaks above a recent high.
+   - Enter long, set stop loss below the breakout level.
+   - Exit when the 3-day EMA of KST Momentum turns downward.
+
+2. **Bearish Breakout**:
+   - VI- crosses above VI+.
+   - Elder's Volume Force surges above its 20-period EMA.
+   - Price breaks below a recent low.
+   - Enter short, set stop loss above the breakout level.
+   - Exit when the 3-day EMA of KST Momentum turns upward.
+
+This strategy is ideal for traders looking to capitalize on high-momentum breakouts with clear confirmation signals and disciplined risk management.

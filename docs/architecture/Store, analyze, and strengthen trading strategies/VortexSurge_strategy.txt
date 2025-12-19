@@ -1,0 +1,43 @@
+STRATEGY_NAME: VortexSurge  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Vortex Indicator (VI)**: Confirms trend direction and strength.  
+   - **VI+ (Positive Vortex)**: Bullish trend confirmation.  
+   - **VI- (Negative Vortex)**: Bearish trend confirmation.  
+2. **Volume Surge**: Validates breakout strength (e.g., volume > 20-period moving average).  
+3. **Bollinger Band Width (BBW)**: Measures volatility for exit signals (contraction below a threshold, e.g., BBW < 0.5).  
+
+**Entry Rules:**  
+1. **Long Entry**:  
+   - VI+ crosses above VI- (bullish trend shift).  
+   - Price breaks above a recent high (e.g., 20-period peak).  
+   - Volume exceeds its 20-period moving average by 1.5x.  
+2. **Short Entry**:  
+   - VI- crosses above VI+ (bearish trend shift).  
+   - Price breaks below a recent low (e.g., 20-period trough).  
+   - Volume exceeds its 20-period moving average by 1.5x.  
+
+**Exit Rules:**  
+1. **Long Exit**:  
+   - BBW contracts below threshold (e.g., BBW < 0.5).  
+   - VI+ crosses below VI- (trend reversal).  
+2. **Short Exit**:  
+   - BBW contracts below threshold (e.g., BBW < 0.5).  
+   - VI- crosses below VI+ (trend reversal).  
+
+**Risk Management:**  
+1. **Stop-Loss**:  
+   - Long: Below the breakout candle’s low or 1.5x ATR (14-period).  
+   - Short: Above the breakout candle’s high or 1.5x ATR (14-period).  
+2. **Position Sizing**: Risk ≤ 1-2% of capital per trade.  
+3. **Trailing Stop**: Adjust stop to breakeven after 1.5x risk-to-reward (e.g., 3R profit).  
+
+**Required Indicators:**  
+1. Vortex Indicator (VI) (default period: 14).  
+2. Bollinger Bands (20-period, 2 StdDev) + BBW.  
+3. Volume (20-period moving average).  
+4. ATR (14-period) for stop placement.  
+
+**Unique Edge:** Combines trend confirmation (VI) with volume-fueled breakouts and volatility-based exits, filtering false breakouts.

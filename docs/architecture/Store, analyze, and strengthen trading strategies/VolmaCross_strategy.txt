@@ -1,0 +1,35 @@
+STRATEGY_NAME: VolmaCross  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **EMA Crossover:** The strategy uses the 50-period EMA crossing above the 200-period EMA (Golden Cross) as the primary trend confirmation signal.  
+2. **Volatility Filter:** Bollinger Band width (BB width) is used to filter entries during low volatility (BB width < 1) and exits during high volatility (BB width > 2).  
+3. **Momentum Indicator:** RSI is used to identify overbought conditions (RSI > 70) as an exit signal.  
+
+**Entry Rules:**  
+- Go **LONG** when:  
+  - The 50-period EMA crosses **above** the 200-period EMA (Golden Cross).  
+  - Bollinger Band width is **below 1** (low volatility).  
+
+**Exit Rules:**  
+- Exit the **LONG** position when:  
+  - RSI exceeds **70** (overbought condition).  
+  - Bollinger Band width expands **above 2** (high volatility).  
+
+**Risk Management:**  
+- **Stop Loss:** Consider placing a stop loss below the recent swing low or using a fixed percentage (e.g., 2-3%) to limit downside risk.  
+- **Position Sizing:** Adjust trade size based on volatility (e.g., smaller positions when BB width is very low).  
+- **Avoid Choppy Markets:** Only trade when BB width is below 1 to ensure low volatility before entry.  
+
+**Required Indicators:**  
+1. **50-period Exponential Moving Average (EMA)**  
+2. **200-period Exponential Moving Average (EMA)**  
+3. **Bollinger Bands (20-period, 2 standard deviations) – For BB width calculation**  
+4. **Relative Strength Index (RSI, 14-period)**  
+
+**Additional Notes:**  
+- Works best in trending markets but avoids false signals during high volatility.  
+- Backtest on multiple timeframes (e.g., 1H, 4H, Daily) for robustness.  
+- Combine with price action (e.g., support/resistance) for higher accuracy.  
+
+This strategy combines trend-following (EMA crossover) with volatility and momentum filters for disciplined entries and exits.

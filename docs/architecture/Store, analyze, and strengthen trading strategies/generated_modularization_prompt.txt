@@ -1,0 +1,175 @@
+
+**Act as an expert trading system architect and quantitative developer.**
+
+Your task is to decompose the provided Python trading strategy code into its core, modular, and reusable components. Analyze the code and extract the logic for each component into a structured JSON format.
+
+**Objective:** Create a machine-readable, structured representation of the strategy's logic that can be used for automated analysis, backtesting, and execution by a master trading orchestrator.
+
+**Input Python Code:**
+```python
+Here's the complete fixed backtest code with Moon Dev themed debug prints and proper position sizing implementation:
+
+```python
+# 🌙 MOON DEV BACKTESTING IMPLEMENTATION FOR VOLATILITY BANDIT STRATEGY ✨
+from backtesting import Backtest, Strategy
+import pandas as pd
+import talib
+import numpy as np
+
+# 🌌 DATA PREPARATION 
+data = pd.read_csv('/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/BTC-USD-15m.csv')
+data.columns = data.columns.str.strip().str.lower()
+data = data.drop(columns=[col for col in data.columns if 'unnamed' in col.lower()])
+data = data.rename(columns={
+    'open': 'Open',
+    'high': 'High',
+    'low': 'Low',
+    'close': 'Close',
+    'volume': 'Volume'
+})
+data['datetime'] = pd.to_datetime(data['datetime'])
+data.set_index('datetime', inplace=True)
+
+class VolatilityBandit(Strategy):
+    ema_period = 20
+    atr_period = 14
+    risk_pct = 0.01
+    atr_multiplier = 2
+    
+    def init(self):
+        # 🌗 CALCULATE INDICATORS WITH TALIB (NO BACKTESTING.LIB USAGE)
+        self.ema = self.I(talib.EMA, self.data.Close, timeperiod=self.ema_period)
+        self.atr = self.I(talib.ATR, self.data.High, self.data.Low, self.data.Close, timeperiod=self.atr_period)
+        self.upper_band = self.I(lambda: self.ema.array + (self.atr.array * self.atr_multiplier))
+        self.lower_band = self.I(lambda: self.ema.array - (self.atr.array * self.atr_multiplier))
+        
+        # 🌑 TRACK POSITION METRICS
+        self.entry_price = None
+        self.extreme_price = None
+        self.position_type = None
+
+    def next(self):
+        # 🌓 MOON DEV POSITION MANAGEMENT
+        if not self.position:
+            # 🌕 LONG ENTRY LOGIC
+            if (self.data.Close[-1] > self.upper_band[-1] and 
+                self.data.Close[-2] <= self.upper_band[-2]):
+                
+                atr_value = self.atr[-1]
+                if atr_value <= 0: 
+                    print("🌑 MOON DEV WARNING: Invalid ATR value detected")
+                    return
+                
+                # 🚀 RISK CALCULATION
+                risk_amount = self.risk_pct * self.equity
+                size = int(round(risk_amount / atr_value))
+                if size <= 0: 
+                    print("🌑 MOON DEV WARNING: Position size too small")
+                    return
+                
+                # 🌙 ENTRY EXECUTION
+                stop_price = self.data.Close[-1] - atr_value
+                self.buy(size=size, sl=stop_price)
+                self.entry_price = self.data.Close[-1]
+                self.extreme_price = self.data.High[-1]
+                self.position_type = 'LONG'
+                print(f"🚀🌙 MOON DEV LONG ENTRY: {self.data.index[-1]} | Size: {size} | Entry: {self.entry_price:.2f} | SL: {stop_price:.2f}")
+
+            # 🌑 SHORT ENTRY LOGIC    
+            elif (self.data.Close[-1] < self.lower_band[-1] and 
+                  self.data.Close[-2] >= self.lower_band[-2]):
+                
+                atr_value = self.atr[-1]
+                if atr_value <= 0: 
+                    print("🌑 MOON DEV WARNING: Invalid ATR value detected")
+                    return
+                
+                # 📉 RISK CALCULATION
+                risk_amount = self.risk_pct * self.equity
+                size = int(round(risk_amount / atr_value))
+                if size <= 0: 
+                    print("🌑 MOON DEV WARNING: Position size too small")
+                    return
+                
+                # 🌙 ENTRY EXECUTION
+                stop_price = self.data.Close[-1] + atr_value
+                self.sell(size=size, sl=stop_price)
+                self.entry_price = self.data.Close[-1]
+                self.extreme_price = self.data.Low[-1]
+                self.position_type = 'SHORT'
+                print(f"🌑📉 MOON DEV SHORT ENTRY: {self.data.index[-1]} | Size: {size} | Entry: {self.entry_price:.2f} | SL: {stop
+```
+
+**Decomposition Schema (Output JSON Format):**
+
+Strictly adhere to the following JSON schema. Do not add any extra commentary or explanations outside of the JSON structure.
+
+```json
+{
+  "strategy_name": "<Name of the strategy class>",
+  "strategy_type": "<Classify as one of: Trend Following, Mean Reversion, Breakout, Volatility, Momentum, Scalping, Arbitrage, etc.>",
+  "description": "<A brief, one-sentence description of the strategy's core logic>",
+  "components": {
+    "parameters": [
+      {
+        "name": "<parameter_name>",
+        "default_value": "<value>",
+        "description": "<What this parameter controls>"
+      }
+    ],
+    "data_requirements": {
+      "timeframe": "<e.g., 15m, 1h, 1d>",
+      "indicators": [
+        {
+          "name": "<Indicator Name, e.g., EMA, RSI, BollingerBands>",
+          "parameters": "<Parameters used, e.g., period=20, std_dev=2>",
+          "code_snippet": "<The exact line(s) of Python code that calculate this indicator>"
+        }
+      ]
+    },
+    "logic": {
+      "entry_conditions_long": {
+        "description": "<Plain English description of the long entry logic>",
+        "code_snippet": "<The exact Python code block for long entry conditions>"
+      },
+      "entry_conditions_short": {
+        "description": "<Plain English description of the short entry logic>",
+        "code_snippet": "<The exact Python code block for short entry conditions>"
+      },
+      "exit_conditions_long": {
+        "description": "<Plain English description of the long exit logic (take profit, stop loss)>",
+        "code_snippet": "<The exact Python code block for long exit conditions>"
+      },
+      "exit_conditions_short": {
+        "description": "<Plain English description of the short exit logic (take profit, stop loss)>",
+        "code_snippet": "<The exact Python code block for short exit conditions>"
+      }
+    },
+    "risk_management": {
+      "position_sizing": {
+        "method": "<e.g., Fixed Size, Percent of Equity, ATR-based>",
+        "code_snippet": "<The Python code for calculating position size>"
+      },
+      "stop_loss": {
+        "method": "<e.g., Fixed Percentage, ATR Trailing, Indicator-based>",
+        "code_snippet": "<The Python code for calculating stop-loss levels>"
+      },
+      "take_profit": {
+        "method": "<e.g., Fixed R:R Ratio, Indicator Target, Price Level>",
+        "code_snippet": "<The Python code for calculating take-profit levels>"
+      }
+    }
+  }
+}
+```
+
+**Instructions:**
+1.  **Analyze the entire script** to understand the strategy's flow.
+2.  **Identify the main strategy class** and its parameters.
+3.  **Extract all technical indicators** used, including their specific parameters.
+4.  **Isolate the exact conditional logic** for long/short entries and exits.
+5.  **Pinpoint the risk management logic**, including how position size, stop-loss, and take-profit are determined.
+6.  **Populate the JSON schema** with the extracted information. Ensure all `code_snippet` fields contain valid, verbatim Python code from the input.
+7.  **If a component is not present** (e.g., no short conditions), provide an empty list `[]` or an empty string `""` for the corresponding field.
+
+**Begin analysis and generate the JSON output now.**

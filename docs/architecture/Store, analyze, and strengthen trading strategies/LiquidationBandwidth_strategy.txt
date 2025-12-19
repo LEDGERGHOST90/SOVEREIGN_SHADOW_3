@@ -1,0 +1,46 @@
+STRATEGY_NAME: LiquidationBandwidth
+
+STRATEGY_DETAILS:
+1. Key Strategy Components:
+- Liquidation Heatmap Analysis: Identifies high liquidation zones where price may experience accelerated moves due to stop-loss clustering
+- Volatility Filter: Uses Bollinger Band Width to detect low volatility regimes (compression periods)
+- Price Action Confirmation: Requires price to approach liquidation zones with specific momentum characteristics
+
+2. Entry Rules:
+- Long Entry:
+  a) Bollinger Band Width reaches lower 20% of its 50-period range (low volatility)
+  b) Price approaches a significant long liquidation zone (from heatmap data)
+  c) Price shows upward momentum (e.g., 2 consecutive green candles closing above midpoint)
+
+- Short Entry:
+  a) Bollinger Band Width reaches lower 20% of its 50-period range (low volatility)
+  b) Price approaches a significant short liquidation zone (from heatmap data)
+  c) Price shows downward momentum (e.g., 2 consecutive red candles closing below midpoint)
+
+3. Exit Rules:
+- Take Profit: 
+  a) Fixed RR ratio (e.g., 1:2)
+  b) Or when reaching next significant liquidation cluster in opposite direction
+- Stop Loss:
+  a) Placed just beyond the liquidation zone that triggered the trade
+  b) Alternative: 1.5x recent Average True Range
+
+4. Risk Management:
+- Position sizing based on distance to stop loss (1-2% risk per trade)
+- Maximum 3 concurrent trades
+- Daily loss limit of 5% of account
+- Avoid trading during major news events
+
+5. Required Indicators:
+- Liquidation Heatmap (cluster density visualization)
+- Bollinger Bands (20,2) with Width calculation
+- Volume Profile (for additional confirmation)
+- 50-period moving average (trend filter)
+
+6. Additional Notes:
+- Works best on 1H-4H timeframes
+- Requires clean liquidity data feed
+- Most effective in ranging markets with clear liquidity pools
+- Combine with order flow analysis for higher probability entries
+
+This strategy capitalizes on the market's tendency to hunt for liquidity during low volatility periods, using Bollinger Band compression as a volatility filter and liquidation clusters as key price targets. The unique combination of liquidity analysis with volatility measurement creates high-probability trade setups.

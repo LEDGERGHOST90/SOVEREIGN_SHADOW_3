@@ -1,0 +1,41 @@
+STRATEGY_NAME: VolatilityQuotient
+
+STRATEGY_DETAILS:
+This strategy combines volatility analysis with momentum indicators to identify potential trend reversals in low-volatility conditions. The core premise is that periods of suppressed volatility often precede significant price movements, while the RSI exit helps capture profits before potential reversals.
+
+Key Components:
+1. Volatility Measurement: Uses 10-day historical volatility (standard deviation of logarithmic returns)
+2. Volatility Baseline: 20-day moving average of the 10-day historical volatility
+3. Momentum Filter: 5-day RSI for exit signals
+
+Entry Rules:
+- Calculate 10-day historical volatility (HV)
+- Calculate 20-day moving average of 10-day HV
+- Enter long position when:
+  * Current 10-day HV crosses below its 20-day moving average
+  * Price is above 200-day moving average (optional trend filter)
+
+Exit Rules:
+- Close position when:
+  * 5-day RSI crosses above 70 (overbought condition)
+  * Or when 10-day HV crosses back above its 20-day MA (volatility expansion)
+
+Risk Management:
+1. Position sizing based on volatility (e.g., 1% risk per trade)
+2. Stop-loss at recent swing low or X% below entry
+3. Optional trailing stop after RSI crosses 60
+4. Maximum portfolio exposure limit (e.g., 20%)
+
+Required Indicators:
+1. 10-day historical volatility (standard deviation of log returns)
+2. 20-day moving average of 10-day HV
+3. 5-day RSI (14-period standard calculation)
+4. Optional: 200-day moving average for trend filter
+
+Optimization Considerations:
+- Adjust HV period (7-14 days) for sensitivity
+- Test different RSI periods (3-7 days) for exits
+- Experiment with different moving average lengths for HV baseline
+- Consider adding volume confirmation for entries
+
+This strategy works best in ranging markets transitioning to trending phases, and may underperform in sustained high-volatility environments. The combination of volatility contraction detection with momentum-based exits creates a systematic approach to capture early trend movements while managing risk.

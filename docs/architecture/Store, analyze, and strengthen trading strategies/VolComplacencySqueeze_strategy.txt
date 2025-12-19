@@ -1,0 +1,37 @@
+STRATEGY_NAME: VolComplacencySqueeze  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Bollinger Band Width Contraction:** The strategy identifies periods of low volatility when the Bollinger Band width contracts below a specific historical percentile (e.g., 20th percentile). This signals a potential volatility squeeze.  
+2. **Volume-Adjusted Skew Indicator:** A skewness metric adjusted for trading volume is used to detect market complacency. High skew (indicating extreme positioning) combined with low volatility suggests an overconfident market ripe for a reversal.  
+3. **Short Volatility Position:** The strategy takes a short volatility position (e.g., via options, VIX futures, or volatility ETFs) when both conditions align.  
+4. **Exit Triggers:** Positions are closed either on a volatility spike (e.g., Bollinger Band width expansion above a threshold) or upon hitting a predefined profit target (e.g., 2:1 reward-to-risk).  
+
+**Entry Rules:**  
+- **Bollinger Band Width:** Calculate the rolling percentile of the Bollinger Band width (typically 20-period bands, 2 standard deviations). Enter when width falls below the 20th percentile.  
+- **Skew Confirmation:** Ensure the volume-adjusted skew metric shows complacency (e.g., skew > +1 standard deviation from its mean).  
+- **Timing:** Execute the short volatility trade at the close of the confirming candle.  
+
+**Exit Rules:**  
+- **Volatility Spike Exit:** Exit if the Bollinger Band width expands above its median historical value or a fixed threshold (e.g., 50th percentile).  
+- **Profit Target:** Close the position if a fixed return (e.g., 5-10%) is achieved.  
+- **Stop-Loss:** Use a trailing stop or volatility-based stop (e.g., exit if volatility rises beyond 1.5x the entry width).  
+
+**Risk Management:**  
+- Position sizing should account for the high leverage inherent in volatility products (e.g., risk ≤ 1-2% of capital per trade).  
+- Avoid overlapping trades during prolonged low-volatility regimes.  
+- Monitor macroeconomic events that could trigger unexpected volatility spikes.  
+
+**Required Indicators:**  
+1. Bollinger Bands (20-period, 2 standard deviations) + width calculation.  
+2. Historical percentile ranking for Bollinger Band width.  
+3. Volume-adjusted skew metric (e.g., rolling skewness of returns multiplied by volume Z-score).  
+4. Volatility spike detection (e.g., Bollinger Band width expansion threshold).  
+
+**Unique Aspects:**  
+- Combines Bollinger Band contraction with skew-based sentiment analysis for high-probability short volatility setups.  
+- Focuses on exploiting complacency rather than pure mean reversion or trend-following.  
+- Exits are dynamic, blending profit targets and volatility regime shifts.  
+
+**Note:** Backtest the skew metric’s predictive power for your asset class, as its effectiveness varies across markets.

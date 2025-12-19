@@ -1,0 +1,49 @@
+STRATEGY_NAME: ConfluencePattern
+
+STRATEGY_DETAILS:
+The ConfluencePattern strategy focuses on identifying and trading price patterns that are confirmed by the alignment of multiple technical indicators. This approach ensures higher probability setups by requiring multiple signals to converge before entering a trade. The strategy is designed to filter out false signals and enhance trade accuracy through indicator confluence.
+
+### Key Strategy Components:
+1. **Price Patterns**: Focus on classic price patterns such as triangles, flags, head and shoulders, double tops/bottoms, etc.
+2. **Indicator Confluence**: Use a combination of indicators to confirm the validity of the price pattern. These include:
+   - Moving Averages (e.g., 50 EMA, 200 EMA)
+   - Relative Strength Index (RSI)
+   - MACD (Moving Average Convergence Divergence)
+   - Volume Analysis
+3. **Trend Confirmation**: Ensure the price pattern aligns with the broader trend using moving averages or trendlines.
+4. **Support/Resistance Levels**: Identify key levels that align with the price pattern for additional confirmation.
+
+### Entry Rules:
+1. **Pattern Formation**: Wait for a clear price pattern to form on the chart (e.g., a breakout from a triangle or a reversal at a double top/bottom).
+2. **Indicator Alignment**:
+   - Moving Averages: Price should be above the 50 EMA and 200 EMA for bullish patterns, or below for bearish patterns.
+   - RSI: Should show overbought (above 70) or oversold (below 30) conditions aligning with the pattern.
+   - MACD: Look for a crossover or divergence that supports the pattern direction.
+   - Volume: Confirm the pattern with increasing volume on the breakout or reversal.
+3. **Trend Confirmation**: Ensure the pattern aligns with the broader trend (e.g., uptrend for bullish patterns, downtrend for bearish patterns).
+4. **Support/Resistance Break**: Enter the trade when price breaks a key support/resistance level in the direction of the pattern.
+
+### Exit Rules:
+1. **Target Levels**: Set profit targets based on the measured move of the pattern (e.g., height of the triangle projected from the breakout point).
+2. **Stop Loss**: Place stop-loss orders below the recent swing low (for long trades) or above the recent swing high (for short trades).
+3. **Trailing Stop**: Use a trailing stop to lock in profits as the trade moves in your favor.
+4. **Indicator Reversal**: Exit the trade if key indicators (e.g., RSI, MACD) show a reversal signal against your position.
+
+### Risk Management:
+1. **Position Sizing**: Risk no more than 1-2% of your trading capital on any single trade.
+2. **Risk-Reward Ratio**: Aim for a minimum risk-reward ratio of 1:2 or better.
+3. **Diversification**: Avoid over-concentration in a single asset or market.
+4. **Avoid Overtrading**: Only take trades with clear confluence and high probability setups.
+
+### Required Indicators:
+1. **Moving Averages**: 50 EMA and 200 EMA for trend confirmation.
+2. **RSI**: To identify overbought/oversold conditions.
+3. **MACD**: For momentum and divergence signals.
+4. **Volume**: To confirm the strength of the pattern breakout or reversal.
+
+### Additional Notes:
+- This strategy works best on higher timeframes (e.g., 1H, 4H, Daily) to reduce noise and false signals.
+- Always backtest the strategy on historical data to ensure its effectiveness in your chosen market.
+- Combine this strategy with fundamental analysis for a more holistic approach, especially in volatile markets.
+
+By focusing on the confluence of multiple indicators and price patterns, the ConfluencePattern strategy aims to provide high-probability trading opportunities while minimizing risk.

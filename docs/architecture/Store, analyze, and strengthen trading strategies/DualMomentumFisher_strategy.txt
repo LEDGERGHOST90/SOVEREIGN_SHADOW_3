@@ -1,0 +1,40 @@
+STRATEGY_NAME: DualMomentumFisher
+
+STRATEGY_DETAILS:
+This strategy combines momentum confirmation through Heiken-Ashi smoothed trends with Fisher Transform signal crossovers, while dynamically adjusting risk exposure using volatility measurements.
+
+Key Components:
+1. Heiken-Ashi Candles - Smoothed price action to identify trend direction
+2. Fisher Transform - Momentum oscillator that helps identify potential reversals
+3. Chande's Volatility Index (CVI) - Measures market volatility for stop placement
+4. Trailing Stop Mechanism - Dynamic exit system based on volatility
+
+Entry Rules:
+1. Primary Condition: Heiken-Ashi candles must show consistent color (green for uptrend/red for downtrend) for 3 consecutive periods
+2. Secondary Condition: Fisher Transform must cross above/below its signal line in the direction of the Heiken-Ashi trend
+3. Confirmation: Price must be above/below the 20-period EMA for long/short entries respectively
+
+Exit Rules:
+1. Trailing Stop: Initial stop placed at 2x CVI value from entry price, trailing at 1.5x CVI
+2. Fisher Transform Reversal: Exit when Fisher crosses signal line opposite to trade direction
+3. Heiken-Ashi Reversal: Exit when Heiken-Ashi candles change color for 2 consecutive periods
+
+Risk Management:
+1. Position sizing based on 1% risk per trade using CVI-adjusted stops
+2. Maximum daily loss limit of 3% of account
+3. No new entries if CVI exceeds threshold (suggested 40-50 range)
+4. Time-based exit if trade doesn't reach 1:1.5 RR within 48 hours
+
+Required Indicators:
+1. Heiken-Ashi Candles (smoothed price representation)
+2. Fisher Transform (14-period default)
+3. Chande's Volatility Index (9-period recommended)
+4. 20-period Exponential Moving Average (trend filter)
+
+Optimization Notes:
+1. Adjust Fisher Transform period (10-20) based on asset volatility
+2. Test CVI multiplier (1.5-2.5x) for stop placement
+3. Consider adding volume filter for higher timeframe confirmation
+4. Backtest optimal Heiken-Ashi confirmation period (2-5 candles)
+
+This DualMomentumFisher strategy provides a systematic approach to momentum trading with built-in volatility adaptation, suitable for trending markets across various timeframes.

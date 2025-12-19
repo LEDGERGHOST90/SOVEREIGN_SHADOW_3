@@ -1,0 +1,35 @@
+STRATEGY_NAME: LiquidityVoidBreakout
+
+STRATEGY_DETAILS:
+The LiquidityVoidBreakout strategy focuses on identifying and trading breakouts from overnight liquidity voids, leveraging volume-weighted average price (VWAP) gaps and Bollinger Band squeeze confirmation to target high-frequency trading (HFT) liquidity zones. This strategy is designed to capitalize on periods of low liquidity and subsequent price expansion.
+
+### Key Strategy Components:
+1. **Overnight Liquidity Voids**: Identify periods of low liquidity during overnight sessions where price gaps are likely to occur.
+2. **Volume-Weighted Average Price (VWAP) Gaps**: Use VWAP to measure the average price a security has traded at throughout the day, weighted by volume. Gaps in VWAP indicate potential breakout zones.
+3. **Bollinger Band Squeeze**: Confirm breakout potential using Bollinger Bands, specifically looking for periods of low volatility (squeeze) followed by expansion.
+4. **High-Frequency Trading (HFT) Liquidity Zones**: Target areas where HFT algorithms are likely to place orders, often near recent highs or lows.
+
+### Entry Rules:
+1. **Identify Overnight Liquidity Void**: Look for periods of low volume and price consolidation during the overnight session.
+2. **VWAP Gap Confirmation**: Confirm a significant gap in VWAP from the previous day's close to the current session's open.
+3. **Bollinger Band Squeeze**: Ensure that Bollinger Bands are in a squeeze (narrowing) before the breakout.
+4. **Breakout Entry**: Enter a trade when price breaks out of the Bollinger Band squeeze with increased volume, targeting the nearest HFT liquidity zone.
+
+### Exit Rules:
+1. **Target HFT Liquidity Zone**: Exit the trade when price reaches the targeted HFT liquidity zone, typically near recent highs or lows.
+2. **Stop-Loss Placement**: Place a stop-loss just below the breakout point for long trades or above the breakout point for short trades.
+3. **Trailing Stop**: Use a trailing stop to lock in profits if the price moves significantly in your favor.
+
+### Risk Management:
+1. **Position Sizing**: Use a fixed percentage of your trading capital per trade (e.g., 1-2%).
+2. **Stop-Loss**: Always use a stop-loss to limit potential losses.
+3. **Risk-Reward Ratio**: Aim for a minimum risk-reward ratio of 1:2, ensuring that potential profits are at least twice the potential loss.
+
+### Required Indicators:
+1. **Volume-Weighted Average Price (VWAP)**: To identify gaps and measure the average price weighted by volume.
+2. **Bollinger Bands**: To confirm periods of low volatility (squeeze) and potential breakout points.
+3. **Volume Indicator**: To confirm breakout strength with increased volume.
+4. **High-Frequency Trading (HFT) Liquidity Zones**: Use recent price action to identify key levels where HFT algorithms are likely to place orders.
+
+### Summary:
+The LiquidityVoidBreakout strategy is a sophisticated approach to trading breakouts from overnight liquidity voids. By combining VWAP gaps, Bollinger Band squeeze confirmation, and targeting HFT liquidity zones, this strategy aims to capitalize on periods of low liquidity and subsequent price expansion. Proper risk management and disciplined execution are crucial for success with this strategy.

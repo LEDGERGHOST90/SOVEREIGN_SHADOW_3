@@ -1,0 +1,62 @@
+STRATEGY_NAME: DynamicBreakout
+
+STRATEGY_DETAILS:
+The DynamicBreakout strategy is designed to capitalize on strong trending markets by combining moving average crossovers, trend strength confirmation, and adaptive risk management. Here's a detailed breakdown of the strategy:
+
+---
+
+### **Key Strategy Components**
+1. **Trend Identification**:  
+   - Uses the 50-period EMA (Exponential Moving Average) and 200-period EMA to identify the overall trend.  
+   - A bullish trend is confirmed when the 50-period EMA crosses above the 200-period EMA (Golden Cross).  
+
+2. **Trend Strength Confirmation**:  
+   - The ADX (Average Directional Index) is used to confirm the strength of the trend.  
+   - A rising ADX above 25 indicates a strong trend, ensuring the breakout has momentum.  
+
+3. **Breakout Entry**:  
+   - Entries are triggered when the price breaks above a recent high or resistance level during the confirmed bullish trend.  
+
+4. **Risk Management**:  
+   - A trailing stop is set at 2x the 14-period ATR (Average True Range) to lock in profits and protect against reversals.  
+
+---
+
+### **Entry Rules**
+1. Wait for the 50-period EMA to cross above the 200-period EMA (Golden Cross).  
+2. Confirm trend strength by ensuring the ADX is rising and above 25.  
+3. Enter a long position when the price breaks above a recent high or resistance level.  
+
+---
+
+### **Exit Rules**
+1. Use a trailing stop set at 2x the 14-period ATR.  
+   - The trailing stop adjusts dynamically as the price moves in your favor.  
+   - Exit the trade when the price retraces and hits the trailing stop level.  
+
+---
+
+### **Risk Management**
+1. Position sizing should be based on the distance between the entry price and the trailing stop level to ensure risk per trade is within your predefined limits (e.g., 1-2% of account equity).  
+2. Avoid trading during low ADX conditions (below 25) to prevent false breakouts.  
+
+---
+
+### **Required Indicators**
+1. **50-period EMA**: Identifies short-term trend direction.  
+2. **200-period EMA**: Identifies long-term trend direction.  
+3. **ADX (14-period)**: Confirms trend strength.  
+4. **ATR (14-period)**: Sets the trailing stop distance.  
+
+---
+
+### **Example Scenario**
+1. The 50-period EMA crosses above the 200-period EMA, signaling a bullish trend.  
+2. The ADX rises above 25, confirming strong trend momentum.  
+3. The price breaks above a recent high, triggering a long entry.  
+4. The trailing stop is set at 2x the 14-period ATR below the entry price.  
+5. The trade is exited when the price retraces and hits the trailing stop level.  
+
+---
+
+This strategy is ideal for trending markets and combines trend-following principles with adaptive risk management to maximize gains while minimizing losses.

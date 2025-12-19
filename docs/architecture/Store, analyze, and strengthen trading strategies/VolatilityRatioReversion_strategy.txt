@@ -1,0 +1,28 @@
+STRATEGY_NAME: VolatilityRatioReversion
+
+STRATEGY_DETAILS:
+The VolatilityRatioReversion strategy is a mean-reversion approach that utilizes the relationship between price movement and volatility to identify potential trading opportunities. The strategy focuses on entering long positions when the price movement relative to volatility exceeds a specific threshold, and exits when this relationship weakens.
+
+Key Strategy Components:
+1. SMA (20): A 20-period Simple Moving Average to measure the average price movement.
+2. ATR (3): A 3-period Average True Range to measure volatility.
+3. Mean-Return Ratio: The ratio of the SMA (20) to the ATR (3), which quantifies the relationship between price movement and volatility.
+
+Entry Rules:
+- Calculate the Mean-Return Ratio: (SMA 20) / (ATR 3)
+- Enter a long position when the Mean-Return Ratio exceeds the predefined upper threshold (1.5). This indicates that the price movement is significantly stronger relative to volatility, suggesting a potential overextension and a possible mean-reversion opportunity.
+
+Exit Rules:
+- Exit the long position when the Mean-Return Ratio drops below the predefined lower threshold (-0). This indicates that the price movement relative to volatility has weakened, suggesting that the mean-reversion opportunity may be over.
+
+Risk Management:
+1. Position Sizing: Determine position size based on a fixed percentage of the total account balance or a fixed dollar amount to manage risk.
+2. Stop-Loss: Implement a stop-loss order at a predefined percentage or dollar amount below the entry price to limit potential losses.
+3. Take-Profit: Set a take-profit level at a predefined percentage or dollar amount above the entry price to lock in gains.
+
+Required Indicators:
+1. SMA (20): To calculate the 20-period Simple Moving Average.
+2. ATR (3): To calculate the 3-period Average True Range.
+3. Mean-Return Ratio: To determine the ratio of price movement to volatility.
+
+This strategy is designed to capitalize on mean-reversion opportunities by identifying overextended price movements relative to volatility. By using the Mean-Return Ratio, the strategy aims to enter trades when the price is likely to revert to its mean and exit when the reversion potential diminishes. Proper risk management is crucial to ensure that losses are minimized and gains are maximized.

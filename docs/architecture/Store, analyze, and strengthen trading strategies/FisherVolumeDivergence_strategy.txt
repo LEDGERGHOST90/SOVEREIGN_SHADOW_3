@@ -1,0 +1,53 @@
+STRATEGY_NAME: FisherVolume Divergence
+
+STRATEGY_DETAILS:
+This is a sophisticated momentum strategy that combines two powerful technical indicators - the Fisher Transform and a volume-weighted MACD - with dynamic support/resistance analysis for high-probability entries.
+
+Key Components:
+1. Fisher Transform Indicator (10-period)
+   - Smoothed price transformation that creates Gaussian-like distribution
+   - Identifies extreme price movements and potential reversals
+2. Volume-Weighted MACD (12,26,9 periods)
+   - Standard MACD calculation weighted by volume intensity
+   - Divergence detection between price and indicator
+3. Dynamic Support/Resistance
+   - Auto-adjusting levels based on recent price extremes
+   - Calculated using 20-period Donchian channels
+
+Entry Rules:
+LONG ENTRY:
+1. Fisher Transform crosses above -0.5 from below
+2. Volume-MACD shows bullish divergence (higher lows while price makes lower lows)
+3. Price breaks above dynamic resistance level
+4. All conditions must occur within 3 bars of each other
+
+SHORT ENTRY:
+1. Fisher Transform crosses below 0.5 from above
+2. Volume-MACD shows bearish divergence (lower highs while price makes higher highs)
+3. Price breaks below dynamic support level
+4. All conditions must occur within 3 bars of each other
+
+Exit Rules:
+- Take Profit: 2:1 reward ratio based on entry volatility (ATR 14)
+- Stop Loss: Opposite side of dynamic S/R level
+- Time Exit: Close position if no target hit after 10 bars
+
+Risk Management:
+1. Position sizing based on 1% risk per trade
+2. Maximum 3 concurrent positions
+3. Stop loss always placed first before entry
+4. No trading during first/last 30 minutes of session
+
+Required Indicators:
+1. Fisher Transform (10 period)
+2. Volume-Weighted MACD (12,26,9)
+3. Donchian Channel (20 period)
+4. Average True Range (14 period)
+
+Optimization Notes:
+- Best performs on 30m-4h timeframes
+- Works well with liquid assets showing clear trends
+- Requires volume confirmation for validity
+- Filter with VWAP for additional confirmation
+
+This strategy excels in capturing momentum shifts while using volume confirmation to filter false signals, making it particularly effective in trending markets with clear support/resistance structures.

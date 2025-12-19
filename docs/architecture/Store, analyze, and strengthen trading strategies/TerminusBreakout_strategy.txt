@@ -1,0 +1,57 @@
+STRATEGY_NAME: TerminusBreakout
+
+STRATEGY_DETAILS:
+This strategy combines VIX term structure analysis with Bollinger Band breakouts on the S&P 500, creating a unique volatility-adaptive trading approach.
+
+Key Components:
+1. VIX Term Structure Analysis:
+   - Monitors contango (futures > spot) vs. backwardation (futures < spot)
+   - Signals market sentiment shifts when the curve flips polarity
+
+2. Bollinger Band Breakout:
+   - Uses standard 20-period, 2-standard deviation bands
+   - Tracks price exiting upper/lower bands
+
+Entry Rules:
+1. Long Entry:
+   - When S&P 500 price exits LOWER Bollinger Band
+   - AND VIX term structure flips from contango to backwardation
+   - (Signals oversold conditions with increasing fear)
+
+2. Short Entry:
+   - When S&P 500 price exits UPPER Bollinger Band
+   - AND VIX term structure flips from backwardation to contango
+   - (Signals overbought conditions with complacency)
+
+Exit Rules:
+1. Mean Reversion Exit:
+   - Close long positions when price returns to middle Bollinger Band
+   - Close short positions when price returns to middle Bollinger Band
+
+2. Emergency Exit:
+   - Exit if price reaches opposite band (for longs: upper band, for shorts: lower band)
+   - Exit if VIX curve flips polarity again
+
+Risk Management:
+1. Position Sizing:
+   - 1-2% risk per trade
+   - Adjust position size based on band width (wider bands = smaller position)
+
+2. Stop Loss:
+   - Natural stop at opposite Bollinger Band
+   - Maximum 3% of account risk per trade
+
+Required Indicators:
+1. Bollinger Bands (20,2)
+2. VIX spot and front-month futures
+3. VIX term structure calculation (futures minus spot)
+
+Optimal Conditions:
+- Works best during periods of high volatility
+- Most effective when VIX is between 15-30
+- Avoid extreme volatility regimes (VIX > 40)
+
+Additional Notes:
+- Monitor roll dates for VIX futures
+- Combine with volume confirmation for stronger signals
+- Works on daily or 4-hour timeframes

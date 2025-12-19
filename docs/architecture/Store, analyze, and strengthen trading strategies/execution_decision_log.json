@@ -1,0 +1,19 @@
+[
+  {
+    "timestamp": "2025-12-13T10:55:17.140624",
+    "regime": "High Volatility Range",
+    "regime_metrics": {
+      "adx": 12.71,
+      "atr_percentile": 96.0,
+      "atr": 246.2614,
+      "regime": "High Volatility Range"
+    },
+    "regime_changed": true,
+    "regime_confirmations": 1,
+    "should_switch_strategy": true,
+    "selected_strategy": "FibroVoltaic",
+    "strategy_type": "Volatility",
+    "previous_strategy": null,
+    "action": "Switched from None to FibroVoltaic"
+  }
+]

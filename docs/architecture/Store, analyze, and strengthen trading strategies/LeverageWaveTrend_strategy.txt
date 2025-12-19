@@ -1,0 +1,45 @@
+STRATEGY_NAME: LeverageWaveTrend
+
+STRATEGY_DETAILS:
+The LeverageWaveTrend strategy is a sophisticated trend-following approach that combines Elliott Wave Theory with leveraged trading techniques. This strategy focuses on identifying and capitalizing on strong trending markets by analyzing wave patterns and applying calculated leverage to maximize returns during high-probability trend phases.
+
+Key Strategy Components:
+1. Elliott Wave Analysis: Identify and count wave patterns (impulse and corrective waves) to determine the current market phase.
+2. Trend Confirmation: Use technical indicators to confirm the strength and direction of the trend.
+3. Leverage Application: Apply calculated leverage during strong impulse waves to maximize returns.
+4. Risk Management: Implement strict risk controls to protect capital during corrective waves.
+
+Entry Rules:
+1. Enter long positions during confirmed Wave 3 or Wave 5 impulse waves in an uptrend.
+2. Enter short positions during confirmed Wave 3 or Wave 5 impulse waves in a downtrend.
+3. Confirm wave count with Fibonacci retracement levels and volume analysis.
+4. Use MACD (12,26,9) crossover above/below zero line for trend confirmation.
+5. Apply leverage only when RSI (14) is between 40-60 (neutral zone) at wave start.
+
+Exit Rules:
+1. Close positions when price reaches Fibonacci extension targets (1.618 or 2.618 of previous wave).
+2. Exit when RSI (14) reaches overbought (>70) or oversold (<30) levels.
+3. Close positions if price breaks below/above the previous wave's starting point.
+4. Use trailing stop-loss at 1 ATR (14) below/above the most recent swing high/low.
+
+Risk Management:
+1. Maximum leverage: 3:1 (adjust based on account size and risk tolerance).
+2. Position sizing: 1-2% of account per trade.
+3. Stop-loss: 1.5 ATR (14) from entry point.
+4. Daily loss limit: 5% of account.
+5. Weekly drawdown limit: 10% of account.
+
+Required Indicators:
+1. Elliott Wave Oscillator (for wave confirmation)
+2. MACD (12,26,9) - trend confirmation
+3. RSI (14) - momentum and overbought/oversold levels
+4. ATR (14) - volatility and stop-loss calculation
+5. Fibonacci Retracement and Extension tools
+
+Additional Notes:
+- Focus on higher timeframes (4H, Daily) for more reliable wave patterns.
+- Avoid trading during news events or low liquidity periods.
+- Regularly review and adjust leverage based on market conditions.
+- Maintain a trading journal to track wave counts and performance.
+
+This strategy requires a solid understanding of Elliott Wave Theory and disciplined risk management. Traders should practice on demo accounts before implementing with real capital.

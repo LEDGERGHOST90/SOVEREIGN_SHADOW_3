@@ -1,0 +1,62 @@
+STRATEGY_NAME: LiquidationFracture
+
+STRATEGY_DETAILS:
+This strategy combines order book liquidity analysis with volatility compression patterns to target high-probability liquidation-driven moves. The core premise revolves around identifying and trading through clustered liquidation zones where forced position closures create explosive price movements.
+
+Key Components:
+1. Liquidation Heatmap Analysis
+   - Identifies high-density liquidation zones (both long and short) using order book data
+   - Focuses on areas where multiple stop losses cluster together
+   - Zones become more significant with higher liquidity concentration
+
+2. Bollinger Band Squeeze Confirmation
+   - Uses BB% (Bollinger Band Percentage) to detect volatility compression
+   - Requires squeeze condition (BB width < X% of price) before entry
+   - Acts as a volatility filter for higher-probability setups
+
+Entry Rules:
+1. Primary Trigger:
+   - Price must breach a identified liquidation cluster zone
+   - Breach must occur with increasing volume (min 20% above average)
+
+2. Secondary Confirmation:
+   - Bollinger Band squeeze must be present (BB width < 1.5% of price)
+   - RSI(14) between 40-60 (neutral zone) at time of breach
+   - Entry only in direction of breach (long above, short below)
+
+Exit Rules:
+1. Profit Taking:
+   - Primary target: 1.5x average liquidation zone width
+   - Secondary target: Next significant liquidity zone
+   - Trail stop after 1R profit achieved
+
+2. Stop Loss:
+   - Initial stop: Opposite side of liquidation zone
+   - Maximum risk: 1-2% of capital per trade
+   - Emergency stop if price re-enters zone against position
+
+Risk Management:
+1. Position Sizing:
+   - Maximum 2% risk per trade
+   - Adjust position size based on zone significance (A/B/C tiers)
+   - Reduce size during high volatility periods
+
+2. Trade Filtering:
+   - Only trade liquid markets (minimum $50M daily volume)
+   - Avoid news events and scheduled announcements
+   - Require minimum 3:1 reward/risk ratio
+
+Required Indicators:
+1. Liquidation Heatmap (order book analysis tool)
+2. Bollinger Bands (20,2 standard deviations)
+3. Volume Profile (for zone validation)
+4. RSI (14 period)
+5. ATR (14 period for volatility context)
+
+Special Notes:
+- Works best in crypto and forex markets with deep liquidity
+- Most effective on 1H-4H timeframes
+- Requires real-time order book data feed
+- Backtest with attention to different volatility regimes
+
+This strategy capitalizes on the market's tendency for accelerated moves when hitting concentrated liquidity zones, using volatility compression as a confirming filter to avoid false breakouts. The "fracture" aspect refers to the price breaking through these clustered liquidation levels with follow-through momentum.

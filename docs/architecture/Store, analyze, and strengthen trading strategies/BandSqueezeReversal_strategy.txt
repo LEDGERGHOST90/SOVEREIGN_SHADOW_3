@@ -1,0 +1,35 @@
+STRATEGY_NAME: BandSqueezeReversal
+
+STRATEGY_DETAILS:
+The BandSqueezeReversal strategy combines Bollinger Band contraction with Heikin-Ashi candlestick patterns to identify potential trend reversals and capitalize on breakout opportunities. Here's a detailed breakdown of the strategy:
+
+1. **Key Strategy Components**:
+   - **Bollinger Band Width Contraction**: Identifies periods of low volatility, signaling potential breakouts.
+   - **Heikin-Ashi Candles**: Smoothes price action to confirm trend direction.
+   - **ATR Trailing Stop**: Manages risk and locks in profits during favorable moves.
+
+2. **Entry Rules**:
+   - Wait for the Bollinger Band width to contract to a 10-day low, indicating a period of low volatility (squeeze).
+   - Confirm the setup with three consecutive bullish Heikin-Ashi closes, signaling a potential reversal or breakout.
+   - Enter a long position when both conditions are met.
+
+3. **Exit Rules**:
+   - Use a trailing stop based on 2x the Average True Range (ATR) to exit the trade.
+   - The trailing stop adjusts dynamically as the price moves in your favor, locking in profits while allowing room for the trend to develop.
+
+4. **Risk Management**:
+   - Calculate the ATR value at the time of entry to determine the initial stop-loss distance.
+   - Ensure the position size aligns with your risk tolerance, typically risking no more than 1-2% of your account per trade.
+   - Continuously monitor the trailing stop to protect gains and minimize losses.
+
+5. **Required Indicators**:
+   - **Bollinger Bands**: Set to default parameters (20-period SMA with 2 standard deviations).
+   - **Heikin-Ashi Candles**: Use standard Heikin-Ashi candlestick charts.
+   - **ATR (Average True Range)**: Set to a 14-period default for calculating the trailing stop.
+
+6. **Additional Notes**:
+   - This strategy works best in trending or breakout markets. Avoid using it during choppy or sideways conditions.
+   - Combine with volume analysis to confirm the strength of the breakout.
+   - Backtest the strategy on multiple timeframes to identify the most effective settings for your trading style.
+
+By focusing on volatility contraction and trend confirmation, the BandSqueezeReversal strategy provides a systematic approach to capturing breakout opportunities while managing risk effectively.

@@ -1,0 +1,345 @@
+{
+  "total_unique_strategies": 34,
+  "strategies": {
+    "BandedRSI_Trend": {
+      "name": "BandedRSI_Trend",
+      "python_versions": [],
+      "json_results_count": 2,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 2
+    },
+    "BandedReversion": {
+      "name": "BandedReversion",
+      "python_versions": [],
+      "json_results_count": 1,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "BandedStochastic": {
+      "name": "BandedStochastic",
+      "python_versions": [],
+      "json_results_count": 8,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 8
+    },
+    "BandwidthBreakout": {
+      "name": "BandwidthBreakout",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "BandwidthMomentum": {
+      "name": "BandwidthMomentum",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "BandwidthPulse": {
+      "name": "BandwidthPulse",
+      "python_versions": [
+        "BandwidthPulse_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "ChannelFibonacciBreakout": {
+      "name": "ChannelFibonacciBreakout",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "ChoppyBreakout": {
+      "name": "ChoppyBreakout",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "ContangoDivergence": {
+      "name": "ContangoDivergence",
+      "python_versions": [
+        "ContangoDivergence_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "DeltaBandBreakout": {
+      "name": "DeltaBandBreakout",
+      "python_versions": [
+        "DeltaBandBreakout_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "DeltaClusterBreakout": {
+      "name": "DeltaClusterBreakout",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "DualMomentumFisher": {
+      "name": "DualMomentumFisher",
+      "python_versions": [
+        "DualMomentumFisher_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 2
+    },
+    "DynamicCrossfire": {
+      "name": "DynamicCrossfire",
+      "python_versions": [
+        "DynamicCrossfire_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "DynamicVWAPTrend": {
+      "name": "DynamicVWAPTrend",
+      "python_versions": [],
+      "json_results_count": 2,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 2
+    },
+    "ElderReversion": {
+      "name": "ElderReversion",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "FibonacciDivergence": {
+      "name": "FibonacciDivergence",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": true,
+      "total_files": 1
+    },
+    "FibroVoltaic": {
+      "name": "FibroVoltaic",
+      "python_versions": [
+        "FibroVoltaic_BTFinal_v8.py"
+      ],
+      "json_results_count": 7,
+      "has_strategy_doc": false,
+      "has_pkg_file": true,
+      "total_files": 9
+    },
+    "FisherBandConvergence": {
+      "name": "FisherBandConvergence",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "FlowVolatilityBreakout": {
+      "name": "FlowVolatilityBreakout",
+      "python_versions": [],
+      "json_results_count": 0,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "FractalFibonacci": {
+      "name": "FractalFibonacci",
+      "python_versions": [
+        "FractalFibonacci_BTFinal_v3.py"
+      ],
+      "json_results_count": 5,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 6
+    },
+    "GammaReversion": {
+      "name": "GammaReversion",
+      "python_versions": [
+        "GammaReversion_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "GannSMAConvergence": {
+      "name": "GannSMAConvergence",
+      "python_versions": [
+        "GannSMAConvergence_BTFinal_WORKING.py",
+        "GannSMAConvergence_BTFinal_v2.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 2
+    },
+    "LiquidationSpikeBreakout": {
+      "name": "LiquidationSpikeBreakout",
+      "python_versions": [
+        "LiquidationSpikeBreakout_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "MomentumBandwidth": {
+      "name": "MomentumBandwidth",
+      "python_versions": [
+        "MomentumBandwidth_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "VolCliffArbitrage": {
+      "name": "VolCliffArbitrage",
+      "python_versions": [
+        "VolCliffArbitrage_BT.py",
+        "VolCliffArbitrage_BTFinal_WORKING.py",
+        "VolCliffArbitrage_BTFinal_v1.py",
+        "VolCliffArbitrage_BTFinal_v2.py",
+        "VolCliffArbitrage_BTFinal_v3.py",
+        "VolCliffArbitrage_BTFinal_v4.py"
+      ],
+      "json_results_count": 4,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 11
+    },
+    "VolatilityBandit": {
+      "name": "VolatilityBandit",
+      "python_versions": [
+        "VolatilityBandit_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "VolatilityBreakout": {
+      "name": "VolatilityBreakout",
+      "python_versions": [
+        "VolatilityBreakout_BTFinal_v2.py",
+        "VolatilityBreakout_BTFinal_v3.py",
+        "VolatilityBreakout_BTFinal_v6.py",
+        "VolatilityBreakout_BTFinal_v7.py",
+        "VolatilityBreakout_BTFinal_v8.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 5
+    },
+    "VolatilityCompression": {
+      "name": "VolatilityCompression",
+      "python_versions": [
+        "VolatilityCompression_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "VolatilityCorridorPutter": {
+      "name": "VolatilityCorridorPutter",
+      "python_versions": [
+        "VolatilityCorridorPutter_BTFinal_v1.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "VolatilityDivergence": {
+      "name": "VolatilityDivergence",
+      "python_versions": [
+        "VolatilityDivergence_BT.py",
+        "VolatilityDivergence_BTFinal_v1.py",
+        "VolatilityDivergence_BTFinal_v2.py",
+        "VolatilityDivergence_BTFinal_v3.py",
+        "VolatilityDivergence_BTFinal_v4.py",
+        "VolatilityDivergence_BTFinal_v5.py",
+        "VolatilityDivergence_BTFinal_v6.py",
+        "VolatilityDivergence_BTFinal_v7.py",
+        "VolatilityDivergence_BTFinal_v8.py",
+        "VolatilityDivergence_BTFinal_v9.py"
+      ],
+      "json_results_count": 7,
+      "has_strategy_doc": true,
+      "has_pkg_file": false,
+      "total_files": 18
+    },
+    "VolatilityFilteredEMA": {
+      "name": "VolatilityFilteredEMA",
+      "python_versions": [
+        "VolatilityFilteredEMA_BTFinal.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "VoltaicDivergence": {
+      "name": "VoltaicDivergence",
+      "python_versions": [
+        "VoltaicDivergence_BTFinal_WORKING.py",
+        "VoltaicDivergence_BTFinal_v1.py",
+        "VoltaicDivergence_BTFinal_v4.py",
+        "VoltaicDivergence_BTFinal_v5.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 4
+    },
+    "VolumePulseBreakout": {
+      "name": "VolumePulseBreakout",
+      "python_versions": [
+        "VolumePulseBreakout_BTFinal_v1.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": false,
+      "total_files": 1
+    },
+    "VolumetricBreakout": {
+      "name": "VolumetricBreakout",
+      "python_versions": [
+        "VolumetricBreakout_BTFinal_v2.py",
+        "VolumetricBreakout_BTFinal_v3.py",
+        "VolumetricBreakout_BTFinal_v6.py",
+        "VolumetricBreakout_BTFinal_v7.py",
+        "VolumetricBreakout_BTFinal_v9.py"
+      ],
+      "json_results_count": 0,
+      "has_strategy_doc": false,
+      "has_pkg_file": true,
+      "total_files": 6
+    }
+  }
+}

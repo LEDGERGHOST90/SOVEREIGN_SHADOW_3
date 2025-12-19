@@ -1,0 +1,33 @@
+STRATEGY_NAME: BandwidthBreakout  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **Bollinger Band Width Contraction:** The strategy identifies periods of low volatility when the Bollinger Band width reaches a 20-day low, signaling potential breakout conditions.  
+2. **Volume Spike Confirmation:** A 150% increase in volume relative to the 10-day average confirms strong participation in the breakout move.  
+3. **Breakout Execution:** Entries are triggered when price breaks out of the contracted Bollinger Bands with the volume spike.  
+4. **Exit Conditions:** Positions are closed either when price touches the opposite Bollinger Band (mean reversion signal) or after holding for 5 periods (time-based exit).  
+
+**Entry Rules:**  
+- Wait for Bollinger Band width (BB Width) to reach a 20-day low, indicating contraction.  
+- Confirm a volume spike of at least 150% above the 10-day average volume.  
+- Enter long on a breakout above the upper Bollinger Band or short on a breakout below the lower Bollinger Band.  
+
+**Exit Rules:**  
+- **Opposite Band Touch:** Close the trade if price touches the opposite Bollinger Band (e.g., exit long if price hits the lower band).  
+- **Time-Based Exit:** Automatically exit after 5 periods (bars) if the opposite band isn’t touched.  
+
+**Risk Management:**  
+- Use a stop-loss just beyond the breakout band (e.g., for a long entry, place a stop below the lower band).  
+- Position sizing should account for the volatility contraction (e.g., wider stops may require smaller position sizes).  
+
+**Required Indicators:**  
+1. **Bollinger Bands** (20-period SMA with 2 standard deviations).  
+2. **Bollinger Band Width** (BB Width = (Upper Band - Lower Band) / Middle Band).  
+3. **Volume** (10-day average volume for comparison).  
+
+**Unique Aspects:**  
+- Combines volatility contraction (BB Width) with volume confirmation for high-probability breakouts.  
+- Uses both price action (band touch) and time-based exits to balance trend-following and mean reversion.  
+- Avoids false breakouts by requiring volume spikes.  
+
+**Note:** This strategy works best in trending markets after consolidation phases. Backtest for optimal parameters (e.g., BB period, volume spike threshold).

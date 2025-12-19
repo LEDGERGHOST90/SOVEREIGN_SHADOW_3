@@ -1,0 +1,56 @@
+STRATEGY_NAME: VolumetricStochastic
+
+STRATEGY_DETAILS:
+The VolumetricStochastic strategy combines the Stochastic Oscillator with range-based volume indicators to identify high-probability trading opportunities. This approach leverages momentum and volume dynamics to confirm trends and reversals, providing a robust framework for both trend-following and mean-reversion strategies.
+
+### Key Strategy Components:
+1. **Stochastic Oscillator**: 
+   - Used to identify overbought (above 80) and oversold (below 20) conditions.
+   - Focus on the %K and %D lines for momentum confirmation.
+2. **Range-Based Volume Indicators**:
+   - Volume Weighted Average Price (VWAP) or On-Balance Volume (OBV) to confirm volume trends within specific price ranges.
+   - Volume spikes within key price levels (support/resistance) are used to validate breakouts or reversals.
+
+### Entry Rules:
+1. **Long Entry**:
+   - Stochastic %K crosses above %D in the oversold zone (below 20).
+   - Volume indicator (e.g., OBV) shows a significant increase, confirming buying pressure.
+   - Price breaks above a key resistance level with high volume.
+2. **Short Entry**:
+   - Stochastic %K crosses below %D in the overbought zone (above 80).
+   - Volume indicator shows a significant decrease, confirming selling pressure.
+   - Price breaks below a key support level with high volume.
+
+### Exit Rules:
+1. **Take Profit**:
+   - For long positions, exit when Stochastic %K crosses below %D in the overbought zone.
+   - For short positions, exit when Stochastic %K crosses above %D in the oversold zone.
+   - Alternatively, use a fixed risk-reward ratio (e.g., 2:1) based on the entry price.
+2. **Stop Loss**:
+   - Place stop-loss orders below the recent swing low for long positions or above the recent swing high for short positions.
+   - Adjust stop-loss levels based on volatility (e.g., ATR-based stop).
+
+### Risk Management:
+1. **Position Sizing**:
+   - Risk no more than 1-2% of the trading capital per trade.
+   - Use the distance between entry and stop-loss levels to calculate position size.
+2. **Diversification**:
+   - Avoid over-concentration in a single asset or sector.
+3. **Trailing Stops**:
+   - Use trailing stops to lock in profits as the trade moves in your favor.
+
+### Required Indicators:
+1. **Stochastic Oscillator** (14,3,3 settings recommended):
+   - %K and %D lines for momentum analysis.
+2. **Volume Indicator** (OBV or VWAP):
+   - OBV for cumulative volume trends.
+   - VWAP for intraday volume-weighted price levels.
+3. **Support/Resistance Levels**:
+   - Identify key price levels using historical data or pivot points.
+4. **Optional: ATR (Average True Range)**:
+   - For volatility-based stop-loss adjustments.
+
+### Additional Notes:
+- This strategy works best in trending markets but can also be adapted for range-bound conditions by focusing on overbought/oversold levels.
+- Always backtest the strategy on historical data to ensure its effectiveness in your chosen market and timeframe.
+- Combine with fundamental analysis or news events to avoid false signals during high-impact news releases.

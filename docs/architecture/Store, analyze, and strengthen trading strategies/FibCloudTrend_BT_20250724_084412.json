@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "",
+  "stderr": "  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_13_2025/backtests/FibCloudTrend_BT.py\", line 1\n    Here's the complete implementation of the FibCloudTrend strategy for backtesting.py:\n        ^\nSyntaxError: unterminated string literal (detected at line 1)\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_13_2025/backtests/FibCloudTrend_BT.py` failed. (See above for error)\n",
+  "execution_time": 0.468165,
+  "timestamp": "2025-07-24T08:44:12.751627"
+}

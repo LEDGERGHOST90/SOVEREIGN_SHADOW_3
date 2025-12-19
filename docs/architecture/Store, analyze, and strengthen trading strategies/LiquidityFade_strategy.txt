@@ -1,0 +1,32 @@
+STRATEGY_NAME: LiquidityFade  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Liquidity Gap Identification:** The strategy focuses on detecting liquidity gaps in the market by analyzing order book depth imbalance. These gaps often indicate areas where price may reverse due to sudden shifts in supply and demand.  
+2. **Volume Profile Extremes:** Uses a 15-minute volume profile to identify key support/resistance levels where high trading activity has occurred. These extremes act as potential reversal zones.  
+3. **Price Rejection Candles:** Entries are triggered by rapid price rejection candles (e.g., long wicks, pin bars) near these liquidity gaps, signaling a potential fade opportunity.  
+4. **Mean Volume-Weighted Price (VWAP) Exit:** Positions are closed when price returns to the mean volume-weighted price, ensuring a balanced risk-reward ratio.  
+
+**Entry Rules:**  
+- **Condition 1:** Identify a liquidity gap via order book depth imbalance (e.g., large bid/ask imbalance or sudden depth depletion).  
+- **Condition 2:** Confirm the presence of a volume profile extreme (high-volume node) within the last 15-minute candle.  
+- **Condition 3:** Wait for a strong price rejection candle (e.g., a pin bar or engulfing pattern) near the identified level.  
+- **Entry Trigger:** Enter short if rejection occurs at a high-volume resistance level, or long if rejection occurs at a high-volume support level.  
+
+**Exit Rules:**  
+- **Profit Target:** Exit the trade when price reaches the mean volume-weighted price (VWAP) of the recent 15-minute profile.  
+- **Stop Loss:** Place stop loss just beyond the liquidity gap (e.g., above/below the recent swing high/low).  
+
+**Risk Management:**  
+- **Position Sizing:** Risk no more than 1-2% of capital per trade.  
+- **Stop Placement:** Stops should be tight, respecting the liquidity gap boundaries.  
+- **Avoid Over-Trading:** Only take signals near clear volume extremes with strong order book confirmation.  
+
+**Required Indicators:**  
+1. **Order Book Depth Imbalance Tool** (to detect liquidity gaps).  
+2. **15-Minute Volume Profile** (to identify high-volume nodes).  
+3. **Candlestick Patterns** (for price rejection confirmation).  
+4. **Volume-Weighted Average Price (VWAP)** (for exit targeting).  
+
+This strategy capitalizes on short-term liquidity inefficiencies, fading extreme moves when order flow suggests exhaustion. The combination of order book analysis, volume profiling, and price action filtering ensures high-probability setups with controlled risk.

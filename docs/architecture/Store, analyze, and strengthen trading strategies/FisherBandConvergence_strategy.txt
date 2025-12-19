@@ -1,0 +1,36 @@
+STRATEGY_NAME: FisherBand Convergence
+
+STRATEGY_DETAILS:
+This strategy combines three specialized technical indicators to identify high-probability convergence points in market conditions. The core approach uses the Fisher Transform for trend detection, Chaikin Money Flow for volume confirmation, and Bollinger Band Width for volatility filtering.
+
+Key Components:
+1. Fisher Transform Indicator - Detects potential trend reversals when crossing zero line
+2. Chaikin Money Flow (CMF) - Confirms buying pressure when >0.1
+3. Bollinger Band Width (30-day) - Identifies periods of contraction preceding potential expansion
+
+Entry Rules:
+- Primary Condition: Fisher Transform crosses ABOVE zero line
+- Confirmation 1: Chaikin Money Flow >0.1 (indicating strong buying pressure)
+- Confirmation 2: 30-day Bollinger Band Width at narrowest point (indicating low volatility before potential breakout)
+
+Exit Rules:
+- Fisher Transform crosses BELOW zero line (signaling potential trend reversal)
+- No CMF or BB Width conditions required for exit
+
+Risk Management:
+1. Position Sizing: Recommended 1-2% risk per trade
+2. Stop Loss: Consider placing below recent swing low or using ATR-based stop
+3. Time Filter: Avoid entering trades during major economic news events
+4. Volatility Check: Ensure Bollinger Bands aren't excessively wide when entering
+
+Required Indicators:
+1. Fisher Transform (standard settings)
+2. Chaikin Money Flow (20-period standard)
+3. Bollinger Bands (20,2 standard with Width calculation)
+
+Optimization Notes:
+- Test different CMF thresholds (0.05-0.15 range)
+- Experiment with Bollinger Band periods (20-50 days)
+- Consider adding time-based exit (e.g., 5-10 bars after entry)
+
+This strategy works best in trending markets and may produce false signals during ranging conditions. The combination of price transformation (Fisher), volume confirmation (CMF), and volatility measurement (BB Width) creates a robust filter for high-quality entries.

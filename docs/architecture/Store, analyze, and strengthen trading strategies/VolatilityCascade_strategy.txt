@@ -1,0 +1,30 @@
+STRATEGY_NAME: VolatilityCascade
+
+STRATEGY_DETAILS:
+The VolatilityCascade strategy focuses on identifying and capitalizing on volatility expansions that occur after liquidation cascades, using a combination of long/short ratio analysis, Bollinger Bandwidth extremes, and anchored VWAP inflection points.
+
+Key Strategy Components:
+1. Liquidation Cascade Detection: Monitor clustered long/short ratio flips to identify potential liquidation cascades. These flips indicate a significant shift in market sentiment and positioning.
+2. Bollinger Bandwidth Extremes: Use Bollinger Bandwidth to measure volatility. Enter trades when the bandwidth reaches extreme levels, signaling potential volatility expansions.
+3. Anchored VWAP Inflection Points: Use anchored VWAP to identify key support and resistance levels. Exit trades at these inflection points to capture profits and manage risk.
+
+Entry Rules:
+1. Detect a liquidation cascade via clustered long/short ratio flips.
+2. Confirm volatility expansion by observing Bollinger Bandwidth reaching extreme levels.
+3. Enter a trade in the direction of the volatility expansion (long or short) once these conditions are met.
+
+Exit Rules:
+1. Monitor the anchored VWAP for inflection points.
+2. Exit the trade when the price reaches an anchored VWAP inflection point, signaling a potential reversal or consolidation.
+
+Risk Management:
+1. Position Sizing: Adjust position sizes based on the volatility levels indicated by Bollinger Bandwidth. Higher volatility may warrant smaller positions to manage risk.
+2. Stop-Loss: Set stop-loss orders at a predefined percentage or price level below the entry point to limit potential losses.
+3. Take-Profit: Use anchored VWAP inflection points as take-profit targets to lock in gains.
+
+Required Indicators:
+1. Long/Short Ratio: To detect clustered flips indicating liquidation cascades.
+2. Bollinger Bands: Specifically, Bollinger Bandwidth to measure volatility extremes.
+3. Anchored VWAP: To identify key support and resistance levels for exit points.
+
+By combining these elements, the VolatilityCascade strategy aims to capture significant moves following periods of high volatility and market dislocations, providing a structured approach to trading in volatile conditions.

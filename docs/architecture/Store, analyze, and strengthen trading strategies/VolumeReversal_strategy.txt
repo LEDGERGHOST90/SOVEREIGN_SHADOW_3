@@ -1,0 +1,40 @@
+STRATEGY_NAME: VolumeReversal
+
+STRATEGY_DETAILS:
+The VolumeReversal strategy is a counter-trend trading approach that capitalizes on sudden volume surges during overbought or oversold market conditions. It combines Bollinger Bandwidth thresholds, RSI overbought/oversold levels, and Fibonacci retracement for precise entries and exits.
+
+### Key Strategy Components:
+1. **Bollinger Bandwidth Thresholds**: Measures volatility by calculating the percentage difference between the upper and lower Bollinger Bands. A surge in volume above a predefined threshold indicates potential reversals.
+2. **RSI Overbought/Oversold Conditions**: Identifies extreme market conditions using RSI levels (typically above 70 for overbought and below 30 for oversold).
+3. **Fibonacci Retracement**: Used to define exit points, specifically the 38.2% retracement level from the recent swing high or low.
+
+### Entry Rules:
+1. Wait for RSI to enter overbought (above 70) or oversold (below 30) territory.
+2. Confirm a surge in volume that exceeds the Bollinger Bandwidth threshold (e.g., volume spikes above the average volume by a significant percentage).
+3. Enter a counter-trend position:
+   - **Short Entry**: When RSI is overbought and volume surges above the upper Bollinger Bandwidth threshold.
+   - **Long Entry**: When RSI is oversold and volume surges above the lower Bollinger Bandwidth threshold.
+
+### Exit Rules:
+1. Use the Fibonacci 38.2% retracement level as the exit point:
+   - For short positions, exit when price retraces 38.2% from the recent swing low.
+   - For long positions, exit when price retraces 38.2% from the recent swing high.
+2. Alternatively, exit if RSI exits the overbought/oversold zone (e.g., RSI crosses below 70 for short positions or above 30 for long positions).
+
+### Risk Management:
+1. Set a stop-loss just beyond the recent swing high (for short positions) or swing low (for long positions).
+2. Use a risk-reward ratio of at least 1:2 to ensure profitability.
+3. Limit position size to 1-2% of total capital per trade to manage risk.
+
+### Required Indicators:
+1. **Bollinger Bands**: To calculate Bandwidth thresholds and identify volatility surges.
+2. **RSI (Relative Strength Index)**: To identify overbought/oversold conditions.
+3. **Volume Indicator**: To detect volume surges above average levels.
+4. **Fibonacci Retracement Tool**: To define exit levels at 38.2%.
+
+### Example Setup:
+- **Scenario**: RSI is at 75 (overbought), and volume spikes 50% above the average, exceeding the Bollinger Bandwidth threshold.
+- **Action**: Enter a short position.
+- **Exit**: Close the position when price retraces 38.2% from the recent swing low or RSI drops below 70.
+
+This strategy is ideal for traders who prefer counter-trend opportunities and can act quickly on volume surges during extreme market conditions.

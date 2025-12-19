@@ -1,0 +1,36 @@
+STRATEGY_NAME: VolatilitySqueezeBreakout
+
+STRATEGY_DETAILS:
+The VolatilitySqueezeBreakout strategy is designed to capitalize on periods of low volatility followed by high-probability breakouts. It combines Bollinger Band width analysis, ADX trend strength, and volume confirmation to identify and trade these setups.
+
+Key Components:
+1. **Bollinger Band Width Percentile**: Measures the relative width of Bollinger Bands to identify periods of extreme contraction (below 10th percentile).
+2. **ADX (Average Directional Index)**: Confirms trend strength with a rising ADX above 25.
+3. **Volume Filter**: Ensures breakout validity by requiring volume to exceed the 20-day average.
+4. **Breakout Confirmation**: Uses closing prices outside Bollinger Bands to confirm the breakout.
+
+Entry Rules:
+1. Wait for Bollinger Band width to drop below the 10th percentile (indicating a volatility squeeze).
+2. Confirm a rising ADX above 25 (indicating increasing trend strength).
+3. Enter the trade on a breakout close outside the Bollinger Bands.
+4. Ensure the breakout volume exceeds the 20-day average volume.
+
+Exit Rules:
+1. Exit the trade when the ADX reverses and drops below 20 (indicating weakening trend strength).
+2. Alternatively, use a trailing stop or fixed risk-reward ratio (e.g., 2:1) to lock in profits.
+
+Risk Management:
+1. Position sizing should be based on a fixed percentage of account equity (e.g., 1-2% per trade).
+2. Set a stop-loss just inside the Bollinger Band opposite the breakout direction.
+3. Avoid overtrading by waiting for high-quality setups that meet all criteria.
+
+Required Indicators:
+1. Bollinger Bands (20-period, 2 standard deviations).
+2. Bollinger Band Width Percentile (calculated using historical width data).
+3. ADX (14-period).
+4. Volume (20-day average).
+
+Additional Notes:
+- This strategy works best in trending markets and may underperform in choppy or range-bound conditions.
+- Backtest the strategy on multiple timeframes (e.g., daily, 4-hour) to identify optimal settings for your trading style.
+- Combine with fundamental analysis or other technical filters to further refine entries.

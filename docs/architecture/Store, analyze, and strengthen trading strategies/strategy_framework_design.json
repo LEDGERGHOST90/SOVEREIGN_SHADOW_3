@@ -1,0 +1,1555 @@
+{
+  "framework_name": "Intelligent Strategy Selection Framework",
+  "version": "1.0",
+  "description": "An architectural design for an AI agent to select and execute the optimal trading strategy based on real-time market regime analysis.",
+  "components": {
+    "strategy_library": {
+      "total_strategies": 294,
+      "strategies": {
+        "BandwidthPulse": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ContangoDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaBandBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DynamicCrossfire": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FibroVoltaic": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "GammaReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "GannSMAConvergence": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationSpikeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MomentumBandwidth": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolCliffArbitrage": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityBandit": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityFilteredEMA": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumePulseBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FractalFibonacci": {
+          "type": "Fibonacci",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityCompression": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DualMomentumFisher": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandedRSI_Trend": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandedReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DynamicVWAPTrend": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ElderReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FibonacciDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FisherBandConvergence": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityCorridorPutter": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandedStochastic": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ChannelFibonacciBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ChoppyBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaClusterBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FlowVolatilityBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ConfluencePattern": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "InverseMidpoint": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSurgeReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentPulse": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T02_QuadrupleHarmonic": {
+          "type": "Harmonic",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationVolatility": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandSqueezeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T04_KalmanStochastic": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySurgeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SigmaChannelShort": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityEMA": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexChopFlip": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexVolumeSurge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicContraction": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationPivot": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FibroDeltaBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityFade": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T02_CascadeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FractalStochastic": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentBandReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexFlow": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolCompressBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MomentumBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationSpikeEngulf": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SigmaSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T04_KalmanResonance": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolClusterFlip": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MomentumVolatility": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandStrengthMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaSentiment": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityReversal_01": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaMomentum": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ChannelMomentumBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityHarvester": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumeSurgeEMA": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySurge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthPOC": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergenceAnchor": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolmaCross": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSyncChannel": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T01_ConfluentHarmonics": {
+          "type": "Harmonic",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricSqueeze": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "EuroSpreadScalper": {
+          "type": "Arbitrage",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandSyncMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "HeikinBreakoutDivergence": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySqueezeEdge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T03_QuadrupleCrossover": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityFundament": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandReversalEdge": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicLiquidity": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentRay": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatileDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandChannelBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexVolumeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityBandBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthSurge": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T00_SynergisticOscillator": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicSqueeze": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T03_FibonacciCrossover": {
+          "type": "Fibonacci",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SqueezeAccumulation": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaVwapBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FibroMACDReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandEngulfReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergenceSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexContraction": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatileBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaConverge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MomentumCrossADX": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicCompression": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T00_StochasticHarmony": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentBands": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaBandwidth": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationFracture": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexFlowTrail": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquiditySqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FractalVolumeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicSqueeze_01": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ChikouVolatility": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SqueezeSurge": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandedMACD": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "AccumulationManipulation": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityMomentum": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "CloudStochSync": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ClusterBandwidth": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricSqueeze_01": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityClusterBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityFade": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationBand": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T04_KalmanResonance_BEST_-0.724755pct": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityQuotient": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySqueezeSurge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MomentumReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexSurge": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "CoTrendalNeutral": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SqueezeMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaSqueezeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityExtreme": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityCascade": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationConvergence": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySqueezeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaClusterReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FibroMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "TerminusBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationVolBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricTrendRider": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "QuantumReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T01_VolatilityDirectional": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicSqueeze_02": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationFracture_01": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicConvergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationBandit": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "HeikinTickDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandStochFusion": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexKSTSurge": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "OscillOBVReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "HarmonicStochastic": {
+          "type": "Harmonic",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationSqueeze_01": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityPulse": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolCompressSurge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricExpansion": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergenceBand": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "AtrReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityPricer": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexDivergence_01": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeExpansion": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ClusterReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexAccelTrend": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexChaikinFlow": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolBandDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandSqueezeTrend": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolDeltaBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolCompressDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandSqueezeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySurge_01": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ForceSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolCompressLiquidation": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "T01_ConfluentHarmonics_BEST_0.013855pct": {
+          "type": "Harmonic",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VelocityDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SqueezeSurge_01": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SqueezeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexVolMACD": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityInversion": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SqueezeReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquiBandBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DynamicBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricBollinger": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySqueezePro": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergenceVolatility": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricFibMACD": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolComplacencySqueeze": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityContraction": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumeSurgeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolBandBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexSurgeBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexChaikinCluster": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquiClusterSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityLiquidity": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LeveragedRecovery": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ClusterBandwidth_01": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSyncBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSpikeReversal": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationRejection": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaSqueeze": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityArbitrage": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ChaikinSqueeze": {
+          "type": "Volatility Squeeze",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentCrossover": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityPulse_01": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaBandwidth": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ReversalPulse": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeReversion_01": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySqueezeBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolSqueezeBreakout_02": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricCross": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexSurge_01": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexChopDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicSurge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DualWaveReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricVWAP": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VortexSurge_02": {
+          "type": "Vortex",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VoltaicPulse": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "InverseVolumeDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MoonDev": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MoonTrendRider": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandMACDDivergence": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "CoTrendalNeutral_numpy": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "OptimalTrend": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MoonWinner": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MoonChampion": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "EarlyBuyLateHold": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MoonBullRider": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DivergentVolume": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LeveragedBuyHold": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FinalWinner": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaSentiment_working": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "MoonSuper": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "CoTrendalNeutral_working": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "SuperSimple": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "EarlyBird": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DCAplus": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "init": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandSyncMomentum_01": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaSentiment_01": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ConfluencePattern_01": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ChikouVolatility_01": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolCompressBreakout_01": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandwidthSurge_01": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandReversalEdge_01": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandedMACD_01": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "TrendMomentum": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandedMACD08": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ClusterBreakout08": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "test_backtest_working24": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandStrengthMomentum08": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandStochFusion08": {
+          "type": "Band-Based",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "DeltaSentiment08": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandMACDDivergence08": {
+          "type": "Divergence",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandSyncMomentum08": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FibCloudTrend24": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ConfluencePattern08": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "BandReversalEdge08": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityFractal": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidityVoidBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolumetricStochastic": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityShift": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityRatioReversion": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolBandSurge": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilitySentry": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "FisherVolumeDivergence": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationBandwidth": {
+          "type": "Liquidation",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LiquidationReversal_01": {
+          "type": "Mean Reversion",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityFractal_01": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "StochasticSync": {
+          "type": "Unknown",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "VolatilityHarmonic": {
+          "type": "Volatility",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "LeverageWaveTrend": {
+          "type": "Trend Following",
+          "score": 0,
+          "source": "batch_2"
+        },
+        "ClusterBreakout": {
+          "type": "Breakout",
+          "score": 0,
+          "source": "batch_2"
+        }
+      }
+    },
+    "market_regime_detector": {
+      "description": "Identifies the current market state using ADX and ATR Percentile.",
+      "regimes": {
+        "High Volatility Trend": {
+          "description": "Strong directional movement with high price volatility. Ideal for aggressive trend-following and breakout strategies.",
+          "conditions": {
+            "ADX": "> 25",
+            "ATR_Percentile": "> 70%"
+          }
+        },
+        "Low Volatility Trend": {
+          "description": "Steady, grinding directional movement with low volatility. Suitable for classic trend-following and pullback strategies.",
+          "conditions": {
+            "ADX": "> 25",
+            "ATR_Percentile": "< 30%"
+          }
+        },
+        "High Volatility Range": {
+          "description": "Choppy, sideways market with high volatility. Dangerous conditions, but suitable for mean reversion and volatility strategies.",
+          "conditions": {
+            "ADX": "< 20",
+            "ATR_Percentile": "> 70%"
+          }
+        },
+        "Low Volatility Range": {
+          "description": "Quiet, sideways market with low volatility. Ideal for accumulation, squeeze breakouts, and range-bound strategies.",
+          "conditions": {
+            "ADX": "< 20",
+            "ATR_Percentile": "< 30%"
+          }
+        },
+        "Transitioning Market": {
+          "description": "Market is shifting between trend and range. Conditions are uncertain, requiring cautious or adaptive strategies.",
+          "conditions": {
+            "ADX": "20-25",
+            "ATR_Percentile": "30-70%"
+          }
+        }
+      }
+    },
+    "strategy_selector": {
+      "description": "Maps market regimes to suitable strategy types.",
+      "mapping": {
+        "High Volatility Trend": [
+          "Trend Following",
+          "Breakout",
+          "Volatility",
+          "Momentum"
+        ],
+        "Low Volatility Trend": [
+          "Trend Following",
+          "Pullback",
+          "Momentum"
+        ],
+        "High Volatility Range": [
+          "Mean Reversion",
+          "Volatility",
+          "Scalping",
+          "Arbitrage"
+        ],
+        "Low Volatility Range": [
+          "Mean Reversion",
+          "Volatility Squeeze",
+          "Accumulation",
+          "Band-Based"
+        ],
+        "Transitioning Market": [
+          "Divergence",
+          "Adaptive",
+          "Harmonic"
+        ]
+      }
+    }
+  }
+}

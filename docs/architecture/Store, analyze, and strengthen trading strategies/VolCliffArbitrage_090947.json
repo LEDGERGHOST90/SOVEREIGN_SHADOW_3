@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "\ud83c\udf19 Moon Dev: Initialized VolCliffArbitrage indicators \ud83d\ude80\n\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/10_20_2025/backtests_final/VolCliffArbitrage_BTFinal_v1.py\", line 94, in <module>\n    stats = bt.run()\n  File \"/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/backtesting.py\", line 1170, in run\n    strategy.next()\n  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/10_20_2025/backtests_final/VolCliffArbitrage_BTFinal_v1.py\", line 38, in next\n    if self.i < 100:\nAttributeError: 'VolCliffArbitrage' object has no attribute 'i'. Did you mean: 'I'?\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi_v2/10_20_2025/backtests_final/VolCliffArbitrage_BTFinal_v1.py` failed. (See above for error)\n",
+  "execution_time": 1.252346,
+  "timestamp": "2025-10-20T09:09:47.878955"
+}

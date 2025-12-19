@@ -1,0 +1,44 @@
+STRATEGY_NAME: VoltaicSqueeze  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **Volatility Contraction Detection**: Uses Bollinger Band width (BBW) to measure volatility contraction when the bands narrow significantly.  
+2. **Keltner Channel Confirmation**: Confirms the squeeze condition when price is within the Keltner Channel, indicating low volatility.  
+3. **Breakout Trigger**: Enters trades when volatility expands (BBW increases) and price breaks out of the Keltner Channel.  
+4. **Exit Mechanism**: Uses Parabolic SAR (PSAR) trailing stops to lock in profits and exit on trend reversals.  
+
+**Entry Rules:**  
+1. **Squeeze Condition**:  
+   - Bollinger Band width (BBW) must be below a defined threshold (e.g., lowest 20% of its range).  
+   - Price must be inside the Keltner Channel (indicating low volatility).  
+2. **Breakout Confirmation**:  
+   - BBW expands (rises above the threshold).  
+   - Price closes outside the Keltner Channel in the direction of the breakout (long if above, short if below).  
+
+**Exit Rules:**  
+1. **Trailing Stop**:  
+   - Parabolic SAR (PSAR) is used to trail the stop.  
+   - Exit long when PSAR flips below price; exit short when PSAR flips above price.  
+2. **Optional Time-Based Exit**:  
+   - Close trade after a fixed number of bars (e.g., 10-20) if PSAR has not triggered.  
+
+**Risk Management:**  
+1. **Stop Loss**:  
+   - Initial stop placed at the opposite Keltner Channel boundary or a recent swing low/high.  
+2. **Position Sizing**:  
+   - Risk per trade limited to 1-2% of capital.  
+3. **Volatility Filter**:  
+   - Avoid trading if overall market volatility (e.g., ATR) is extremely high or low.  
+
+**Required Indicators:**  
+1. **Bollinger Bands** (20-period, 2 StdDev) – For BBW calculation.  
+2. **Keltner Channel** (20-period, 1.5x ATR multiplier) – To confirm squeeze conditions.  
+3. **Parabolic SAR** (0.02 step, 0.2 max) – For trailing exits.  
+4. **Optional**: ATR (14-period) – To filter low/high volatility environments.  
+
+**Unique Aspects:**  
+- Combines Bollinger Band width and Keltner Channel for high-probability squeeze detection.  
+- Uses PSAR for dynamic exits, adapting to trend strength.  
+- Focuses on volatility cycles (contraction → expansion) rather than pure price action.  
+
+**Note**: Backtest optimal thresholds for BBW and Keltner Channel parameters based on the traded asset’s volatility profile.

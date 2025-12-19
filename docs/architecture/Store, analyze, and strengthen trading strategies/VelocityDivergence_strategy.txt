@@ -1,0 +1,27 @@
+STRATEGY_NAME: VelocityDivergence  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Volume-Weighted Price Velocity**: Measures the rate of price change weighted by trading volume to identify meaningful momentum shifts.  
+2. **Rolling Z-Score**: Calculates the standard deviation (σ) of price velocity over a 30-minute baseline to detect statistically significant divergences (>2σ).  
+3. **Micro-Liquidation Clusters**: Uses orderbook imbalance data to confirm entries when liquidity is skewed, indicating potential continuation or exhaustion.  
+
+**Entry Rules:**  
+- **Long Entry**: Triggered when the Z-score of volume-weighted price velocity exceeds +2σ, accompanied by orderbook imbalance showing aggressive buying (liquidation clusters on the ask side).  
+- **Short Entry**: Triggered when the Z-score drops below -2σ, with orderbook imbalance reflecting aggressive selling (liquidation clusters on the bid side).  
+
+**Exit Rules:**  
+- **Take-Profit**: Close position when Z-score reverts to within ±1σ or price reaches a predefined risk-reward ratio (e.g., 1:2).  
+- **Stop-Loss**: Exit if Z-score diverges further beyond ±3σ or orderbook imbalance reverses sharply (e.g., opposing liquidity clusters).  
+
+**Risk Management:**  
+- Position sizing based on volatility-adjusted ATR (14-period) to limit risk per trade to 1-2% of capital.  
+- Intraday only—no overnight exposure.  
+
+**Required Indicators:**  
+1. Custom Z-score of volume-weighted price velocity (30-minute rolling window).  
+2. Real-time orderbook imbalance metrics (e.g., bid/ask liquidity delta).  
+3. Optional: ATR for dynamic stop placement.  
+
+**Unique Edge:** Combines statistical extremes (Z-score) with liquidity confirmation, filtering false breakouts common in pure momentum strategies.

@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "return_code": 0,
+  "stdout": "\ud83c\udf19 Moon Dev: Data loaded successfully! Starting backtest... \u2728\n\ud83c\udf19 Moon Dev Error: `data` must be a pandas.DataFrame with columns 'Open', 'High', 'Low', 'Close', and (optionally) 'Volume'\n\n",
+  "stderr": "",
+  "execution_time": 1.426266,
+  "timestamp": "2025-08-08T12:08:24.814996"
+}

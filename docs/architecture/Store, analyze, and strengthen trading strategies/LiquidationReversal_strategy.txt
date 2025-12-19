@@ -1,0 +1,33 @@
+STRATEGY_NAME: LiquidationReversal
+
+STRATEGY_DETAILS:
+The LiquidationReversal strategy focuses on identifying and trading reversals in price action by detecting clustered liquidation zones through order book delta imbalances and extreme funding rates. The strategy leverages Fibonacci retracement levels to time entries after significant liquidation spikes.
+
+### Key Strategy Components:
+1. **Order Book Delta Imbalances**: Monitor the order book for significant delta imbalances, which indicate potential liquidation zones.
+2. **Funding Rate Extremes**: Identify extreme funding rates that suggest over-leveraged positions, often leading to liquidations.
+3. **Fibonacci Retracement Levels**: Use the 61.8% Fibonacci retracement level of the liquidation spike range as a key entry trigger.
+4. **Price Retracement**: Wait for price to retrace beyond the 61.8% level before considering an entry.
+
+### Entry Rules:
+1. **Detection of Liquidation Zones**: Identify clustered liquidation zones by analyzing order book delta imbalances and extreme funding rates.
+2. **Fibonacci Retracement**: Wait for the price to retrace beyond the 61.8% Fibonacci level of the liquidation spike range.
+3. **Confirmation**: Confirm the reversal with additional indicators such as RSI divergence or volume spikes.
+
+### Exit Rules:
+1. **Take Profit**: Set take profit levels based on previous support/resistance levels or a predefined risk-reward ratio (e.g., 2:1).
+2. **Stop Loss**: Place stop loss orders just beyond the recent swing high/low to minimize potential losses.
+
+### Risk Management:
+1. **Position Sizing**: Use a fixed percentage of the trading capital per trade (e.g., 1-2%).
+2. **Stop Loss**: Always use stop loss orders to protect against adverse price movements.
+3. **Risk-Reward Ratio**: Aim for a minimum risk-reward ratio of 2:1 to ensure profitable trades outweigh losses.
+
+### Required Indicators:
+1. **Order Book Delta**: To detect imbalances and potential liquidation zones.
+2. **Funding Rate Indicator**: To identify extreme funding rates.
+3. **Fibonacci Retracement Tool**: To determine key retracement levels.
+4. **RSI (Relative Strength Index)**: For divergence confirmation.
+5. **Volume Indicator**: To confirm price movements with volume spikes.
+
+By following these detailed instructions, the LiquidationReversal strategy aims to capitalize on market reversals triggered by clustered liquidations, using a combination of order book analysis, funding rate extremes, and Fibonacci retracement levels for precise entries and exits.

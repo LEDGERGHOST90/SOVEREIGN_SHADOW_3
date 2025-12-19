@@ -1,0 +1,38 @@
+STRATEGY_NAME: VolumetricExpansion
+
+STRATEGY_DETAILS:
+The VolumetricExpansion strategy combines Bollinger Band width analysis with On-Balance Volume (OBV) confirmation to identify high-probability breakout opportunities. The strategy focuses on periods of increased volatility and volume expansion, using a trailing stop for dynamic exit management.
+
+Key Components:
+1. Bollinger Band Width Expansion: Measures volatility expansion beyond normal levels
+2. On-Balance Volume (OBV): Confirms volume participation in the breakout
+3. Average True Range (ATR): Used for dynamic trailing stop placement
+
+Entry Rules:
+1. Wait for Bollinger Band width to expand beyond two standard deviations of its 20-period average
+2. Confirm with OBV making a new 10-day high
+3. Enter long position when both conditions are met
+
+Exit Rules:
+1. Use a trailing stop set at 3x the 14-period ATR
+2. Trail the stop based on the highest high since entry
+3. Exit when price crosses below the trailing stop level
+
+Risk Management:
+1. Position size should be calculated based on the distance between entry price and initial stop level
+2. Risk no more than 1-2% of account equity per trade
+3. Consider implementing a maximum daily loss limit
+4. Avoid trading during major news events or low liquidity periods
+
+Required Indicators:
+1. Bollinger Bands (20,2) with width calculation
+2. On-Balance Volume (OBV)
+3. Average True Range (14)
+
+Additional Considerations:
+- Backtest the strategy across different market conditions
+- Consider implementing a time-based exit for trades that don't move in your favor
+- Monitor overall market context and sector performance
+- Adjust ATR multiplier based on market volatility (higher for more volatile markets)
+
+This strategy is particularly effective in trending markets and during periods of increased volatility. The combination of volatility expansion and volume confirmation helps filter out false breakouts, while the ATR-based trailing stop allows for capturing extended moves while protecting profits.

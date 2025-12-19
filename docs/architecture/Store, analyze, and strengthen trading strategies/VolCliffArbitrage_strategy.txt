@@ -1,0 +1,82 @@
+STRATEGY_NAME: VolCliffArbitrage
+
+STRATEGY_DETAILS:
+
+### Overview
+VolCliffArbitrage is a sophisticated options-based arbitrage strategy designed to exploit sudden drops in implied volatility (IV), known as "volatility cliffs," which often occur post-earnings announcements, economic data releases, or event resolutions. These cliffs represent temporary mispricings where IV collapses faster than realized volatility, creating opportunities for delta-neutral trades that profit from the convergence of option premiums to fair value. The strategy focuses on synthetic positions (e.g., straddles or strangles) combined with dynamic hedging to capture the IV decay while minimizing directional risk. Backtesting this strategy requires historical options data, including IV surfaces, underlying price movements, and event calendars, typically over multi-year periods (e.g., 5-10 years) across liquid underlyings like SPY, QQQ, or individual stocks with high options volume.
+
+Key assumptions in backtesting:
+- Transaction costs: Include bid-ask spreads (0.5-2% of premium) and commissions ($0.50-$1 per contract).
+- Slippage: Account for 0.1-0.5% on entries/exits due to IV skew.
+- Data sources: Use platforms like Thinkorswim, OptionMetrics, or Python libraries (e.g., yfinance, pandas) for historical IV, Greeks, and volatility surfaces.
+- Universe: Focus on ETFs or blue-chip stocks with weekly/monthly expirations and average daily volume >1M shares.
+
+### Key Strategy Components
+1. **Volatility Cliff Identification**:
+   - Monitor for impending cliffs using event-driven signals: Earnings dates, FOMC meetings, or geopolitical events where IV spikes pre-event (e.g., IV > 50% above 30-day historical volatility).
+   - Define a "cliff" as a post-event IV drop of ≥20% within 1-3 days, confirmed by IV rank (current IV percentile over 1 year) falling below 30%.
+   - Use IV term structure: Target expirations 7-30 days out where front-month IV is elevated relative to back-month (contango setup pre-cliff).
+
+2. **Position Construction**:
+   - Build delta-neutral synthetic longs/shorts: Enter short straddles (sell ATM call + put) or strangles (OTM) to collect premium ahead of the expected cliff.
+   - Hedge with the underlying: Dynamically adjust delta using spot futures or shares to maintain neutrality (target delta between -0.1 and +0.1).
+   - Scale: Position size based on account equity (e.g., 1-5% risk per trade), with max 10 concurrent positions.
+
+3. **Required Indicators and Tools**:
+   - **Implied Volatility (IV)**: 30-day ATM IV from options chains; track IV rank and IV percentile via CBOE data.
+   - **Historical Volatility (HV)**: 20-30 day realized vol to compare against IV for overpricing signals (enter when IV > 1.5x HV).
+   - **Greeks**: Delta, gamma, vega, theta – use Black-Scholes or binomial models to calculate (e.g., via QuantLib in Python).
+   - **VIX or VIX Futures**: As a market-wide vol proxy to filter entries (avoid if VIX > 30).
+   - **Event Calendar**: Integrate APIs like Alpha Vantage for earnings/Fed dates.
+   - **Volatility Surface**: Plot IV skew/smile to identify mispricings (e.g., put skew > call skew pre-cliff).
+   - Backtesting software: Backtrader, Zipline, or custom Python scripts with vectorized computations for efficiency.
+
+### Entry Rules
+- **Pre-Cliff Setup (1-3 Days Before Event)**:
+  - IV rank > 70% and IV/HV ratio > 1.5.
+  - Underlying in a range-bound state (e.g., ADX < 25 for low trendiness).
+  - Enter short straddle/strangle if expected cliff probability > 60% (based on historical event outcomes; backtest win rate > 65% for similar setups).
+  - Strike selection: ATM for straddles (delta ~0.5 each); 16-delta OTM for strangles to reduce gamma risk.
+  - Confirmation: Vega exposure positive (profiting from IV drop); theta decay > 0.5% daily.
+
+- **Entry Execution**:
+  - Time: 30-60 minutes before market close to capture end-of-day IV buildup.
+  - Quantity: Risk 2-5% of portfolio per trade, adjusted for vega (e.g., $10K vega notional for $1M account).
+  - Avoid: Entries during high VIX regimes (>40) or if underlying has broken key support/resistance.
+
+### Exit Rules
+- **Profit Targets**:
+  - Exit 50% of position if IV drops 15-20% post-event (partial profit lock-in).
+  - Full exit if total premium capture reaches 30-50% of initial credit (e.g., from $5 premium to $2.50-3.50 remaining).
+  - Time-based: Unwind within 3-7 days post-cliff if no further decay.
+
+- **Stop-Loss and Adverse Exits**:
+  - Vega stop: Exit if IV rises >10% (unexpected vol expansion).
+  - Delta breach: If absolute delta > 0.2 despite hedging, liquidate to avoid directional bets.
+  - Realized vol spike: Exit if underlying moves >2 standard deviations from entry (e.g., via Bollinger Bands).
+  - Hard stop: 2x initial credit as max loss (e.g., if premium doubles due to gamma bleed).
+
+- **Hedging Protocol**:
+  - Rebalance delta every 15-30 minutes or when |delta| > 0.1: Buy/sell underlying shares or futures.
+  - Gamma scalping: In profitable moves, scalp small profits from underlying to offset option decay.
+
+### Risk Management
+- **Position Sizing**: Use Kelly Criterion or fixed fractional (1-2% portfolio risk per trade). Limit vol exposure to 20% of portfolio vega.
+- **Diversification**: Max 20% allocation to single underlying; spread across 5-10 assets/events per quarter.
+- **Drawdown Controls**: Pause trading if quarterly drawdown >10%; max drawdown target <15% annually.
+- **Scenario Analysis in Backtesting**:
+  - Stress test: Simulate 1987/2008 vol shocks or 2020 COVID cliffs.
+  - Monte Carlo: Run 1,000 simulations varying IV drops (10-50%) and underlying moves (±3%).
+  - Metrics to Track: Sharpe ratio (>1.5 target), win rate (60-75%), max adverse excursion, profit factor (>1.5).
+- **Other Risks**:
+  - Liquidity: Only trade options with open interest >500 and volume >100 contracts.
+  - Model Risk: Backtest assumes Black-Scholes; adjust for smile effects using stochastic vol models (e.g., Heston).
+  - Regulatory: Ensure compliance with pattern day trader rules; no overnight holds if margin-constrained.
+
+### Backtesting Guidelines
+- **Period**: 2010-present, focusing on 100+ events (e.g., 50 earnings, 50 macro).
+- **Performance Expectations**: Historical backtests show 8-15% annualized returns with 10-20% vol, but adjust for costs (net 5-10% realistic).
+- **Implementation Tips**: Code in Python with libraries like py_vollib for Greeks and backtrader for simulation. Validate against live paper trading for 3-6 months.
+- **Edge Validation**: The strategy's uniqueness lies in event-specific IV forecasting; backtest edge decays if events become more efficient (e.g., post-2020).
+
+This strategy requires advanced options knowledge and is not suitable for beginners due to its sensitivity to timing and hedging precision. Always consult a financial advisor before implementation.

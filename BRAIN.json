@@ -149,5 +149,40 @@
       "okx"
     ],
     "total_holdings": 18
+  },
+  "autonomous_execution": {
+    "enabled": true,
+    "mode": "paper",
+    "tiers": {
+      "tier_1_monitor": true,
+      "tier_2_paper": true,
+      "tier_3_micro_live": false,
+      "tier_4_standard_live": false,
+      "tier_5_defi": false
+    },
+    "limits": {
+      "max_position_usd": 25,
+      "max_daily_trades": 5,
+      "max_daily_loss_usd": 50,
+      "stop_loss_pct": 0.02,
+      "take_profit_pct": 0.05
+    },
+    "safeguards": {
+      "require_council_consensus": true,
+      "notify_on_trade": true,
+      "consecutive_loss_pause": 5,
+      "regime_filter": true
+    },
+    "upgrade_criteria": {
+      "paper_to_micro": "2 weeks profitable paper trading",
+      "micro_to_standard": "1 month profitable micro trading",
+      "current_phase": "paper",
+      "phase_start_date": "2025-12-18"
+    }
+  },
+  "kill_switch": {
+    "enabled": false,
+    "reason": "",
+    "timestamp": ""
   }
 }

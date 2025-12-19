@@ -1,0 +1,33 @@
+STRATEGY_NAME: VolatilityFractal
+
+STRATEGY_DETAILS:
+The VolatilityFractal strategy is designed to capitalize on long volatility breakouts during periods of low volatility, using a combination of momentum confirmation, Bollinger Band analysis, and fractal resistance levels. Here's a detailed breakdown of the strategy:
+
+1. **Key Strategy Components:**
+   - **Bollinger Band Squeeze:** Identifies periods of low volatility, indicating a potential breakout.
+   - **Chande Momentum Oscillator (CMO):** Confirms strong momentum when it crosses above 80, signaling a potential breakout.
+   - **Fractal Resistance Levels:** Used to identify key price levels for exit points.
+   - **Volume Confirmation:** Ensures the breakout is supported by increasing volume, adding validity to the trade.
+
+2. **Entry Rules:**
+   - Wait for a Bollinger Band squeeze, characterized by the bands narrowing significantly.
+   - Confirm the breakout by ensuring the Chande Momentum Oscillator crosses above 80.
+   - Enter a long position when price breaks above the upper Bollinger Band, with volume confirmation (increasing volume).
+
+3. **Exit Rules:**
+   - Identify the nearest fractal resistance level above the entry price.
+   - Exit the trade when price reaches the fractal resistance level, especially if accompanied by decreasing volume or a reversal pattern.
+   - Alternatively, exit if the Chande Momentum Oscillator crosses below 20, indicating a loss of momentum.
+
+4. **Risk Management:**
+   - Set a stop-loss just below the lower Bollinger Band or a recent swing low, whichever is closer.
+   - Use a risk-reward ratio of at least 1:2, ensuring potential profits outweigh potential losses.
+   - Avoid over-leveraging, as volatility breakouts can be unpredictable.
+
+5. **Required Indicators:**
+   - **Bollinger Bands (20,2):** To identify periods of low volatility and potential breakouts.
+   - **Chande Momentum Oscillator (14):** To confirm strong momentum during the breakout.
+   - **Fractal Indicator:** To identify key resistance levels for exits.
+   - **Volume Indicator:** To confirm the strength of the breakout.
+
+This strategy is best suited for traders who can monitor the market closely, as volatility breakouts can occur rapidly. It works well in trending markets but may produce false signals in choppy or sideways conditions. Always backtest and adjust parameters to fit your specific trading style and risk tolerance.

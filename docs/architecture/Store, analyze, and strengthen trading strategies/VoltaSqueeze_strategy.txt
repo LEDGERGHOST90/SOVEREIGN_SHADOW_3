@@ -1,0 +1,36 @@
+STRATEGY_NAME: VoltaSqueeze
+
+STRATEGY_DETAILS:
+The VoltaSqueeze strategy is a volatility-based breakout system that capitalizes on periods of low volatility followed by explosive price movements. It combines Bollinger Bands and Average True Range (ATR) to identify high-probability breakout opportunities and manage risk effectively.
+
+### Key Components:
+1. **Bollinger Bands (20,2)**: Used to identify periods of low volatility (squeeze) and potential breakout levels.
+2. **Average True Range (14)**: Used for setting dynamic stop-loss and take-profit levels.
+3. **20-Day Narrowest Band Condition**: Ensures the strategy only trades during significant volatility contractions.
+
+### Entry Rules:
+1. **Volatility Squeeze Condition**: Bollinger Bands must contract to their narrowest point in the last 20 days.
+2. **Breakout Confirmation**: Price must close above the upper Bollinger Band.
+3. **Entry Trigger**: Enter a long position at the open of the next candle after the breakout confirmation.
+
+### Exit Rules:
+1. **Profit Target**: Exit the trade when price reaches a 2x ATR move above the entry price.
+2. **Stop-Loss**: Exit the trade if price re-enters the Bollinger Bands (closes below the upper band).
+3. **Time-Based Exit**: Consider exiting after 5-10 candles if neither the profit target nor stop-loss is hit, to avoid prolonged sideways movement.
+
+### Risk Management:
+1. **Position Sizing**: Use a fixed percentage of capital (e.g., 1-2%) per trade to manage risk.
+2. **ATR-Based Stop**: The 2x ATR profit target ensures a favorable risk-reward ratio.
+3. **Avoid Overtrading**: Only trade when the volatility squeeze condition is met, ensuring high-quality setups.
+
+### Required Indicators:
+1. **Bollinger Bands (20,2)**: To identify volatility contractions and breakout levels.
+2. **Average True Range (14)**: To measure volatility and set dynamic exit levels.
+3. **Candlestick Chart**: For price action confirmation and trade execution.
+
+### Additional Notes:
+- This strategy works best in trending markets and may underperform during prolonged consolidation periods.
+- Backtest the strategy on multiple timeframes (e.g., 1H, 4H, Daily) to identify optimal settings for your trading style.
+- Combine with fundamental analysis or other technical filters to improve accuracy in choppy markets.
+
+The VoltaSqueeze strategy is designed to capture explosive moves following periods of low volatility, making it ideal for traders who prefer high-probability, low-frequency setups.

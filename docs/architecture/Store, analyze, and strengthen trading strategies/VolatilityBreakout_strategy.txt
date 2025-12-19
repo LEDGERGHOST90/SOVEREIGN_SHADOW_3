@@ -1,0 +1,33 @@
+STRATEGY_NAME: VolatilityBreakout
+
+STRATEGY_DETAILS:
+The VolatilityBreakout strategy is designed to capitalize on significant price movements following periods of low volatility. It combines the ADX indicator to confirm trend strength and Bollinger Bands to identify contraction phases, targeting Fibonacci extensions for profit-taking.
+
+### Key Strategy Components:
+1. **ADX (Average Directional Index)**: Used to confirm the strength of a trend. A reading above 30 indicates a strong trend.
+2. **Bollinger Bands**: Used to measure volatility. A contraction in the band width (below 2% of price) signals a period of low volatility, often preceding a breakout.
+3. **Fibonacci Extension**: Used to set profit targets. The 161.8% extension of the contraction range is the primary target.
+
+### Entry Rules:
+1. **ADX Condition**: Wait for the ADX to cross above 30, indicating a strong trend.
+2. **Bollinger Band Condition**: Ensure the Bollinger Band width contracts below 2% of the current price, signaling low volatility.
+3. **Breakout Confirmation**: Enter a trade when the price breaks above the upper Bollinger Band (for a long trade) or below the lower Bollinger Band (for a short trade).
+
+### Exit Rules:
+1. **Profit Target**: Set the profit target at the 161.8% Fibonacci extension of the contraction range. Measure the range from the lowest to the highest point during the contraction phase and project it from the breakout point.
+2. **Stop Loss**: Place a stop loss just below the breakout level (for a long trade) or above the breakout level (for a short trade). This ensures minimal loss if the breakout fails.
+
+### Risk Management:
+1. **Position Sizing**: Use a fixed percentage of your trading capital (e.g., 1-2%) per trade to manage risk.
+2. **Stop Loss**: Always use a stop loss to limit potential losses. Adjust the stop loss level based on the volatility of the asset.
+3. **Risk-Reward Ratio**: Aim for a minimum risk-reward ratio of 1:2. The 161.8% Fibonacci extension provides a favorable reward relative to the risk taken.
+
+### Required Indicators:
+1. **ADX (14-period)**: To measure trend strength.
+2. **Bollinger Bands (20-period, 2 standard deviations)**: To identify volatility contraction and breakout levels.
+3. **Fibonacci Extension Tool**: To calculate the 161.8% target based on the contraction range.
+
+### Additional Notes:
+- This strategy works best in trending markets. Avoid using it during choppy or sideways market conditions.
+- Always backtest the strategy on historical data to ensure its effectiveness for your chosen asset and timeframe.
+- Combine this strategy with other confirmation tools (e.g., volume analysis, candlestick patterns) to increase the probability of success.

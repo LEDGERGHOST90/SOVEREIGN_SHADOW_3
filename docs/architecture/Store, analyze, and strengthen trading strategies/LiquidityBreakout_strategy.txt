@@ -1,0 +1,31 @@
+STRATEGY_NAME: LiquidityBreakout  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Order Book Imbalance Breakout:** The strategy triggers trades when the order book imbalance exceeds two standard deviations from its 20-period moving average, indicating a strong directional bias in liquidity.  
+2. **Volatility Filter:** Only trades when 1-hour realized volatility is below the 30-day historical volatility median, ensuring breakouts occur in relatively stable conditions.  
+3. **Liquidity-Based Exits:** Positions are closed at opposing liquidity clusters (support/resistance zones where large resting orders accumulate), optimizing exit execution.  
+
+**Entry Rules:**  
+- **Long Entry:** When the order book imbalance (bid-ask volume difference) exceeds +2σ of its 20-period average, and 1-hour realized volatility is below the 30-day median.  
+- **Short Entry:** When the order book imbalance drops below -2σ of its 20-period average, with the same volatility condition.  
+
+**Exit Rules:**  
+- **Take-Profit:** Exit at the nearest opposing liquidity cluster (e.g., long trades exit near detected ask-side liquidity zones, shorts near bid-side clusters).  
+- **Stop-Loss:** Dynamic stop based on a multiple of the recent average true range (ATR) or a trailing liquidity breach (if the order book imbalance reverses beyond a threshold).  
+
+**Risk Management:**  
+- Position sizing scaled to volatility (e.g., 1% risk per trade based on ATR-adjusted stops).  
+- Avoid trading during scheduled high-impact news events that may distort order book dynamics.  
+- Maximum daily loss limit (e.g., 5% of equity) to prevent overexposure.  
+
+**Required Indicators:**  
+1. **Order Book Imbalance:** Calculated as (Bid Volume - Ask Volume) / (Bid Volume + Ask Volume).  
+2. **Standard Deviation Bands:** 20-period moving average and ±2σ thresholds of the imbalance.  
+3. **Realized Volatility:** 1-hour volatility vs. 30-day median.  
+4. **Liquidity Cluster Detection:** Algorithmic identification of high-volume zones in the order book (e.g., volume profile peaks).  
+
+**Unique Edge:** Combines aggressive breakout entries (statistical extremes) with conservative exits (liquidity zones), exploiting short-term momentum while minimizing slippage. The volatility filter reduces false breakouts during erratic market phases.  
+
+**Note:** Backtest with tick-level order book data to validate liquidity cluster accuracy and adjust σ thresholds for different asset classes.

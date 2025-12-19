@@ -1,0 +1,32 @@
+STRATEGY_NAME: LiquidationRejection  
+
+STRATEGY_DETAILS:  
+
+**Key Strategy Components:**  
+1. **Liquidation Cluster Analysis** – Uses exchange heatmaps to identify high-liquidation zones where price rejection is likely.  
+2. **RSI Divergence** – Confirms counter-trend potential when price makes a higher high (or lower low) but RSI shows a divergence (lower high or higher low).  
+3. **Volume Contraction** – Validates weakening momentum as volume declines near key rejection zones.  
+4. **Fibonacci Retracement Exits** – Takes profits at predefined Fib levels (e.g., 38.2%, 50%, or 61.8%) from the recent swing.  
+
+**Entry Rules:**  
+1. **Liquidation Zone Rejection** – Price must show a clear rejection (wick, pin bar, or engulfing pattern) at a high-liquidation cluster.  
+2. **RSI Divergence** – Bearish divergence (price higher high, RSI lower high) for short entries; bullish divergence (price lower low, RSI higher low) for long entries.  
+3. **Volume Confirmation** – Volume should contract as price approaches the liquidation zone, indicating fading participation.  
+
+**Exit Rules:**  
+1. **Profit Targets** – Exit at Fibonacci retracement levels (prior swing high/low). Primary target at 38.2%, secondary at 61.8%.  
+2. **Stop-Loss Placement** – Place stops just beyond the liquidation cluster’s extreme (e.g., above the high for shorts, below the low for longs).  
+3. **Early Exit Trigger** – If volume surges against the trade or RSI reverses sharply, consider early exit.  
+
+**Risk Management:**  
+1. **Position Sizing** – Risk no more than 1-2% per trade.  
+2. **Stop-Loss Discipline** – Strict adherence to stop levels based on liquidation zone boundaries.  
+3. **Trade Filter** – Only take trades where all three conditions (rejection, divergence, volume) align.  
+
+**Required Indicators/Tools:**  
+1. **Exchange Liquidation Heatmap** (e.g., Hyblock, Coinalyze).  
+2. **RSI (14-period)** – For divergence detection.  
+3. **Volume Indicator** – To confirm contraction.  
+4. **Fibonacci Retracement Tool** – For profit targets.  
+
+**Unique Edge:** Combines liquidation-driven sentiment shifts with classical technical confirmations (RSI/volume) for high-probability counter-trend entries.

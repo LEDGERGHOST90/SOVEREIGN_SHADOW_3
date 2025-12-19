@@ -1,0 +1,55 @@
+{
+  "query": "Current crypto market analysis for December 18, 2025:\n    1. Market regime (trending/ranging/volatile)?\n    2. Top 3 trade setups for BTC, ETH, or XRP\n    3. Risk assessment for $734 trading capital\n    ",
+  "timestamp": "2025-12-18T15:31:22.892395",
+  "sources": {
+    "gemini": {
+      "status": "complete",
+      "confidence": 0
+    },
+    "manus": {
+      "status": "pending",
+      "task_id": "UPh8yhNffm5CJpEMLDSmzN",
+      "url": "https://manus.im/app/UPh8yhNffm5CJpEMLDSmzN"
+    },
+    "ds_star": {
+      "status": "complete",
+      "analysis": "Synoptic Core: 'SynopticCore' object has no attribute 'score_asset'\nOracle Interface: 'OracleInterface' object has no attribute 'interpret'"
+    }
+  },
+  "synthesis": {
+    "consensus": null,
+    "confidence": 0.0,
+    "key_findings": [],
+    "scholarly_refs": [],
+    "recommendations": []
+  },
+  "raw_results": {
+    "manus": {
+      "status": "dispatched",
+      "task_id": "UPh8yhNffm5CJpEMLDSmzN",
+      "url": "https://manus.im/app/UPh8yhNffm5CJpEMLDSmzN"
+    },
+    "gemini": {
+      "source": "gemini",
+      "query": "Current crypto market analysis for December 18, 2025:\n    1. Market regime (trending/ranging/volatile)?\n    2. Top 3 trade setups for BTC, ETH, or XRP\n    3. Risk assessment for $734 trading capital\n    ",
+      "analysis": "Error: 400 API key expired. Please renew the API key. [reason: \"API_KEY_INVALID\"\ndomain: \"googleapis.com\"\nmetadata {\n  key: \"service\"\n  value: \"generativelanguage.googleapis.com\"\n}\n, locale: \"en-US\"\nmessage: \"API key expired. Please renew the API key.\"\n]",
+      "confidence": 0,
+      "sources_cited": [],
+      "scholarly_refs": [],
+      "timestamp": "2025-12-18T15:31:20.973916",
+      "raw_response": null
+    },
+    "ds_star": {
+      "source": "ds_star",
+      "query": "Current crypto market analysis for December 18, 2025:\n    1. Market regime (trending/ranging/volatile)?\n    2. Top 3 trade setups for BTC, ETH, or XRP\n    3. Risk assessment for $734 trading capital\n    ",
+      "analysis": "Synoptic Core: 'SynopticCore' object has no attribute 'score_asset'\nOracle Interface: 'OracleInterface' object has no attribute 'interpret'",
+      "confidence": 60.0,
+      "sources_cited": [
+        "Local DS-Star Analysis"
+      ],
+      "scholarly_refs": [],
+      "timestamp": "2025-12-18T15:31:22.892143",
+      "raw_response": null
+    }
+  }
+}

@@ -1,0 +1,48 @@
+STRATEGY_NAME: VolatilitySentry  
+
+STRATEGY_DETAILS:  
+This strategy capitalizes on shifts in market volatility by combining Bollinger Bandwidth contraction with put/call ratio divergence, providing high-probability entries during volatility expansion phases.  
+
+**Key Components:**  
+1. **Bollinger Bandwidth Contraction:**  
+   - Measures the relative width of Bollinger Bands (typically 20-period, 2 StdDev).  
+   - Identifies periods of low volatility when bandwidth falls below its 6-month percentile (e.g., bottom 20%).  
+
+2. **Put/Call Ratio Divergence:**  
+   - Tracks the put/call ratio (PCR) for unusual spikes compared to its moving average (e.g., 10-day).  
+   - A surge in PCR signals rising fear, often preceding volatility expansion.  
+
+3. **Keltner Channel Confirmation:**  
+   - Uses outer bands (e.g., 2x ATR) to define dynamic stop levels and confirm breakout direction.  
+
+**Entry Rules:**  
+- **Long Entry:**  
+  1. Bollinger Bandwidth contracts below its 6-month low percentile.  
+  2. PCR spikes above its 10-day MA by a threshold (e.g., +25%).  
+  3. Price breaks above the upper Bollinger Band with volume confirmation.  
+  4. Place initial stop below the Keltner Channel lower band.  
+
+- **Short Entry:**  
+  1. Same bandwidth contraction condition.  
+  2. PCR spikes below its 10-day MA (rare but signals complacency).  
+  3. Price breaks below the lower Bollinger Band.  
+  4. Stop above the Keltner Channel upper band.  
+
+**Exit Rules:**  
+- **Take Profit:**  
+  - Close 50% at 1.5x ATR from entry, trail remainder using a 3-bar Keltner Channel exit.  
+- **Stop Loss:**  
+  - Fixed at the opposite Keltner outer band or if bandwidth reverts above its median.  
+
+**Risk Management:**  
+- Position size limited to 1-2% of capital per trade.  
+- Avoid entries during scheduled high-impact news events.  
+
+**Required Indicators:**  
+1. Bollinger Bands (20, 2 StdDev) + Bandwidth calculation.  
+2. Put/Call Ratio (with 10-day MA for divergence).  
+3. Keltner Channels (20-period, 2x ATR).  
+4. Volume oscillator (for confirmation).  
+
+**Unique Edge:**  
+The synergy between volatility compression (Bollinger) and sentiment extremes (PCR) filters false breakouts, while Keltner bands provide adaptive risk control.

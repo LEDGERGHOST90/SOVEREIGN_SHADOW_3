@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/BandStrengthMomentum_BT.py", line 54, in <module>
+    bt = Backtest(data, BandStrengthMomentum, cash=1_000_000, commission=.002)
+  File "/opt/anaconda3/envs/tflow/lib/python3.10/site-packages/backtesting/backtesting.py", line 1067, in __init__
+    raise ValueError("`data` must be a pandas.DataFrame with columns "
+ValueError: `data` must be a pandas.DataFrame with columns 'Open', 'High', 'Low', 'Close', and (optionally) 'Volume'
+
+ERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/BandStrengthMomentum_BT.py` failed. (See above for error)

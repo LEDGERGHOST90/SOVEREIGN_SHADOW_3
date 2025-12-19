@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "return_code": 1,
+  "stdout": "",
+  "stderr": "  File \"/Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/BandMACDDivergence_BT.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n\nERROR conda.cli.main_run:execute(124): `conda run python /Users/md/Dropbox/dev/github/moon-dev-ai-agents-for-trading/src/data/rbi/03_14_2025/research/GPT-5/BandMACDDivergence_BT.py` failed. (See above for error)\n",
+  "execution_time": 0.523495,
+  "timestamp": "2025-08-08T12:01:16.158508"
+}

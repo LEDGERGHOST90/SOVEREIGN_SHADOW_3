@@ -1,0 +1,32 @@
+STRATEGY_NAME: BandSqueezeTrend
+
+STRATEGY_DETAILS:
+The BandSqueezeTrend strategy leverages Bollinger Bands and the Average True Range (ATR) to identify high-probability trend continuation opportunities. It focuses on capturing strong trends by analyzing price behavior relative to volatility and momentum.
+
+### Key Strategy Components:
+1. **Bollinger Bands (20, 2)**: Used to identify overbought conditions and potential trend continuation zones.
+2. **20-Period ATR**: Measures market volatility to confirm the strength of the trend.
+3. **Price Action**: Analyzes the relationship between the closing price, Bollinger Bands, and ATR.
+
+### Entry Rules:
+1. **Condition 1**: The closing price must be **above the upper Bollinger Band**, indicating potential overbought conditions.
+2. **Condition 2**: The closing price must be **below the 20-period moving average of the ATR**, suggesting that volatility is not excessively high, and the trend has room to sustain.
+3. **Entry Signal**: When both conditions are met, enter a **long position** to capitalize on the strong trend continuation.
+
+### Exit Rules:
+1. **Take Profit**: Set a take-profit level at **1.5x the ATR value** from the entry price to lock in gains during strong trends.
+2. **Stop Loss**: Place a stop-loss order at **0.5x the ATR value** below the entry price to manage risk effectively.
+3. **Exit Signal**: Exit the trade if the price closes **below the middle Bollinger Band (20-period SMA)**, indicating a potential trend reversal.
+
+### Risk Management:
+1. **Position Sizing**: Risk no more than **1-2% of your trading capital** per trade.
+2. **Volatility Filter**: Avoid trading during periods of excessively high ATR values, as this may indicate unstable market conditions.
+3. **Trend Confirmation**: Use additional confirmation from a momentum indicator (e.g., RSI or MACD) to ensure the trend is strong and sustainable.
+
+### Required Indicators:
+1. **Bollinger Bands (20, 2)**: To identify overbought conditions and potential trend continuation zones.
+2. **20-Period ATR**: To measure volatility and confirm trend strength.
+3. **Optional: RSI or MACD**: For additional momentum confirmation.
+
+### Summary:
+The BandSqueezeTrend strategy is designed to capture strong trend continuations by combining Bollinger Bands and ATR analysis. It focuses on high-probability setups where price is overbought but volatility remains moderate, ensuring the trend has room to sustain. Proper risk management and additional momentum confirmation can enhance the strategy's effectiveness.

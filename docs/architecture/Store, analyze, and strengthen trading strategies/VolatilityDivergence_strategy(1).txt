@@ -1,0 +1,34 @@
+STRATEGY_NAME: VolatilityDivergence  
+
+STRATEGY_DETAILS:  
+**Key Strategy Components:**  
+1. **Bollinger Band Width Contraction:** Identifies periods of low volatility, signaling potential upcoming expansion.  
+2. **OBV Divergence:** Detects discrepancies between price action and volume flow, hinting at weakening trends.  
+3. **ADX Surge Confirmation:** Ensures the breakout has momentum by requiring a sharp rise in the ADX (e.g., above 25 and increasing).  
+4. **Opposing Band Touch Exit:** Uses the opposite Bollinger Band as a profit-taking or stop-loss level.  
+
+**Entry Rules:**  
+- Wait for Bollinger Band width to contract significantly (e.g., below a 20-period moving average of the width).  
+- Confirm OBV divergence (price makes higher highs while OBV makes lower highs, or vice versa).  
+- Enter long/short on a breakout of the Bollinger Band, confirmed by an ADX surge (e.g., ADX rising above 25 with +DI/-DI crossover).  
+
+**Exit Rules:**  
+- Take profit or exit when price touches the opposite Bollinger Band.  
+- Alternatively, exit if OBV reverses direction sharply or ADX starts declining.  
+
+**Risk Management:**  
+- Position sizing based on volatility (e.g., ATR-based stops).  
+- Stop-loss placed just outside the breakout band (e.g., middle band for mean reversion fails).  
+- Maximum risk per trade capped at 1-2% of capital.  
+
+**Required Indicators:**  
+1. Bollinger Bands (20,2) + Band Width  
+2. On-Balance Volume (OBV)  
+3. ADX (14-period) with +DI/-DI lines  
+
+**Notes:**  
+- Works best in ranging markets transitioning to trends.  
+- Avoid during high ADX (>30) to prevent false breakouts.  
+- Combine with higher timeframe trend alignment for better accuracy.  
+
+This strategy captures volatility shifts early while filtering false moves with volume and momentum confirmation.
