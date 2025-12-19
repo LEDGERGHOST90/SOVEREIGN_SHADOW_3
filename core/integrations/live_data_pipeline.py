@@ -14,6 +14,7 @@ import os
 import json
 import requests
 import asyncio
+import ccxt
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -67,6 +68,7 @@ class MarketSignal:
 class LiveDataPipeline:
     """
     Unified live data pipeline for SS_III
+    Uses CCXT for real exchange prices
     """
 
     def __init__(self):
@@ -74,8 +76,27 @@ class LiveDataPipeline:
         self.birdeye_key = os.getenv('BIRDEYE_API_KEY')
         self.gemini_key = os.getenv('GEMINI_API_KEY')
 
-        # Watchlist
-        self.symbols = ['BTC', 'ETH', 'SOL', 'XRP', 'AAVE']
+        # Initialize CCXT exchange (Coinbase)
+        self.exchange = ccxt.coinbase({
+            'apiKey': os.getenv('COINBASE_API_KEY'),
+            'secret': os.getenv('COINBASE_API_SECRET'),
+        })
+
+        # DISCOVERY watchlist - assets to find buying opportunities
+        self.symbols = [
+            # Major caps
+            'BTC', 'ETH', 'SOL', 'XRP', 'AAVE',
+            # Layer 1s
+            'ADA', 'AVAX', 'DOT', 'ATOM', 'NEAR', 'APT', 'SUI',
+            # Layer 2s
+            'MATIC', 'ARB', 'OP',
+            # DeFi
+            'UNI', 'LINK', 'MKR', 'CRV', 'LDO',
+            # Memes with volume
+            'DOGE', 'SHIB', 'PEPE',
+            # AI/Compute
+            'FET', 'RNDR', 'TAO'
+        ]
 
         # Cache
         self.price_cache = {}
@@ -83,72 +104,55 @@ class LiveDataPipeline:
         self.cache_ttl = 60  # seconds
 
     # =========================================================================
-    # PRICE DATA
+    # PRICE DATA - CCXT
     # =========================================================================
 
     def get_live_prices(self) -> Dict[str, LivePrice]:
-        """Fetch live prices from CoinGecko (free, no key needed)"""
+        """Fetch live prices from Coinbase via CCXT"""
         prices = {}
 
-        # CoinGecko IDs
-        cg_ids = {
-            'BTC': 'bitcoin',
-            'ETH': 'ethereum',
-            'SOL': 'solana',
-            'XRP': 'ripple',
-            'AAVE': 'aave'
-        }
+        for symbol in self.symbols:
+            try:
+                pair = f"{symbol}/USD"
+                ticker = self.exchange.fetch_ticker(pair)
 
-        try:
-            ids = ','.join(cg_ids.values())
-            url = f"https://api.coingecko.com/api/v3/simple/price?ids={ids}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true"
-
-            response = requests.get(url, timeout=10)
-            data = response.json()
-
-            for symbol, cg_id in cg_ids.items():
-                if cg_id in data:
-                    prices[symbol] = LivePrice(
-                        symbol=symbol,
-                        price=data[cg_id].get('usd', 0),
-                        change_24h=data[cg_id].get('usd_24h_change', 0),
-                        volume_24h=data[cg_id].get('usd_24h_vol', 0),
-                        source='coingecko',
-                        timestamp=datetime.now().isoformat()
-                    )
-
-        except Exception as e:
-            print(f"CoinGecko error: {e}")
+                prices[symbol] = LivePrice(
+                    symbol=symbol,
+                    price=ticker.get('last', 0),
+                    change_24h=ticker.get('percentage', 0) or 0,
+                    volume_24h=ticker.get('quoteVolume', 0) or 0,
+                    source='coinbase',
+                    timestamp=datetime.now().isoformat()
+                )
+            except Exception as e:
+                # Asset not available on Coinbase, skip
+                pass
 
         self.price_cache = prices
         return prices
 
+    def get_current_prices(self) -> Dict[str, Dict]:
+        """Get current prices as simple dict for paper trader"""
+        prices = self.get_live_prices()
+        return {symbol: {'price': p.price, 'change_24h': p.change_24h} for symbol, p in prices.items()}
+
     def get_ohlcv(self, symbol: str, days: int = 30) -> pd.DataFrame:
-        """Fetch OHLCV data for strategy engine"""
-        cg_ids = {
-            'BTC': 'bitcoin',
-            'ETH': 'ethereum',
-            'SOL': 'solana',
-            'XRP': 'ripple',
-            'AAVE': 'aave'
-        }
-
-        cg_id = cg_ids.get(symbol, symbol.lower())
-
+        """Fetch OHLCV data from Coinbase via CCXT"""
         try:
-            url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days={days}"
-            response = requests.get(url, timeout=10)
-            data = response.json()
+            pair = f"{symbol}/USD"
+            timeframe = '1h'  # 1 hour candles
+            limit = days * 24  # hours in days
 
-            df = pd.DataFrame(data, columns=['timestamp', 'Open', 'High', 'Low', 'Close'])
+            ohlcv = self.exchange.fetch_ohlcv(pair, timeframe, limit=limit)
+
+            df = pd.DataFrame(ohlcv, columns=['timestamp', 'Open', 'High', 'Low', 'Close', 'Volume'])
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
             df.set_index('timestamp', inplace=True)
-            df['Volume'] = 0  # CoinGecko OHLC doesn't include volume
 
             return df
 
         except Exception as e:
-            print(f"OHLCV fetch error: {e}")
+            print(f"OHLCV fetch error for {symbol}: {e}")
             return pd.DataFrame()
 
     # =========================================================================
@@ -292,7 +296,7 @@ class LiveDataPipeline:
             take_profit=take_profit,
             position_size=round(position_size, 2),
             reasoning=reasoning,
-            sources=['CoinGecko', 'StrategyEngine'],
+            sources=['Coinbase/CCXT', 'StrategyEngine'],
             timestamp=datetime.now().isoformat()
         )
 
