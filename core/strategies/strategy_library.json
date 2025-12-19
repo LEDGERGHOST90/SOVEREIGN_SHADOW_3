@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "strategies": {
+    "BandwidthPulse": {
+      "type": "Breakout",
+      "score": 100,
+      "risk": 0.01
+    },
+    "ContangoDivergence": {
+      "type": "Arbitrage",
+      "score": 100,
+      "risk": 0.01
+    },
+    "DeltaBandBreakout": {
+      "type": "Breakout",
+      "score": 100,
+      "risk": 0.02
+    },
+    "DynamicCrossfire": {
+      "type": "Trend Following",
+      "score": 100,
+      "risk": 0.02
+    },
+    "FibroVoltaic": {
+      "type": "Volatility",
+      "score": 100,
+      "risk": 0.02
+    },
+    "VolatilityDivergence": {
+      "type": "Mean Reversion",
+      "score": 95,
+      "risk": 0.015
+    },
+    "VolCliffArbitrage": {
+      "type": "Arbitrage",
+      "score": 95,
+      "risk": 0.01
+    },
+    "MomentumBandwidth": {
+      "type": "Momentum",
+      "score": 90,
+      "risk": 0.02
+    },
+    "LiquidationSqueeze": {
+      "type": "Volatility",
+      "score": 85,
+      "risk": 0.02
+    },
+    "FractalFibonacci": {
+      "type": "Harmonic",
+      "score": 85,
+      "risk": 0.015
+    }
+  }
+}

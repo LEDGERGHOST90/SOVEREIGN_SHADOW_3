@@ -1,28 +1,28 @@
 {
-  "version": "3.0",
-  "last_updated": "2025-12-16T11:54:23.196124",
+  "version": "3.2",
+  "last_updated": "2025-12-18T16:43:57.560203",
   "system_location": "/Volumes/LegacySafe/SS_III/",
   "portfolio": {
-    "net_worth": 5433.87,
-    "snapshot_time": "2025-12-06",
+    "net_worth": 4972.59,
+    "snapshot_time": "2025-12-18",
     "ledger": {
-      "total": 5715.91,
-      "AAVE_wstETH": 3040.25,
-      "BTC": 1508.32,
-      "XRP": 1099.17,
-      "USDC": 53.61,
-      "ETH": 14.56
+      "total": 4900.59,
+      "AAVE_wstETH": 2805.32,
+      "BTC": 1404.23,
+      "XRP": 617.87,
+      "USDC": 53.6,
+      "ETH": 13.39
     },
     "exchanges": {
-      "total": 595.76,
-      "kraken": 2.65,
-      "binance_us": 73.16,
-      "coinbase": 519.95
+      "kraken": 0.0037,
+      "binance_us": 73.16006075,
+      "coinbase": 113.00029866796433,
+      "okx": 0.0866996986677442
     },
     "aave": {
-      "collateral": 3211.76,
-      "debt": 662.23,
-      "health_factor": 3.93
+      "collateral": 2805.32,
+      "debt": 662.0,
+      "health_factor": 3.52
     }
   },
   "wallets": {
@@ -109,7 +109,45 @@
     },
     "risk_agent": {
       "status": "idle",
-      "last_run": "2025-12-16T11:54:23.196099"
+      "last_run": "2025-12-18T12:19:12.183076"
     }
+  },
+  "council_decisions": [
+    {
+      "symbol": "BTC",
+      "decision": "HOLD",
+      "confidence": 50,
+      "timestamp": "2025-12-18T13:36:10.902257"
+    },
+    {
+      "symbol": "BTC",
+      "decision": "HOLD",
+      "confidence": 50,
+      "timestamp": "2025-12-18T16:41:02.669828"
+    },
+    {
+      "symbol": "BTC",
+      "decision": "HOLD",
+      "confidence": 50,
+      "timestamp": "2025-12-18T16:43:57.559752"
+    }
+  ],
+  "strategy_selections": [
+    {
+      "symbol": "BTC",
+      "regime": "Insufficient Data",
+      "strategy": null,
+      "timestamp": "2025-12-18T13:46:09.672236"
+    }
+  ],
+  "last_sync": {
+    "timestamp": "2025-12-18T14:18:43.429080",
+    "exchanges_checked": [
+      "coinbase",
+      "kraken",
+      "binance_us",
+      "okx"
+    ],
+    "total_holdings": 18
   }
 }
