@@ -1,6 +1,6 @@
 {
   "version": "3.2",
-  "last_updated": "2025-12-18T16:43:57.560203",
+  "last_updated": "2025-12-18T18:13:02.079044",
   "system_location": "/Volumes/LegacySafe/SS_III/",
   "portfolio": {
     "net_worth": 4972.59,
@@ -130,6 +130,12 @@
       "decision": "HOLD",
       "confidence": 50,
       "timestamp": "2025-12-18T16:43:57.559752"
+    },
+    {
+      "symbol": "BTC",
+      "decision": "HOLD",
+      "confidence": 50,
+      "timestamp": "2025-12-18T18:13:02.078423"
     }
   ],
   "strategy_selections": [
@@ -179,6 +185,19 @@
       "current_phase": "paper",
       "phase_start_date": "2025-12-18"
     }
+  },
+  "trading": {
+    "paper_stats": {
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "total_pnl_pct": 0.0,
+      "last_trade": null,
+      "streak": 0
+    },
+    "paper_trades": [],
+    "signals_generated": 0,
+    "last_signal": null
   },
   "kill_switch": {
     "enabled": false,
