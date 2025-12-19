@@ -1,0 +1,36 @@
+[
+  {
+    "id": "PT-20251218183602",
+    "signal_id": "SIG-20251218183602",
+    "timestamp": "2025-12-18T18:36:02.949185",
+    "symbol": "BTC",
+    "action": "SHORT",
+    "entry_price": 85445,
+    "position_size_usd": 25.57,
+    "stop_loss": 88008.35,
+    "take_profit": 81172.75,
+    "is_paper": true,
+    "status": "OPEN",
+    "exit_price": null,
+    "exit_timestamp": null,
+    "pnl_usd": null,
+    "pnl_pct": null
+  },
+  {
+    "id": "PT-20251218183602",
+    "signal_id": "SIG-20251218183602",
+    "timestamp": "2025-12-18T18:36:02.950367",
+    "symbol": "ETH",
+    "action": "SHORT",
+    "entry_price": 2828.41,
+    "position_size_usd": 25.19,
+    "stop_loss": 2913.2623,
+    "take_profit": 2686.9894999999997,
+    "is_paper": true,
+    "status": "OPEN",
+    "exit_price": null,
+    "exit_timestamp": null,
+    "pnl_usd": null,
+    "pnl_pct": null
+  }
+]

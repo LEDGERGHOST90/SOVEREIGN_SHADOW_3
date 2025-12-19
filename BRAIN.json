@@ -1,6 +1,6 @@
 {
   "version": "3.2",
-  "last_updated": "2025-12-18T18:13:02.079044",
+  "last_updated": "2025-12-18T18:36:02.949572",
   "system_location": "/Volumes/LegacySafe/SS_III/",
   "portfolio": {
     "net_worth": 4972.59,
@@ -110,6 +110,10 @@
     "risk_agent": {
       "status": "idle",
       "last_run": "2025-12-18T12:19:12.183076"
+    },
+    "paper_trader": {
+      "status": "opening_trade",
+      "last_run": "2025-12-18T18:36:02.949569"
     }
   },
   "council_decisions": [
@@ -136,6 +140,18 @@
       "decision": "HOLD",
       "confidence": 50,
       "timestamp": "2025-12-18T18:13:02.078423"
+    },
+    {
+      "symbol": "BTC",
+      "decision": "HOLD",
+      "confidence": 50,
+      "timestamp": "2025-12-18T18:21:02.812088"
+    },
+    {
+      "symbol": "BTC",
+      "decision": "HOLD",
+      "confidence": 50,
+      "timestamp": "2025-12-18T18:23:06.696624"
     }
   ],
   "strategy_selections": [

@@ -116,6 +116,18 @@ class OvernightRunner:
             logger.warning(f"⚠ Agent Orchestrator: {e}")
             self.orchestrator = None
 
+        # Paper Trader
+        try:
+            from agents.execution.paper_trader import PaperTrader
+            from agents.base_agent import Signal
+            self.paper_trader = PaperTrader()
+            self.Signal = Signal
+            logger.info("✓ Paper Trader")
+        except Exception as e:
+            logger.warning(f"⚠ Paper Trader: {e}")
+            self.paper_trader = None
+            self.Signal = None
+
     def run_cycle(self) -> dict:
         """Run one analysis cycle"""
         self.cycle_count += 1
@@ -124,6 +136,20 @@ class OvernightRunner:
         logger.info(f"\n{'='*60}")
         logger.info(f"CYCLE {self.cycle_count} - {cycle_start.isoformat()}")
         logger.info(f"{'='*60}")
+
+        # Check open positions for SL/TP hits
+        if self.paper_trader and self.data_pipeline:
+            try:
+                prices = self.data_pipeline.get_current_prices()
+                current_prices = {s: p.get('price', 0) for s, p in prices.items()}
+                triggered = self.paper_trader.check_stops(current_prices)
+
+                for trade_id, exit_price, reason in triggered:
+                    result = self.paper_trader.close_trade(trade_id, exit_price)
+                    emoji = "✅" if result.get('pnl_usd', 0) > 0 else "❌"
+                    logger.info(f"  {emoji} {reason}: Closed {trade_id} @ ${exit_price:.2f} | PnL: ${result.get('pnl_usd', 0):.2f}")
+            except Exception as e:
+                logger.warning(f"Stop check error: {e}")
 
         results = {
             'cycle': self.cycle_count,
@@ -213,6 +239,31 @@ class OvernightRunner:
                 logger.info(f"     Size: ${opp['position_size']:.2f} | Confidence: {opp['confidence']}%")
         else:
             logger.info("  No opportunities meeting criteria")
+
+        # 5. Execute Paper Trades
+        if self.paper_trader and self.paper_mode and opportunities:
+            logger.info("\n[5/5] Paper Trade Execution...")
+            for opp in opportunities:
+                if opp['confidence'] >= 50:
+                    try:
+                        # Create Signal object
+                        signal = self.Signal(
+                            symbol=opp['symbol'],
+                            action=opp['direction'],
+                            confidence=opp['confidence'],
+                            reasoning=opp.get('reasoning', 'Overnight runner signal'),
+                            source_agent='overnight_runner',
+                            entry_price=opp['entry'],
+                            stop_loss=opp['stop_loss'],
+                            take_profit=opp['take_profit']
+                        )
+                        # Execute paper trade
+                        result = self.paper_trader.execute_signal(signal, opp['position_size'])
+                        logger.info(f"  📝 PAPER TRADE: {result['symbol']} {result['action']} @ ${result['entry_price']:.2f}")
+                        results['paper_trades'] = results.get('paper_trades', [])
+                        results['paper_trades'].append(result)
+                    except Exception as e:
+                        logger.error(f"  Paper trade error: {e}")
 
         # Save results
         self._save_results(results)
