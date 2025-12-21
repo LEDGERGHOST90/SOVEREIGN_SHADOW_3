@@ -1,0 +1,13 @@
+{
+  "cycle": 9,
+  "timestamp": "2025-12-18T20:23:40.587391",
+  "paper_mode": true,
+  "components": {
+    "live_data": "ERROR: [Errno 5] Input/output error",
+    "research_swarm": "DISPATCHED",
+    "agent_council": "NO_SIGNALS"
+  },
+  "signals": {},
+  "opportunities": [],
+  "manus_task": null
+}

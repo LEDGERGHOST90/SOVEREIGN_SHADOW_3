@@ -1,0 +1,89 @@
+{
+  "cycle": 16,
+  "timestamp": "2025-12-18T22:11:58.409902",
+  "paper_mode": true,
+  "components": {
+    "live_data": "OK",
+    "research_swarm": "SKIPPED (runs hourly)",
+    "agent_council": "NO_SIGNALS"
+  },
+  "signals": {
+    "BTC": {
+      "symbol": "BTC",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T22:11:58.414722"
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T22:11:58.419100"
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T22:11:58.420796"
+    },
+    "XRP": {
+      "symbol": "XRP",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T22:11:58.422618"
+    },
+    "AAVE": {
+      "symbol": "AAVE",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T22:11:58.424329"
+    }
+  },
+  "opportunities": [],
+  "summary": {
+    "long": [],
+    "short": [],
+    "neutral": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "AAVE"
+    ]
+  }
+}

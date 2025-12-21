@@ -1,0 +1,553 @@
+{
+  "cycle": 1,
+  "timestamp": "2025-12-18T18:59:34.932627",
+  "paper_mode": true,
+  "components": {
+    "live_data": "OK",
+    "research_swarm": "DISPATCHED",
+    "agent_council": "OK"
+  },
+  "signals": {
+    "BTC": {
+      "symbol": "BTC",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 85607.74,
+      "stop_loss": 88175.9722,
+      "take_profit": 81327.353,
+      "position_size": 25.0,
+      "reasoning": "BTC in High Volatility Trend regime. 24h change: 0.0%. ADX: 30.6. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T18:59:50.304056"
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 2834.18,
+      "stop_loss": 2919.2054,
+      "take_profit": 2692.4709999999995,
+      "position_size": 25.0,
+      "reasoning": "ETH in High Volatility Trend regime. 24h change: 0.0%. ADX: 29.1. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T18:59:55.507035"
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 118.89,
+      "stop_loss": 122.4567,
+      "take_profit": 112.9455,
+      "position_size": 25.0,
+      "reasoning": "SOL in High Volatility Trend regime. 24h change: 0.0%. ADX: 30.5. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:01.682411"
+    },
+    "XRP": {
+      "symbol": "XRP",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1.7933,
+      "stop_loss": 1.847099,
+      "take_profit": 1.7036349999999998,
+      "position_size": 25.0,
+      "reasoning": "XRP in High Volatility Trend regime. 24h change: 0.0%. ADX: 27.6. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:07.583920"
+    },
+    "AAVE": {
+      "symbol": "AAVE",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 173.55,
+      "stop_loss": 178.75650000000002,
+      "take_profit": 164.8725,
+      "position_size": 15.0,
+      "reasoning": "AAVE in Transitioning Market regime. 24h change: 0.0%. ADX: 22.0. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:13.336344"
+    },
+    "ADA": {
+      "symbol": "ADA",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.3504,
+      "stop_loss": 0.360912,
+      "take_profit": 0.33287999999999995,
+      "position_size": 25.0,
+      "reasoning": "ADA in High Volatility Trend regime. 24h change: 0.0%. ADX: 30.2. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:19.810346"
+    },
+    "AVAX": {
+      "symbol": "AVAX",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 11.35,
+      "stop_loss": 11.6905,
+      "take_profit": 10.782499999999999,
+      "position_size": 25.0,
+      "reasoning": "AVAX in High Volatility Trend regime. 24h change: 0.0%. ADX: 29.0. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:25.477063"
+    },
+    "DOT": {
+      "symbol": "DOT",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 1.741,
+      "stop_loss": 1.79323,
+      "take_profit": 1.65395,
+      "position_size": 15.0,
+      "reasoning": "DOT in Transitioning Market regime. 24h change: 0.0%. ADX: 23.1. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:30.946731"
+    },
+    "ATOM": {
+      "symbol": "ATOM",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 1.855,
+      "stop_loss": 1.91065,
+      "take_profit": 1.7622499999999999,
+      "position_size": 15.0,
+      "reasoning": "ATOM in Transitioning Market regime. 24h change: 0.0%. ADX: 22.4. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:36.600429"
+    },
+    "NEAR": {
+      "symbol": "NEAR",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 1.424,
+      "stop_loss": 1.46672,
+      "take_profit": 1.3527999999999998,
+      "position_size": 15.0,
+      "reasoning": "NEAR in Transitioning Market regime. 24h change: 0.0%. ADX: 21.4. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:41.871746"
+    },
+    "APT": {
+      "symbol": "APT",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1.4475,
+      "stop_loss": 1.490925,
+      "take_profit": 1.375125,
+      "position_size": 25.0,
+      "reasoning": "APT in High Volatility Trend regime. 24h change: 0.0%. ADX: 25.3. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:47.504445"
+    },
+    "SUI": {
+      "symbol": "SUI",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1.3386,
+      "stop_loss": 1.3787580000000002,
+      "take_profit": 1.2716699999999999,
+      "position_size": 25.0,
+      "reasoning": "SUI in High Volatility Trend regime. 24h change: 0.0%. ADX: 27.4. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:00:52.659411"
+    },
+    "MATIC": {
+      "symbol": "MATIC",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T19:00:58.233154"
+    },
+    "ARB": {
+      "symbol": "ARB",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.1753,
+      "stop_loss": 0.18055900000000003,
+      "take_profit": 0.16653500000000002,
+      "position_size": 25.0,
+      "reasoning": "ARB in High Volatility Trend regime. 24h change: 0.0%. ADX: 26.0. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:03.349132"
+    },
+    "OP": {
+      "symbol": "OP",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 0.258,
+      "stop_loss": 0.26574000000000003,
+      "take_profit": 0.24509999999999998,
+      "position_size": 15.0,
+      "reasoning": "OP in Transitioning Market regime. 24h change: 0.0%. ADX: 23.3. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:08.587806"
+    },
+    "UNI": {
+      "symbol": "UNI",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 4.947,
+      "stop_loss": 5.09541,
+      "take_profit": 4.69965,
+      "position_size": 25.0,
+      "reasoning": "UNI in High Volatility Trend regime. 24h change: 0.0%. ADX: 34.7. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:14.020049"
+    },
+    "LINK": {
+      "symbol": "LINK",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 11.936,
+      "stop_loss": 12.294080000000001,
+      "take_profit": 11.3392,
+      "position_size": 15.0,
+      "reasoning": "LINK in Transitioning Market regime. 24h change: 0.0%. ADX: 23.1. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:19.805079"
+    },
+    "MKR": {
+      "symbol": "MKR",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1345.87,
+      "stop_loss": 1386.2460999999998,
+      "take_profit": 1278.5765,
+      "position_size": 25.0,
+      "reasoning": "MKR in High Volatility Trend regime. 24h change: 0.0%. ADX: 40.2. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:24.443521"
+    },
+    "CRV": {
+      "symbol": "CRV",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.3409,
+      "stop_loss": 0.35112699999999997,
+      "take_profit": 0.32385499999999995,
+      "position_size": 25.0,
+      "reasoning": "CRV in High Volatility Trend regime. 24h change: 0.0%. ADX: 27.9. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:30.059615"
+    },
+    "LDO": {
+      "symbol": "LDO",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 0.505,
+      "stop_loss": 0.52015,
+      "take_profit": 0.47974999999999995,
+      "position_size": 15.0,
+      "reasoning": "LDO in Transitioning Market regime. 24h change: 0.0%. ADX: 22.1. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:35.823402"
+    },
+    "DOGE": {
+      "symbol": "DOGE",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.12159,
+      "stop_loss": 0.1252377,
+      "take_profit": 0.1155105,
+      "position_size": 25.0,
+      "reasoning": "DOGE in High Volatility Trend regime. 24h change: 0.0%. ADX: 33.0. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:40.572665"
+    },
+    "SHIB": {
+      "symbol": "SHIB",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 7.13e-06,
+      "stop_loss": 7.343900000000001e-06,
+      "take_profit": 6.7735e-06,
+      "position_size": 25.0,
+      "reasoning": "SHIB in High Volatility Trend regime. 24h change: 0.0%. ADX: 74.9. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:45.772292"
+    },
+    "PEPE": {
+      "symbol": "PEPE",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 3.69e-06,
+      "stop_loss": 3.8007e-06,
+      "take_profit": 3.5054999999999997e-06,
+      "position_size": 25.0,
+      "reasoning": "PEPE in High Volatility Trend regime. 24h change: 0.0%. ADX: 33.8. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:51.274864"
+    },
+    "FET": {
+      "symbol": "FET",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.1954,
+      "stop_loss": 0.201262,
+      "take_profit": 0.18563,
+      "position_size": 25.0,
+      "reasoning": "FET in High Volatility Trend regime. 24h change: 0.0%. ADX: 29.3. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:01:56.515082"
+    },
+    "RNDR": {
+      "symbol": "RNDR",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 2.9685,
+      "stop_loss": 3.0575550000000002,
+      "take_profit": 2.820075,
+      "position_size": 15.0,
+      "reasoning": "RNDR in Unknown regime. 24h change: 0.0%. ADX: 0.0. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:02:01.958913"
+    },
+    "TAO": {
+      "symbol": "TAO",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 219.0,
+      "stop_loss": 225.57,
+      "take_profit": 208.04999999999998,
+      "position_size": 15.0,
+      "reasoning": "TAO in Transitioning Market regime. 24h change: 0.0%. ADX: 27.7. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T19:02:07.840459"
+    }
+  },
+  "opportunities": [
+    {
+      "symbol": "BTC",
+      "direction": "SHORT",
+      "entry": 85607.74,
+      "stop_loss": 88175.9722,
+      "take_profit": 81327.353,
+      "position_size": 25.0,
+      "confidence": 50,
+      "regime": "High Volatility Trend",
+      "reasoning": "BTC in High Volatility Trend regime. 24h change: 0.0%. ADX: 30.6. Recommended: SHORT with 50% confidence.",
+      "paper_mode": true
+    },
+    {
+      "symbol": "ETH",
+      "direction": "SHORT",
+      "entry": 2834.18,
+      "stop_loss": 2919.2054,
+      "take_profit": 2692.4709999999995,
+      "position_size": 25.0,
+      "confidence": 50,
+      "regime": "High Volatility Trend",
+      "reasoning": "ETH in High Volatility Trend regime. 24h change: 0.0%. ADX: 29.1. Recommended: SHORT with 50% confidence.",
+      "paper_mode": true
+    },
+    {
+      "symbol": "SOL",
+      "direction": "SHORT",
+      "entry": 118.89,
+      "stop_loss": 122.4567,
+      "take_profit": 112.9455,
+      "position_size": 25.0,
+      "confidence": 50,
+      "regime": "High Volatility Trend",
+      "reasoning": "SOL in High Volatility Trend regime. 24h change: 0.0%. ADX: 30.5. Recommended: SHORT with 50% confidence.",
+      "paper_mode": true
+    }
+  ],
+  "summary": {
+    "long": [],
+    "short": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "ADA",
+      "AVAX",
+      "APT",
+      "SUI",
+      "ARB",
+      "UNI",
+      "MKR",
+      "CRV",
+      "DOGE",
+      "SHIB",
+      "PEPE",
+      "FET"
+    ],
+    "neutral": [
+      "AAVE",
+      "DOT",
+      "ATOM",
+      "NEAR",
+      "MATIC",
+      "OP",
+      "LINK",
+      "LDO",
+      "RNDR",
+      "TAO"
+    ]
+  },
+  "manus_task": null,
+  "council_opinion": {
+    "recommendation": "HOLD",
+    "confidence": 50,
+    "agents": {
+      "reflect": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "reflect analysis pending - needs market data",
+        "agent": "reflect"
+      },
+      "whale": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "whale analysis pending - needs market data",
+        "agent": "whale"
+      },
+      "swarm": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "swarm analysis pending - needs market data",
+        "agent": "swarm"
+      },
+      "fundingarb": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "fundingarb analysis pending - needs market data",
+        "agent": "fundingarb"
+      },
+      "liquidation": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "liquidation analysis pending - needs market data",
+        "agent": "liquidation"
+      },
+      "risk": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "risk analysis pending - needs market data",
+        "agent": "risk"
+      },
+      "portfolio": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "portfolio analysis pending - needs market data",
+        "agent": "portfolio"
+      }
+    },
+    "signal_counts": {
+      "BUY": 0,
+      "SELL": 0,
+      "HOLD": 0,
+      "NEUTRAL": 7
+    },
+    "reasoning": "Council voted: BUY=0, SELL=0, HOLD=0",
+    "timestamp": "2025-12-18T19:02:24.639310"
+  }
+}

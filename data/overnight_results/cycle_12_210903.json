@@ -1,0 +1,180 @@
+{
+  "cycle": 12,
+  "timestamp": "2025-12-18T21:09:02.736592",
+  "paper_mode": true,
+  "components": {
+    "live_data": "OK",
+    "research_swarm": "SKIPPED (runs hourly)",
+    "agent_council": "OK"
+  },
+  "signals": {
+    "BTC": {
+      "symbol": "BTC",
+      "regime": "High Volatility Trend",
+      "direction": "LONG",
+      "confidence": 50.19316777278556,
+      "entry_price": 86865,
+      "stop_loss": 84259.05,
+      "take_profit": 91208.25,
+      "position_size": 25.1,
+      "reasoning": "BTC in High Volatility Trend regime. 24h change: 0.2%. ADX: 26.6. Recommended: LONG with 50% confidence.",
+      "sources": [
+        "CoinGecko",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T21:09:03.222975"
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "regime": "High Volatility Trend",
+      "direction": "LONG",
+      "confidence": 52.75537111195955,
+      "entry_price": 2910.19,
+      "stop_loss": 2822.8843,
+      "take_profit": 3055.6995,
+      "position_size": 26.38,
+      "reasoning": "ETH in High Volatility Trend regime. 24h change: 2.8%. ADX: 33.9. Recommended: LONG with 53% confidence.",
+      "sources": [
+        "CoinGecko",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T21:09:03.499786"
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 122.21,
+      "stop_loss": 125.8763,
+      "take_profit": 116.09949999999999,
+      "position_size": 15.0,
+      "reasoning": "SOL in Unknown regime. 24h change: -1.1%. ADX: 0.0. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "CoinGecko",
+        "StrategyEngine"
+      ],
+      "timestamp": "2025-12-18T21:09:03.717786"
+    },
+    "XRP": {
+      "symbol": "XRP",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T21:09:03.806258"
+    },
+    "AAVE": {
+      "symbol": "AAVE",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-18T21:09:03.973463"
+    }
+  },
+  "opportunities": [
+    {
+      "symbol": "ETH",
+      "direction": "LONG",
+      "entry": 2910.19,
+      "stop_loss": 2822.8843,
+      "take_profit": 3055.6995,
+      "position_size": 26.38,
+      "confidence": 52.75537111195955,
+      "regime": "High Volatility Trend",
+      "reasoning": "ETH in High Volatility Trend regime. 24h change: 2.8%. ADX: 33.9. Recommended: LONG with 53% confidence.",
+      "paper_mode": true
+    },
+    {
+      "symbol": "BTC",
+      "direction": "LONG",
+      "entry": 86865,
+      "stop_loss": 84259.05,
+      "take_profit": 91208.25,
+      "position_size": 25.1,
+      "confidence": 50.19316777278556,
+      "regime": "High Volatility Trend",
+      "reasoning": "BTC in High Volatility Trend regime. 24h change: 0.2%. ADX: 26.6. Recommended: LONG with 50% confidence.",
+      "paper_mode": true
+    }
+  ],
+  "summary": {
+    "long": [
+      "BTC",
+      "ETH"
+    ],
+    "short": [],
+    "neutral": [
+      "SOL",
+      "XRP",
+      "AAVE"
+    ]
+  },
+  "council_opinion": {
+    "recommendation": "HOLD",
+    "confidence": 50,
+    "agents": {
+      "reflect": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "reflect analysis pending - needs market data",
+        "agent": "reflect"
+      },
+      "whale": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "whale analysis pending - needs market data",
+        "agent": "whale"
+      },
+      "swarm": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "swarm analysis pending - needs market data",
+        "agent": "swarm"
+      },
+      "fundingarb": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "fundingarb analysis pending - needs market data",
+        "agent": "fundingarb"
+      },
+      "liquidation": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "liquidation analysis pending - needs market data",
+        "agent": "liquidation"
+      },
+      "risk": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "risk analysis pending - needs market data",
+        "agent": "risk"
+      },
+      "portfolio": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "portfolio analysis pending - needs market data",
+        "agent": "portfolio"
+      }
+    },
+    "signal_counts": {
+      "BUY": 0,
+      "SELL": 0,
+      "HOLD": 0,
+      "NEUTRAL": 7
+    },
+    "reasoning": "Council voted: BUY=0, SELL=0, HOLD=0",
+    "timestamp": "2025-12-18T21:09:03.974041"
+  }
+}

@@ -219,7 +219,9 @@ class ResearchSwarm:
         query: str,
         context: str = "",
         asset: str = None,
-        require_scholarly: bool = True
+        require_scholarly: bool = True,
+        wait_for_manus: bool = True,
+        manus_timeout: int = 300
     ) -> Dict[str, Any]:
         """
         Execute multi-AI research
@@ -229,6 +231,8 @@ class ResearchSwarm:
             context: Additional context (SS_III state, portfolio, etc.)
             asset: Specific asset being analyzed (BTC, ETH, etc.)
             require_scholarly: Enforce academic/scholarly sources
+            wait_for_manus: If True, poll Manus until complete (default: True)
+            manus_timeout: Max seconds to wait for Manus (default: 300)
 
         Returns:
             Unified research report with all sources
@@ -272,12 +276,60 @@ Provide a detailed, evidence-based analysis with full source citations.
                 agent_profile='manus-1.6-max',
                 task_mode='agent'
             )
+            task_id = manus_task.get('task_id')
             results['manus'] = {
                 'status': 'dispatched',
-                'task_id': manus_task.get('task_id'),
+                'task_id': task_id,
                 'url': manus_task.get('task_url')
             }
-            print(f"   ✓ Manus task created: {manus_task.get('task_id')}")
+            print(f"   ✓ Manus task created: {task_id}")
+
+            # Wait for Manus to complete if requested
+            if wait_for_manus and task_id:
+                import time
+                print(f"   ⏳ Waiting for Manus (max {manus_timeout}s)...")
+                start_time = time.time()
+                poll_interval = 10  # Check every 10 seconds
+
+                while time.time() - start_time < manus_timeout:
+                    time.sleep(poll_interval)
+                    elapsed = int(time.time() - start_time)
+
+                    try:
+                        task_result = self.manus.get_task(task_id)
+                        status = task_result.get('status', 'unknown')
+
+                        if status == 'completed':
+                            # Extract the analysis
+                            output = task_result.get('output', [])
+                            analysis = ""
+                            for msg in output:
+                                if msg.get('role') == 'assistant':
+                                    for content in msg.get('content', []):
+                                        if content.get('type') == 'output_text':
+                                            analysis += content.get('text', '')
+
+                            results['manus'] = {
+                                'status': 'complete',
+                                'task_id': task_id,
+                                'url': manus_task.get('task_url'),
+                                'analysis': analysis,
+                                'confidence': 85.0
+                            }
+                            print(f"   ✓ Manus completed ({elapsed}s) - {len(analysis)} chars")
+                            break
+                        elif status == 'failed':
+                            results['manus']['status'] = 'failed'
+                            print(f"   ✗ Manus task failed")
+                            break
+                        else:
+                            print(f"   ... Manus status: {status} ({elapsed}s)")
+                    except Exception as poll_e:
+                        print(f"   ⚠ Poll error: {poll_e}")
+                else:
+                    print(f"   ⚠ Manus timeout after {manus_timeout}s - results still pending")
+                    results['manus']['status'] = 'timeout'
+
         except Exception as e:
             results['manus'] = {'status': 'error', 'error': str(e)}
             print(f"   ✗ Manus error: {e}")

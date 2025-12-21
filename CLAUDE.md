@@ -61,6 +61,7 @@ python3 bin/overnight_runner.py --once
 3. **Coordinate with other AIs via BRAIN.json**
 4. **Use feature branches for changes**
 5. **Post updates to Replit webhook**
+6. **When encountering unfamiliar tools/products, search the web before saying "I don't know"**
 
 ---
 

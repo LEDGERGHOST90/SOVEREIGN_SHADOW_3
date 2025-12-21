@@ -67,7 +67,11 @@ class PaperTrader(BaseAgent):
         self._save_trades()
 
         # Update BRAIN
-        self.brain['active_positions'].append({
+        if 'trading' not in self.brain:
+            self.brain['trading'] = {'active_positions': [], 'paper_trades': []}
+        if 'active_positions' not in self.brain['trading']:
+            self.brain['trading']['active_positions'] = []
+        self.brain['trading']['active_positions'].append({
             'trade_id': trade.id,
             'symbol': trade.symbol,
             'action': trade.action,
@@ -77,7 +81,9 @@ class PaperTrader(BaseAgent):
             'take_profit': trade.take_profit,
             'timestamp': trade.timestamp
         })
-        self.brain['session']['trades_today'] = self.brain['session'].get('trades_today', 0) + 1
+        if 'session' not in self.brain:
+            self.brain['session'] = {}
+        self.brain['session']['trades_today'] = self.brain.get('session', {}).get('trades_today', 0) + 1
         self._save_brain()
 
         self.log(f"Trade opened: {trade.id} - {trade.symbol} {trade.action} @ ${trade.entry_price}")
@@ -119,19 +125,23 @@ class PaperTrader(BaseAgent):
         self._save_trades()
 
         # Update BRAIN
-        self.brain['active_positions'] = [
-            p for p in self.brain.get('active_positions', [])
+        if 'trading' not in self.brain:
+            self.brain['trading'] = {'active_positions': []}
+        self.brain['trading']['active_positions'] = [
+            p for p in self.brain.get('trading', {}).get('active_positions', [])
             if p.get('trade_id') != trade_id
         ]
 
         # Update stats
         trading = self.brain.get('trading', {})
         trading['total_trades'] = trading.get('total_trades', 0) + 1
+        trading['wins'] = trading.get('wins', 0)
+        trading['losses'] = trading.get('losses', 0)
 
         if pnl_usd > 0:
-            trading['wins'] = trading.get('wins', 0) + 1
+            trading['wins'] += 1
         else:
-            trading['losses'] = trading.get('losses', 0) + 1
+            trading['losses'] += 1
 
         trading['total_pnl_usd'] = trading.get('total_pnl_usd', 0) + pnl_usd
         trading['win_rate_pct'] = (trading['wins'] / trading['total_trades'] * 100) if trading['total_trades'] > 0 else 0
@@ -139,11 +149,15 @@ class PaperTrader(BaseAgent):
         self.brain['trading'] = trading
 
         # Update session
-        self.brain['session']['pnl_today_usd'] = self.brain['session'].get('pnl_today_usd', 0) + pnl_usd
+        if 'session' not in self.brain:
+            self.brain['session'] = {}
+        self.brain['session']['pnl_today_usd'] = self.brain.get('session', {}).get('pnl_today_usd', 0) + pnl_usd
 
         # Update mission progress if profitable
         if pnl_usd > 0:
-            self.brain['mission']['progress_usd'] = self.brain['mission'].get('progress_usd', 0) + pnl_usd
+            if 'mission' not in self.brain:
+                self.brain['mission'] = {}
+            self.brain['mission']['progress_usd'] = self.brain.get('mission', {}).get('progress_usd', 0) + pnl_usd
 
         self._save_brain()
 
@@ -163,7 +177,7 @@ class PaperTrader(BaseAgent):
         """Check all open positions for stop loss / take profit."""
         triggered = []
 
-        for position in self.brain.get('active_positions', []):
+        for position in self.brain.get('trading', {}).get('active_positions', []):
             symbol = position['symbol']
             if symbol not in current_prices:
                 continue
@@ -201,7 +215,7 @@ class PaperTrader(BaseAgent):
             'losses': trading.get('losses', 0),
             'win_rate': trading.get('win_rate_pct', 0),
             'total_pnl': trading.get('total_pnl_usd', 0),
-            'active_positions': len(self.brain.get('active_positions', [])),
+            'active_positions': len(self.brain.get('trading', {}).get('active_positions', [])),
             'ready_for_live': trading.get('total_trades', 0) >= 10 and trading.get('win_rate_pct', 0) >= 60
         }
 

@@ -1,0 +1,90 @@
+{
+  "cycle": 25,
+  "timestamp": "2025-12-19T00:46:44.199673",
+  "paper_mode": true,
+  "components": {
+    "live_data": "OK",
+    "research_swarm": "DISPATCHED",
+    "agent_council": "NO_SIGNALS"
+  },
+  "signals": {
+    "BTC": {
+      "symbol": "BTC",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-19T00:46:44.205887"
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-19T00:46:44.208312"
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-19T00:46:44.209948"
+    },
+    "XRP": {
+      "symbol": "XRP",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-19T00:46:44.213484"
+    },
+    "AAVE": {
+      "symbol": "AAVE",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2025-12-19T00:46:44.215101"
+    }
+  },
+  "opportunities": [],
+  "summary": {
+    "long": [],
+    "short": [],
+    "neutral": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "AAVE"
+    ]
+  },
+  "manus_task": null
+}
