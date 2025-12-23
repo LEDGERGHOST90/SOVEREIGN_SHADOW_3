@@ -21,29 +21,33 @@ import requests
 # ============================================================================
 
 # Actual fill prices from Coinbase (slippage accounted)
+# 3-TIER LADDER EXIT: TP1 +25% (50%), TP2 +40% (30%), TP3 +60% (20%), SL -7%
 POSITIONS = {
     'FET': {
         'quantity': 916.1,
         'entry': 0.2104,  # Actual fill
         'stop_loss': 0.1957,  # -7% from actual
-        'tp1': 0.2630,  # +25% from actual
-        'tp2': 0.2946,  # +40% from actual
+        'tp1': 0.2630,  # +25% → sell 50%
+        'tp2': 0.2946,  # +40% → sell 30%
+        'tp3': 0.3366,  # +60% → sell 20% (moonbag)
         'coingecko_id': 'fetch-ai'
     },
     'RENDER': {
         'quantity': 123.8,
         'entry': 1.2780,  # Actual fill
         'stop_loss': 1.1885,  # -7% from actual
-        'tp1': 1.5975,  # +25% from actual
-        'tp2': 1.7892,  # +40% from actual
+        'tp1': 1.5975,  # +25% → sell 50%
+        'tp2': 1.7892,  # +40% → sell 30%
+        'tp3': 2.0448,  # +60% → sell 20% (moonbag)
         'coingecko_id': 'render-token'
     },
     'SUI': {
         'quantity': 90.7,
         'entry': 1.4370,  # Actual fill (avg of 2 fills)
         'stop_loss': 1.3364,  # -7% from actual
-        'tp1': 1.7963,  # +25% from actual
-        'tp2': 2.0118,  # +40% from actual
+        'tp1': 1.7963,  # +25% → sell 50%
+        'tp2': 2.0118,  # +40% → sell 30%
+        'tp3': 2.2992,  # +60% → sell 20% (moonbag)
         'coingecko_id': 'sui'
     }
 }
@@ -106,7 +110,7 @@ async def fetch_prices() -> Dict[str, float]:
 
 class PositionMonitor:
     def __init__(self):
-        self.alerts_sent = {sym: {'tp1': False, 'tp2': False, 'sl': False} for sym in POSITIONS}
+        self.alerts_sent = {sym: {'tp1': False, 'tp2': False, 'tp3': False, 'sl': False} for sym in POSITIONS}
         self.last_prices = {}
         self.start_time = datetime.now()
 
@@ -115,20 +119,25 @@ class PositionMonitor:
         pos = POSITIONS[symbol]
         alerts = self.alerts_sent[symbol]
 
-        # Check TP2 first (highest priority)
+        # Check TP3 first (highest priority - moonbag)
+        if price >= pos['tp3'] and not alerts['tp3']:
+            alerts['tp3'] = True
+            return f"🚀 TP3 MOONBAG: {symbol} @ ${price:.4f} (+60%) - SELL 20%"
+
+        # Check TP2
         if price >= pos['tp2'] and not alerts['tp2']:
             alerts['tp2'] = True
-            return f"🎯 TP2 HIT: {symbol} @ ${price:.4f} (+40%)"
+            return f"🎯 TP2 HIT: {symbol} @ ${price:.4f} (+40%) - SELL 30%"
 
         # Check TP1
         if price >= pos['tp1'] and not alerts['tp1']:
             alerts['tp1'] = True
-            return f"🎯 TP1 HIT: {symbol} @ ${price:.4f} (+25%)"
+            return f"🎯 TP1 HIT: {symbol} @ ${price:.4f} (+25%) - SELL 50%"
 
         # Check Stop Loss
         if price <= pos['stop_loss'] and not alerts['sl']:
             alerts['sl'] = True
-            return f"🛑 STOP LOSS: {symbol} @ ${price:.4f} (-7%)"
+            return f"🛑 STOP LOSS: {symbol} @ ${price:.4f} (-7%) - SELL 100%"
 
         return None
 
