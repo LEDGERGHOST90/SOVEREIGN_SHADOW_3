@@ -6,7 +6,7 @@ This codebase is managed by multiple AIs working together:
 - **Claude Code** (you, if in terminal)
 - **Claude Desktop** (MCP integration)
 - **Claude Mobile** (quick queries)
-- **Cursor** (code editing)
+- **Antigravity** (Google IDE)
 - **Manus** (research)
 - **Gemini** (analysis)
 - **GPT** (architecture)
@@ -111,10 +111,16 @@ curl -d "EOD Complete: [summary]" ntfy.sh/sovereignshadow_dc4d2fa1
 
 ## Current Mission
 
-**DEBT_DESTROYER**
-- Target: Repay $661 AAVE debt
-- Capital: ~$186 across exchanges
-- Strategy: Paper trade → Micro live → Full autonomous
+**DEBT_DESTROYER** (via AI Basket Siphon)
+- Target: Repay $662 AAVE debt
+- Capital: ~$482 deployed in AI basket (FET, RENDER, SUI)
+- Strategy: Ladder exits at TP1/TP2/TP3, profits → AAVE repayment
+- Scanner: `bin/ai_basket_scanner.py` (NTFY alerts active)
+
+**Active Positions:**
+- FET: 916.1 @ $0.2104 | TP1: $0.263 | TP2: $0.295 | TP3: $0.337
+- RENDER: 123.8 @ $1.278 | TP1: $1.598 | TP2: $1.789 | TP3: $2.045
+- SUI: 90.7 @ $1.437 | TP1: $1.796 | TP2: $2.012 | TP3: $2.299
 
 ---
 
