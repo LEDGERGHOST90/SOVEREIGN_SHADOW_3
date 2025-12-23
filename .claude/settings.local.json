@@ -23,9 +23,17 @@
       "Bash(brew install:*)",
       "Bash(chmod:*)",
       "Bash(git add:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(open \"https://manus.im/app/Ez6ssr2KdjZBWgehhzRnSA\")",
+      "WebFetch(domain:manus.im)",
+      "Bash(unzip:*)",
+      "Bash(system_profiler:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "ds-star"
+  ],
+  "enableAllProjectMcpServers": true
 }

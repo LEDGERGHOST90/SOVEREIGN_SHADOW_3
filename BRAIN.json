@@ -105,9 +105,15 @@
     },
     "exchanges": {
       "kraken": 0.0037,
-      "binance_us": 73.16006075,
-      "coinbase": 556.16,
-      "okx": 0.0866996986677442
+      "binance_us": 73.16,
+      "coinbase": {
+        "USDC": 2.21,
+        "FET": 916.1,
+        "RENDER": 123.8,
+        "SUI": 90.7,
+        "total_usd": 483.56
+      },
+      "okx": 0.09
     },
     "aave": {
       "collateral": 2805.32,
@@ -219,7 +225,7 @@
     "google_gemini": "ACTIVE",
     "elevenlabs": "ACTIVE"
   },
-  "current_goal": "Test trading automations with $500 Coinbase deposit",
+  "current_goal": "AI Basket Siphon: FET/RENDER/SUI ladder exits → AAVE debt repayment",
   "agents": {
     "swarm_agent": {
       "status": "idle",
@@ -234,76 +240,8 @@
       "last_run": "2025-12-19T18:30:51.170847"
     }
   },
-  "council_decisions": [
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T18:53:09.868350"
-    },
-    {
-      "symbol": "ETH",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T19:08:11.651972"
-    },
-    {
-      "symbol": "ETH",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T19:23:32.124677"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T19:38:34.105566"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T19:53:37.503748"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T20:08:39.651404"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T20:38:59.969205"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T20:54:01.931338"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T21:09:03.974041"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2025-12-18T21:24:21.731416"
-    }
-  ],
-  "strategy_selections": [
-    {
-      "symbol": "BTC",
-      "regime": "Insufficient Data",
-      "strategy": null,
-      "timestamp": "2025-12-18T13:46:09.672236"
-    }
-  ],
+  "council_decisions": [],
+  "strategy_selections": [],
   "last_sync": {
     "timestamp": "2025-12-18T14:18:43.429080",
     "exchanges_checked": [
@@ -372,32 +310,38 @@
       {
         "symbol": "FET",
         "quantity": 916.1,
-        "entry_price": 0.21,
-        "value_usd": 192.66,
-        "stop_loss": 0.195,
-        "tp1": 0.263,
-        "tp2": 0.294,
-        "timestamp": "2025-12-23T10:35:25.957271"
+        "entry_price": 0.2104,
+        "value_usd": 192.79,
+        "stop_loss": 0.1957,
+        "tp1": 0.2630,
+        "tp2": 0.2946,
+        "tp3": 0.3366,
+        "timestamp": "2025-12-23T18:34:11Z",
+        "exchange": "coinbase"
       },
       {
         "symbol": "RENDER",
         "quantity": 123.8,
-        "entry_price": 1.277,
-        "value_usd": 158.09,
-        "stop_loss": 1.188,
-        "tp1": 1.596,
-        "tp2": 1.788,
-        "timestamp": "2025-12-23T10:35:25.957272"
+        "entry_price": 1.2780,
+        "value_usd": 158.22,
+        "stop_loss": 1.1885,
+        "tp1": 1.5975,
+        "tp2": 1.7892,
+        "tp3": 2.0448,
+        "timestamp": "2025-12-23T18:34:13Z",
+        "exchange": "coinbase"
       },
       {
         "symbol": "SUI",
         "quantity": 90.7,
-        "entry_price": 1.437,
+        "entry_price": 1.4370,
         "value_usd": 130.34,
-        "stop_loss": 1.336,
-        "tp1": 1.796,
-        "tp2": 2.012,
-        "timestamp": "2025-12-23T10:35:25.957273"
+        "stop_loss": 1.3364,
+        "tp1": 1.7963,
+        "tp2": 2.0118,
+        "tp3": 2.2992,
+        "timestamp": "2025-12-23T18:34:14Z",
+        "exchange": "coinbase"
       }
     ],
     "signals_generated": 0,
@@ -432,31 +376,34 @@
   },
   "live_trades": [
     {
-      "order_id": "0539b678-413f-4087-9bb3-b8325873034b",
-      "symbol": "BTC",
+      "order_id": "ai_basket_deploy",
+      "symbol": "FET",
       "action": "BUY",
-      "amount_usd": 25,
-      "product": "BTC-USDC",
+      "amount_usd": 192.79,
+      "quantity": 916.1,
+      "product": "FET-USDC",
       "status": "FILLED",
-      "timestamp": "2025-12-19T18:49:54.476088"
+      "timestamp": "2025-12-23T18:34:11Z"
     },
     {
-      "order_id": "6c4a0784-f73b-4beb-8ea2-2d7f38ea5e55",
-      "symbol": "XRP",
+      "order_id": "ai_basket_deploy",
+      "symbol": "RENDER",
       "action": "BUY",
-      "amount_usd": 25,
-      "product": "XRP-USDC",
+      "amount_usd": 158.22,
+      "quantity": 123.8,
+      "product": "RENDER-USDC",
       "status": "FILLED",
-      "timestamp": "2025-12-19T18:51:46.802184"
+      "timestamp": "2025-12-23T18:34:13Z"
     },
     {
-      "order_id": "1e47fb76-00b3-49a6-bf0e-b24cef80ae57",
-      "symbol": "SOL",
+      "order_id": "ai_basket_deploy",
+      "symbol": "SUI",
       "action": "BUY",
-      "amount_usd": 25,
-      "product": "SOL-USDC",
+      "amount_usd": 130.34,
+      "quantity": 90.7,
+      "product": "SUI-USDC",
       "status": "FILLED",
-      "timestamp": "2025-12-19T18:51:46.802213"
+      "timestamp": "2025-12-23T18:34:14Z"
     }
   ]
 }

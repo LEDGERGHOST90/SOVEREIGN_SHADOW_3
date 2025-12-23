@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "ds-star"
+  ],
+  "enableAllProjectMcpServers": true
+}

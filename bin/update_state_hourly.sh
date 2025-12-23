@@ -5,15 +5,13 @@
 #
 
 # Navigate to project directory
-cd /Volumes/LegacySafe/SOVEREIGN_SHADOW_3 || exit 1
+cd /Volumes/LegacySafe/SS_III || exit 1
 
-# Activate virtual environment if it exists
-if [ -d "venv" ]; then
-    source venv/bin/activate
-fi
+# Set Python path
+export PYTHONPATH=/Volumes/LegacySafe/SS_III
 
-# Run the update script
-python3 scripts/update_persistent_state.py
+# Run the portfolio sync
+python3 bin/sync_portfolio.py
 
 # Exit with the script's exit code
 exit $?
