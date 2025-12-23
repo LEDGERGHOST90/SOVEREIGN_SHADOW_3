@@ -249,7 +249,14 @@
     "total_deployed_usdc": 200,
     "remaining_usdc": 0.91
   },
-  "current_goal": "AI Basket Siphon: FET/RENDER/SUI ladder exits \u2192 AAVE debt repayment",
+  "current_goal": "DELEVERAGE FIRST: Next capital → AAVE debt repayment ($662), THEN new positions",
+  "gio_directive": {
+    "date": "2025-12-23",
+    "grade": "C+",
+    "message": "Excellent technique cannot compensate for flawed strategy. Deleverage first.",
+    "priority_order": ["Pay AAVE debt", "Validate FreqTrade", "Then deploy new capital"],
+    "approved": true
+  },
   "agents": {
     "swarm_agent": {
       "status": "idle",
