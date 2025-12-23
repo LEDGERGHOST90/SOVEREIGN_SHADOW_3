@@ -27,13 +27,16 @@
       "Bash(open \"https://manus.im/app/Ez6ssr2KdjZBWgehhzRnSA\")",
       "WebFetch(domain:manus.im)",
       "Bash(unzip:*)",
-      "Bash(system_profiler:*)"
+      "Bash(system_profiler:*)",
+      "mcp__ds-star__oracle_query",
+      "mcp__ds-star__architect_forge_build",
+      "Skill(funding-arbitrage)"
     ],
     "deny": [],
     "ask": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "ds-star"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

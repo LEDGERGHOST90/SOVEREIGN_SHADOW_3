@@ -240,3 +240,4 @@ ECO_SYSTEM_4/Shadow_3--11.30.25.zip
 # Replit
 .config/replit/.semgrep/
 config/.env.unified
+freqtrade/config.json
