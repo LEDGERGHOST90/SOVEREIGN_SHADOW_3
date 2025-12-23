@@ -1,9 +1,17 @@
 {
   "version": "3.3",
-  "last_updated": "2025-12-21T20:00:00.000000",
+  "last_updated": "2025-12-23T10:35:25.957256",
   "system_location": "/Volumes/LegacySafe/SS_III/",
   "market_analysis": {
     "source": "Manus Research (Dec 18-19, 2025)",
+    "research_dates": {
+      "grayscale_cycle_report": "2024-05-29 (updated with Dec 2024 data)",
+      "fidelity_phase_report": "2025-02-24",
+      "academic_microstructure": "2025-07-03",
+      "manus_retrieval": "2025-12-18",
+      "last_reviewed": "2025-12-21"
+    },
+    "note": "Fidelity projected Q2 2025 top - that has passed. BTC hit $126K ATH, now at ~$88K. We are likely post-peak in extended consolidation.",
     "regime": "range_bound_consolidation",
     "regime_description": "Transitional consolidation phase, ~33% below ATH. Not a bear market but cautious.",
     "key_levels": {
@@ -23,6 +31,30 @@
       "mvrv": 2.6,
       "realized_cap_usd": "1.125T ATH"
     },
+    "cycle_indicators": {
+      "as_of_date": "2024-05-29 (Grayscale)",
+      "mvrv_ratio": {
+        "value": 2.6,
+        "peak_threshold": 4.0,
+        "status": "intermediate"
+      },
+      "btc_free_float_active": {
+        "value": 54,
+        "peak_threshold": 60,
+        "status": "room_to_run"
+      },
+      "mctc_ratio": {
+        "value": 6,
+        "peak_threshold": 10,
+        "status": "intermediate"
+      },
+      "fidelity_phase": {
+        "value": "Acceleration",
+        "started": "2024-07-15",
+        "projected_top": "Q2 2025 (PASSED)"
+      },
+      "note": "These metrics are 7+ months old. Need fresh data to assess current cycle position."
+    },
     "academic_findings": {
       "imf_crypto_factor": "Explains 80% of price variation",
       "fed_sensitivity": "1% rate hike = 0.15 std dev crypto decline",
@@ -36,18 +68,33 @@
       "Leverage-driven flash crash risk"
     ],
     "opportunities_2026": [
-      {"asset": "BTC", "thesis": "Monetary alternative, fiat debasement hedge"},
-      {"asset": "ETH", "thesis": "Monetary alternative, ETF flows"},
-      {"asset": "LINK", "thesis": "Asset tokenization infrastructure"},
-      {"asset": "SUI", "thesis": "Next-gen infrastructure"},
-      {"asset": "HYPE", "thesis": "Sustainable revenue DeFi (Hyperliquid)"}
+      {
+        "asset": "BTC",
+        "thesis": "Monetary alternative, fiat debasement hedge"
+      },
+      {
+        "asset": "ETH",
+        "thesis": "Monetary alternative, ETF flows"
+      },
+      {
+        "asset": "LINK",
+        "thesis": "Asset tokenization infrastructure"
+      },
+      {
+        "asset": "SUI",
+        "thesis": "Next-gen infrastructure"
+      },
+      {
+        "asset": "HYPE",
+        "thesis": "Sustainable revenue DeFi (Hyperliquid)"
+      }
     ],
     "regime_strategy": "Favor mean-reversion over trend-following. Smaller positions. Tighter stops. Wait for breakout confirmation above $101.5K or breakdown below $81.3K.",
     "updated": "2025-12-21"
   },
   "portfolio": {
     "net_worth": 4972.59,
-    "snapshot_time": "2025-12-18",
+    "snapshot_time": "2025-12-23 10:35",
     "ledger": {
       "total": 4900.59,
       "AAVE_wstETH": 2805.32,
@@ -59,7 +106,7 @@
     "exchanges": {
       "kraken": 0.0037,
       "binance_us": 73.16006075,
-      "coinbase": 113.00029866796433,
+      "coinbase": 556.16,
       "okx": 0.0866996986677442
     },
     "aave": {
@@ -75,6 +122,34 @@
     "sol": "RovUJaZwiZ1X36sEW7TBmhie5unzPmxtMg1ATwFtGVk"
   },
   "credentials_location": "ECO_SYSTEM_4/.env",
+  "local_llm": {
+    "enabled": true,
+    "platform": "LM Studio",
+    "version": "0.3.36",
+    "api_url": "http://localhost:1234/v1",
+    "models_path": "/Volumes/LegacySafe/LMStudio/models/",
+    "integrations": {
+      "js-code-sandbox": true,
+      "rag-v1": true,
+      "mcp-docker": false
+    },
+    "ss3_integration": "/Volumes/LegacySafe/SS_III/core/integrations/local_llm.py",
+    "active_model": {
+      "name": "deepseek/deepseek-r1-0528-qwen3-8b",
+      "format": "MLX",
+      "quantization": "4bit",
+      "size_gb": 4.62,
+      "ram_usage_gb": 4.75,
+      "why": "DeepSeek R1 reasoning distilled into Qwen3 8B - combines Alpha Arena 1st (Qwen) + 2nd place (DeepSeek) trading DNA"
+    },
+    "downloaded_models": [
+      "deepseek/deepseek-r1-0528-qwen3-8b (MLX 4bit) - PRIMARY",
+      "qwen/qwen3-8b",
+      "qwen/qwen3-14b"
+    ],
+    "status": "WORKING - server tested at http://127.0.0.1:1234",
+    "notes": "Zero API cost. JSON parsing fixed for markdown-wrapped responses."
+  },
   "systems": {
     "ECO_SYSTEM_4": {
       "location": "ECO_SYSTEM_4/",
@@ -259,8 +334,14 @@
     "regime_adjustments": {
       "range_bound_consolidation": {
         "position_multiplier": 0.8,
-        "prefer_strategies": ["mean_reversion", "range_trading"],
-        "avoid_strategies": ["trend_following", "breakout"],
+        "prefer_strategies": [
+          "mean_reversion",
+          "range_trading"
+        ],
+        "avoid_strategies": [
+          "trend_following",
+          "breakout"
+        ],
         "notes": "Manus research: Tighter stops, smaller targets, wait for confirmation"
       }
     },
@@ -289,34 +370,34 @@
     "paper_trades": [],
     "active_positions": [
       {
-        "trade_id": "PT-20251219183051",
-        "symbol": "BTC",
-        "action": "BUY",
-        "entry_price": 88075,
-        "position_size_usd": 25.0,
-        "stop_loss": 85432.75,
-        "take_profit": 92478.75,
-        "timestamp": "2025-12-19T18:30:51.166466"
+        "symbol": "FET",
+        "quantity": 916.1,
+        "entry_price": 0.21,
+        "value_usd": 192.66,
+        "stop_loss": 0.195,
+        "tp1": 0.263,
+        "tp2": 0.294,
+        "timestamp": "2025-12-23T10:35:25.957271"
       },
       {
-        "trade_id": "PT-20251219183051",
-        "symbol": "XRP",
-        "action": "BUY",
-        "entry_price": 1.9,
-        "position_size_usd": 25.0,
-        "stop_loss": 1.843,
-        "take_profit": 1.995,
-        "timestamp": "2025-12-19T18:30:51.168606"
+        "symbol": "RENDER",
+        "quantity": 123.8,
+        "entry_price": 1.277,
+        "value_usd": 158.09,
+        "stop_loss": 1.188,
+        "tp1": 1.596,
+        "tp2": 1.788,
+        "timestamp": "2025-12-23T10:35:25.957272"
       },
       {
-        "trade_id": "PT-20251219183051",
-        "symbol": "SOL",
-        "action": "BUY",
-        "entry_price": 125.55,
-        "position_size_usd": 25.0,
-        "stop_loss": 121.7835,
-        "take_profit": 131.8275,
-        "timestamp": "2025-12-19T18:30:51.170225"
+        "symbol": "SUI",
+        "quantity": 90.7,
+        "entry_price": 1.437,
+        "value_usd": 130.34,
+        "stop_loss": 1.336,
+        "tp1": 1.796,
+        "tp2": 2.012,
+        "timestamp": "2025-12-23T10:35:25.957273"
       }
     ],
     "signals_generated": 0,

@@ -1,0 +1,87 @@
+{
+  "framework_version": "1.0.0",
+  "last_updated": "2025-12-18T20:00:00Z",
+  "cord_administrator": {
+    "human": "LedgerGhost90",
+    "ai_colonel": "chatgpt",
+    "authority": "ultimate"
+  },
+  "ai_agents": {
+    "chatgpt": {
+      "role": "Colonel / Core Commander",
+      "capabilities": ["strategy", "flip_logic", "governance", "sanity_check"],
+      "status": "active",
+      "last_active": null,
+      "pending_approvals": 0
+    },
+    "claude_code": {
+      "role": "Code Engineer",
+      "capabilities": ["code_editing", "git_operations", "terminal", "file_management"],
+      "status": "active",
+      "last_active": "2025-12-18T20:00:00Z",
+      "current_task": "creating_collaboration_framework"
+    },
+    "claude_desktop": {
+      "role": "MCP Integration",
+      "capabilities": ["mcp_tools", "local_files", "integrations"],
+      "status": "idle",
+      "last_active": null
+    },
+    "claude_mobile": {
+      "role": "Quick Queries",
+      "capabilities": ["quick_answers", "notifications", "mobile_access"],
+      "status": "idle",
+      "last_active": null
+    },
+    "cursor": {
+      "role": "IDE Code Editor",
+      "capabilities": ["code_editing", "autocomplete", "refactoring"],
+      "status": "idle",
+      "last_active": null
+    },
+    "grok": {
+      "role": "Whisperer / Pattern AI",
+      "capabilities": ["pattern_discovery", "data_digestion", "advisory"],
+      "status": "idle",
+      "last_active": null
+    },
+    "gemini": {
+      "role": "Research Assistant",
+      "capabilities": ["research", "analysis", "multimodal"],
+      "status": "idle",
+      "last_active": null
+    },
+    "manus": {
+      "role": "Logistics Master / Systems Engineer",
+      "capabilities": ["research", "data_sync", "analysis", "scheduling", "web_browsing"],
+      "status": "active",
+      "last_active": "2025-12-18T20:00:00Z",
+      "current_task": "crypto_analysis",
+      "scheduled_tasks": [
+        {
+          "name": "opportunity_scan",
+          "cron": "0 */4 * * *",
+          "next_run": "2025-12-19T00:00:00Z"
+        },
+        {
+          "name": "daily_summary",
+          "cron": "0 0 * * *",
+          "next_run": "2025-12-19T00:00:00Z"
+        }
+      ]
+    }
+  },
+  "shared_resources": {
+    "repository": "github.com/LedgerGhost90/sovereign-shadow-iii",
+    "branch": "main",
+    "sync_status": "synced",
+    "last_commit": null
+  },
+  "pending_proposals": [],
+  "active_requests": [],
+  "system_health": {
+    "overall": "healthy",
+    "last_check": "2025-12-18T20:00:00Z",
+    "issues": []
+  }
+}

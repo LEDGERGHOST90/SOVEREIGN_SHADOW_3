@@ -1,0 +1,238 @@
+{
+  "deployed_at": "2025-12-23T10:32:07.156295",
+  "mode": "paper",
+  "total_capital": 750,
+  "deployments": [
+    {
+      "symbol": "FET",
+      "capital": 300,
+      "avg_entry": 0.20527605650203914,
+      "total_qty": 1461.446625154843,
+      "entry_tiers": [
+        {
+          "tier": 1,
+          "price": 0.20307725999999998,
+          "capital": 90.0,
+          "quantity": 443.1810829041125,
+          "weight": 30.0
+        },
+        {
+          "tier": 2,
+          "price": 0.20429116736662586,
+          "capital": 75.0,
+          "quantity": 367.12306736885586,
+          "weight": 25.0
+        },
+        {
+          "tier": 3,
+          "price": 0.20586608679032384,
+          "capital": 60.0,
+          "quantity": 291.4515981503571,
+          "weight": 20.0
+        },
+        {
+          "tier": 4,
+          "price": 0.20761386589329917,
+          "capital": 45.0,
+          "quantity": 216.74852884405732,
+          "weight": 15.0
+        },
+        {
+          "tier": 5,
+          "price": 0.20948430149283337,
+          "capital": 24.0,
+          "quantity": 114.56705743089326,
+          "weight": 8.0
+        },
+        {
+          "tier": 6,
+          "price": 0.21145158,
+          "capital": 6.0,
+          "quantity": 28.375290456566937,
+          "weight": 2.0
+        }
+      ],
+      "exit_tiers": [
+        {
+          "level": "TP1",
+          "price": 0.25659507062754894,
+          "qty_pct": 50,
+          "qty": 730.7233125774216
+        },
+        {
+          "level": "TP2",
+          "price": 0.2873864791028548,
+          "qty_pct": 30,
+          "qty": 438.4339875464529
+        },
+        {
+          "level": "TP3",
+          "price": 0.32844169040326265,
+          "qty_pct": 20,
+          "qty": 292.28932503096866
+        },
+        {
+          "level": "SL",
+          "price": 0.1909067325468964,
+          "qty_pct": 100,
+          "qty": 1461.446625154843
+        }
+      ],
+      "projected_profit": 109.5
+    },
+    {
+      "symbol": "RENDER",
+      "capital": 250,
+      "avg_entry": 1.2452382605756158,
+      "total_qty": 200.76479169892886,
+      "entry_tiers": [
+        {
+          "tier": 1,
+          "price": 1.2319,
+          "capital": 75.0,
+          "quantity": 60.8815650620992,
+          "weight": 30.0
+        },
+        {
+          "tier": 2,
+          "price": 1.2392637613829653,
+          "capital": 62.5,
+          "quantity": 50.43317003819483,
+          "weight": 25.0
+        },
+        {
+          "tier": 3,
+          "price": 1.248817481174406,
+          "capital": 50.0,
+          "quantity": 40.0378764340961,
+          "weight": 20.0
+        },
+        {
+          "tier": 4,
+          "price": 1.2594197961601177,
+          "capital": 37.5,
+          "quantity": 29.77561581478619,
+          "weight": 15.0
+        },
+        {
+          "tier": 5,
+          "price": 1.270766165591467,
+          "capital": 20.0,
+          "quantity": 15.738536751717161,
+          "weight": 8.0
+        },
+        {
+          "tier": 6,
+          "price": 1.2827,
+          "capital": 5.0,
+          "quantity": 3.8980275980353944,
+          "weight": 2.0
+        }
+      ],
+      "exit_tiers": [
+        {
+          "level": "TP1",
+          "price": 1.5565478257195198,
+          "qty_pct": 50,
+          "qty": 100.38239584946443
+        },
+        {
+          "level": "TP2",
+          "price": 1.743333564805862,
+          "qty_pct": 30,
+          "qty": 60.229437509678654
+        },
+        {
+          "level": "TP3",
+          "price": 1.9923812169209854,
+          "qty_pct": 20,
+          "qty": 40.152958339785776
+        },
+        {
+          "level": "SL",
+          "price": 1.1580715823353227,
+          "qty_pct": 100,
+          "qty": 200.76479169892886
+        }
+      ],
+      "projected_profit": 91.25
+    },
+    {
+      "symbol": "SUI",
+      "capital": 200,
+      "avg_entry": 1.402118671356796,
+      "total_qty": 142.6412785777005,
+      "entry_tiers": [
+        {
+          "tier": 1,
+          "price": 1.3871,
+          "capital": 60.0,
+          "quantity": 43.25571335880614,
+          "weight": 30.0
+        },
+        {
+          "tier": 2,
+          "price": 1.3953914793524729,
+          "capital": 50.0,
+          "quantity": 35.832238292871295,
+          "weight": 25.0
+        },
+        {
+          "tier": 3,
+          "price": 1.406148817385355,
+          "capital": 40.0,
+          "quantity": 28.44649122870044,
+          "weight": 20.0
+        },
+        {
+          "tier": 4,
+          "price": 1.418086857093676,
+          "capital": 30.0,
+          "quantity": 21.155262704771165,
+          "weight": 15.0
+        },
+        {
+          "tier": 5,
+          "price": 1.430862690390392,
+          "capital": 16.0,
+          "quantity": 11.182065272548696,
+          "weight": 8.0
+        },
+        {
+          "tier": 6,
+          "price": 1.4443,
+          "capital": 4.0,
+          "quantity": 2.76950772000277,
+          "weight": 2.0
+        }
+      ],
+      "exit_tiers": [
+        {
+          "level": "TP1",
+          "price": 1.7526483391959948,
+          "qty_pct": 50,
+          "qty": 71.32063928885024
+        },
+        {
+          "level": "TP2",
+          "price": 1.9629661398995142,
+          "qty_pct": 30,
+          "qty": 42.79238357331015
+        },
+        {
+          "level": "TP3",
+          "price": 2.2433898741708735,
+          "qty_pct": 20,
+          "qty": 28.528255715540098
+        },
+        {
+          "level": "SL",
+          "price": 1.3039703643618203,
+          "qty_pct": 100,
+          "qty": 142.6412785777005
+        }
+      ],
+      "projected_profit": 73.0
+    }
+  ]
+}
