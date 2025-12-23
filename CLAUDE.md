@@ -62,6 +62,50 @@ python3 bin/overnight_runner.py --once
 4. **Use feature branches for changes**
 5. **Post updates to Replit webhook**
 6. **When encountering unfamiliar tools/products, search the web before saying "I don't know"**
+7. **EOD Protocol is MANDATORY** (see below)
+
+---
+
+## EOD Protocol (MANDATORY)
+
+When user says **"EOD"** or **"close"**, you MUST:
+
+### 1. Log Daily Session
+Create `/memory/SESSIONS/YYYY-MM-DD_session.md`:
+```markdown
+# Session: YYYY-MM-DD
+
+## Accomplishments
+- [What was done]
+
+## Trades/Positions
+- [Any trades, position changes]
+
+## Key Decisions
+- [Important decisions made]
+
+## Next Steps
+- [What to do next session]
+```
+
+### 2. Update BRAIN.json
+Update these fields with session data:
+- `trading.active_positions`
+- `portfolio` (if changed)
+- `session.pnl_today_usd`
+- `current_goal` (if changed)
+- `agents` status
+
+### 3. Monthly Consolidation (1st of month)
+- Merge daily sessions → `YYYY-MM_monthly_summary.md`
+- Delete individual daily files after consolidation
+- Keep BRAIN.json lean, remove stale data
+
+### 4. Confirm Closure
+Send NTFY notification:
+```bash
+curl -d "EOD Complete: [summary]" ntfy.sh/sovereignshadow_dc4d2fa1
+```
 
 ---
 
