@@ -7,7 +7,19 @@ Bridges:
 - CryptoCompare API → ORACLE (Fear & Greed, DXY)
 - CCXT Pipeline → REGIME (HMM detection)
 - CoinGlass API → FLOW (on-chain signals)
-- All modules → TacticalRiskGate
+- yfinance OHLCV → MOONDEV (verified signals from 450 backtested strategies)
+- All modules → TacticalRiskGate + REFLECT (AI critique)
+
+Active Modules:
+1. SENTINEL - AdvancedRiskManager (circuit breaker, ATR sizing)
+2. ORACLE - MarketFilters (Fear & Greed, DXY correlation)
+3. REGIME - HMMRegimeDetector (Trending/MeanReverting/Volatile)
+4. FLOW - OnChainSignals (exchange flows, whale alerts)
+5. REFLECT - ReflectAgent (self-critique, 11-22% decision improvement)
+6. MOONDEV - Top 3 verified signals from 450 backtested:
+   - MomentumBreakout_AI7: +12.5% return, +23.2% alpha
+   - BandedMACD: +6.9% return, high frequency
+   - VolCliffArbitrage: +6.4% return, 75% win rate
 
 Created: 2025-12-23
 Part of SOVEREIGN_SHADOW_3
@@ -38,6 +50,13 @@ from core.regime.hmm_regime_detector import HMMRegimeDetector
 from core.signals.onchain_signals import OnChainSignals
 from core.agents.reflect_agent import ReflectAgent
 
+# MoonDev verified signals (top 3 from 450 backtested)
+try:
+    from core.signals.moondev_signals import MoonDevSignals
+    MOONDEV_AVAILABLE = True
+except ImportError:
+    MOONDEV_AVAILABLE = False
+
 logger = logging.getLogger(__name__)
 
 
@@ -63,6 +82,8 @@ class RiskState:
     flow_exchange_signals: Dict[str, str]
     atr_values: Dict[str, float]
     kelly_sizes: Dict[str, float]
+    moondev_signals: Dict[str, str]  # Top 3 strategy consensus
+    moondev_confidence: float
     last_update: datetime
 
 
@@ -118,13 +139,25 @@ class RealtimeRiskBridge:
             logger.warning(f"ReflectAgent init failed (API key needed?): {e}")
             self.reflect_agent = None
 
+        # MoonDev verified signals (top 3 from 450 backtested strategies)
+        if MOONDEV_AVAILABLE:
+            try:
+                self.moondev_signals = MoonDevSignals()
+                logger.info("MoonDev signals loaded: MomentumBreakout, BandedMACD, VolCliffArbitrage")
+            except Exception as e:
+                logger.warning(f"MoonDevSignals init failed: {e}")
+                self.moondev_signals = None
+        else:
+            self.moondev_signals = None
+
         # Log active modules
         active = [name for name, mod in [
             ("SENTINEL", self.sentinel),
             ("ORACLE", self.oracle),
             ("REGIME", self.regime_detector),
             ("FLOW", self.flow_signals),
-            ("REFLECT", self.reflect_agent)
+            ("REFLECT", self.reflect_agent),
+            ("MOONDEV", self.moondev_signals)
         ] if mod is not None]
         logger.info(f"Active modules: {', '.join(active) if active else 'None'}")
 
@@ -139,6 +172,8 @@ class RealtimeRiskBridge:
             flow_exchange_signals={},
             atr_values={},
             kelly_sizes={},
+            moondev_signals={},
+            moondev_confidence=0.0,
             last_update=datetime.now()
         )
 
@@ -155,6 +190,7 @@ class RealtimeRiskBridge:
         self.last_oracle_update = datetime.min
         self.last_regime_update = datetime.min
         self.last_flow_update = datetime.min
+        self.last_moondev_update = datetime.min
 
         logger.info("RealtimeRiskBridge initialized with all modules")
 
@@ -313,6 +349,70 @@ class RealtimeRiskBridge:
         except Exception as e:
             logger.error(f"FLOW update failed: {e}")
 
+    def update_moondev_signals(self, symbols: List[str] = None, force: bool = False):
+        """
+        Update MoonDev verified signals (top 3 from 450 backtested).
+
+        Strategies:
+        - MomentumBreakout_AI7: +12.5% return, 55.6% WR
+        - BandedMACD: +6.9% return, 38.0% WR
+        - VolCliffArbitrage: +6.4% return, 75.0% WR
+        """
+        now = datetime.now()
+
+        # Update every 30 minutes unless forced (these are hourly timeframe signals)
+        if not force and (now - self.last_moondev_update).seconds < 1800:
+            return
+
+        self.last_moondev_update = now
+        symbols = symbols or ["BTC", "ETH"]
+
+        if not self.moondev_signals:
+            return
+
+        try:
+            import yfinance as yf
+            import pandas as pd
+
+            for symbol in symbols:
+                ticker = f"{symbol}-USD"
+
+                # Download recent data for signal calculation
+                data = yf.download(ticker, period='3mo', interval='1h', progress=False)
+
+                if data.empty:
+                    logger.warning(f"MOONDEV: No data for {symbol}")
+                    continue
+
+                # Flatten MultiIndex if present
+                if isinstance(data.columns, pd.MultiIndex):
+                    data.columns = data.columns.get_level_values(0)
+
+                data = data.rename(columns={
+                    'Open': 'open', 'High': 'high', 'Low': 'low',
+                    'Close': 'close', 'Volume': 'volume'
+                })
+
+                # Get consensus from top 3 strategies
+                result = self.moondev_signals.get_consensus(data)
+
+                self.risk_state.moondev_signals[symbol] = result['action']
+                self.risk_state.moondev_confidence = result['confidence']
+
+                if result['action'] != 'WAIT':
+                    logger.info(f"MOONDEV {symbol}: {result['action']} (conf: {result['confidence']:.0%})")
+
+                    # Fire alert for high-confidence signals
+                    if result['confidence'] >= 0.7:
+                        self._fire_alert(
+                            title=f"MOONDEV SIGNAL: {symbol}",
+                            message=f"{result['action']} signal at {result['confidence']:.0%} confidence",
+                            priority="high" if result['confidence'] >= 0.8 else "default"
+                        )
+
+        except Exception as e:
+            logger.error(f"MOONDEV update failed: {e}")
+
     # =========================================================================
     # TRADE VALIDATION
     # =========================================================================
@@ -394,7 +494,25 @@ class RealtimeRiskBridge:
             except Exception as e:
                 logger.debug(f"REFLECT critique failed: {e}")
 
-        # 8. Pass through TacticalRiskGate
+        # 8. Check MOONDEV verified signals (top 3 from 450 backtested)
+        moondev_signal = self.risk_state.moondev_signals.get(request.asset, "WAIT")
+        moondev_conf = self.risk_state.moondev_confidence
+
+        if moondev_signal != "WAIT" and moondev_conf >= 0.6:
+            # Signal alignment check
+            if moondev_signal == "LONG" and request.side == "short":
+                warnings.append(f"MOONDEV: {moondev_signal} signal ({moondev_conf:.0%}) conflicts with short")
+                size_adj *= 0.7
+            elif moondev_signal == "SHORT" and request.side == "long":
+                warnings.append(f"MOONDEV: {moondev_signal} signal ({moondev_conf:.0%}) conflicts with long")
+                size_adj *= 0.7
+            elif moondev_signal == request.side.upper():
+                # Signal confirms direction - boost confidence
+                if moondev_conf >= 0.8:
+                    size_adj *= 1.15  # 15% size boost for high-confidence alignment
+                    logger.info(f"MOONDEV confirms {request.side} with {moondev_conf:.0%} confidence")
+
+        # 9. Pass through TacticalRiskGate
         if not self.tactical_gate:
             return ValidationResult(
                 approved=True,
@@ -487,16 +605,28 @@ class RealtimeRiskBridge:
 
     def get_full_status(self) -> Dict:
         """Get comprehensive system status"""
+        tactical_stats = None
+        if self.tactical_gate:
+            try:
+                tactical_stats = self.tactical_gate.get_session_stats()
+            except Exception:
+                tactical_stats = "unavailable"
+
         return {
             "risk_state": self.get_risk_state(),
             "current_prices": self.current_prices.copy(),
-            "tactical_session": self.tactical_gate.get_session_stats(),
+            "tactical_session": tactical_stats,
             "modules": {
-                "sentinel": "active",
+                "sentinel": "active" if self.sentinel else "disabled",
                 "oracle": f"fng={self.risk_state.oracle_fng_signal}, dxy={self.risk_state.oracle_dxy_signal}",
                 "regime": self.risk_state.current_regime,
                 "flow": self.risk_state.flow_exchange_signals,
-                "reflect": "active"
+                "reflect": "active" if self.reflect_agent else "disabled",
+                "moondev": {
+                    "signals": self.risk_state.moondev_signals,
+                    "confidence": self.risk_state.moondev_confidence,
+                    "strategies": ["MomentumBreakout_AI7", "BandedMACD", "VolCliffArbitrage"]
+                }
             },
             "last_update": self.risk_state.last_update.isoformat()
         }
@@ -596,10 +726,11 @@ async def run_realtime_bridge(
 
     try:
         while True:
-            # Update ORACLE, REGIME, FLOW periodically
+            # Update ORACLE, REGIME, FLOW, MOONDEV periodically
             bridge.update_oracle_filters()
             bridge.update_regime_detection()
             bridge.update_flow_signals(assets=["BTC", "ETH"])
+            bridge.update_moondev_signals(symbols=["BTC", "ETH"])
 
             # Log status
             status = bridge.get_full_status()

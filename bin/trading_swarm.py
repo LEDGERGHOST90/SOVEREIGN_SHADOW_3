@@ -21,6 +21,15 @@ PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "agents"))
 sys.path.insert(0, str(PROJECT_ROOT / "meme_machine"))
+sys.path.insert(0, str(PROJECT_ROOT / "core"))
+
+# Import verified Moon Dev signal generators
+try:
+    from signals.moondev_signals import MoonDevSignals
+    MOONDEV_AVAILABLE = True
+except ImportError:
+    MOONDEV_AVAILABLE = False
+    print("[WARN] MoonDev signals not available")
 
 class TradingSwarm:
     """
@@ -42,6 +51,9 @@ class TradingSwarm:
         self.validated = []
         self.approved = []
         self.rejected = []
+
+        # Initialize MoonDev verified signals (top 3 from 450 backtested)
+        self.moondev_signals = MoonDevSignals() if MOONDEV_AVAILABLE else None
 
         print("=" * 60)
         print("TRADING SWARM - December Aggressive Mode")
@@ -159,6 +171,43 @@ class TradingSwarm:
             "message": "Clear to trade" if allowed else "LOCKED - 3 strike limit reached"
         }
 
+    def run_moondev_signals(self, symbol: str = "BTC-USD") -> Optional[Dict]:
+        """Run verified MoonDev strategies for consensus signal"""
+        if not self.moondev_signals:
+            print("[MOONDEV] Signals not available")
+            return None
+
+        print(f"\n[MOONDEV] Running verified signals on {symbol}...")
+
+        try:
+            import yfinance as yf
+            import pandas as pd
+
+            # Get recent data
+            data = yf.download(symbol, period='3mo', interval='1h', progress=False)
+            if data.empty:
+                print(f"[MOONDEV] No data for {symbol}")
+                return None
+
+            # Flatten MultiIndex if present
+            if isinstance(data.columns, pd.MultiIndex):
+                data.columns = data.columns.get_level_values(0)
+
+            data = data.rename(columns={
+                'Open': 'open', 'High': 'high', 'Low': 'low',
+                'Close': 'close', 'Volume': 'volume'
+            })
+
+            # Get consensus
+            result = self.moondev_signals.get_consensus(data)
+            self.moondev_signals.print_dashboard(data, symbol)
+
+            return result
+
+        except Exception as e:
+            print(f"[MOONDEV] Error: {e}")
+            return None
+
     def full_scan_cycle(self):
         """Run complete scan → validate → present cycle"""
         print("\n" + "=" * 60)
@@ -173,7 +222,19 @@ class TradingSwarm:
             print("SWARM HALTED - Psychology lock active")
             return
 
-        # Step 2: Run all scanners
+        # Step 1.5: MoonDev Verified Signals (TOP 3 from 450 backtested)
+        print("\n" + "-" * 60)
+        print("MOONDEV VERIFIED SIGNALS (Top 3 from 450 backtested)")
+        print("-" * 60)
+        moondev_btc = self.run_moondev_signals("BTC-USD")
+        moondev_eth = self.run_moondev_signals("ETH-USD")
+
+        if moondev_btc and moondev_btc['action'] != 'WAIT':
+            print(f"\n*** BTC SIGNAL: {moondev_btc['action']} (confidence: {moondev_btc['confidence']:.0%}) ***")
+        if moondev_eth and moondev_eth['action'] != 'WAIT':
+            print(f"\n*** ETH SIGNAL: {moondev_eth['action']} (confidence: {moondev_eth['confidence']:.0%}) ***")
+
+        # Step 2: Run all scanners (meme_machine for alts)
         scan_types = ["breakout", "kings", "trending"]
         all_candidates = []
 
