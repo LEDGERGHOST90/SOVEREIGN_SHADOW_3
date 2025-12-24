@@ -1,0 +1,37 @@
+{
+  "strategy_name": "DynamicCrossfire",
+  "params": {
+    "trailing": {
+      "trailing_stop": true,
+      "trailing_stop_positive": 0.02,
+      "trailing_stop_positive_offset": 0.04,
+      "trailing_only_offset_is_reached": true
+    },
+    "max_open_trades": {
+      "max_open_trades": 3
+    },
+    "buy": {
+      "adx_period": 18,
+      "adx_threshold": 37,
+      "ema_fast_period": 99,
+      "ema_slow_period": 212,
+      "swing_period": 27,
+      "volume_mult": 1.4
+    },
+    "sell": {
+      "rsi_overbought": 72,
+      "rsi_period": 17
+    },
+    "roi": {
+      "0": 0.136,
+      "41": 0.086,
+      "88": 0.015,
+      "317": 0
+    },
+    "stoploss": {
+      "stoploss": -0.06
+    }
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2025-12-24 00:49:23.397969+00:00"
+}

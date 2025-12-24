@@ -7,9 +7,11 @@ Strategy: EMA Golden Cross + ADX Trend Strength
 - Entry: EMA50 crosses above EMA200 + ADX > 25 and rising
 - Exit: RSI > 70 or EMA death cross
 - Risk: 1% per trade with swing low stop-loss
+
+Hyperopt-enabled: Run with freqtrade hyperopt to auto-tune parameters
 """
 import numpy as np
-from freqtrade.strategy import IStrategy, merge_informative_pair
+from freqtrade.strategy import IStrategy, IntParameter, DecimalParameter, CategoricalParameter
 from freqtrade.persistence import Trade
 from pandas import DataFrame
 import talib.abstract as ta
@@ -21,6 +23,12 @@ class DynamicCrossfire(IStrategy):
     """
     Moon Dev's DynamicCrossfire - EMA crossover with ADX confirmation
     Optimized for trending markets (INJ, LINK, SOL)
+
+    Hyperopt Spaces:
+    - buy: EMA periods, ADX threshold, volume multiplier
+    - sell: RSI overbought level
+    - roi: Minimal ROI targets
+    - stoploss: Stop loss percentage
     """
 
     # Strategy interface version
@@ -32,16 +40,16 @@ class DynamicCrossfire(IStrategy):
     # Can this strategy go short?
     can_short = False
 
-    # Minimal ROI designed for the strategy
+    # Minimal ROI designed for the strategy (hyperopt will override)
     minimal_roi = {
-        "0": 0.15,    # 15% profit target
-        "60": 0.10,   # 10% after 1 hour
-        "120": 0.05,  # 5% after 2 hours
-        "240": 0.02   # 2% after 4 hours
+        "0": 0.15,
+        "60": 0.10,
+        "120": 0.05,
+        "240": 0.02
     }
 
-    # Optimal stoploss
-    stoploss = -0.05  # 5% stop loss
+    # Optimal stoploss (hyperopt will override)
+    stoploss = -0.05
 
     # Trailing stop
     trailing_stop = True
@@ -52,17 +60,35 @@ class DynamicCrossfire(IStrategy):
     # Run "populate_indicators()" only for new candle
     process_only_new_candles = True
 
-    # Strategy parameters
-    ema_fast_period = 50
-    ema_slow_period = 200
-    adx_period = 14
-    adx_threshold = 25
-    rsi_period = 14
-    rsi_overbought = 70
-    swing_period = 20
+    # ========== HYPEROPT PARAMETER SPACES ==========
+
+    # EMA Fast Period: 20-100 (default 50)
+    ema_fast_period = IntParameter(20, 100, default=50, space='buy', optimize=True)
+
+    # EMA Slow Period: 100-300 (default 200)
+    ema_slow_period = IntParameter(100, 300, default=200, space='buy', optimize=True)
+
+    # ADX Period: 7-21 (default 14)
+    adx_period = IntParameter(7, 21, default=14, space='buy', optimize=True)
+
+    # ADX Threshold: 15-40 (default 25) - trend strength requirement
+    adx_threshold = IntParameter(15, 40, default=25, space='buy', optimize=True)
+
+    # RSI Period: 7-21 (default 14)
+    rsi_period = IntParameter(7, 21, default=14, space='sell', optimize=True)
+
+    # RSI Overbought: 60-85 (default 70) - exit trigger
+    rsi_overbought = IntParameter(60, 85, default=70, space='sell', optimize=True)
+
+    # Volume Multiplier: 0.5-2.0 (default 1.0) - volume confirmation
+    volume_mult = DecimalParameter(0.5, 2.0, default=1.0, decimals=1, space='buy', optimize=True)
+
+    # Swing Period: 10-30 (default 20) - for dynamic stop-loss
+    swing_period = IntParameter(10, 30, default=20, space='buy', optimize=True)
 
     # Number of candles the strategy requires before producing valid signals
-    startup_candle_count = 200
+    # Must be >= largest EMA period (300)
+    startup_candle_count = 300
 
     # Position sizing (1% risk)
     position_adjustment_enable = False
@@ -74,54 +100,67 @@ class DynamicCrossfire(IStrategy):
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Adds several indicators to the given DataFrame.
+        Uses hyperopt parameter values (.value) for optimization.
         """
-        # EMAs
-        dataframe['ema_fast'] = ta.EMA(dataframe, timeperiod=self.ema_fast_period)
-        dataframe['ema_slow'] = ta.EMA(dataframe, timeperiod=self.ema_slow_period)
+        # Calculate EMAs for all possible periods in hyperopt range
+        # This allows hyperopt to test different combinations without recalculating
+        for period in range(20, 301, 10):
+            dataframe[f'ema_{period}'] = ta.EMA(dataframe, timeperiod=period)
 
-        # ADX
-        dataframe['adx'] = ta.ADX(dataframe, timeperiod=self.adx_period)
+        # ADX for all possible periods
+        for period in range(7, 22):
+            dataframe[f'adx_{period}'] = ta.ADX(dataframe, timeperiod=period)
 
-        # RSI
-        dataframe['rsi'] = ta.RSI(dataframe, timeperiod=self.rsi_period)
+        # RSI for all possible periods
+        for period in range(7, 22):
+            dataframe[f'rsi_{period}'] = ta.RSI(dataframe, timeperiod=period)
 
-        # Swing Low for stop-loss
-        dataframe['swing_low'] = dataframe['low'].rolling(window=self.swing_period).min()
+        # Swing Low for all possible periods
+        for period in range(10, 31):
+            dataframe[f'swing_low_{period}'] = dataframe['low'].rolling(window=period).min()
 
-        # EMA Cross signals
-        dataframe['ema_cross_up'] = (
-            (dataframe['ema_fast'] > dataframe['ema_slow']) &
-            (dataframe['ema_fast'].shift(1) <= dataframe['ema_slow'].shift(1))
-        )
-        dataframe['ema_cross_down'] = (
-            (dataframe['ema_fast'] < dataframe['ema_slow']) &
-            (dataframe['ema_fast'].shift(1) >= dataframe['ema_slow'].shift(1))
-        )
-
-        # ADX rising
-        dataframe['adx_rising'] = (
-            (dataframe['adx'] > dataframe['adx'].shift(1)) &
-            (dataframe['adx'] > self.adx_threshold)
-        )
+        # Volume moving average for confirmation
+        dataframe['volume_mean'] = dataframe['volume'].rolling(20).mean()
 
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Entry conditions:
-        - EMA50 crosses above EMA200 (Golden Cross)
-        - ADX > 25 and rising (strong trend)
+        - EMA Fast crosses above EMA Slow (Golden Cross)
+        - ADX > threshold and rising (strong trend)
+        - Volume above average * multiplier
+
+        Uses hyperopt parameter values for optimization.
         """
+        # Get hyperopt parameter values (round EMA to nearest 10 for pre-calculated)
+        ema_fast = min(300, max(20, (self.ema_fast_period.value // 10) * 10))
+        ema_slow = min(300, max(100, (self.ema_slow_period.value // 10) * 10))
+        adx_p = self.adx_period.value
+        adx_thresh = self.adx_threshold.value
+        vol_mult = self.volume_mult.value
+
+        # Get the pre-calculated indicators
+        ema_fast_col = f'ema_{ema_fast}'
+        ema_slow_col = f'ema_{ema_slow}'
+        adx_col = f'adx_{adx_p}'
+
         conditions = []
 
-        # Golden Cross
-        conditions.append(dataframe['ema_cross_up'])
+        # Golden Cross: EMA fast crosses above EMA slow
+        conditions.append(
+            (dataframe[ema_fast_col] > dataframe[ema_slow_col]) &
+            (dataframe[ema_fast_col].shift(1) <= dataframe[ema_slow_col].shift(1))
+        )
 
-        # ADX confirmation
-        conditions.append(dataframe['adx_rising'])
+        # ADX confirmation: above threshold and rising
+        conditions.append(
+            (dataframe[adx_col] > adx_thresh) &
+            (dataframe[adx_col] > dataframe[adx_col].shift(1))
+        )
 
-        # Volume confirmation (above average)
-        conditions.append(dataframe['volume'] > dataframe['volume'].rolling(20).mean())
+        # Volume confirmation: above average * multiplier
+        conditions.append(dataframe['volume'] > dataframe['volume_mean'] * vol_mult)
 
         if conditions:
             dataframe.loc[
@@ -134,29 +173,34 @@ class DynamicCrossfire(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Exit conditions:
-        - RSI > 70 (overbought)
+        - RSI > overbought threshold
         - EMA Death Cross
+
+        Uses hyperopt parameter values for optimization.
         """
-        conditions_rsi = []
-        conditions_cross = []
+        # Get hyperopt parameter values
+        ema_fast = min(300, max(20, (self.ema_fast_period.value // 10) * 10))
+        ema_slow = min(300, max(100, (self.ema_slow_period.value // 10) * 10))
+        rsi_p = self.rsi_period.value
+        rsi_ob = self.rsi_overbought.value
+
+        # Get the pre-calculated indicators
+        ema_fast_col = f'ema_{ema_fast}'
+        ema_slow_col = f'ema_{ema_slow}'
+        rsi_col = f'rsi_{rsi_p}'
 
         # RSI overbought exit
-        conditions_rsi.append(dataframe['rsi'] > self.rsi_overbought)
+        dataframe.loc[
+            dataframe[rsi_col] > rsi_ob,
+            'exit_long'
+        ] = 1
 
         # Death Cross exit
-        conditions_cross.append(dataframe['ema_cross_down'])
-
-        if conditions_rsi:
-            dataframe.loc[
-                np.all(conditions_rsi, axis=0),
-                'exit_long'
-            ] = 1
-
-        if conditions_cross:
-            dataframe.loc[
-                np.all(conditions_cross, axis=0),
-                'exit_long'
-            ] = 1
+        dataframe.loc[
+            (dataframe[ema_fast_col] < dataframe[ema_slow_col]) &
+            (dataframe[ema_fast_col].shift(1) >= dataframe[ema_slow_col].shift(1)),
+            'exit_long'
+        ] = 1
 
         return dataframe
 
@@ -165,12 +209,14 @@ class DynamicCrossfire(IStrategy):
                         after_fill: bool, **kwargs) -> Optional[float]:
         """
         Custom stoploss logic - use swing low as dynamic stop
+        Uses hyperopt swing_period parameter.
         """
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
 
         if len(dataframe) > 0:
             last_candle = dataframe.iloc[-1]
-            swing_low = last_candle['swing_low']
+            swing_col = f'swing_low_{self.swing_period.value}'
+            swing_low = last_candle.get(swing_col, 0)
 
             # Calculate stop distance from current price
             if swing_low > 0:
