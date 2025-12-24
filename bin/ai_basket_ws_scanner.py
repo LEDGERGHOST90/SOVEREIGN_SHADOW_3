@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-🔍 AI BASKET SCANNER - WEBSOCKET EDITION
+🔍 AI BASKET SCANNER - WEBSOCKET EDITION + RISK BRIDGE
 Real-time price monitoring via Coinbase WebSocket
 Zero polling, instant alerts, no rate limits
+Integrated with SENTINEL, ORACLE, REGIME, FLOW risk modules
 
 Commander: LedgerGhost90
 Created: 2025-12-23
+Updated: 2025-12-23 - Added RealtimeRiskBridge integration
 """
 
 import asyncio
@@ -18,6 +20,18 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional
 import requests
+
+# Add project root to path
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+# Import Risk Bridge (gracefully handle if not available)
+try:
+    from core.integrations.realtime_risk_bridge import RealtimeRiskBridge, PriceTick
+    RISK_BRIDGE_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️ Risk Bridge not available: {e}")
+    RISK_BRIDGE_AVAILABLE = False
 
 # Crash protection
 MAX_RECONNECT_ATTEMPTS = 100
@@ -113,13 +127,26 @@ def send_alert(title: str, message: str, priority: str = "default"):
 # ============================================================================
 
 class WebSocketMonitor:
-    def __init__(self):
+    def __init__(self, use_risk_bridge: bool = True):
         self.prices: Dict[str, float] = {}
         self.alerts_sent = {sym: {'tp1': False, 'tp2': False, 'tp3': False, 'sl': False} for sym in POSITIONS}
         self.last_log_time = 0
         self.last_display_time = 0
         self.message_count = 0
         self.start_time = datetime.now()
+
+        # Initialize Risk Bridge if available
+        self.risk_bridge = None
+        if use_risk_bridge and RISK_BRIDGE_AVAILABLE:
+            try:
+                self.risk_bridge = RealtimeRiskBridge()
+                print("🛡️ Risk Bridge ACTIVE - SENTINEL, ORACLE, REGIME, FLOW integrated")
+            except Exception as e:
+                print(f"⚠️ Risk Bridge init failed: {e}")
+
+        # Track risk state updates
+        self.last_oracle_update = 0
+        self.last_regime_update = 0
 
     def check_levels(self, symbol: str, price: float) -> Optional[str]:
         """Check if price hit any levels"""
@@ -186,6 +213,14 @@ class WebSocketMonitor:
         pnl_arrow = "📈" if totals['pnl'] >= 0 else "📉"
         print(f"\n  {pnl_arrow} TOTAL: ${totals['value']:.2f} | P&L: ${totals['pnl']:+.2f} ({totals['pnl_pct']:+.2f}%)")
 
+        # Display Risk Bridge status if active
+        if self.risk_bridge:
+            state = self.risk_bridge.risk_state
+            breakers = [k for k, v in state.sentinel_breakers.items() if v]
+            print(f"\n  🛡️ RISK: F&G={state.oracle_fng_signal} | Regime={state.current_regime}")
+            if breakers:
+                print(f"  ⚠️ BREAKERS: {', '.join(breakers)}")
+
     def log_to_file(self):
         """Log to JSONL file (every 30 seconds)"""
         now = time.time()
@@ -224,6 +259,34 @@ class WebSocketMonitor:
                         old_price = self.prices.get(symbol)
                         self.prices[symbol] = price
                         self.message_count += 1
+
+                        # Feed Risk Bridge with real-time data
+                        if self.risk_bridge:
+                            try:
+                                tick = PriceTick(
+                                    symbol=symbol,
+                                    price=price,
+                                    high_24h=float(message.get('high_24h', price)),
+                                    low_24h=float(message.get('low_24h', price)),
+                                    volume_24h=float(message.get('volume_24h', 0)),
+                                    timestamp=datetime.now(),
+                                    source='coinbase_ws'
+                                )
+                                self.risk_bridge.ingest_price_tick(tick)
+
+                                # Update ORACLE every 5 minutes
+                                now = time.time()
+                                if now - self.last_oracle_update > 300:
+                                    self.risk_bridge.update_oracle_filters()
+                                    self.last_oracle_update = now
+
+                                # Update REGIME every 15 minutes
+                                if now - self.last_regime_update > 900:
+                                    self.risk_bridge.update_regime_detection(symbol="BTC")
+                                    self.last_regime_update = now
+
+                            except Exception as e:
+                                pass  # Don't let bridge errors stop price monitoring
 
                         # Check for alerts on every price update
                         alert = self.check_levels(symbol, price)
@@ -302,9 +365,11 @@ def main():
     print("""
     ╔═══════════════════════════════════════════════════════════╗
     ║     🔍 AI BASKET SCANNER - WEBSOCKET EDITION              ║
-    ║     Real-Time Price Monitoring                            ║
+    ║     Real-Time Price Monitoring + Risk Bridge              ║
     ║     FET | RENDER | SUI                                    ║
     ║     ~100ms latency | Zero rate limits                     ║
+    ║                                                           ║
+    ║     🛡️ SENTINEL | ORACLE | REGIME | FLOW | REFLECT       ║
     ╚═══════════════════════════════════════════════════════════╝
     """)
 

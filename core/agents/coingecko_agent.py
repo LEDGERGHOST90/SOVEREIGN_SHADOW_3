@@ -82,7 +82,7 @@ Usage:
    python src/agents/coingecko_agent.py
 
 3. Or import the classes:
-   from agents.coingecko_agent import MultiAgentSystem
+   from core.agents_highlevel.coingecko_agent import MultiAgentSystem
 
 Configuration:
 -------------

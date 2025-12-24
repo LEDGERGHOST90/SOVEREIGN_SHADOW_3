@@ -6,7 +6,7 @@ Test strategy validation and risk enforcement
 
 import pytest
 from unittest.mock import Mock, patch
-from modules.shade_agent import ShadeAgent
+from core.modules.shade_agent import ShadeAgent
 
 
 class TestShadeAgent:

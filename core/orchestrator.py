@@ -149,7 +149,7 @@ class AgentOrchestrator:
 
         # RiskAgent - Risk assessment
         try:
-            from agents.risk_agent import RiskAgent
+            from core.agents_highlevel.risk_agent import RiskAgent
             self.agents['risk'] = {
                 'class': RiskAgent,
                 'instance': None,
@@ -161,7 +161,7 @@ class AgentOrchestrator:
 
         # PortfolioAgent - Rebalancing
         try:
-            from agents.portfolio_agent import PortfolioAgent
+            from core.agents_highlevel.portfolio_agent import PortfolioAgent
             self.agents['portfolio'] = {
                 'class': PortfolioAgent,
                 'instance': None,

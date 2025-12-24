@@ -1,4 +1,0 @@
-ccxt
-pandas
-numpy
-python-dotenv

@@ -6,7 +6,7 @@ Test MENTOR//NODE NetworkChuck-style education curriculum
 
 import pytest
 from unittest.mock import Mock, patch
-from modules.mentor_system import MentorSystem, LessonProgress
+from core.modules.mentor_system import MentorSystem, LessonProgress
 
 
 class TestMentorSystem:

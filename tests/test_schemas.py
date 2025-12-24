@@ -6,7 +6,7 @@ Test Pydantic schema validation
 
 import pytest
 from pydantic import ValidationError
-from schemas.trade_schemas import (
+from core.schemas.trade_schemas import (
     TradeValidationRequest,
     TradeExecutionRequest,
     TradeCloseRequest,

@@ -118,8 +118,8 @@ class OvernightRunner:
 
         # Paper Trader
         try:
-            from agents.execution.paper_trader import PaperTrader
-            from agents.base_agent import Signal
+            from core.agents_highlevel.execution.paper_trader import PaperTrader
+            from core.agents_highlevel.base_agent import Signal
             self.paper_trader = PaperTrader()
             self.Signal = Signal
             logger.info("✓ Paper Trader")

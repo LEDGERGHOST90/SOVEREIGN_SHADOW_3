@@ -6,13 +6,13 @@ Test exchange integrations with mocking
 
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from exchanges.base_connector import BaseExchangeConnector, OrderSide, OrderType
-from exchanges.coinbase_connector import CoinbaseConnector
-from exchanges.okx_connector import OKXConnector
-from exchanges.kraken_connector import KrakenConnector
-from exchanges.binance_us_connector import BinanceUSConnector
-from exchanges.ledger_connector import LedgerConnector
-from exchanges.aave_connector import AAVEConnector
+from core.exchanges.base_connector import BaseExchangeConnector, OrderSide, OrderType
+from core.exchanges.coinbase_connector import CoinbaseConnector
+from core.exchanges.okx_connector import OKXConnector
+from core.exchanges.kraken_connector import KrakenConnector
+from core.exchanges.binance_us_connector import BinanceUSConnector
+from core.exchanges.ledger_connector import LedgerConnector
+from core.exchanges.aave_connector import AAVEConnector
 
 
 class TestBaseConnector:

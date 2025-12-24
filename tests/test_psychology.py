@@ -7,8 +7,8 @@ Test MIND//LOCK emotion tracking and 3-strike rule
 import pytest
 from datetime import datetime, timedelta
 from unittest.mock import Mock, patch
-from modules.psychology_tracker import PsychologyTracker
-from schemas.trade_schemas import EmotionType
+from core.modules.psychology_tracker import PsychologyTracker
+from core.schemas.trade_schemas import EmotionType
 
 
 class TestPsychologyTracker:

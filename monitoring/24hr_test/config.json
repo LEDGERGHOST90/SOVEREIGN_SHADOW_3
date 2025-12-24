@@ -1,8 +1,0 @@
-{
-  "test_name": "24hr_monitoring_test",
-  "start_time": "2025-10-19T05:42:45-07:00",
-  "end_time": "2025-10-20T05:42:45-07:00",
-  "mode": "monitoring",
-  "exchanges": ["binance_us", "kraken", "okx"],
-  "status": "running"
-}

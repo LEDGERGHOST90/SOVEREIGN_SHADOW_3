@@ -1,5 +1,0 @@
-{
-  "name": "StrategyScout AI",
-  "description": "An AI-powered dashboard to analyze YouTube trading content, extract strategies using Gemini, and visualize potential performance.",
-  "requestFramePermissions": []
-}

@@ -8,7 +8,7 @@ import pytest
 import json
 from datetime import datetime
 from unittest.mock import Mock, patch
-from modules.trade_journal import TradeJournal
+from core.modules.trade_journal import TradeJournal
 
 
 class TestTradeJournal:

@@ -17,8 +17,8 @@ from pathlib import Path
 # Add project to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from agents.portfolio_rebalancer import PortfolioRebalancer
-from agents.shade_agent import ShadeAgent
+from core.agents_highlevel.portfolio_rebalancer import PortfolioRebalancer
+from core.agents_highlevel.shade_agent import ShadeAgent
 
 
 def test_portfolio_rebalancing():
@@ -133,7 +133,7 @@ def test_process_scoring():
     print("TEST 4: PROCESS SCORING (Separate from Outcome)")
     print("="*80)
 
-    from agents.trade_journal import TradeJournal
+    from core.agents_highlevel.trade_journal import TradeJournal
 
     journal = TradeJournal("logs/trading/test_journal.json")
 

@@ -13,9 +13,9 @@ from dotenv import load_dotenv
 # Add exchanges to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from exchanges.coinbase_connector import CoinbaseConnector
-from exchanges.kraken_connector import KrakenConnector
-from exchanges.binance_us_connector import BinanceUSConnector
+from core.exchanges.coinbase_connector import CoinbaseConnector
+from core.exchanges.kraken_connector import KrakenConnector
+from core.exchanges.binance_us_connector import BinanceUSConnector
 
 # Load environment variables
 env_path = Path(__file__).parent / "ECO_SYSTEM_4" / ".env"

@@ -7,7 +7,7 @@ Test command-line interface
 import pytest
 import json
 from unittest.mock import Mock, patch, MagicMock
-from cli.trading_cli import TradingCLI
+from bin.trading_cli import TradingCLI
 from argparse import Namespace
 
 
