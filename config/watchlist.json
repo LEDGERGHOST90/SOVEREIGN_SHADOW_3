@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "locked": true,
   "locked_date": "2025-12-28",
-  "note": "DO NOT MODIFY - Locked watchlist for focused trading",
+  "note": "DO NOT MODIFY - Locked watchlist + Ultimate Foresight Stack",
 
   "primary_watchlist": {
-    "description": "Daily monitoring - Dec 28 2025 locked list",
+    "description": "Daily monitoring - Dec 28 2025 LOCKED",
     "assets": [
       {"symbol": "BTC", "exchange": "binanceus", "tier": "core"},
       {"symbol": "ETH", "exchange": "binanceus", "tier": "core"},
@@ -20,34 +20,92 @@
     ]
   },
 
-  "foresight_stack": {
-    "description": "GIO Ultimate Token Foresight Stack - Dec 23 2025",
-    "source": "GIO_FORESIGHT_RWA_CROSSREF_2025-12-23.md",
+  "ultimate_foresight_stack": {
+    "description": "GIO + Manus Ultimate Token Foresight Stack",
+    "sources": [
+      "GIO_FORESIGHT_RWA_CROSSREF_2025-12-23.md",
+      "GIO_FINAL_RWA_INTELLIGENCE_REPORT_2025-12-23.md",
+      "GIO_MACHINE_ECONOMY_THESIS_2025-12-23.md",
+      "RWA_GAMEPLAN_2025.md"
+    ],
 
-    "tier_1_infrastructure": {
-      "thesis": "Must Own - Oracle/Interop/RWA modules",
-      "assets": ["LINK", "INJ", "QNT"]
+    "tier_1_infrastructure_cornerstone": {
+      "thesis": "MUST OWN - Oracle monopoly, interop, RWA backbone",
+      "confidence": "HIGHEST",
+      "assets": [
+        {"symbol": "LINK", "role": "Oracle monopoly, Swift/DTCC integration", "action": "CORNERSTONE - SIZE IT"},
+        {"symbol": "INJ", "role": "Bloomberg of blockchains, derivatives layer", "action": "ACCUMULATE"},
+        {"symbol": "QNT", "role": "SWIFT 2.0, bank connectivity, Overledger", "action": "ACCUMULATE"}
+      ]
     },
 
-    "tier_2_global_rails": {
-      "thesis": "ISO 20022 compliant settlement",
-      "assets": ["XRP", "HBAR", "XLM", "XDC", "ALGO"]
+    "tier_2_global_rails_iso20022": {
+      "thesis": "Settlement infrastructure for $100T+ trade finance",
+      "confidence": "HIGH",
+      "assets": [
+        {"symbol": "XRP", "role": "Cross-border settlement, trade finance", "action": "HOLD/ADD"},
+        {"symbol": "HBAR", "role": "Archax partnership, tokenized MMFs", "action": "RESEARCH"},
+        {"symbol": "XLM", "role": "Stablecoin remittance scaling", "action": "WATCH"},
+        {"symbol": "XDC", "role": "Trade finance blockchain, ISO compliant", "action": "WATCH"},
+        {"symbol": "ALGO", "role": "Green PoS, institutional compliance", "action": "WATCH"},
+        {"symbol": "IOTA", "role": "IoT settlement layer", "action": "WATCH"}
+      ]
     },
 
-    "tier_3_machine_economy": {
-      "thesis": "AI agents managing tokenized assets",
-      "assets": ["FET", "RENDER", "OCEAN", "AGIX"]
+    "tier_3_machine_economy_ai": {
+      "thesis": "AI agents managing tokenized assets at machine speed",
+      "confidence": "HIGH",
+      "assets": [
+        {"symbol": "FET", "role": "Agent coordination, autonomous trading", "action": "HOLD - YOU OWN THIS"},
+        {"symbol": "RENDER", "role": "Compute fuel, financial modeling", "action": "HOLD - YOU OWN THIS"},
+        {"symbol": "OCEAN", "role": "Data monetization for AI decisions", "action": "ACCUMULATE"},
+        {"symbol": "AGIX", "role": "AGI marketplace, RWA Base Camp partner", "action": "WATCH"}
+      ]
     },
 
-    "tier_4_energy_depin": {
-      "thesis": "Physical economy digital twin",
-      "assets": ["EWT", "AKT"]
+    "tier_4_rwa_protocols": {
+      "thesis": "Application layer - tokenized assets",
+      "confidence": "MEDIUM-HIGH",
+      "assets": [
+        {"symbol": "ONDO", "role": "Treasury tokenization leader, xStocks", "action": "ACCUMULATE ON DIP"},
+        {"symbol": "SYRUP", "role": "Maple Finance, institutional credit yields", "action": "ACCUMULATE"},
+        {"symbol": "CFG", "role": "Centrifuge, real-world credit, MakerDAO", "action": "WATCH"},
+        {"symbol": "PLUME", "role": "RWA-specific L1, Q1 2025 mainnet", "action": "WATCH - Q1 ENTRY"}
+      ]
+    },
+
+    "tier_5_energy_depin": {
+      "thesis": "Physical economy digital twin - frontier",
+      "confidence": "MEDIUM",
+      "assets": [
+        {"symbol": "EWT", "role": "Energy grid tokenization", "action": "FRONTIER"},
+        {"symbol": "AKT", "role": "GPU marketplace, compute as RWA", "action": "FRONTIER"},
+        {"symbol": "AR", "role": "Permanent storage layer", "action": "WATCH"}
+      ]
+    },
+
+    "tier_6_stablecoin_velocity": {
+      "thesis": "Stablecoin-as-King - controls RWA velocity",
+      "confidence": "MEDIUM",
+      "assets": [
+        {"symbol": "ENA", "role": "Ethena - yield + BUIDL backing", "action": "HOLD"},
+        {"symbol": "TON", "role": "900M Telegram users distribution", "action": "WATCH"}
+      ]
     }
   },
 
+  "barbell_strategy": {
+    "description": "GIO recommended allocation",
+    "infrastructure_anchor_40pct": ["LINK", "QNT"],
+    "retail_rwa_growth_40pct": ["INJ", "PLUME", "SOL", "ONDO"],
+    "stablecoin_hedge_20pct": ["ENA", "TON"]
+  },
+
   "exchange_routing": {
-    "binanceus": ["BTC", "ETH", "SOL", "XRP", "AAVE", "SUI", "ENA", "LDO", "ZEC", "LINK", "FET", "RENDER", "HBAR", "XLM", "ALGO", "OCEAN"],
-    "kraken": ["PENDLE", "INJ", "QNT", "XDC", "EWT", "AKT"],
-    "coinbase": ["BTC", "ETH", "SOL", "XRP", "AAVE", "LINK"]
-  }
+    "binanceus": ["BTC", "ETH", "SOL", "XRP", "AAVE", "SUI", "ENA", "LDO", "ZEC", "LINK", "FET", "RENDER", "HBAR", "XLM", "ALGO", "OCEAN", "ONDO", "AR"],
+    "kraken": ["PENDLE", "INJ", "QNT", "XDC", "EWT", "AKT", "AGIX"],
+    "coinbase": ["BTC", "ETH", "SOL", "XRP", "AAVE", "LINK", "ONDO"]
+  },
+
+  "total_unique_assets": 30
 }
