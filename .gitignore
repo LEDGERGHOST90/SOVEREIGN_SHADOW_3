@@ -242,3 +242,6 @@ ECO_SYSTEM_4/Shadow_3--11.30.25.zip
 config/.env.unified
 freqtrade/config.json
 freqtrade/*.sqlite*
+
+# AlphaRunner logs
+.logs/

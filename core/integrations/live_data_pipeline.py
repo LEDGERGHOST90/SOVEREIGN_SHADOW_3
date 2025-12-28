@@ -23,6 +23,12 @@ from dotenv import load_dotenv
 import pandas as pd
 
 # Load environment
+# Trading profiles for dynamic SL/TP
+try:
+    from core.config.trading_profiles import get_profile_for_symbol, get_active_profile
+except ImportError:
+    get_profile_for_symbol = None
+    get_active_profile = None
 load_dotenv(Path(__file__).parent.parent.parent / '.env', override=True)
 
 SS3_ROOT = Path("/Volumes/LegacySafe/SS_III")
@@ -109,8 +115,24 @@ class LiveDataPipeline:
 
     def get_live_prices(self) -> Dict[str, LivePrice]:
         """Fetch live prices from Coinbase via CCXT"""
-        prices = {}
+        # Check cache validity
+        if self.price_cache:
+            try:
+                # Check age of first item
+                first_item = next(iter(self.price_cache.values()))
+                cache_time = datetime.fromisoformat(first_item.timestamp)
+                age = (datetime.now() - cache_time).total_seconds()
+                
+                if age < self.cache_ttl:
+                    return self.price_cache
+            except Exception as e:
+                # If date parsing fails, ignore cache
+                pass
 
+        prices = {}
+        
+        # Optimize: Try to fetch all tickers at once if possible, or stick to loop but strictly cached
+        # For now, we keep the loop but it will only run ONCE per cycle per cache_ttl
         for symbol in self.symbols:
             try:
                 pair = f"{symbol}/USD"
@@ -160,13 +182,72 @@ class LiveDataPipeline:
     # =========================================================================
 
     def get_whale_activity(self, symbol: str) -> Optional[WhaleActivity]:
-        """Fetch whale activity from Birdeye"""
+        """Fetch whale activity from multiple sources"""
+
+        # For BTC/ETH - use CoinGlass Open Interest data
+        if symbol in ['BTC', 'ETH']:
+            return self._get_oi_whale_signal(symbol)
+
+        # For Solana ecosystem - use Birdeye
         if not self.birdeye_key:
             return None
 
-        # Birdeye is primarily for Solana tokens
-        # For BTC/ETH we'd use different sources
-        if symbol not in ['SOL', 'BONK', 'WIF', 'JUP']:
+        if symbol in ['SOL', 'BONK', 'WIF', 'JUP']:
+            return self._get_birdeye_whale(symbol)
+
+        # Default: no whale data available
+        return WhaleActivity(
+            symbol=symbol,
+            net_flow=0,
+            large_txs=0,
+            exchange_flow='neutral',
+            timestamp=datetime.now().isoformat()
+        )
+
+    def _get_oi_whale_signal(self, symbol: str) -> Optional[WhaleActivity]:
+        """Get BTC/ETH whale signal using CCXT volume analysis"""
+        try:
+            # Use volume spike as whale activity proxy
+            ticker = self.exchange.fetch_ticker(f"{symbol}/USD")
+
+            # Get recent OHLCV for volume comparison
+            ohlcv = self.exchange.fetch_ohlcv(f"{symbol}/USD", '1h', limit=24)
+            if not ohlcv:
+                raise Exception("No OHLCV data")
+
+            volumes = [candle[5] for candle in ohlcv]  # Volume is index 5
+            avg_volume = sum(volumes[:-1]) / len(volumes[:-1]) if len(volumes) > 1 else volumes[0]
+            current_volume = volumes[-1]
+
+            # Volume spike detection (whale activity proxy)
+            volume_ratio = current_volume / avg_volume if avg_volume > 0 else 1
+            price_change = ticker.get('percentage', 0) or 0
+
+            # Interpret: High volume + price up = accumulation, High volume + price down = distribution
+            if volume_ratio > 1.5:  # 50% above average = significant
+                if price_change > 0:
+                    net_flow = min(25, (volume_ratio - 1) * 20)  # Scale to 0-25
+                    exchange_flow = 'accumulation'
+                    large_txs = 1
+                else:
+                    net_flow = -min(25, (volume_ratio - 1) * 20)
+                    exchange_flow = 'distribution'
+                    large_txs = 1
+            else:
+                net_flow = 0
+                exchange_flow = 'neutral'
+                large_txs = 0
+
+            return WhaleActivity(
+                symbol=symbol,
+                net_flow=net_flow,
+                large_txs=large_txs,
+                exchange_flow=exchange_flow,
+                timestamp=datetime.now().isoformat()
+            )
+
+        except Exception as e:
+            print(f"CCXT whale detection error for {symbol}: {e}")
             return WhaleActivity(
                 symbol=symbol,
                 net_flow=0,
@@ -175,6 +256,8 @@ class LiveDataPipeline:
                 timestamp=datetime.now().isoformat()
             )
 
+    def _get_birdeye_whale(self, symbol: str) -> Optional[WhaleActivity]:
+        """Get whale data for Solana tokens from Birdeye"""
         try:
             # Birdeye token overview
             url = f"https://public-api.birdeye.so/public/token_overview?address={symbol}"
@@ -272,16 +355,29 @@ class LiveDataPipeline:
             direction = 'NEUTRAL'
             confidence = 30
 
-        # 4. Calculate position sizing (2% risk rule)
-        max_position = min(50, capital * 0.02 / 0.03)  # Max $50 or 2% risk at 3% stop
+        # 4. Get trading profile for this symbol (uses asset-specific or active profile)
+        if get_profile_for_symbol:
+            profile = get_profile_for_symbol(symbol)
+        else:
+            # Fallback to hardcoded sniper defaults
+            profile = type('Profile', (), {
+                'stop_loss_pct': 3.0, 'tp1_pct': 5.0, 'risk_per_trade_pct': 2.0
+            })()
+
+        # 5. Calculate position sizing using profile
+        risk_pct = profile.risk_per_trade_pct / 100
+        sl_pct = profile.stop_loss_pct / 100
+        max_position = min(50, capital * risk_pct / sl_pct)
         position_size = max_position * (confidence / 100)
 
-        # 5. Calculate levels
-        stop_loss = current_price * (0.97 if direction == 'LONG' else 1.03)
-        take_profit = current_price * (1.05 if direction == 'LONG' else 0.95)
+        # 6. Calculate levels using profile (use LONG math for NEUTRAL too since we don't short on Coinbase)
+        is_long = direction in ['LONG', 'NEUTRAL']  # Default to long-biased
+        stop_loss = current_price * (1 - sl_pct if is_long else 1 + sl_pct)
+        take_profit = current_price * (1 + profile.tp1_pct / 100 if is_long else 1 - profile.tp1_pct / 100)
 
-        # 6. Generate reasoning
+        # 7. Generate reasoning
         reasoning = f"{symbol} in {regime} regime. "
+        reasoning += f"Profile: {getattr(profile, 'name', 'default')}. "
         reasoning += f"24h change: {change_24h:.1f}%. "
         reasoning += f"ADX: {regime_data.get('adx', 0):.1f}. "
         reasoning += f"Recommended: {direction} with {confidence:.0f}% confidence."

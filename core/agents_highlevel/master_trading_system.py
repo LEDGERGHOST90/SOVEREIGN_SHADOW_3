@@ -12,11 +12,18 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 
-# Import our agent systems
-from shade_agent import ShadeAgent
-from psychology_tracker import PsychologyTracker, EmotionState
-from trade_journal import TradeJournal, TradeType, TradeStatus, MistakeType
-from mentor_system import MentorSystem
+# Import our agent systems (use relative imports for package compatibility)
+try:
+    from .shade_agent import ShadeAgent
+    from .psychology_tracker import PsychologyTracker, EmotionState
+    from .trade_journal import TradeJournal, TradeType, TradeStatus, MistakeType
+    from .mentor_system import MentorSystem
+except ImportError:
+    # Fallback for direct execution
+    from shade_agent import ShadeAgent
+    from psychology_tracker import PsychologyTracker, EmotionState
+    from trade_journal import TradeJournal, TradeType, TradeStatus, MistakeType
+    from mentor_system import MentorSystem
 
 
 class MasterTradingSystem:

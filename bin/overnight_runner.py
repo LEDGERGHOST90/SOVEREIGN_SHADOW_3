@@ -31,6 +31,14 @@ sys.path.insert(0, str(SS3_ROOT / 'src'))  # For pandas_ta shim
 from dotenv import load_dotenv
 load_dotenv(SS3_ROOT / '.env', override=True)
 
+# Trading profiles
+try:
+    from core.config.trading_profiles import get_profile_for_symbol, ProfileType, PROFILES
+except ImportError:
+    get_profile_for_symbol = None
+    ProfileType = None
+    PROFILES = None
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -66,6 +74,33 @@ class OvernightRunner:
         # Results storage
         self.results_path = SS3_ROOT / 'data' / 'overnight_results'
         self.results_path.mkdir(exist_ok=True)
+
+        # Alpha Executor (bias-driven execution)
+        try:
+            from core.alpha_executor import AlphaExecutor
+            self.alpha_executor = AlphaExecutor()
+            logger.info("✓ Alpha Executor (bias-driven execution)")
+        except Exception as e:
+            logger.warning(f"✗ Alpha Executor: {e} (falling back to direct execution)")
+            self.alpha_executor = None
+
+        # MoonDev Signals (verified strategies)
+        try:
+            from core.signals.moondev_signals import MoonDevSignals
+            self.moondev = MoonDevSignals()
+            logger.info("✓ MoonDev Signals (3 verified strategies)")
+        except Exception as e:
+            logger.warning(f"✗ MoonDev Signals: {e}")
+            self.moondev = None
+
+        # Outrageous Filter (final gate - only undeniable signals)
+        try:
+            from core.outrageous_filter import OutrageousFilter
+            self.outrageous_filter = OutrageousFilter()
+            logger.info("✓ Outrageous Filter (only undeniable signals execute)")
+        except Exception as e:
+            logger.warning(f"✗ Outrageous Filter: {e}")
+            self.outrageous_filter = None
 
     def _load_brain(self) -> dict:
         """Load BRAIN.json"""
@@ -177,6 +212,72 @@ class OvernightRunner:
                 logger.error(f"  Live data error: {e}")
                 results['components']['live_data'] = f'ERROR: {e}'
 
+        # 1.5. MoonDev Signals (verified strategies)
+        if self.moondev:
+            logger.info("\n[1.5/5] MoonDev Strategy Signals...")
+            try:
+                import ccxt
+                import pandas as pd
+
+                # Exchanges: binance.us, kraken, coinbase (user confirmed)
+                exchanges = [
+                    ('binanceus', ccxt.binanceus()),
+                    ('kraken', ccxt.kraken()),
+                    ('coinbase', ccxt.coinbase()),
+                ]
+
+                def get_ohlcv_multi(sym: str):
+                    """Try multiple exchanges for OHLCV data"""
+                    for name, ex in exchanges:
+                        try:
+                            pair = f"{sym}/USD"
+                            ohlcv = ex.fetch_ohlcv(pair, '1h', limit=200)
+                            if ohlcv and len(ohlcv) > 100:
+                                return ohlcv, name
+                        except:
+                            try:
+                                pair = f"{sym}/USDT"
+                                ohlcv = ex.fetch_ohlcv(pair, '1h', limit=200)
+                                if ohlcv and len(ohlcv) > 100:
+                                    return ohlcv, name
+                            except:
+                                continue
+                    return None, None
+
+                # Symbols: BRAIN watchlist + Manus immediate + Hayes rotation
+                moondev_symbols = ['BTC', 'ETH', 'SOL', 'ENA', 'PENDLE', 'LDO']
+                moondev_results = {}
+
+                for symbol in moondev_symbols:
+                    try:
+                        ohlcv, source = get_ohlcv_multi(symbol)
+
+                        if ohlcv and len(ohlcv) > 100:
+                            df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
+                            df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+                            df.set_index('timestamp', inplace=True)
+
+                            consensus = self.moondev.get_consensus(df)
+                            consensus['source'] = source
+                            moondev_results[symbol] = consensus
+
+                            if consensus['action'] != 'WAIT':
+                                logger.info(f"  {symbol}: {consensus['action']} (score: {consensus['score']:.2f}, conf: {consensus['confidence']:.0%}) [{source}]")
+                            else:
+                                logger.info(f"  {symbol}: WAIT [{source}]")
+                        else:
+                            logger.warning(f"  {symbol}: No data on any exchange")
+
+                    except Exception as e:
+                        logger.warning(f"  {symbol}: {e}")
+
+                results['moondev_signals'] = moondev_results
+                results['components']['moondev'] = 'OK'
+
+            except Exception as e:
+                logger.error(f"  MoonDev error: {e}")
+                results['components']['moondev'] = f'ERROR: {e}'
+
         # 2. Research Swarm (dispatch async)
         if self.research_swarm:
             logger.info("\n[2/4] Research Swarm...")
@@ -240,30 +341,79 @@ class OvernightRunner:
         else:
             logger.info("  No opportunities meeting criteria")
 
-        # 5. Execute Paper Trades
-        if self.paper_trader and self.paper_mode and opportunities:
-            logger.info("\n[5/5] Paper Trade Execution...")
-            for opp in opportunities:
-                if opp['confidence'] >= 50:
+        # 5. Execute via Alpha Executor (tiered execution)
+        if opportunities:
+            logger.info("\n[5/5] Alpha Executor Processing...")
+
+            if self.alpha_executor:
+                # Use bias-driven tiered execution
+                for opp in opportunities:
                     try:
-                        # Create Signal object
-                        signal = self.Signal(
-                            symbol=opp['symbol'],
-                            action=opp['direction'],
-                            confidence=opp['confidence'],
-                            reasoning=opp.get('reasoning', 'Overnight runner signal'),
-                            source_agent='overnight_runner',
-                            entry_price=opp['entry'],
-                            stop_loss=opp['stop_loss'],
-                            take_profit=opp['take_profit']
-                        )
-                        # Execute paper trade
-                        result = self.paper_trader.execute_signal(signal, opp['position_size'])
-                        logger.info(f"  📝 PAPER TRADE: {result['symbol']} {result['action']} @ ${result['entry_price']:.2f}")
-                        results['paper_trades'] = results.get('paper_trades', [])
-                        results['paper_trades'].append(result)
+                        # Convert opportunity to raw signal format
+                        raw_signal = {
+                            "symbol": opp['symbol'],
+                            "side": "BUY" if opp['direction'] == 'LONG' else "SELL",
+                            "confidence": opp['confidence'],
+                            "entry_price": opp['entry'],
+                            "position_size_usd": opp['position_size'],
+                            "source": "overnight_runner"
+                        }
+
+                        # Apply alpha bias
+                        biased_signal = self.alpha_executor.apply_bias(raw_signal)
+
+                        if biased_signal:
+                            # Process through tier system
+                            result = self.alpha_executor.process_signal(biased_signal)
+                            logger.info(f"  [{result['tier']}] {result['action']}: {opp['symbol']} (conf: {biased_signal.confidence:.0f}%)")
+
+                            results['alpha_executions'] = results.get('alpha_executions', [])
+                            results['alpha_executions'].append(result)
+
+                            # Also create paper trade if TIER_1_AUTO
+                            if result['tier'] == 'TIER_1_AUTO' and self.paper_trader and self.paper_mode:
+                                signal = self.Signal(
+                                    symbol=opp['symbol'],
+                                    action=opp['direction'],
+                                    confidence=biased_signal.confidence,
+                                    reasoning=f"Alpha Executor Auto: {opp.get('reasoning', '')}",
+                                    source_agent='alpha_executor',
+                                    entry_price=opp['entry'],
+                                    stop_loss=biased_signal.stop_loss,
+                                    take_profit=biased_signal.take_profit_1
+                                )
+                                paper_result = self.paper_trader.execute_signal(signal, biased_signal.position_size_usd)
+                                logger.info(f"  📝 PAPER TRADE: {paper_result['symbol']} {paper_result['action']} @ ${paper_result['entry_price']:.2f}")
+                                results['paper_trades'] = results.get('paper_trades', [])
+                                results['paper_trades'].append(paper_result)
+                        else:
+                            logger.info(f"  ⏭️ {opp['symbol']}: Filtered by bias (below threshold)")
+
                     except Exception as e:
-                        logger.error(f"  Paper trade error: {e}")
+                        logger.error(f"  Alpha executor error for {opp['symbol']}: {e}")
+
+            # Fallback to direct paper trading if no alpha executor
+            elif self.paper_trader and self.paper_mode:
+                logger.info("  (Fallback: Direct paper trading)")
+                for opp in opportunities:
+                    if opp['confidence'] >= 50:
+                        try:
+                            signal = self.Signal(
+                                symbol=opp['symbol'],
+                                action=opp['direction'],
+                                confidence=opp['confidence'],
+                                reasoning=opp.get('reasoning', 'Overnight runner signal'),
+                                source_agent='overnight_runner',
+                                entry_price=opp['entry'],
+                                stop_loss=opp['stop_loss'],
+                                take_profit=opp['take_profit']
+                            )
+                            result = self.paper_trader.execute_signal(signal, opp['position_size'])
+                            logger.info(f"  📝 PAPER TRADE: {result['symbol']} {result['action']} @ ${result['entry_price']:.2f}")
+                            results['paper_trades'] = results.get('paper_trades', [])
+                            results['paper_trades'].append(result)
+                        except Exception as e:
+                            logger.error(f"  Paper trade error: {e}")
 
         # Save results
         self._save_results(results)
@@ -281,17 +431,89 @@ class OvernightRunner:
         opportunities = []
         capital = self.brain.get('portfolio', {}).get('exchange_total', {}).get('total_usd', 734)
 
+        # Priority 1: MoonDev signals (verified strategies)
+        moondev_signals = results.get('moondev_signals', {})
+        for symbol, moon in moondev_signals.items():
+            if moon.get('action') in ['BUY', 'STRONG BUY']:
+                # Convert MoonDev format to standard signal
+                confidence = int(moon.get('confidence', 0) * 100)
+                if confidence < 50:
+                    continue
+
+                # Get profile for this symbol
+                if get_profile_for_symbol:
+                    profile = get_profile_for_symbol(symbol)
+                    sl_pct = profile.stop_loss_pct / 100
+                    risk_pct = profile.risk_per_trade_pct / 100
+                else:
+                    sl_pct = 0.03
+                    risk_pct = 0.02
+
+                position_size = min(50, capital * risk_pct / sl_pct)
+
+                opportunities.append({
+                    'symbol': symbol,
+                    'direction': 'LONG',
+                    'entry': moon.get('entry', 0),
+                    'stop_loss': moon.get('stop_loss', 0),
+                    'take_profit': moon.get('take_profit', 0),
+                    'position_size': round(position_size * (confidence / 100), 2),
+                    'confidence': confidence,
+                    'original_confidence': confidence,
+                    'whale_boost': 0,
+                    'regime': 'MoonDev',
+                    'reasoning': f"🌙 MoonDev: {', '.join(moon.get('reasons', []))}",
+                    'paper_mode': self.paper_mode,
+                    'source': 'moondev'
+                })
+
+        # Priority 2: Live pipeline signals (fallback if no MoonDev)
         for symbol, signal in results.get('signals', {}).items():
+            # Skip if we already have MoonDev signal for this symbol
+            if symbol in moondev_signals and moondev_signals[symbol].get('action') != 'WAIT':
+                continue
             # Filter criteria
             confidence = signal.get('confidence', 0)
             direction = signal.get('direction', 'NEUTRAL')
 
             if direction == 'NEUTRAL':
                 continue
-            if confidence < 50:  # Minimum 50% confidence
+            if direction == 'SHORT':
+                continue  # Skip shorts - Coinbase spot only (no margin/futures)
+
+            # Get profile for this symbol
+            if get_profile_for_symbol:
+                profile = get_profile_for_symbol(symbol)
+                min_conf = profile.min_confidence
+                sl_pct = profile.stop_loss_pct / 100
+                risk_pct = profile.risk_per_trade_pct / 100
+            else:
+                min_conf = 50
+                sl_pct = 0.03
+                risk_pct = 0.02
+
+            if confidence < min_conf:
                 continue
 
-            position_size = min(50, capital * 0.02 / 0.03)  # 2% risk, 3% stop
+            position_size = min(50, capital * risk_pct / sl_pct)
+
+            # Check whale activity for confidence boost
+            whale_boost = 0
+            whale_note = ""
+            if self.data_pipeline:
+                try:
+                    whale = self.data_pipeline.get_whale_activity(symbol)
+                    if whale and whale.net_flow != 0:
+                        if whale.exchange_flow == 'accumulation' and direction == 'LONG':
+                            whale_boost = min(15, abs(whale.net_flow))  # Up to +15% confidence
+                            whale_note = f"🐋 Whale accumulation ({whale.net_flow:+.1f}%). "
+                        elif whale.exchange_flow == 'distribution' and direction == 'SHORT':
+                            whale_boost = min(15, abs(whale.net_flow))
+                            whale_note = f"🐋 Whale distribution ({whale.net_flow:+.1f}%). "
+                except Exception as e:
+                    logger.warning(f"Whale check error for {symbol}: {e}")
+
+            boosted_confidence = min(100, confidence + whale_boost)
 
             opportunities.append({
                 'symbol': symbol,
@@ -299,10 +521,12 @@ class OvernightRunner:
                 'entry': signal.get('entry_price', 0),
                 'stop_loss': signal.get('stop_loss', 0),
                 'take_profit': signal.get('take_profit', 0),
-                'position_size': round(position_size * (confidence / 100), 2),
-                'confidence': confidence,
+                'position_size': round(position_size * (boosted_confidence / 100), 2),
+                'confidence': boosted_confidence,
+                'original_confidence': confidence,
+                'whale_boost': whale_boost,
                 'regime': signal.get('regime', 'Unknown'),
-                'reasoning': signal.get('reasoning', ''),
+                'reasoning': whale_note + signal.get('reasoning', ''),
                 'paper_mode': self.paper_mode
             })
 
@@ -327,6 +551,12 @@ class OvernightRunner:
 
         replit_url = os.getenv('REPLIT_API_URL')
         if not replit_url:
+             # Fallback to the known working Replit instance
+             replit_url = "https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev"
+             logger.info(f"Using fallback Replit URL: {replit_url}")
+             
+        if not replit_url:
+            logger.warning("No Replit URL configured - skipping Replit push")
             return
 
         try:
