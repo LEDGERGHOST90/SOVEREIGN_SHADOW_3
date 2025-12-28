@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "locked": true,
+  "locked_date": "2025-12-28",
+  "note": "DO NOT MODIFY - Locked watchlist for focused trading",
+
+  "primary_watchlist": {
+    "description": "Daily monitoring - Dec 28 2025 locked list",
+    "assets": [
+      {"symbol": "BTC", "exchange": "binanceus", "tier": "core"},
+      {"symbol": "ETH", "exchange": "binanceus", "tier": "core"},
+      {"symbol": "SOL", "exchange": "binanceus", "tier": "core"},
+      {"symbol": "XRP", "exchange": "binanceus", "tier": "global_rails"},
+      {"symbol": "AAVE", "exchange": "binanceus", "tier": "defi"},
+      {"symbol": "SUI", "exchange": "binanceus", "tier": "l1"},
+      {"symbol": "ENA", "exchange": "binanceus", "tier": "defi"},
+      {"symbol": "LDO", "exchange": "binanceus", "tier": "defi"},
+      {"symbol": "ZEC", "exchange": "binanceus", "tier": "privacy"},
+      {"symbol": "PENDLE", "exchange": "kraken", "tier": "defi"}
+    ]
+  },
+
+  "foresight_stack": {
+    "description": "GIO Ultimate Token Foresight Stack - Dec 23 2025",
+    "source": "GIO_FORESIGHT_RWA_CROSSREF_2025-12-23.md",
+
+    "tier_1_infrastructure": {
+      "thesis": "Must Own - Oracle/Interop/RWA modules",
+      "assets": ["LINK", "INJ", "QNT"]
+    },
+
+    "tier_2_global_rails": {
+      "thesis": "ISO 20022 compliant settlement",
+      "assets": ["XRP", "HBAR", "XLM", "XDC", "ALGO"]
+    },
+
+    "tier_3_machine_economy": {
+      "thesis": "AI agents managing tokenized assets",
+      "assets": ["FET", "RENDER", "OCEAN", "AGIX"]
+    },
+
+    "tier_4_energy_depin": {
+      "thesis": "Physical economy digital twin",
+      "assets": ["EWT", "AKT"]
+    }
+  },
+
+  "exchange_routing": {
+    "binanceus": ["BTC", "ETH", "SOL", "XRP", "AAVE", "SUI", "ENA", "LDO", "ZEC", "LINK", "FET", "RENDER", "HBAR", "XLM", "ALGO", "OCEAN"],
+    "kraken": ["PENDLE", "INJ", "QNT", "XDC", "EWT", "AKT"],
+    "coinbase": ["BTC", "ETH", "SOL", "XRP", "AAVE", "LINK"]
+  }
+}
