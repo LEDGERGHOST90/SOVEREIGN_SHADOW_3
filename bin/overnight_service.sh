@@ -77,30 +77,29 @@ cmd_start() {
     # Ensure log directory exists
     mkdir -p "$LOG_DIR"
 
-    # Check if already running
-    if [[ -f "$PID_FILE" ]]; then
-        OLD_PID=$(cat "$PID_FILE")
-        if ps -p "$OLD_PID" > /dev/null 2>&1; then
-            echo -e "${YELLOW}Already running (PID: $OLD_PID)${NC}"
-            return 0
-        fi
+    # Check if already running via launchctl
+    if launchctl list "$PLIST_NAME" &>/dev/null; then
+        echo -e "${YELLOW}Already running via launchd${NC}"
+        cmd_status
+        return 0
     fi
 
-    # Start with nohup (simpler than launchd)
-    cd "$SS3_ROOT"
-    nohup env PYTHONPATH="$SS3_ROOT" python3 bin/overnight_runner.py \
-        --interval 15 \
-        --duration 24 \
-        --paper \
-        >> "$LOG_DIR/overnight_stdout.log" 2>&1 &
+    # Create/update plist
+    create_plist
 
-    NEW_PID=$!
-    echo "$NEW_PID" > "$PID_FILE"
+    # Load and start via launchd (auto-restarts on crash)
+    launchctl load "$PLIST_PATH"
+    launchctl start "$PLIST_NAME"
 
     sleep 2
 
-    if ps -p "$NEW_PID" > /dev/null 2>&1; then
-        echo -e "${GREEN}Overnight Runner STARTED (PID: $NEW_PID)${NC}"
+    if launchctl list "$PLIST_NAME" &>/dev/null; then
+        # Get PID from launchctl
+        NEW_PID=$(launchctl list "$PLIST_NAME" 2>/dev/null | awk 'NR==2 {print $1}')
+        [[ -n "$NEW_PID" && "$NEW_PID" != "-" ]] && echo "$NEW_PID" > "$PID_FILE"
+
+        echo -e "${GREEN}Overnight Runner STARTED (launchd managed)${NC}"
+        echo -e "${GREEN}Auto-restart on crash: ENABLED${NC}"
         echo ""
         echo "Monitoring: BTC, ETH, SOL, ENA, PENDLE, LDO"
         echo "Interval: Every 15 minutes"
@@ -112,32 +111,34 @@ cmd_start() {
         echo "  ./bin/overnight_service.sh stop    - Stop service"
     else
         echo -e "${RED}Failed to start. Check logs:${NC}"
-        echo "  tail -f $LOG_DIR/overnight_stdout.log"
-        rm -f "$PID_FILE"
+        echo "  tail -f $LOG_DIR/overnight_stderr.log"
     fi
 }
 
 cmd_stop() {
     echo -e "${YELLOW}Stopping Overnight Runner...${NC}"
 
+    # Stop via launchd first (primary method)
+    if launchctl list "$PLIST_NAME" &>/dev/null; then
+        launchctl stop "$PLIST_NAME" 2>/dev/null || true
+        launchctl unload "$PLIST_PATH" 2>/dev/null || true
+        echo -e "${GREEN}Overnight Runner STOPPED (launchd unloaded)${NC}"
+    fi
+
+    # Also kill any orphaned process
     if [[ -f "$PID_FILE" ]]; then
         PID=$(cat "$PID_FILE")
         if ps -p "$PID" > /dev/null 2>&1; then
             kill "$PID" 2>/dev/null || true
             sleep 1
-            # Force kill if still running
             if ps -p "$PID" > /dev/null 2>&1; then
                 kill -9 "$PID" 2>/dev/null || true
             fi
         fi
         rm -f "$PID_FILE"
-        echo -e "${GREEN}Overnight Runner STOPPED${NC}"
-    else
-        # Try launchctl as fallback
-        launchctl stop "$PLIST_NAME" 2>/dev/null || true
-        launchctl unload "$PLIST_PATH" 2>/dev/null || true
-        echo -e "${YELLOW}No PID file found. Attempted launchctl cleanup.${NC}"
     fi
+
+    echo -e "${GREEN}Service fully stopped${NC}"
 }
 
 cmd_status() {
@@ -145,14 +146,29 @@ cmd_status() {
     echo ""
 
     RUNNING=false
-    if [[ -f "$PID_FILE" ]]; then
+
+    # Check launchd first
+    if launchctl list "$PLIST_NAME" &>/dev/null; then
+        # Get PID from running process
+        PID=$(pgrep -f "overnight_runner.py" | head -1)
+        if [[ -n "$PID" ]]; then
+            RUNNING=true
+            echo -e "Service: ${GREEN}RUNNING${NC}"
+            echo -e "Manager: ${GREEN}launchd (auto-restart on crash)${NC}"
+            echo "PID: $PID"
+            STARTED=$(ps -p "$PID" -o lstart= 2>/dev/null || echo "unknown")
+            echo "Started: $STARTED"
+        fi
+    fi
+
+    # Fallback to PID file check
+    if [[ "$RUNNING" == "false" && -f "$PID_FILE" ]]; then
         PID=$(cat "$PID_FILE")
         if ps -p "$PID" > /dev/null 2>&1; then
             RUNNING=true
             echo -e "Service: ${GREEN}RUNNING${NC}"
+            echo -e "Manager: ${YELLOW}nohup (no auto-restart)${NC}"
             echo "PID: $PID"
-
-            # Show uptime
             STARTED=$(ps -p "$PID" -o lstart= 2>/dev/null || echo "unknown")
             echo "Started: $STARTED"
         fi
