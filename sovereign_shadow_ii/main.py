@@ -28,6 +28,11 @@ from pathlib import Path
 # Add paths
 sys.path.insert(0, str(Path(__file__).parent))
 
+# Ensure required directories exist BEFORE imports that might use them
+_base_dir = Path(__file__).parent
+(_base_dir / 'logs').mkdir(exist_ok=True)
+(_base_dir / 'data').mkdir(exist_ok=True)
+
 from core.orchestration.orchestrator import (
     SovereignShadowOrchestrator,
     OrchestratorConfig,
@@ -44,7 +49,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler(Path(__file__).parent / 'logs' / f'sovereign_{datetime.now().strftime("%Y%m%d")}.log')
+        logging.FileHandler(_base_dir / 'logs' / f'sovereign_{datetime.now().strftime("%Y%m%d")}.log')
     ]
 )
 logger = logging.getLogger(__name__)
