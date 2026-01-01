@@ -61,22 +61,44 @@ class MarketSimulator:
         self.price_history: Dict[str, List[MarketData]] = {}
         self.current_prices: Dict[str, float] = {}
         self.volatility_profiles = {
+            # Core Holdings (Ledger + Coinbase)
             'BTC': 0.03,    # 3% daily volatility
             'ETH': 0.04,    # 4% daily volatility
+            'SOL': 0.06,    # 6% daily volatility
+            'XRP': 0.05,    # 5% daily volatility
+            # AI Basket (Coinbase Active)
+            'FET': 0.08,    # 8% daily volatility (AI token)
+            'RNDR': 0.06,   # 6% daily volatility (AI/GPU)
+            'SUI': 0.07,    # 7% daily volatility (L1)
+            # Shadow Stack
             'BONK': 0.08,   # 8% daily volatility
             'WIF': 0.10,    # 10% daily volatility
-            'RNDR': 0.06,   # 6% daily volatility
             'STMX': 0.12,   # 12% daily volatility
+            'MASK': 0.07,   # 7% daily volatility (Tier 1)
+            'TRUMP': 0.15,  # 15% daily volatility (News Driven)
+            'ARB': 0.05,    # 5% daily volatility (Steady)
+            'QNT': 0.04,    # 4% daily volatility (Vault)
         }
         
-        # Initialize base prices
+        # Initialize base prices (updated 2025-12-29)
         self.base_prices = {
-            'BTCUSDT': 45000.0,
-            'ETHUSDT': 3000.0,
+            # Core Holdings
+            'BTCUSDT': 94000.0,
+            'ETHUSDT': 3350.0,
+            'SOLUSDT': 189.0,
+            'XRPUSDT': 2.10,
+            # AI Basket (Coinbase Active Positions)
+            'FETUSDT': 1.30,
+            'RENDERUSDT': 7.10,
+            'SUIUSDT': 4.20,
+            # Shadow Stack
             'BONKUSDT': 0.00003,
-            'WIFUSDT': 2.5,
-            'RNDRUSDT': 8.5,
-            'STMXUSDT': 0.025
+            'WIFUSDT': 1.85,
+            'STMXUSDT': 0.006,
+            'MASKUSDT': 2.90,
+            'TRUMPUSDT': 32.0,
+            'ARBUSDT': 0.75,
+            'QNTUSDT': 105.00
         }
         
         # Initialize current prices

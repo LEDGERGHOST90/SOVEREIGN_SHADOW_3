@@ -34,6 +34,13 @@ cat BRAIN.json | head -50
 - `bin/overnight_runner.py` - 24/7 trading monitor
 - `core/orchestrator.py` - Agent council (7 agents)
 
+### Active Web Endpoints
+```
+Replit Dashboard: https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev/
+AlphaRunner (GCP): https://shadow-ai-alpharunner-33906555678.us-west1.run.app/
+DEPRECATED: sovereignnshadowii.abacusai.app, legacyloopshadowai.abacusai.app
+```
+
 ### Run Commands
 ```bash
 # Market scan
@@ -111,16 +118,20 @@ curl -d "EOD Complete: [summary]" ntfy.sh/sovereignshadow_dc4d2fa1
 
 ## Current Mission
 
-**DEBT_DESTROYER** (via AI Basket Siphon)
-- Target: Repay $662 AAVE debt
-- Capital: ~$482 deployed in AI basket (FET, RENDER, SUI)
-- Strategy: Ladder exits at TP1/TP2/TP3, profits → AAVE repayment
-- Scanner: `bin/ai_basket_scanner.py` (NTFY alerts active)
+**PORTFOLIO_GROWTH** (AAVE = Strategic Good Debt)
+- AAVE debt (~$609) is KEPT as strategic leverage
+- Health Factor: 3.98 (min threshold: 2.5)
+- Focus: Grow exchange holdings, capture swing opportunities
 
-**Active Positions:**
-- FET: 916.1 @ $0.2104 | TP1: $0.263 | TP2: $0.295 | TP3: $0.337
-- RENDER: 123.8 @ $1.278 | TP1: $1.598 | TP2: $1.789 | TP3: $2.045
-- SUI: 90.7 @ $1.437 | TP1: $1.796 | TP2: $2.012 | TP3: $2.299
+**AAVE Rules (HARDCODED):**
+- DO NOT repay debt unless HF < 2.5
+- Collateral: wstETH (earning yield)
+- Debt status: LOCKED IN as good debt
+
+**Active AI Basket (Coinbase):**
+- FET: 916.1 @ $0.21 | Current: $0.21
+- RENDER: 123.8 @ $1.28 | Current: $1.53 (+20%)
+- SUI: 90.7 @ $1.44 | Current: $1.45
 
 ---
 

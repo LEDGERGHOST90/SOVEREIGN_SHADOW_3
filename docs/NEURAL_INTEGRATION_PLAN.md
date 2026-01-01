@@ -1,9 +1,11 @@
 # 🧠 NEURAL CONSCIOUSNESS INTEGRATION PLAN
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
 ## 🎯 **CURRENT STATUS:**
 
-**✅ ABACUS AI NEURAL CONSCIOUSNESS IS LIVE!**
-- **URL:** https://legacyloopshadowai.abacusai.app/dashboard
+**✅ NEURAL CONSCIOUSNESS MIGRATED TO GCP!**
+- **URL:** https://shadow-ai-alpharunner-33906555678.us-west1.run.app (was legacyloopshadowai.abacusai.app)
 - **Status:** Active and accessible
 - **Purpose:** Cloud AI pattern recognition and opportunity detection
 

@@ -1,7 +1,9 @@
 # Unified SovereignShadow - Abacus AI Architecture
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
 ## Vision
-Single command center at `sovereignnshadowii.abacusai.app` that combines:
+Single command center at `1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev` that combines:
 - **StrategyScout AI** (Gemini frontend) - Strategy analysis, transcription, protocols
 - **SovereignShadow_II** (Python backend) - Trading execution, portfolio management
 - **Persistent Memory** - Database-backed storage, no more localStorage

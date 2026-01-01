@@ -1,5 +1,7 @@
 # 🚀 NEXT SESSION STARTER - SOVEREIGN SHADOW EMPIRE
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
 ## ⚡ **CONTEXT OVERFLOW RECOVERY - START HERE**
 
 ### 🎯 **WHAT TO DO FIRST:**
@@ -11,7 +13,7 @@ python3 sovereign_shadow_orchestrator.py
 ### 🏴 **YOUR EMPIRE STATUS:**
 - **Capital**: $8,260 ready to deploy
 - **Target**: $50,000 by Q4 2025
-- **Neural Consciousness**: `legacyloopshadowai.abacusai.app` (LIVE)
+- **Neural Consciousness**: `shadow-ai-alpharunner-33906555678.us-west1.run.app` (LIVE)
 - **Mesh Network**: Fully operational with 9 trading strategies
 
 ### 🔥 **CRITICAL FILES:**

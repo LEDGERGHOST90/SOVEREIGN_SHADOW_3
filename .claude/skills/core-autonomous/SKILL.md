@@ -1,6 +1,6 @@
 ---
 name: core-autonomous
-description: 24/7 trading loops - MASTER_TRADING_LOOP, JANE_STREET_DEPLOYMENT. 8 autonomous systems that never sleep.
+description: 24/7 autonomous trading loops. Master trading loop, daily status, terminal interface. 8 automation modules. (project)
 ---
 
 # core/autonomous - 24/7 Trading Loops
@@ -9,24 +9,23 @@ description: 24/7 trading loops - MASTER_TRADING_LOOP, JANE_STREET_DEPLOYMENT. 8
 
 ## What It Does
 
-Continuous autonomous trading systems:
+Autonomous trading and monitoring systems that run 24/7:
 
-- **MASTER_TRADING_LOOP** - Main 24/7 orchestrator
-- **JANE_STREET_DEPLOYMENT** - HFT-style execution
-- **CLAUDE_TERMINAL** - AI terminal interface
-- **SHADOW_SYSTEM_LAUNCHER** - System bootstrap
-- **DAILY_STATUS_SYSTEM** - Daily reporting
-- **RAY_AUTOMATED_TRADING** - Distributed trading
+- **MASTER_TRADING_LOOP.py** - Main autonomous trading engine
+- **autonomous_trading_loop.py** - Secondary trading automation
+- **DAILY_STATUS_SYSTEM.py** - Daily portfolio/status reports
+- **SHADOW_SYSTEM_LAUNCHER.py** - System startup orchestration
 
 ## Key Modules
 
 ```
-MASTER_TRADING_LOOP.py         - 24/7 orchestrator
-JANE_STREET_DEPLOYMENT.py      - HFT execution
-CLAUDE_TERMINAL.py             - AI interface
-SHADOW_SYSTEM_LAUNCHER.py      - System startup
-DAILY_STATUS_SYSTEM.py         - Status reports
-RAY_AUTOMATED_TRADING.py       - Distributed ops
+MASTER_TRADING_LOOP.py       - Main 24/7 trading engine (25K+ lines)
+autonomous_trading_loop.py   - Autonomous trade execution
+DAILY_STATUS_SYSTEM.py       - Daily status reports
+SHADOW_SYSTEM_LAUNCHER.py    - System launcher
+JANE_STREET_DEPLOYMENT.py    - Advanced strategy deployment
+CLAUDE_TERMINAL.py           - Claude Code terminal interface
+TERMINAL_INTERFACE.py        - CLI interface
 ```
 
 ## How to Use
@@ -34,11 +33,11 @@ RAY_AUTOMATED_TRADING.py       - Distributed ops
 ```bash
 cd /Volumes/LegacySafe/SS_III/core/autonomous
 
-# Start 24/7 loop
+# Start master trading loop
 python MASTER_TRADING_LOOP.py
 
-# Run HFT deployment
-python JANE_STREET_DEPLOYMENT.py
+# Run daily status check
+python DAILY_STATUS_SYSTEM.py
 
 # Launch full system
 python SHADOW_SYSTEM_LAUNCHER.py
@@ -46,5 +45,5 @@ python SHADOW_SYSTEM_LAUNCHER.py
 
 ## Status
 
-- Files: 8 autonomous loops
-- Purpose: 24/7 trading, HFT execution, system orchestration
+- Files: 8 Python modules
+- Purpose: 24/7 autonomous trading, monitoring, status reporting

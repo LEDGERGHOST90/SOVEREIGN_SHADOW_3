@@ -1,5 +1,7 @@
 # 🏴 Sovereign Shadow Trading System
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json for current config.
+
 **Philosophy:** "Fearless. Bold. Smiling through chaos."
 
 ## 🎯 System Overview
@@ -14,7 +16,7 @@ A comprehensive cryptocurrency trading system with 55,379 Python files, designed
 - **Target:** $50,000 by Q4 2025
 
 ### 🧠 Neural Consciousness
-- **Live AI:** https://legacyloopshadowai.abacusai.app/
+- **Live AI:** https://shadow-ai-alpharunner-33906555678.us-west1.run.app/ (was legacyloopshadowai.abacusai.app)
 - **Authentication:** pilot@consciousness.void
 - **Status:** 🟢 OPERATIONAL
 
@@ -141,7 +143,7 @@ Complete documentation available in `Master_LOOP_Creation/`:
 
 ## 📞 Support
 
-- **Neural Consciousness:** https://legacyloopshadowai.abacusai.app/
+- **Neural Consciousness:** https://shadow-ai-alpharunner-33906555678.us-west1.run.app/
 - **Documentation:** `Master_LOOP_Creation/README_START_HERE.md`
 - **Quick Reference:** `Master_LOOP_Creation/SOVEREIGN_SHADOW_QUICK_REFERENCE.md`
 

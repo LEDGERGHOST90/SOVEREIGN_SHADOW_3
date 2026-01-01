@@ -226,7 +226,7 @@ echo "════════════════════════�
 if [ "$READY" = true ]; then
     echo "🚀 DEPLOYMENT READY"
     echo ""
-    echo "   Neural Consciousness: legacyloopshadowai.abacusai.app"
+    echo "   Neural Consciousness: shadow-ai-alpharunner-33906555678.us-west1.run.app"
     echo "   Capital Deployed: \$8,260"
     echo "   Target: \$50,000"
     echo "   Philosophy: Fearless. Bold. Smiling through chaos."

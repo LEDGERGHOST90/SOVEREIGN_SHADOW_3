@@ -237,7 +237,7 @@ Proprietary - Sovereign Shadow Trading Empire
 ## 🔗 Links
 
 - Main System: `/Volumes/LegacySafe/SovereignShadow/`
-- Neural Consciousness: `legacyloopshadowai.abacusai.app`
+- Neural Consciousness: `shadow-ai-alpharunner-33906555678.us-west1.run.app`
 - Documentation: `docs/reference/SHADOW_SCANNER_ARCHITECTURE.md`
 
 ---

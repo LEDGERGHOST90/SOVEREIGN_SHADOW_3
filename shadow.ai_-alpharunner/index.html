@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadow.Ai: AlphaRunner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #050505; /* True Black/Deep Slate */
+        color: #e2e8f0;
+      }
+      
+      /* Cyberpunk Selection */
+      ::selection {
+        background: #00f0ff; /* Cyber Cyan */
+        color: #000;
+      }
+
+      /* Scrollbar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #0f172a; 
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #ef4444; /* Neon Red thumb */
+        border-radius: 0px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #00f0ff; /* Cyan hover */
+      }
+
+      /* Animations */
+      @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+      }
+      .scanline::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba(0, 240, 255, 0.3);
+        opacity: 0.5;
+        animation: scanline 4s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+        50% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+      }
+      .animate-pulse-glow {
+        animation: pulse-glow 2s infinite;
+      }
+
+      /* Font Utilities */
+      .font-mono-tech {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      
+      .clip-corner {
+        clip-path: polygon(
+          0 0, 
+          100% 0, 
+          100% calc(100% - 10px), 
+          calc(100% - 10px) 100%, 
+          0 100%
+        );
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

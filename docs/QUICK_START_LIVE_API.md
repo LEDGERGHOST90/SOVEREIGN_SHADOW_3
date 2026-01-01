@@ -1,7 +1,9 @@
 # 🚀 QUICK START: CONNECT FRONTEND TO LIVE API
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
 **Date:** October 31, 2025
-**Goal:** Connect your Abacus.AI dashboard to live portfolio and trading data
+**Goal:** Connect your dashboard to live portfolio and trading data
 
 ---
 

@@ -2,11 +2,11 @@
 """
 🧠 NEURAL CONSCIOUSNESS INTEGRATION
 
-Connects Sovereign Legacy Loop (Abacus AI) to Master Trading Loop.
+Connects Sovereign Legacy Loop to Master Trading Loop.
 Provides AI-powered strategy selection, risk assessment, and opportunity analysis.
 
 Architecture:
-    🧠 Abacus AI (legacyloopshadowai.abacusai.app)
+    🧠 AlphaRunner GCP (shadow-ai-alpharunner-33906555678.us-west1.run.app)
          ↓
     🏴 Sovereign Legacy Loop (Neural Orchestration)
          ↓
@@ -34,7 +34,7 @@ from shadow_sdk.utils import setup_logger
 # ═══════════════════════════════════════════════════════════════════════════
 
 NEURAL_CONFIG = {
-    "interface_url": "https://legacyloopshadowai.abacusai.app",
+    "interface_url": "https://shadow-ai-alpharunner-33906555678.us-west1.run.app",
     "authentication": {
         "email": "LedgerGhost90",
         "method": "neural_access_code"

@@ -1,5 +1,7 @@
 # Deploying SovereignShadow to Abacus AI
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
 ## Quick Start (Local Testing)
 
 ```bash

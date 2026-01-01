@@ -1,6 +1,6 @@
 [
   {
-    "id": "PT-20251219183051",
+    "id": "PT-20251219183051-BTC",
     "signal_id": "SIG-20251219183051",
     "timestamp": "2025-12-19T18:30:51.166466",
     "symbol": "BTC",
@@ -17,7 +17,7 @@
     "pnl_pct": null
   },
   {
-    "id": "PT-20251219183051",
+    "id": "PT-20251219183051-XRP",
     "signal_id": "SIG-20251219183051",
     "timestamp": "2025-12-19T18:30:51.168606",
     "symbol": "XRP",
@@ -27,14 +27,14 @@
     "stop_loss": 1.843,
     "take_profit": 1.995,
     "is_paper": true,
-    "status": "OPEN",
-    "exit_price": null,
-    "exit_timestamp": null,
-    "pnl_usd": null,
-    "pnl_pct": null
+    "status": "CLOSED",
+    "exit_price": 1.84,
+    "exit_timestamp": "2025-12-26T08:14:33.420620",
+    "pnl_usd": -0.7894736842105241,
+    "pnl_pct": -3.1578947368420964
   },
   {
-    "id": "PT-20251219183051",
+    "id": "PT-20251219183051-SOL",
     "signal_id": "SIG-20251219183051",
     "timestamp": "2025-12-19T18:30:51.170225",
     "symbol": "SOL",
@@ -43,6 +43,23 @@
     "position_size_usd": 25.0,
     "stop_loss": 121.7835,
     "take_profit": 131.8275,
+    "is_paper": true,
+    "status": "OPEN",
+    "exit_price": null,
+    "exit_timestamp": null,
+    "pnl_usd": null,
+    "pnl_pct": null
+  },
+  {
+    "id": "PT-20251226012752-APT",
+    "signal_id": "SIG-20251226012752",
+    "timestamp": "2025-12-26T01:27:52.650397",
+    "symbol": "APT",
+    "action": "SHORT",
+    "entry_price": 1.6723,
+    "position_size_usd": 25.0,
+    "stop_loss": 1.722469,
+    "take_profit": 1.588685,
     "is_paper": true,
     "status": "OPEN",
     "exit_price": null,

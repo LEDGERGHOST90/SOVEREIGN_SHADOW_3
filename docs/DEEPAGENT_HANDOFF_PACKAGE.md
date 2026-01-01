@@ -1,6 +1,8 @@
 # 🧠 DEEPAGENT HANDOFF - WEB INTEGRATION PACKAGE
 
-## 🎯 **MISSION: Integrate Sovereign Shadow System into legacyloopshadowai.abacusai.app**
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
+## 🎯 **MISSION: Integrate Sovereign Shadow System (was legacyloopshadowai.abacusai.app, now GCP)**
 
 ---
 

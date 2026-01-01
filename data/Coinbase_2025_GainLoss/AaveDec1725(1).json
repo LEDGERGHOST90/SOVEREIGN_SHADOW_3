@@ -1,0 +1,141 @@
+[
+  {
+    "action": "Repay",
+    "id": "0x5366f1452480d9265216878f04e3c18b66a45d3cb021a1710e45e5393f52c5f4",
+    "reserve": {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "underlyingAsset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    },
+    "timestamp": 1762304855,
+    "txHash": "0x5366f1452480d9265216878f04e3c18b66a45d3cb021a1710e45e5393f52c5f4",
+    "amount": "500.0",
+    "assetPriceUSD": "0.99993257"
+  },
+  {
+    "action": "Repay",
+    "id": "0x835a1b86ea4cbfffe974c441c0d05312ce8a7e222c3fc13c8ff7a81dd9585239",
+    "reserve": {
+      "name": "USDtb",
+      "symbol": "USDtb",
+      "decimals": 18,
+      "underlyingAsset": "0xC139190F447e929f090Edeb554D95AbB8b18aC1C"
+    },
+    "timestamp": 1761633071,
+    "txHash": "0x835a1b86ea4cbfffe974c441c0d05312ce8a7e222c3fc13c8ff7a81dd9585239",
+    "amount": "795.0",
+    "assetPriceUSD": "0"
+  },
+  {
+    "action": "Borrow",
+    "id": "0x78ebdc80180a3911392fe95fcfdab61e8fa8810801947af01715e363cc7e884b",
+    "reserve": {
+      "name": "USDtb",
+      "symbol": "USDtb",
+      "decimals": 18,
+      "underlyingAsset": "0xC139190F447e929f090Edeb554D95AbB8b18aC1C"
+    },
+    "timestamp": 1761530147,
+    "txHash": "0x78ebdc80180a3911392fe95fcfdab61e8fa8810801947af01715e363cc7e884b",
+    "amount": "800.0",
+    "assetPriceUSD": "0"
+  },
+  {
+    "action": "Supply",
+    "id": "0xa50ca42f7148d484de2c5828752029a4ad0d2d6099035c3dc1e2d9ab7f9b9262",
+    "reserve": {
+      "name": "Wrapped liquid staked Ether 2.0",
+      "symbol": "wstETH",
+      "decimals": 18,
+      "underlyingAsset": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+    },
+    "timestamp": 1761527879,
+    "txHash": "0xa50ca42f7148d484de2c5828752029a4ad0d2d6099035c3dc1e2d9ab7f9b9262",
+    "amount": "0.07174544135214962",
+    "assetPriceUSD": "0"
+  },
+  {
+    "action": "Borrow",
+    "id": "0xfd3ab831b4100f4d9d37ab6c1d2acced5a487dbef20d4ab874d822486db6280a",
+    "reserve": {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "underlyingAsset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    },
+    "timestamp": 1760604671,
+    "txHash": "0xfd3ab831b4100f4d9d37ab6c1d2acced5a487dbef20d4ab874d822486db6280a",
+    "amount": "200.0",
+    "assetPriceUSD": "0.99993257"
+  },
+  {
+    "action": "Borrow",
+    "id": "0x43028bb827c29c80ee6cb814d464b8f9b3584bfb1af31eec0538842f27820626",
+    "reserve": {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "underlyingAsset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    },
+    "timestamp": 1760316395,
+    "txHash": "0x43028bb827c29c80ee6cb814d464b8f9b3584bfb1af31eec0538842f27820626",
+    "amount": "950.0",
+    "assetPriceUSD": "0.99993257"
+  },
+  {
+    "action": "Repay",
+    "id": "0x3f4abdde308e138d0180b7bc40b9fe4b4828c20ed13cea74fd5758581b8212a7",
+    "reserve": {
+      "name": "Wrapped liquid staked Ether 2.0",
+      "symbol": "wstETH",
+      "decimals": 18,
+      "underlyingAsset": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+    },
+    "timestamp": 1760315735,
+    "txHash": "0x3f4abdde308e138d0180b7bc40b9fe4b4828c20ed13cea74fd5758581b8212a7",
+    "amount": "0.582862536192542359",
+    "assetPriceUSD": "0"
+  },
+  {
+    "action": "Borrow",
+    "id": "0x96c6a776e23834a43e844f25b2de3bf9cb14b7e2122b8c1667d643fdd7265c12",
+    "reserve": {
+      "name": "Wrapped liquid staked Ether 2.0",
+      "symbol": "wstETH",
+      "decimals": 18,
+      "underlyingAsset": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+    },
+    "timestamp": 1760314631,
+    "txHash": "0x96c6a776e23834a43e844f25b2de3bf9cb14b7e2122b8c1667d643fdd7265c12",
+    "amount": "0.582862500072279678",
+    "assetPriceUSD": "0"
+  },
+  {
+    "action": "Supply",
+    "id": "0xc5c061893133a1a1871d2e1cc5442d50d39cf6ad19b5ed3460e8e1a38d521a3a",
+    "reserve": {
+      "name": "Wrapped liquid staked Ether 2.0",
+      "symbol": "wstETH",
+      "decimals": 18,
+      "underlyingAsset": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+    },
+    "timestamp": 1760314571,
+    "txHash": "0xc5c061893133a1a1871d2e1cc5442d50d39cf6ad19b5ed3460e8e1a38d521a3a",
+    "amount": "0.75",
+    "assetPriceUSD": "0"
+  },
+  {
+    "action": "UsageAsCollateral",
+    "fromState": false,
+    "id": "0xc5c061893133a1a1871d2e1cc5442d50d39cf6ad19b5ed3460e8e1a38d521a3a",
+    "reserve": {
+      "name": "Wrapped liquid staked Ether 2.0",
+      "symbol": "wstETH",
+      "underlyingAsset": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+    },
+    "timestamp": 1760314571,
+    "toState": true,
+    "txHash": "0xc5c061893133a1a1871d2e1cc5442d50d39cf6ad19b5ed3460e8e1a38d521a3a"
+  }
+]

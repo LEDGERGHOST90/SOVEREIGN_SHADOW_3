@@ -67,7 +67,7 @@ SYSTEMS = {
     "olympus": "/Volumes/LegacySafe/BOTSzips/OLYMPUS_ELITE_UNIFIED_FINAL.zip",
     "shadow_ai": "/Volumes/LegacySafe/BOTSzips/Shadow_ai",
     "okx_api": "/Volumes/LegacySafe/BOTSzips/Unzip and Apply OKX API and Passphrase.zip",
-    "abacus_ai": "https://sovereign-legacy-looping.abacusai.app/"
+    "replit_dashboard": "https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev/"
 }
 
 

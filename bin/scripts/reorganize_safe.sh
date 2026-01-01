@@ -184,7 +184,7 @@ This folder contains all files for DeepAgent web integration on Abacus AI.
   - `DEEPAGENT_INTEGRATION_PACKAGE.tar.gz` - Compressed package
 
 ## Website:
-https://legacyloopshadowai.abacusai.app
+https://shadow-ai-alpharunner-33906555678.us-west1.run.app
 
 ## Usage:
 1. Send `PROMPT_TO_SEND_DEEPAGENT.md` to DeepAgent

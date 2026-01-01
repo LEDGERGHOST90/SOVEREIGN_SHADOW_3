@@ -70,7 +70,7 @@ python -m meme_machine --whales
 
 ### TIER 3: STRATEGY SCOUT (Manual/On-Demand)
 ```
-URL: https://sovereignnshadowii.abacusai.app
+URL: https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev
 
 WORKFLOW:
 1. Drop audio/video of trading strategy

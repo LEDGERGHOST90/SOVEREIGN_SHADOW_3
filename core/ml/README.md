@@ -478,7 +478,7 @@ Part of SOVEREIGN_SHADOW_3 trading system.
 
 - System: SOVEREIGN_SHADOW_3
 - Location: /Volumes/LegacySafe/SS_III/
-- Website: sovereignnshadowii.abacusai.app
+- Website: 1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev
 - Notifications: ntfy.sh/sovereignshadow_dc4d2fa1
 
 ---

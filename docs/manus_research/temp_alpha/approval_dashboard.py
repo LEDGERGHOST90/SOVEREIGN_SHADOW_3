@@ -9,6 +9,7 @@ Then open: http://localhost:8080
 
 import json
 from datetime import datetime
+
 from pathlib import Path
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse

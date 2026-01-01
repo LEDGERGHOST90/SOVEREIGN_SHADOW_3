@@ -1,6 +1,8 @@
 # 🚀 REPLIT QUICK START - New Systems Setup
 
-**Last Updated:** November 19, 2025
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
+**Last Updated:** December 29, 2025
 **Purpose:** Get your SovereignShadow_II system running on Replit for remote access
 
 ---
@@ -64,7 +66,7 @@ ABACUSAI_API_KEY=your_abacusai_api_key
 
 # NextAuth
 NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=https://sovereignnshadowii.abacusai.app
+NEXTAUTH_URL=https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev
 
 # Database
 DATABASE_URL=postgresql://user:pass@host:5432/db?connect_timeout=15
@@ -207,7 +209,7 @@ python3 agents/master_trading_system.py
 
 ## 🌐 STEP 5: CONNECT TO YOUR WEBSITE
 
-Your website: `sovereignnshadowii.abacusai.app`
+Your website: `1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`
 
 ### Update Frontend API URL
 
@@ -327,5 +329,5 @@ print(f\"Last updated: {state['last_updated']}\")
 
 **🎯 You're ready to deploy! Start with paper trading and work your way up.**
 
-**Website:** https://sovereignnshadowii.abacusai.app
+**Website:** https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev
 **Repo:** https://github.com/LEDGERGHOST90/SovereignShadow_II

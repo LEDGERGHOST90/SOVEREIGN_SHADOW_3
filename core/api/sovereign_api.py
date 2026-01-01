@@ -2,7 +2,7 @@
 """
 SovereignShadow Unified API
 Bridge between Gemini frontend and Python trading backend
-Deploy to: sovereignnshadowii.abacusai.app/api
+Deploy to: 1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev/api
 """
 
 import os
@@ -26,14 +26,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS - Allow Gemini frontend and Abacus domain
+# CORS - Allow Gemini frontend and active domains
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",  # Vite dev server
         "http://localhost:3000",
-        "https://sovereignnshadowii.abacusai.app",
-        "https://*.abacusai.app"
+        "https://1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev",
+        "https://shadow-ai-alpharunner-33906555678.us-west1.run.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],

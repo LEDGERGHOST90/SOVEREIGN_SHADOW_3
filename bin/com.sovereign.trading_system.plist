@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sovereign.trading_system</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Volumes/LegacySafe/SS_III/bin/start_system.sh</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Volumes/LegacySafe/SS_III</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Volumes/LegacySafe/SS_III/logs/system_stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Volumes/LegacySafe/SS_III/logs/system_stderr.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/memphis/.pyenv/shims:/Users/memphis/.pyenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONPATH</key>
+        <string>/Volumes/LegacySafe/SS_III</string>
+        <key>PYENV_ROOT</key>
+        <string>/Users/memphis/.pyenv</string>
+    </dict>
+</dict>
+</plist>

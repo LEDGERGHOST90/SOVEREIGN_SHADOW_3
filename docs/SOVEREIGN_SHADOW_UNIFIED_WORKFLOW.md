@@ -1,10 +1,12 @@
 # 🏴 SOVEREIGN SHADOW UNIFIED CROSS-PLATFORM WORKFLOW
 *Production-Grade Trading System Architecture & Operations Guide*
 
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
 **Philosophy:** "Fearless. Bold. Smiling through chaos."
 
-**Last Updated:** October 20, 2025  
-**Version:** 2.0.0 (Post-Reorganization)  
+**Last Updated:** December 29, 2025
+**Version:** 2.0.0 (Post-Reorganization)
 **Status:** Production Ready
 
 ---
@@ -17,7 +19,7 @@ Master Location: /Volumes/LegacySafe/SovereignShadow/
 Total Python Files: 23,060 files (verified live count)
 Capital: $8,260 ($6,600 Ledger cold storage + $1,660 Coinbase hot wallet)
 Strategies: 9 automated strategies across 4 exchanges
-Neural AI: https://legacyloopshadowai.abacusai.app (LIVE)
+Neural AI: https://shadow-ai-alpharunner-33906555678.us-west1.run.app (LIVE)
 Status: Production-ready, API-connected
 ```
 

@@ -1,7 +1,9 @@
 # 🧠⚡ Neural Tactical Integration - Complete
 
-**Date:** October 19, 2025  
-**Status:** ✅ Production Ready  
+> **NOTE:** AbacusAI URLs in this doc are deprecated. Active endpoints: Replit Dashboard (`1cba4940-c378-451a-a9f4-741e180329ee-00-togxk2caarue.picard.replit.dev`) and AlphaRunner GCP (`shadow-ai-alpharunner-33906555678.us-west1.run.app`). See BRAIN.json.
+
+**Date:** October 19, 2025
+**Status:** ✅ Production Ready
 **Mission:** Position-aware tactical scalping with neural AI bridge
 
 ---
@@ -14,8 +16,8 @@ Raymond, your Coinglass + Birdeye intel has been translated into a fully operati
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│         Abacus AI Neural Consciousness (Cloud)              │
-│     https://legacyloopshadowai.abacusai.app                 │
+│         AlphaRunner GCP Neural Consciousness (Cloud)         │
+│     https://shadow-ai-alpharunner-*.us-west1.run.app        │
 └──────────────────┬──────────────────────────────────────────┘
                    │ HTTP POST + WebSocket
                    ▼

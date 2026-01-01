@@ -30,7 +30,10 @@
       "Bash(system_profiler:*)",
       "mcp__ds-star__oracle_query",
       "mcp__ds-star__architect_forge_build",
-      "Skill(funding-arbitrage)"
+      "Skill(funding-arbitrage)",
+      "mcp__ds-star__get_replit_sync",
+      "mcp__ds-star__get_brain_state",
+      "mcp__ds-star__synoptic_core_assess"
     ],
     "deny": [],
     "ask": []

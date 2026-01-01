@@ -1,0 +1,6 @@
+
+{
+  "name": "Shadow.Ai: AlphaRunner",
+  "description": "The Autonomous Execution Terminal. Coordinate G.I.O., Claude, and Manus to hunt for alpha in the shadows. Execute strategies, analyze markets, and run the swarm.",
+  "requestFramePermissions": []
+}

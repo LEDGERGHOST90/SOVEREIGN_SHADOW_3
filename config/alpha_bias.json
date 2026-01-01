@@ -1,0 +1,113 @@
+{
+  "version": "1.0",
+  "generated": "2025-12-28T03:30:00Z",
+  "source": "ALPHA_DIGEST (54 Manus reports)",
+
+  "market_regime": {
+    "classification": "TRANSITIONAL_BULLISH",
+    "peak_indicators_triggered": 0,
+    "peak_indicators_total": 30,
+    "progress_to_peak_pct": 43.46,
+    "fear_greed_index": 20,
+    "fear_greed_status": "EXTREME_FEAR",
+    "consecutive_fear_days": 14,
+    "recommendation": "ACCUMULATE"
+  },
+
+  "execution_bias": {
+    "long_bias": 0.75,
+    "short_bias": 0.25,
+    "position_size_multiplier": 1.2,
+    "confidence_threshold": 60,
+    "max_concurrent_positions": 5
+  },
+
+  "contrarian_signals": {
+    "hash_rate_decline": true,
+    "hash_rate_signal": "BULLISH",
+    "extreme_fear_accumulation": true,
+    "corporate_buying": true,
+    "lth_distribution_pct": 95.82,
+    "note": "Hash rate -4% historically yields +72% 180-day returns (77% win rate)"
+  },
+
+  "sector_weights": {
+    "RWA": { "weight": 0.25, "rating": "VERY_HIGH", "tokens": ["ONDO", "PLUME", "LINK"] },
+    "AI_CRYPTO": { "weight": 0.20, "rating": "HIGH", "tokens": ["TAO", "RNDR", "FET"] },
+    "DEFI": { "weight": 0.20, "rating": "MEDIUM_HIGH", "tokens": ["AAVE", "PENDLE", "ENA", "LDO"] },
+    "PRIVACY": { "weight": 0.10, "rating": "MEDIUM_HIGH", "tokens": ["ZEC", "PROVE"] },
+    "BLUE_CHIP": { "weight": 0.25, "rating": "HIGH", "tokens": ["BTC", "ETH", "SOL"] }
+  },
+
+  "whale_signals": {
+    "accumulation_alerts": [
+      { "token": "AVNT", "sector": "DEX", "signal": "+11M tokens", "priority": "HIGH" },
+      { "token": "PROVE", "sector": "ZK", "signal": "+5.34%", "priority": "MEDIUM" },
+      { "token": "PLUME", "sector": "RWA", "signal": "+7B tokens", "priority": "HIGH" }
+    ],
+    "hayes_rotation": {
+      "active": true,
+      "tokens": ["ENA", "PENDLE", "LDO", "ETHFI"],
+      "thesis": "DeFi rotation as rates decline"
+    }
+  },
+
+  "risk_parameters": {
+    "max_leverage": 3,
+    "stop_loss_pct": 5,
+    "take_profit_1_pct": 15,
+    "take_profit_2_pct": 30,
+    "trailing_stop_activation_pct": 10,
+    "trailing_stop_distance_pct": 5,
+    "time_stop_hours": 48,
+    "avoid_leverage_above": 5,
+    "avoid_exotic_stablecoins": ["USDe"]
+  },
+
+  "key_levels": {
+    "BTC": {
+      "bear_floor": 56000,
+      "fair_value": 81300,
+      "current": 87000,
+      "golden_ratio": 135522,
+      "terminal": 187702
+    }
+  },
+
+  "autonomous_rules": {
+    "tier_1_auto": {
+      "description": "Execute automatically without human approval",
+      "conditions": [
+        "Position size < $50",
+        "Asset in BLUE_CHIP sector",
+        "Confidence > 80",
+        "Within daily loss limit"
+      ]
+    },
+    "tier_2_queue": {
+      "description": "Queue for human approval",
+      "conditions": [
+        "Position size $50-$200",
+        "Any sector",
+        "Confidence 60-80",
+        "New asset not traded before"
+      ]
+    },
+    "tier_3_alert": {
+      "description": "Alert only, no execution",
+      "conditions": [
+        "Position size > $200",
+        "Confidence < 60",
+        "Whale accumulation signal",
+        "Sector rotation opportunity"
+      ]
+    }
+  },
+
+  "watchlist": {
+    "immediate": ["ENA", "PENDLE", "LDO"],
+    "accumulate_on_dip": ["BTC", "ETH", "SOL"],
+    "whale_tracking": ["AVNT", "PROVE", "PLUME"],
+    "avoid": ["USDe", "high_leverage_positions"]
+  }
+}
