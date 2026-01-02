@@ -57,6 +57,8 @@ import sys
 # Add paths for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
+from ..intelligence.decision_tracer import get_tracer
+
 logger = logging.getLogger(__name__)
 
 
@@ -71,6 +73,7 @@ class SwarmSignal:
     reasoning: List[str]
     alpha_sources: Dict[str, float]  # {"on_chain": 0.16, "news": 0.09, "reflection": 0.11}
     timestamp: datetime = None
+    trace_id: str = None  # Decision trace ID for debugging
 
     def to_dict(self) -> Dict:
         return {
@@ -81,7 +84,8 @@ class SwarmSignal:
             "agent_count": len(self.agent_votes),
             "reasoning": self.reasoning,
             "alpha_sources": self.alpha_sources,
-            "timestamp": self.timestamp.isoformat() if self.timestamp else None
+            "timestamp": self.timestamp.isoformat() if self.timestamp else None,
+            "trace_id": self.trace_id
         }
 
 
@@ -263,6 +267,11 @@ class SwarmIntegration:
         logger.info(f"SWARM SIGNAL REQUEST: {symbol}")
         logger.info(f"{'='*60}")
 
+        # Start decision trace for debugging
+        tracer = get_tracer()
+        trace_id = tracer.start_trace(symbol)
+        logger.info(f"  📊 Trace started: {trace_id}")
+
         votes: Dict[str, Dict] = {}
         alpha_sources = {}
 
@@ -280,6 +289,18 @@ class SwarmIntegration:
                 whale_vote = await self.whale_watcher.analyze_market(market_data)
                 votes["whale_watcher"] = whale_vote
                 alpha_sources["on_chain"] = 0.16
+
+                # Record vote in trace
+                tracer.record_swarm_vote(
+                    trace_id=trace_id,
+                    agent_id="swarm_whale_watcher",
+                    agent_type="whale_watcher",
+                    decision=whale_vote.get('decision', 'hold'),
+                    confidence=whale_vote.get('confidence', 0),
+                    reasoning=whale_vote.get('reasoning', ''),
+                    data_sources=whale_vote.get('data_sources', [])
+                )
+
                 logger.info(f"  🐋 WhaleWatcher: {whale_vote.get('decision', 'hold').upper()} "
                            f"({whale_vote.get('confidence', 0):.0%})")
             except Exception as e:
@@ -291,6 +312,18 @@ class SwarmIntegration:
                 manus_vote = await self.manus_researcher.analyze_market(market_data)
                 votes["manus_researcher"] = manus_vote
                 alpha_sources["news_sentiment"] = 0.09
+
+                # Record vote in trace
+                tracer.record_swarm_vote(
+                    trace_id=trace_id,
+                    agent_id="swarm_manus",
+                    agent_type="manus_researcher",
+                    decision=manus_vote.get('decision', 'hold'),
+                    confidence=manus_vote.get('confidence', 0),
+                    reasoning=manus_vote.get('reasoning', ''),
+                    data_sources=manus_vote.get('data_sources', [])
+                )
+
                 logger.info(f"  📚 ManusResearcher: {manus_vote.get('decision', 'hold').upper()} "
                            f"({manus_vote.get('confidence', 0):.0%})")
             except Exception as e:
@@ -303,6 +336,18 @@ class SwarmIntegration:
                 votes["sentiment_scanner"] = sentiment_vote
                 if "news_sentiment" not in alpha_sources:
                     alpha_sources["sentiment"] = 0.09
+
+                # Record vote in trace
+                tracer.record_swarm_vote(
+                    trace_id=trace_id,
+                    agent_id="swarm_sentiment",
+                    agent_type="sentiment_scanner",
+                    decision=sentiment_vote.get('decision', 'hold'),
+                    confidence=sentiment_vote.get('confidence', 0),
+                    reasoning=sentiment_vote.get('reasoning', ''),
+                    data_sources=sentiment_vote.get('data_sources', [])
+                )
+
                 logger.info(f"  📱 SentimentScanner: {sentiment_vote.get('decision', 'hold').upper()} "
                            f"({sentiment_vote.get('confidence', 0):.0%})")
             except Exception as e:
@@ -323,6 +368,27 @@ class SwarmIntegration:
         # Build consensus
         signal = self._build_consensus(votes, reflection_guidance, alpha_sources)
 
+        # Add trace_id to signal
+        signal.trace_id = trace_id
+
+        # Record the final decision in trace
+        reflection_approach = reflection_guidance.get('recommended_approach', 'balanced') if reflection_guidance else 'balanced'
+        reflection_adjustment = reflection_guidance.get('confidence_adjustment', 1.0) if reflection_guidance else 1.0
+
+        tracer.record_decision(
+            trace_id=trace_id,
+            symbol=symbol,
+            decision=signal.decision,
+            confidence=signal.confidence * 100,  # Convert to percentage
+            consensus_reached=signal.consensus_reached,
+            vote_breakdown=signal.vote_breakdown,
+            strategy_selected="",  # Will be set by orchestrator
+            position_size_multiplier=1.0,  # Will be adjusted by orchestrator
+            reflection_adjustment=reflection_adjustment,
+            reflection_approach=reflection_approach,
+            final_reasoning="; ".join(signal.reasoning[:3])  # First 3 reasons
+        )
+
         # Update stats
         self.stats["signals_generated"] += 1
         if signal.consensus_reached:
@@ -341,6 +407,7 @@ class SwarmIntegration:
         logger.info(f"SWARM CONSENSUS: {signal.decision.upper()}")
         logger.info(f"Confidence: {signal.confidence:.0%}")
         logger.info(f"Consensus: {'✅ YES' if signal.consensus_reached else '❌ NO'}")
+        logger.info(f"Trace ID: {trace_id}")
         logger.info(f"{'='*60}\n")
 
         return signal
@@ -434,10 +501,13 @@ class SwarmIntegration:
         pnl_percent: float,
         news_sentiment: str = "neutral",
         on_chain_signal: str = "neutral",
-        reasoning: str = ""
+        reasoning: str = "",
+        trace_id: str = None,
+        duration_minutes: int = None,
+        exit_reason: str = None
     ):
         """
-        Record trade outcome for reflection learning.
+        Record trade outcome for reflection learning and decision tracing.
 
         This enables the +11% alpha from reflection mechanism.
 
@@ -454,7 +524,11 @@ class SwarmIntegration:
             news_sentiment: Manus news sentiment (bullish/bearish/neutral)
             on_chain_signal: On-chain signal (bullish/bearish/neutral)
             reasoning: Why the trade was made
+            trace_id: Decision trace ID (for debugging)
+            duration_minutes: Trade duration in minutes
+            exit_reason: Reason for exit (STOP_LOSS, TAKE_PROFIT, SIGNAL_EXIT)
         """
+        # Record in Reflection Agent for learning
         if self.reflection_agent:
             try:
                 # ReflectionAgent.record_trade() takes individual params, not a dataclass
@@ -475,6 +549,24 @@ class SwarmIntegration:
 
             except Exception as e:
                 logger.error(f"❌ Failed to record trade for reflection: {e}")
+
+        # Record in Decision Tracer for debugging
+        if trace_id:
+            try:
+                tracer = get_tracer()
+                tracer.record_outcome(
+                    trace_id=trace_id,
+                    executed=True,
+                    entry_price=entry_price,
+                    exit_price=exit_price,
+                    pnl=pnl,
+                    pnl_percent=pnl_percent,
+                    exit_reason=exit_reason,
+                    duration_minutes=duration_minutes
+                )
+                logger.info(f"✅ Trace outcome recorded: {trace_id}")
+            except Exception as e:
+                logger.error(f"❌ Failed to record trace outcome: {e}")
 
     def get_stats(self) -> Dict:
         """Get swarm integration statistics"""

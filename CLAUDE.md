@@ -28,6 +28,59 @@ git pull origin main
 cat BRAIN.json | head -50
 ```
 
+---
+
+## ⚠️ CRITICAL RULE: SEARCH BEFORE BUILD ⚠️
+
+**This rule is MANDATORY. Violations waste the user's time and fragment the codebase.**
+
+### Before Creating ANY New File or Function:
+
+```bash
+# 1. Search for existing implementation
+grep -r "keyword" /Volumes/LegacySafe/SS_III --include="*.py" | head -20
+
+# 2. Check existing modules
+ls /Volumes/LegacySafe/SS_III/core/
+ls /Volumes/LegacySafe/SS_III/.claude/skills/
+
+# 3. Read related files before proposing changes
+```
+
+### The Rule:
+1. **SEARCH FIRST** - Always grep/find before building
+2. **INTEGRATE** - Add to existing modules, don't create standalone files
+3. **CONNECT** - New code must import from and connect to existing SS_III systems
+4. **ASK** - If unsure whether something exists, ASK the user
+5. **NEVER** build a "new standalone" when the feature exists somewhere
+
+### Why This Matters:
+- SS_III has 150+ core modules, 15 skills, 75+ strategies
+- Previous Claude sessions built duplicates without searching
+- User has rebuilt the same features multiple times unknowingly
+- The codebase became fragmented instead of unified
+
+### Examples of WRONG Behavior:
+❌ "Let me build a position monitor" → Creates `bin/position_monitor.py`
+❌ "I'll create a new TP/SL system" → Ignores existing `core/trading/tactical_risk_gate.py`
+❌ "Let me write a regime detector" → Doesn't know `core/regime/hmm_regime_detector.py` exists
+
+### Examples of CORRECT Behavior:
+✅ "Let me search for existing position monitoring..." → Finds `core/autonomous/MASTER_TRADING_LOOP.py`
+✅ "I found TP/SL logic in 75 files. Which should I extend?" → Asks user
+✅ "Adding CoinGlass to existing `core/integrations/live_data_pipeline.py`" → Integrates
+
+### Before Every Session:
+```bash
+# Understand what exists
+find /Volumes/LegacySafe/SS_III/core -name "*.py" | wc -l
+ls /Volumes/LegacySafe/SS_III/.claude/skills/
+```
+
+**If you skip this step and build something that already exists, you are wasting the user's time and money.**
+
+---
+
 ### Key Files
 - `BRAIN.json` - Current state (portfolio, rules, tasks)
 - `AI_COLLABORATION.md` - How all AIs work together
@@ -120,18 +173,24 @@ curl -d "EOD Complete: [summary]" ntfy.sh/sovereignshadow_dc4d2fa1
 
 **PORTFOLIO_GROWTH** (AAVE = Strategic Good Debt)
 - AAVE debt (~$609) is KEPT as strategic leverage
-- Health Factor: 3.98 (min threshold: 2.5)
+- Health Factor: 3.96 (min threshold: 2.5)
 - Focus: Grow exchange holdings, capture swing opportunities
+
+**Portfolio (2026-01-01):**
+- Net Worth: ~$5,438
+- Ledger Cold Storage: ~$5,000
+- Exchange Capital: ~$950 (Coinbase $764, Binance US $111, Kraken $73)
 
 **AAVE Rules (HARDCODED):**
 - DO NOT repay debt unless HF < 2.5
-- Collateral: wstETH (earning yield)
-- Debt status: LOCKED IN as good debt
+- Collateral: wstETH (~$2,979)
+- Debt: ~$609 (LOCKED IN as good debt)
 
 **Active AI Basket (Coinbase):**
-- FET: 916.1 @ $0.21 | Current: $0.21
-- RENDER: 123.8 @ $1.28 | Current: $1.53 (+20%)
-- SUI: 90.7 @ $1.44 | Current: $1.45
+- LINK: 16.21 @ $12.43 = $201
+- FET: 916.1 @ $0.21 = $192
+- RENDER: 123.8 @ $1.35 = $167
+- SUI: 90.7 @ $1.44 = $131
 
 ---
 

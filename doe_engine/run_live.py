@@ -25,10 +25,10 @@ logging.basicConfig(
 logger = logging.getLogger('doe_live')
 
 # Import D.O.E. components
-from core.orchestration.orchestrator import SovereignShadowOrchestrator, OrchestratorConfig
-from core.intelligence.regime_detector import get_regime_detector
-from core.intelligence.strategy_selector import get_strategy_selector
-from core.intelligence.performance_tracker import get_performance_tracker
+from doe_engine.core.orchestration import SovereignShadowOrchestrator, OrchestratorConfig
+from doe_engine.core.intelligence.regime_detector import get_regime_detector
+from doe_engine.core.intelligence.strategy_selector import get_strategy_selector
+from doe_engine.core.intelligence.performance_tracker import get_performance_tracker
 
 
 class CoinbaseLiveConnector:

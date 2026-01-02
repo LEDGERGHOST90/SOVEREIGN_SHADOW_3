@@ -5,7 +5,7 @@ Extracted from archives - Dec 9, 2025
 """
 
 from .core.hive_mind import HiveMind, ConsensusDecision, AgentVote
-from .core.trading_agent import TradingAgent, MarketData, TradingDecision, DecisionType
+from .core.swarm_agent_base import TradingAgent, MarketData, TradingDecision, DecisionType
 
 __all__ = [
     'HiveMind', 'ConsensusDecision', 'AgentVote',

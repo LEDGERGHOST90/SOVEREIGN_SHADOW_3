@@ -16,7 +16,7 @@ import math
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from core.agents_highlevel.trading_agent import TradingAgent, AgentBrain, MarketData, DecisionType
+from core.swarm.core.swarm_agent_base import TradingAgent, AgentBrain, MarketData, DecisionType
 
 logger = logging.getLogger(__name__)
 

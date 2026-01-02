@@ -1,0 +1,23 @@
+{
+  "topic": "MACD crossover strategy crypto",
+  "timestamp": "2025-12-23T23:02:21.063230",
+  "findings": {
+    "topic": "MACD crossover strategy crypto",
+    "potential_strategies": [
+      {
+        "name": "MACD Crossover",
+        "entry": [
+          "MACD crosses above signal"
+        ],
+        "exit": [
+          "MACD crosses below signal"
+        ],
+        "timeframe": "1h"
+      }
+    ],
+    "key_indicators": [
+      "MACD"
+    ],
+    "notes": "Research pending for: MACD crossover strategy crypto"
+  }
+}

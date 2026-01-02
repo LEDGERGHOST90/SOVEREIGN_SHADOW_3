@@ -8,7 +8,7 @@ Master Orchestrator implementing D.O.E. Pattern:
 - Learning Layer: Performance Tracking
 """
 
-from .orchestrator import (
+from .doe_orchestrator import (
     SovereignShadowOrchestrator,
     OrchestratorConfig,
     Position,

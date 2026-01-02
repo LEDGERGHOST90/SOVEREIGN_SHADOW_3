@@ -5,7 +5,9 @@ D.O.E. Pattern Implementation:
 - Directive Layer: MarketRegimeDetector
 - Orchestration Layer: AIStrategySelector
 - Execution Layer: (Handled by orchestrator)
-- Learning Layer: PerformanceTracker
+- Learning Layer: PerformanceTracker + ReflectionAgent
+
+Enhanced with Decision Tracing for debugging multi-agent decisions.
 """
 
 from .performance_tracker import (
@@ -27,6 +29,11 @@ from .strategy_selector import (
     DEFAULT_STRATEGIES
 )
 
+from .decision_tracer import (
+    DecisionTracer,
+    get_tracer
+)
+
 __all__ = [
     # Performance Tracker
     'PerformanceTracker',
@@ -42,5 +49,9 @@ __all__ = [
     'StrategyRecommendation',
     'AIStrategySelector',
     'get_strategy_selector',
-    'DEFAULT_STRATEGIES'
+    'DEFAULT_STRATEGIES',
+
+    # Decision Tracer (debugging)
+    'DecisionTracer',
+    'get_tracer'
 ]

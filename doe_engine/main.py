@@ -33,14 +33,14 @@ _base_dir = Path(__file__).parent
 (_base_dir / 'logs').mkdir(exist_ok=True)
 (_base_dir / 'data').mkdir(exist_ok=True)
 
-from core.orchestration.orchestrator import (
+from doe_engine.core.orchestration import (
     SovereignShadowOrchestrator,
     OrchestratorConfig,
     create_orchestrator
 )
-from core.intelligence.performance_tracker import get_performance_tracker
-from core.intelligence.regime_detector import get_regime_detector
-from core.intelligence.strategy_selector import get_strategy_selector
+from doe_engine.core.intelligence.performance_tracker import get_performance_tracker
+from doe_engine.core.intelligence.regime_detector import get_regime_detector
+from doe_engine.core.intelligence.strategy_selector import get_strategy_selector
 from core.backtesting.backtest_engine import BacktestEngine
 
 # Configure logging
