@@ -7,6 +7,9 @@ Modules:
 - market_filters: Fear & Greed Index and DXY correlation filters
 """
 
-from .market_filters import MarketFilters, Signal
+from .market_filters import OracleMarketFilters
 
-__all__ = ['MarketFilters', 'Signal']
+# Alias for backwards compatibility
+MarketFilters = OracleMarketFilters
+
+__all__ = ['OracleMarketFilters', 'MarketFilters']

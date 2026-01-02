@@ -31,9 +31,9 @@ class ReflectAgent:
         critique_messages = []
 
         if not validation_result["approved"]:
-            critique_messages.append(f"Trade REJECTED: {validation_result["reason"]}. Good risk adherence.")
+            critique_messages.append(f"Trade REJECTED: {validation_result['reason']}. Good risk adherence.")
         else:
-            critique_messages.append(f"Trade APPROVED. Notional: ${trade_request["notional_usd"]:.2f}, Side: {trade_request["side"]}.")
+            critique_messages.append(f"Trade APPROVED. Notional: ${trade_request['notional_usd']:.2f}, Side: {trade_request['side']}.")
 
         # Critique based on market filters (ORACLE)
         if "fng_signal" in current_market_data:
@@ -62,10 +62,10 @@ class ReflectAgent:
 
         # Critique based on Sentinel Risk Module
         if validation_result.get("stop_adjustment_bps") and validation_result["stop_adjustment_bps"] > trade_request["stop_loss_bps"]:
-            critique_messages.append(f"SENTINEL: Stop loss widened from {trade_request["stop_loss_bps"]} bps to {validation_result["stop_adjustment_bps"]} bps due to market conditions.")
-        
+            critique_messages.append(f"SENTINEL: Stop loss widened from {trade_request['stop_loss_bps']} bps to {validation_result['stop_adjustment_bps']} bps due to market conditions.")
+
         if validation_result.get("size_adjustment") and validation_result["size_adjustment"] < 1.0:
-            critique_messages.append(f"SENTINEL: Position size reduced by {1 - validation_result["size_adjustment"]:.1%} due to risk factors.")
+            critique_messages.append(f"SENTINEL: Position size reduced by {1 - validation_result['size_adjustment']:.1%} due to risk factors.")
 
         final_critique = "REFLECT Agent Critique:\n" + "\n".join([f"- {msg}" for msg in critique_messages])
         self.critique_history.append({
@@ -75,7 +75,7 @@ class ReflectAgent:
             "current_market_data": current_market_data,
             "critique": final_critique
         })
-        logger.info(f"Trade critique generated for {trade_request["asset"]}.\n{final_critique}")
+        logger.info(f"Trade critique generated for {trade_request['asset']}.\n{final_critique}")
         return final_critique
 
     def analyze_session_performance(self, session_stats: Dict) -> str:
@@ -102,8 +102,8 @@ class ReflectAgent:
             performance_critique.append(f"WARNING: {consecutive_losses} consecutive losses. Review recent trades and market context.")
         
         # Other metrics
-        performance_critique.append(f"Total trades: {session_stats.get("total_trades", 0)}, Open trades: {session_stats.get("open_trades", 0)}.")
-        performance_critique.append(f"Aave Health Factor: {session_stats.get("aave_health_factor", 'N/A'):.2f}, OI Change 24h: {session_stats.get("oi_change_24h_pct", 'N/A'):+.2f}%")
+        performance_critique.append(f"Total trades: {session_stats.get('total_trades', 0)}, Open trades: {session_stats.get('open_trades', 0)}.")
+        performance_critique.append(f"Aave Health Factor: {session_stats.get('aave_health_factor', 'N/A'):.2f}, OI Change 24h: {session_stats.get('oi_change_24h_pct', 'N/A'):+.2f}%")
 
         final_critique = "REFLECT Agent Session Performance Analysis:\n" + "\n".join([f"- {msg}" for msg in performance_critique])
         self.critique_history.append({

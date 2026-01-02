@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any, Tuple, Optional
 import numpy as np
 import pandas as pd
 import gymnasium as gym
@@ -194,8 +194,7 @@ class DepthOrderBookRLEnv(gym.Env):
                 "executed_price": executed_price,
                 "executed_quantity": executed_quantity}
 
-        logger.debug(f"Step {self.current_step}: Action={action["action_type"]},
-                     Reward={reward:.4f}, Portfolio Value={portfolio_value:.2f}")
+        logger.debug(f"Step {self.current_step}: Action={action['action_type']}, Reward={reward:.4f}, Portfolio Value={portfolio_value:.2f}")
 
         return self._get_observation(), reward, terminated, truncated, info
 
@@ -218,7 +217,8 @@ class DepthOrderBookRLEnv(gym.Env):
         """
         Renders the environment (for visualization).
         For a text-based environment, this might print the order book state.
-        """\n        if self.render_mode == "human":
+        """
+        if self.render_mode == "human":
             print(f"\n--- Step {self.current_step} ---")
             print(f"Mid Price: {self.current_mid_price:.2f}")
             print("Order Book Bids (Price, Qty):")
@@ -233,7 +233,8 @@ class DepthOrderBookRLEnv(gym.Env):
     def close(self):
         """
         Cleans up resources.
-        """\n        logger.info("DEPTH Order Book RL Environment closed.")
+        """
+        logger.info("DEPTH Order Book RL Environment closed.")
 
 # Example usage (for testing and basic agent interaction)
 if __name__ == "__main__":
@@ -269,4 +270,4 @@ if __name__ == "__main__":
             break
 
     env.close()
-    print(f"\nFinal Portfolio Value: {info["portfolio_value"]:.2f}")
+    print(f"\nFinal Portfolio Value: {info['portfolio_value']:.2f}")

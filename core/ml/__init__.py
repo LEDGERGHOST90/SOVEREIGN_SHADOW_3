@@ -30,22 +30,14 @@ Example:
         print(f"Signal: {pred.signal}, Confidence: {pred.probability}")
 """
 
-from .freqai_scaffold import (
-    AdaptiveMLEngine,
-    FeatureEngineering,
-    OutlierDetector,
-    ModelMetrics,
-    PredictionResult,
-    create_sample_data
-)
+from .freqai_scaffold import AdaptFreqAIScaffold
+
+# Alias for backwards compatibility
+AdaptiveMLEngine = AdaptFreqAIScaffold
 
 __all__ = [
+    'AdaptFreqAIScaffold',
     'AdaptiveMLEngine',
-    'FeatureEngineering',
-    'OutlierDetector',
-    'ModelMetrics',
-    'PredictionResult',
-    'create_sample_data'
 ]
 
 __version__ = '1.0.0'

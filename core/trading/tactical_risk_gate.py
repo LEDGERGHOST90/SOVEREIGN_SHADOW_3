@@ -17,7 +17,7 @@ import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 import pandas as pd
 from core.risk.advanced_risk_module import SentinelAdvancedRiskModule
 from core.filters.market_filters import OracleMarketFilters
@@ -572,14 +572,14 @@ class TacticalRiskGate:
         if rl_simulation_result["final_portfolio_value"] < self.config.get("depth_config", {}).get("min_acceptable_portfolio_value_after_rl", self.GLOBAL_MAX_POSITION_USD):
             return ValidationResult(
                 approved=False,
-                reason=f"❌ DEPTH RL: Simulation shows negative outcome. Final PnL: ${rl_simulation_result["final_portfolio_value"]:.2f}"
+                reason=f"❌ DEPTH RL: Simulation shows negative outcome. Final PnL: ${rl_simulation_result['final_portfolio_value']:.2f}"
             )
         elif rl_simulation_result["total_reward"] < self.config.get("depth_config", {}).get("min_acceptable_rl_reward", 0.0):
             size_adj *= self.config.get("depth_config", {}).get("rl_negative_reward_size_reduction_factor", 0.9)
-            warnings.append(f"⚠️ DEPTH RL: Simulation shows low reward ({rl_simulation_result["total_reward"]:.2f}). Size reduced to {size_adj:.1f}×")
+            warnings.append(f"⚠️ DEPTH RL: Simulation shows low reward ({rl_simulation_result['total_reward']:.2f}). Size reduced to {size_adj:.1f}×")
 
             size_adj *= self.config.get("depth_config", {}).get("rl_negative_reward_size_reduction_factor", 0.9)
-            warnings.append(f"⚠️ DEPTH RL: Simulation shows low reward ({rl_simulation_result["total_reward"]:.2f}). Size reduced to {size_adj:.1f}×")
+            warnings.append(f"⚠️ DEPTH RL: Simulation shows low reward ({rl_simulation_result['total_reward']:.2f}). Size reduced to {size_adj:.1f}×")
 
         # 7. On-Chain Signals Filter (FLOW)
         self.update_flow_onchain_data(asset=request.asset) # Fetch latest on-chain data
