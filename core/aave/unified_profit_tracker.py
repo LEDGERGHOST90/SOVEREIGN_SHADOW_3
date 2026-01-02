@@ -17,15 +17,16 @@ Last Updated: 2025-10-30
 import os
 import json
 import logging
+import sys
 from datetime import datetime, timezone
 from typing import Dict, Any, Optional, List
 from pathlib import Path
 
 # Import centralized portfolio config
 try:
+    sys.path.insert(0, '/Volumes/LegacySafe/SS_III')
     from core.config.portfolio_config import get_initial_capital, get_portfolio_config, get_aave_config
 except ImportError:
-    # Fallback if running standalone
     def get_initial_capital(exchange=None):
         return 5438 if exchange is None else 0
     def get_portfolio_config():
@@ -65,7 +66,7 @@ class UnifiedProfitTracker:
                 logger.info(f"📊 Loaded capital tracker: Initial ${data.get('initial_capital', 0):.2f}")
                 return data
 
-        # Initialize if doesn't exist - pull from centralized config
+        # Initialize if doesn't exist
         default_data = {
             'initial_capital': get_initial_capital(),  # From portfolio_config.py
             'total_withdrawn': 0.0,

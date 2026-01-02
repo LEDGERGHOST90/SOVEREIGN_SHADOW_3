@@ -5,6 +5,7 @@ Replaces simulation with actual exchange paper trading
 """
 
 import os
+import sys
 import json
 import time
 import logging
@@ -12,6 +13,17 @@ from datetime import datetime
 from typing import Dict, List, Optional
 import requests
 from pathlib import Path
+
+# Import centralized portfolio config
+try:
+    sys.path.insert(0, '/Volumes/LegacySafe/SS_III')
+    from core.config.portfolio_config import get_initial_capital, get_portfolio_config
+except ImportError:
+    # Fallback if running standalone
+    def get_initial_capital(exchange=None):
+        return 950 if exchange is None else 0
+    def get_portfolio_config():
+        return {"net_worth": {"total": 5438, "exchange_capital": 950}}
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -55,9 +67,12 @@ class RealExchangeIntegration:
             }
         }
         
-        # Ultra-conservative trading parameters
+        # Ultra-conservative trading parameters - pull from centralized config
+        portfolio = get_portfolio_config()
+        exchange_capital = portfolio.get("net_worth", {}).get("exchange_capital", 950)
+
         self.trading_config = {
-            'initial_capital': 100.0,      # Start with $100 paper money
+            'initial_capital': exchange_capital,  # From portfolio_config.py
             'max_position_size': 0.005,    # 0.5% maximum position size
             'max_daily_trades': 5,         # Limit to 5 trades per day
             'min_spread_threshold': 0.002, # 0.2% minimum arbitrage spread
@@ -65,13 +80,13 @@ class RealExchangeIntegration:
             'stop_loss': 0.02,             # 2% stop loss
             'take_profit': 0.01,           # 1% take profit (conservative)
         }
-        
+
         # Performance tracking
         self.performance_metrics = {
             'total_trades': 0,
             'successful_trades': 0,
             'total_profit': 0.0,
-            'current_portfolio_value': 100.0,  # Start with paper $100
+            'current_portfolio_value': exchange_capital,  # From portfolio_config.py
             'daily_pnl': 0.0,
             'monthly_pnl': 0.0,
             'win_rate': 0.0,

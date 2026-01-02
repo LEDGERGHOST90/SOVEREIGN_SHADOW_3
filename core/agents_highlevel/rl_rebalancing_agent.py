@@ -16,11 +16,20 @@ Created: 2025-11-24
 
 import numpy as np
 import json
+import sys
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional, Any
 from collections import deque
 import random
+
+# Import centralized portfolio config
+try:
+    sys.path.insert(0, '/Volumes/LegacySafe/SS_III')
+    from core.config.portfolio_config import get_initial_capital
+except ImportError:
+    def get_initial_capital(exchange=None):
+        return 5438 if exchange is None else 0
 
 # Try to import deep learning libraries
 try:
@@ -399,7 +408,7 @@ def demo_rl_agent():
         momentum_7d=momentum_7d,
         volatility=volatility,
         shade_strike_level=0,
-        available_capital=6167.43
+        available_capital=get_initial_capital()  # From portfolio_config.py
     )
 
     print(f"\n📊 CURRENT PORTFOLIO STATE:")

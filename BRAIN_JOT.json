@@ -1,0 +1,144 @@
+{
+  "$schema": "BRAIN_JOT_v1",
+  "meta": {
+    "name": "Brain JOT - Just-in-Time Oversight & Telemetry",
+    "version": "1.0.0",
+    "description": "Ecosystem-wide monitoring and alignment architecture for Sovereign Shadow III",
+    "created": "2026-01-02",
+    "purpose": "NOT a bot. An ECOSYSTEM orchestration layer."
+  },
+
+  "ecosystem": {
+    "identity": "SOVEREIGN_SHADOW_III",
+    "type": "autonomous_trading_ecosystem",
+    "core_thesis": "RWA tokenization infrastructure accumulation",
+    "philosophy": "I don't want to trade. I want the trade to find me."
+  },
+
+  "alignment": {
+    "primary_focus": ["RWA", "LINK", "INJ", "QNT", "ONDO", "PLUME"],
+    "secondary_focus": ["AI_basket", "FET", "RENDER", "SUI"],
+    "drift_indicators": ["outrageous_filter", "aave_debt_focus", "cold_storage_automation"],
+    "research_source": "MANUS",
+    "note": "If conversation focuses on drift_indicators over primary_focus, alert user"
+  },
+
+  "oversight": {
+    "watchdog": {
+      "name": "ED",
+      "role": "Engineer Chief",
+      "status": "active",
+      "monitors": [
+        "context_usage",
+        "session_duration",
+        "file_operations",
+        "focus_alignment",
+        "duplicate_prevention"
+      ]
+    },
+    "thresholds": {
+      "files_before_save": 15,
+      "minutes_before_save": 20,
+      "tool_calls_before_save": 30,
+      "focus_drift_score": 50
+    },
+    "alerts": {
+      "channel": "ntfy",
+      "topic": "sovereignshadow_dc4d2fa1",
+      "levels": ["info", "warning", "urgent", "critical"]
+    }
+  },
+
+  "session_lifecycle": {
+    "on_start": {
+      "actions": [
+        "read_BRAIN.json",
+        "initialize_ED",
+        "load_last_session",
+        "check_api_health"
+      ]
+    },
+    "during_session": {
+      "ed_check_interval": "every_5_tool_calls",
+      "auto_save_triggers": [
+        "files_threshold_reached",
+        "time_threshold_reached",
+        "context_80_percent",
+        "focus_drift_detected"
+      ]
+    },
+    "on_end": {
+      "protocols": ["EOD", "ACC"],
+      "mandatory_updates": [
+        "memory/SESSIONS/{date}_session.md",
+        "BRAIN.json",
+        "Replit sync"
+      ]
+    }
+  },
+
+  "ai_council": {
+    "members": {
+      "AURORA": {"role": "Executor", "model": "Claude", "status": "active"},
+      "GIO": {"role": "Researcher", "model": "Gemini", "status": "degraded", "note": "API key expired"},
+      "ARCHITECT_PRIME": {"role": "Integrator", "model": "GPT", "status": "available"}
+    },
+    "consensus_required_for": [
+      "position_entry",
+      "position_exit",
+      "strategy_change",
+      "allocation_change"
+    ]
+  },
+
+  "data_flow": {
+    "source_of_truth": "BRAIN.json",
+    "session_state": "memory/SESSIONS/",
+    "ed_state": "data/ed_state.json",
+    "ai_cache": "data/ai_provider_cache.json",
+    "sync_targets": [
+      "Replit /api/brain",
+      "GitHub (when token works)"
+    ]
+  },
+
+  "smart_ai": {
+    "router": "core/ai/smart_ai.py",
+    "fallback_order": ["anthropic", "openai", "gemini"],
+    "current_active": "anthropic",
+    "health_check_interval": "1_hour",
+    "auto_switch_on_failure": true
+  },
+
+  "rules": {
+    "hardcoded": [
+      "Never commit to main without human approval",
+      "Always read BRAIN.json first",
+      "Run ACC before context compacts",
+      "Search before building anything new",
+      "RWA thesis is primary focus"
+    ],
+    "aave_specific": {
+      "do_not_repay_unless": "HF < 2.5",
+      "current_hf": 3.96,
+      "status": "strategic_good_debt"
+    }
+  },
+
+  "telemetry": {
+    "current_session": {
+      "started": null,
+      "files_touched": 0,
+      "tool_calls": 0,
+      "focus_score": 100,
+      "last_save": null,
+      "warnings": []
+    },
+    "historical": {
+      "sessions_today": 0,
+      "acc_saves_today": 0,
+      "eod_saves_today": 0,
+      "total_warnings_today": 0
+    }
+  }
+}

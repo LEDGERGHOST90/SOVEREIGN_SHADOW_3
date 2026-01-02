@@ -347,8 +347,7 @@ class TieredLadderSystem:
             aave_debt = position.get('debt_usd', 0.0)
             health_factor = position.get('health_factor', 0.0)
 
-            # Calculate true trading profit
-            # Initial capital is tracked in unified_profit_tracker
+            # Calculate true trading profit - use centralized config
             initial_capital = get_initial_capital()  # From portfolio_config.py
             total_withdrawn = self.state['total_extracted_usd']
 

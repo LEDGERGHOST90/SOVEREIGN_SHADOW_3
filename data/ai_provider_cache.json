@@ -1,0 +1,25 @@
+{
+  "working_provider": {
+    "name": "anthropic",
+    "model": "claude-haiku-4-5",
+    "label": "Claude"
+  },
+  "status": {
+    "anthropic": {
+      "working": true,
+      "model": "claude-haiku-4-5",
+      "tested_at": "2026-01-02T03:55:36.635433"
+    },
+    "openai": {
+      "working": true,
+      "model": "gpt-4o-mini",
+      "tested_at": "2026-01-02T03:55:37.766754"
+    },
+    "gemini": {
+      "working": false,
+      "model": "gemini-2.5-flash",
+      "tested_at": "2026-01-02T03:55:38.734315"
+    }
+  },
+  "cached_at": "2026-01-02T03:55:38.734382"
+}

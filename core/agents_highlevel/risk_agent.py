@@ -14,6 +14,14 @@ from pathlib import Path
 # Add modules to path
 sys.path.append(str(Path(__file__).parent.parent / 'modules' / 'safety'))
 
+# Import centralized portfolio config
+try:
+    sys.path.insert(0, '/Volumes/LegacySafe/SS_III')
+    from core.config.portfolio_config import get_initial_capital
+except ImportError:
+    def get_initial_capital(exchange=None):
+        return 5438 if exchange is None else 0
+
 class RiskAgent:
     """Risk monitoring using existing infrastructure"""
 
@@ -232,7 +240,7 @@ class RiskAgent:
 
         # Calculate risk score
         if portfolio_value is None:
-            portfolio_value = 6167.43  # Default from mcp_portfolio_context.json
+            portfolio_value = get_initial_capital()  # From portfolio_config.py
 
         risk_score = self.calculate_risk_score(aave_risk, exchange_exposure, portfolio_value)
         print(f"\n📊 Overall Risk Score: {risk_score}/100")

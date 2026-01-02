@@ -10,10 +10,19 @@ Integrated with SHADE//AGENT for risk validation
 """
 
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
+
+# Import centralized portfolio config
+try:
+    sys.path.insert(0, '/Volumes/LegacySafe/SS_III')
+    from core.config.portfolio_config import get_initial_capital
+except ImportError:
+    def get_initial_capital(exchange=None):
+        return 5438 if exchange is None else 0
 
 
 @dataclass
@@ -314,8 +323,8 @@ class PortfolioRebalancer:
 def demo():
     """Demo the portfolio rebalancer with your actual data"""
 
-    # Your actual portfolio data from PERSISTENT_STATE.json
-    portfolio_value = 6167.43
+    # Your actual portfolio data from centralized config
+    portfolio_value = get_initial_capital()  # From portfolio_config.py
 
     target_allocation = {
         "BTC": 40,

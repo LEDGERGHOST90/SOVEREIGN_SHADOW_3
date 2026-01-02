@@ -32,7 +32,8 @@
       "Skill(funding-arbitrage)",
       "mcp__ds-star__get_replit_sync",
       "mcp__ds-star__get_brain_state",
-      "mcp__ds-star__synoptic_core_assess"
+      "mcp__ds-star__synoptic_core_assess",
+      "Skill(mcp-orchestration)"
     ],
     "deny": [],
     "ask": []

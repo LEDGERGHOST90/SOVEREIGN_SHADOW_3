@@ -32,7 +32,6 @@ try:
     sys.path.insert(0, '/Volumes/LegacySafe/SS_III')
     from core.config.portfolio_config import get_initial_capital
 except ImportError:
-    # Fallback if running standalone
     def get_initial_capital(exchange=None):
         defaults = {'coinbase': 764, 'binance_us': 111, 'kraken': 73, 'okx': 0}
         return defaults.get(exchange, 0) if exchange else 950

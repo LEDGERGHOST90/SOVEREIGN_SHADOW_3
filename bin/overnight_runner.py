@@ -287,7 +287,9 @@ class OvernightRunner:
                     swarm_result = self.research_swarm.research(
                         query="Current crypto market conditions, regime, and top opportunities",
                         context=f"SS_III cycle {self.cycle_count}",
-                        asset="BTC"
+                        asset="BTC",
+                        wait_for_manus=False,  # Don't block - Manus runs async
+                        manus_timeout=30  # Short timeout if we do wait
                     )
                     results['components']['research_swarm'] = 'DISPATCHED'
                     results['manus_task'] = swarm_result.get('sources', {}).get('manus', {}).get('url')

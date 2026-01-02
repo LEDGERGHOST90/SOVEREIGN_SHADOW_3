@@ -169,6 +169,47 @@ curl -d "EOD Complete: [summary]" ntfy.sh/sovereignshadow_dc4d2fa1
 
 ---
 
+## ACC Protocol (Auto-Compact Call) - MANDATORY
+
+**When context reaches ~80% or you sense compaction is imminent, IMMEDIATELY run:**
+
+```python
+from core.session.auto_save import emergency_save
+
+emergency_save(
+    summary="Brief summary of session",
+    accomplishments=["What was done", "Files created"],
+    issues_found=["Problems discovered"],
+    files_created=["path/to/new/file.py"],
+    files_modified=["path/to/changed/file.py"],
+    next_steps=["What to do next"],
+    brain_updates={"key": "value"}  # Optional BRAIN.json updates
+)
+```
+
+**Or via CLI:**
+```bash
+python3 core/session/auto_save.py "Summary of what we accomplished"
+```
+
+### What ACC Does:
+1. Saves session to `memory/SESSIONS/{date}_{time}_ACC.md`
+2. Updates BRAIN.json with session record
+3. Pushes summary to Replit
+4. Sends NTFY notification
+5. Preserves work BEFORE compaction destroys it
+
+### Signs Compaction is Coming:
+- Long conversation with many file reads
+- Multiple tool calls accumulating
+- Complex multi-step tasks
+- You've been working for 30+ minutes
+
+### Rule: SAVE EARLY, SAVE OFTEN
+If in doubt, run ACC. Better to have duplicate saves than lost work.
+
+---
+
 ## Current Mission
 
 **PORTFOLIO_GROWTH** (AAVE = Strategic Good Debt)
