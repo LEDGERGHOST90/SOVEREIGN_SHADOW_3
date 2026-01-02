@@ -1,0 +1,485 @@
+{
+  "cycle": 4,
+  "timestamp": "2026-01-02T12:08:02.200395",
+  "paper_mode": true,
+  "components": {
+    "live_data": "OK",
+    "research_swarm": "SKIPPED (runs hourly)",
+    "agent_council": "OK"
+  },
+  "signals": {
+    "BTC": {
+      "symbol": "BTC",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 89791.24,
+      "stop_loss": 92484.97720000001,
+      "take_profit": 85301.678,
+      "position_size": 25.0,
+      "reasoning": "BTC in High Volatility Trend regime. Profile: Sniper Scalp. 24h change: 0.0%. ADX: 43.7. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:09.791814"
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 3119.66,
+      "stop_loss": 3213.2498,
+      "take_profit": 2963.6769999999997,
+      "position_size": 25.0,
+      "reasoning": "ETH in High Volatility Trend regime. Profile: Sniper Scalp. 24h change: 0.0%. ADX: 82.5. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:10.072674"
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 131.48,
+      "stop_loss": 151.20199999999997,
+      "take_profit": 92.03599999999999,
+      "position_size": 25.0,
+      "reasoning": "SOL in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 39.9. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:10.387551"
+    },
+    "XRP": {
+      "symbol": "XRP",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1.99,
+      "stop_loss": 2.2885,
+      "take_profit": 1.393,
+      "position_size": 25.0,
+      "reasoning": "XRP in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 59.6. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:10.615134"
+    },
+    "AAVE": {
+      "symbol": "AAVE",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 156.7,
+      "stop_loss": 180.20499999999998,
+      "take_profit": 109.68999999999998,
+      "position_size": 25.0,
+      "reasoning": "AAVE in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 39.0. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:10.981169"
+    },
+    "ADA": {
+      "symbol": "ADA",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.3878,
+      "stop_loss": 0.4459699999999999,
+      "take_profit": 0.27146,
+      "position_size": 25.0,
+      "reasoning": "ADA in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 44.1. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:11.228677"
+    },
+    "AVAX": {
+      "symbol": "AVAX",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 13.63,
+      "stop_loss": 15.6745,
+      "take_profit": 9.541,
+      "position_size": 25.0,
+      "reasoning": "AVAX in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 25.6. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:11.457056"
+    },
+    "DOT": {
+      "symbol": "DOT",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 2.113,
+      "stop_loss": 2.42995,
+      "take_profit": 1.4790999999999999,
+      "position_size": 25.0,
+      "reasoning": "DOT in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 26.3. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:11.836936"
+    },
+    "ATOM": {
+      "symbol": "ATOM",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 2.151,
+      "stop_loss": 2.4736499999999997,
+      "take_profit": 1.5056999999999998,
+      "position_size": 25.0,
+      "reasoning": "ATOM in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 61.1. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:12.198834"
+    },
+    "NEAR": {
+      "symbol": "NEAR",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1.683,
+      "stop_loss": 1.93545,
+      "take_profit": 1.1781,
+      "position_size": 25.0,
+      "reasoning": "NEAR in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 29.8. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:12.694554"
+    },
+    "APT": {
+      "symbol": "APT",
+      "regime": "High Volatility Range",
+      "direction": "NEUTRAL",
+      "confidence": 40,
+      "entry_price": 1.8892,
+      "stop_loss": 1.60582,
+      "take_profit": 2.45596,
+      "position_size": 20.0,
+      "reasoning": "APT in High Volatility Range regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 18.9. Recommended: NEUTRAL with 40% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:13.063565"
+    },
+    "SUI": {
+      "symbol": "SUI",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 1.5914,
+      "stop_loss": 1.8301099999999997,
+      "take_profit": 1.11398,
+      "position_size": 25.0,
+      "reasoning": "SUI in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 66.8. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:13.280772"
+    },
+    "MATIC": {
+      "symbol": "MATIC",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 0,
+      "entry_price": 0,
+      "stop_loss": 0,
+      "take_profit": 0,
+      "position_size": 0,
+      "reasoning": "No price data available",
+      "sources": [],
+      "timestamp": "2026-01-02T12:08:13.281099"
+    },
+    "ARB": {
+      "symbol": "ARB",
+      "regime": "High Volatility Range",
+      "direction": "NEUTRAL",
+      "confidence": 40,
+      "entry_price": 0.2076,
+      "stop_loss": 0.17646,
+      "take_profit": 0.26988,
+      "position_size": 20.0,
+      "reasoning": "ARB in High Volatility Range regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 19.9. Recommended: NEUTRAL with 40% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:13.654666"
+    },
+    "OP": {
+      "symbol": "OP",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.304,
+      "stop_loss": 0.34959999999999997,
+      "take_profit": 0.2128,
+      "position_size": 25.0,
+      "reasoning": "OP in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 37.5. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:14.079054"
+    },
+    "UNI": {
+      "symbol": "UNI",
+      "regime": "High Volatility Range",
+      "direction": "NEUTRAL",
+      "confidence": 40,
+      "entry_price": 6.018,
+      "stop_loss": 5.1152999999999995,
+      "take_profit": 7.8234,
+      "position_size": 20.0,
+      "reasoning": "UNI in High Volatility Range regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 11.6. Recommended: NEUTRAL with 40% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:14.305182"
+    },
+    "LINK": {
+      "symbol": "LINK",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 13.268,
+      "stop_loss": 15.2582,
+      "take_profit": 9.2876,
+      "position_size": 25.0,
+      "reasoning": "LINK in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 39.6. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:14.530504"
+    },
+    "MKR": {
+      "symbol": "MKR",
+      "regime": "Transitioning Market",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 1468.41,
+      "stop_loss": 1248.1485,
+      "take_profit": 1908.9330000000002,
+      "position_size": 15.0,
+      "reasoning": "MKR in Transitioning Market regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 50.1. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:14.792274"
+    },
+    "CRV": {
+      "symbol": "CRV",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.4023,
+      "stop_loss": 0.462645,
+      "take_profit": 0.28160999999999997,
+      "position_size": 25.0,
+      "reasoning": "CRV in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 41.2. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:15.175946"
+    },
+    "LDO": {
+      "symbol": "LDO",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.622,
+      "stop_loss": 0.7152999999999999,
+      "take_profit": 0.43539999999999995,
+      "position_size": 25.0,
+      "reasoning": "LDO in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 26.6. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:15.604245"
+    },
+    "DOGE": {
+      "symbol": "DOGE",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.13958,
+      "stop_loss": 0.167496,
+      "take_profit": 0.06979,
+      "position_size": 18.35,
+      "reasoning": "DOGE in High Volatility Trend regime. Profile: Meme Hunter. 24h change: 0.0%. ADX: 53.2. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:15.849303"
+    },
+    "SHIB": {
+      "symbol": "SHIB",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 8.18e-06,
+      "stop_loss": 9.815999999999999e-06,
+      "take_profit": 4.09e-06,
+      "position_size": 18.35,
+      "reasoning": "SHIB in High Volatility Trend regime. Profile: Meme Hunter. 24h change: 0.0%. ADX: 35.7. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:16.059140"
+    },
+    "PEPE": {
+      "symbol": "PEPE",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 5.91e-06,
+      "stop_loss": 7.092e-06,
+      "take_profit": 2.955e-06,
+      "position_size": 18.35,
+      "reasoning": "PEPE in High Volatility Trend regime. Profile: Meme Hunter. 24h change: 0.0%. ADX: 73.3. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:16.515951"
+    },
+    "FET": {
+      "symbol": "FET",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 0.2277,
+      "stop_loss": 0.261855,
+      "take_profit": 0.15939,
+      "position_size": 25.0,
+      "reasoning": "FET in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 39.2. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:17.134219"
+    },
+    "RNDR": {
+      "symbol": "RNDR",
+      "regime": "Unknown",
+      "direction": "NEUTRAL",
+      "confidence": 30,
+      "entry_price": 2.9685,
+      "stop_loss": 2.523225,
+      "take_profit": 3.8590500000000003,
+      "position_size": 15.0,
+      "reasoning": "RNDR in Unknown regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 0.0. Recommended: NEUTRAL with 30% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:17.646660"
+    },
+    "TAO": {
+      "symbol": "TAO",
+      "regime": "High Volatility Trend",
+      "direction": "SHORT",
+      "confidence": 50,
+      "entry_price": 245.73,
+      "stop_loss": 282.5895,
+      "take_profit": 172.011,
+      "position_size": 25.0,
+      "reasoning": "TAO in High Volatility Trend regime. Profile: Swing Trade. 24h change: 0.0%. ADX: 54.4. Recommended: SHORT with 50% confidence.",
+      "sources": [
+        "Coinbase/CCXT",
+        "StrategyEngine"
+      ],
+      "timestamp": "2026-01-02T12:08:18.003862"
+    }
+  },
+  "opportunities": [],
+  "summary": {
+    "long": [],
+    "short": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "AAVE",
+      "ADA",
+      "AVAX",
+      "DOT",
+      "ATOM",
+      "NEAR",
+      "SUI",
+      "OP",
+      "LINK",
+      "CRV",
+      "LDO",
+      "DOGE",
+      "SHIB",
+      "PEPE",
+      "FET",
+      "TAO"
+    ],
+    "neutral": [
+      "APT",
+      "MATIC",
+      "ARB",
+      "UNI",
+      "MKR",
+      "RNDR"
+    ]
+  },
+  "council_opinion": {
+    "recommendation": "HOLD",
+    "confidence": 50,
+    "agents": {
+      "risk": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "risk analysis pending - needs market data",
+        "agent": "risk"
+      },
+      "portfolio": {
+        "signal": "NEUTRAL",
+        "confidence": 50,
+        "reasoning": "portfolio analysis pending - needs market data",
+        "agent": "portfolio"
+      }
+    },
+    "signal_counts": {
+      "BUY": 0,
+      "SELL": 0,
+      "HOLD": 0,
+      "NEUTRAL": 2
+    },
+    "reasoning": "Council voted: BUY=0, SELL=0, HOLD=0",
+    "timestamp": "2026-01-02T12:08:18.005818"
+  }
+}

@@ -18,6 +18,14 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+import pandas as pd
+from core.risk.advanced_risk_module import SentinelAdvancedRiskModule
+from core.filters.market_filters import OracleMarketFilters
+from core.regime.hmm_regime_detector import RegimeHMMDetector
+from core.agents.reflect_agent import ReflectAgent
+from core.ml.freqai_scaffold import AdaptFreqAIScaffold
+from core.ml.orderbook_rl_scaffold import DepthOrderBookRLEnv
+from core.signals.onchain_signals import FlowOnChainSignals
 
 logger = logging.getLogger(__name__)
 
@@ -110,7 +118,22 @@ class TacticalRiskGate:
         self.funding_cache: Dict[str, FundingData] = {}
         self.aave_health_factor: Optional[float] = None
         self.oi_change_24h_pct: Optional[float] = None
-        
+
+        # Initialize Sentinel Advanced Risk Module
+        self.sentinel_risk_module = SentinelAdvancedRiskModule(self.config.get("sentinel_config", {}))
+        # Initialize Oracle Market Filters Module
+        self.oracle_market_filters = OracleMarketFilters(self.config.get("oracle_config", {}))
+        # Initialize Regime HMM Detector Module
+        self.regime_hmm_detector = RegimeHMMDetector(self.config.get("regime_config", {}))
+        # Initialize Reflect Agent
+        self.reflect_agent = ReflectAgent(self.config.get("reflect_config", {"initial_capital": 1660.0}))
+        # Initialize Adapt FreqAI Scaffold
+        self.adapt_freqai_scaffold = AdaptFreqAIScaffold(self.config.get("freqai_config", {}))
+        # Initialize Depth Order Book RL Environment
+        self.depth_rl_env = DepthOrderBookRLEnv(self.config.get("depth_config", {}))
+        # Initialize Flow On-Chain Signals Module
+        self.flow_onchain_signals = FlowOnChainSignals(self.config.get("flow_config", {}))
+
         logger.info(f"🛡️ Tactical Risk Gate initialized with config: {self.config_path}")
     
     def _load_config(self) -> Dict:
@@ -153,7 +176,91 @@ class TacticalRiskGate:
         """Update 24h Open Interest change"""
         self.oi_change_24h_pct = change_pct
         logger.debug(f"📈 Updated OI 24h change: {change_pct:+.2f}%")
-    
+
+    def update_sentinel_price_data(self, asset: str, close_price: float, high_price: float, low_price: float):
+        self.sentinel_risk_module.update_price_data(asset, close_price, high_price, low_price)
+        logger.debug(f"SENTINEL: Updated price data for {asset}.")
+
+    def get_atr_stop_loss(self, asset: str, multiplier: float = 2.0) -> Optional[float]:
+        return self.sentinel_risk_module.calculate_atr_stop_loss(asset, multiplier)
+
+    def get_kelly_bet_size(self, win_probability: float, payout_ratio: float, current_capital: float) -> float:
+        return self.sentinel_risk_module.calculate_kelly_bet_size(win_probability, payout_ratio, current_capital)
+
+    def is_sentinel_breaker_active(self, asset: str) -> bool:
+        return self.sentinel_risk_module.is_breaker_active(asset)
+
+    def update_oracle_fng_data(self, force_fetch: bool = False):
+        self.oracle_market_filters.fetch_fear_greed_index(force_fetch=force_fetch)
+
+    def get_oracle_fng_signal(self) -> str:
+        return self.oracle_market_filters.get_fear_greed_signal()
+
+    def update_oracle_dxy_data(self, force_fetch: bool = False):
+        self.oracle_market_filters.fetch_dxy_index(force_fetch=force_fetch)
+
+    def get_oracle_dxy_signal(self) -> str:
+        return self.oracle_market_filters.get_dxy_strength_signal()
+
+    def train_regime_detector(self, historical_data: pd.DataFrame):
+        self.regime_hmm_detector.train_model(historical_data.copy())
+        logger.info("REGIME HMM Detector training initiated.")
+
+    def get_current_regime(self, latest_data: pd.DataFrame) -> str:
+        return self.regime_hmm_detector.predict_regime(latest_data.copy())
+
+    def train_freqai_model(self, data: pd.DataFrame):
+        self.adapt_freqai_scaffold.train_model(data.copy())
+        logger.info("ADAPT FreqAI model training initiated.")
+
+    def get_freqai_signal(self, current_features: pd.DataFrame) -> Optional[Any]:
+        return self.adapt_freqai_scaffold.predict_signal(current_features.copy())
+
+    def run_depth_rl_simulation(self, initial_state: Optional[Dict] = None) -> Dict:
+        # Simplified: In a real scenario, initial_state would be derived from live data
+        obs, info = self.depth_rl_env.reset()
+        if initial_state:
+            # For a real env, you'd likely update the internal state based on initial_state
+            pass 
+
+        total_reward = 0.0
+        final_portfolio_value = info["portfolio_value"]
+
+        for _ in range(self.depth_rl_env.max_steps):
+            # Simple random agent for demonstration within TacticalRiskGate
+            action_type = np.random.randint(0, 3)  # 0:HOLD, 1:BUY, 2:SELL
+            price_offset = np.random.randint(-self.depth_rl_env.num_levels, self.depth_rl_env.num_levels + 1)
+            quantity_fraction = np.random.rand(1)
+
+            action = {
+                "action_type": action_type,
+                "price_level_offset": price_offset,
+                "quantity_fraction": quantity_fraction
+            }
+            obs, reward, terminated, truncated, info = self.depth_rl_env.step(action)
+            total_reward += reward
+            final_portfolio_value = info["portfolio_value"]
+
+            if terminated or truncated:
+                break
+        
+        self.depth_rl_env.close()
+        return {"total_reward": total_reward, "final_portfolio_value": final_portfolio_value}
+
+    def update_flow_onchain_data(self, asset: str = None, force_fetch: bool = False):
+        self.flow_onchain_signals.fetch_exchange_net_flows(asset=asset, force_fetch=force_fetch)
+        self.flow_onchain_signals.fetch_whale_transactions(asset=asset, force_fetch=force_fetch)
+        self.flow_onchain_signals.fetch_stablecoin_flows(force_fetch=force_fetch)
+
+    def get_flow_exchange_signal(self, asset: str = None) -> str:
+        return self.flow_onchain_signals.get_exchange_flow_signal(asset=asset)
+
+    def get_flow_whale_signal(self, asset: str = None) -> str:
+        return self.flow_onchain_signals.get_whale_signal(asset=asset)
+
+    def get_flow_stablecoin_signal(self) -> str:
+        return self.flow_onchain_signals.get_stablecoin_signal()
+
     def validate_trade(self, request: TradeRequest) -> ValidationResult:
         """
         Main validation gate - checks all rules before trade approval.
@@ -191,7 +298,7 @@ class TacticalRiskGate:
         all_warnings = layer1.warnings + layer2.warnings + layer3.warnings + layer4.warnings
         
         stop_adj = layer2.stop_adjustment_bps or layer3.stop_adjustment_bps or request.stop_loss_bps
-        
+
         result = ValidationResult(
             approved=True,
             reason="✅ All risk gates passed",
@@ -199,9 +306,19 @@ class TacticalRiskGate:
             stop_adjustment_bps=stop_adj,
             warnings=all_warnings
         )
-        
+
         logger.info(f"🟢 Trade approved: {request.asset} {request.side} ${request.notional_usd * final_size_adj:.2f} (adj: {final_size_adj:.2f}×)")
+
+        # Prepare market data for Reflect Agent
+        current_market_data = {
+            "fng_signal": self.get_oracle_fng_signal(),
+            "dxy_signal": self.get_oracle_dxy_signal(),
+            "regime": self.get_current_regime(pd.DataFrame({'Close': [request.entry_price]}, index=[request.timestamp])) # Simplified for Reflect Agent
+        }
+        self.reflect_agent.analyze_trade_decision(request.__dict__, result.__dict__, current_market_data)
+
         return result
+
     
     def _validate_global_limits(self, request: TradeRequest) -> ValidationResult:
         """Layer 1: Sovereign Shadow hard limits"""
@@ -216,11 +333,14 @@ class TacticalRiskGate:
                 reason=f"❌ Position size ${request.notional_usd:.2f} exceeds global max ${self.GLOBAL_MAX_POSITION_USD:.2f}"
             )
         
-        # 2. Stop loss check
-        if request.stop_loss_bps > self.GLOBAL_MAX_STOP_LOSS_PCT * 100:
+        # 2. Stop loss check (can be overridden by ATR if configured)
+        atr_stop_loss_bps = self.get_atr_stop_loss(request.asset, multiplier=self.config.get("sentinel_config", {}).get("atr_stop_loss_multiplier", 2.0))
+        effective_stop_loss_bps = atr_stop_loss_bps if atr_stop_loss_bps is not None else request.stop_loss_bps
+
+        if effective_stop_loss_bps > self.GLOBAL_MAX_STOP_LOSS_PCT * 100:
             return ValidationResult(
                 approved=False,
-                reason=f"❌ Stop loss {request.stop_loss_bps} bps exceeds global max {self.GLOBAL_MAX_STOP_LOSS_PCT}%"
+                reason=f"❌ Stop loss {effective_stop_loss_bps} bps exceeds global max {self.GLOBAL_MAX_STOP_LOSS_PCT}% (ATR adjusted)" if atr_stop_loss_bps else f"❌ Stop loss {request.stop_loss_bps} bps exceeds global max {self.GLOBAL_MAX_STOP_LOSS_PCT}%"
             )
         
         # 3. Daily loss limit check
@@ -362,8 +482,169 @@ class TacticalRiskGate:
         
         warnings = []
         size_adj = 1.0
+
+        # 0. Circuit Breaker check
+        if self.is_sentinel_breaker_active(request.asset):
+            return ValidationResult(
+                approved=False,
+                reason=f"❌ CIRCUIT BREAKER active for {request.asset} - halting trades"
+            )
+
+        # 0. Circuit Breaker check
+        if self.is_sentinel_breaker_active(request.asset):
+            return ValidationResult(
+                approved=False,
+                reason=f"❌ CIRCUIT BREAKER active for {request.asset} - halting trades"
+            )
+
+        # 1. Fear & Greed Index filter
+        fng_signal = self.get_oracle_fng_signal()
+        if fng_signal == "SELL_SIGNAL_EXTREME_GREED":
+            return ValidationResult(
+                approved=False,
+                reason="❌ ORACLE F&G: Extreme Greed detected - halting new entries"
+            )
+        elif fng_signal == "SELL_SIGNAL_GREED":
+            size_adj *= self.config.get("oracle_config", {}).get("greed_size_reduction_factor", 0.7)
+            warnings.append(f"⚠️ ORACLE F&G: Greed detected - size reduced to {size_adj:.1f}×")
         
-        # 1. Aave Health Factor floor
+        # 2. DXY (US Dollar Index) filter
+        dxy_signal = self.get_oracle_dxy_signal()
+        if dxy_signal == "STRONG_DOLLAR_RISK_OFF":
+            return ValidationResult(
+                approved=False,
+                reason="❌ ORACLE DXY: Strong dollar / Risk-off environment - halting new entries"
+            )
+        elif dxy_signal == "WEAK_DOLLAR_RISK_ON" and request.side == "short":
+            size_adj *= self.config.get("oracle_config", {}).get("weak_dollar_short_size_reduction_factor", 0.8)
+            warnings.append(f"⚠️ ORACLE DXY: Weak dollar / Risk-on detected - short size reduced to {size_adj:.1f}×")
+
+            warnings.append(f"⚠️ ORACLE DXY: Weak dollar / Risk-on detected - short size reduced to {size_adj:.1f}×")
+
+        # 3. HMM Regime Detector filter
+        # This requires historical data to be passed to TacticalRiskGate
+        # For demo purposes, we'll assume a 'current_market_data' placeholder
+        # In a real system, market data would be streamed and managed.
+        current_market_data = pd.DataFrame({'Close': [request.entry_price]}, index=[request.timestamp]) # Simplified for demo
+        current_regime = self.get_current_regime(current_market_data)
+
+        if current_regime == "Bear":
+            if request.side == "long":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ REGIME HMM: Bear market detected - halting new long entries"
+                )
+            else:
+                size_adj *= self.config.get("regime_config", {}).get("bear_market_short_size_factor", 0.7)
+                warnings.append(f"⚠️ REGIME HMM: Bear market detected - short trade size reduced to {size_adj:.1f}×")
+        elif current_regime == "Volatile": # Assuming a 'Volatile' regime might be configured
+            size_adj *= self.config.get("regime_config", {}).get("volatile_market_size_factor", 0.5)
+            warnings.append(f"⚠️ REGIME HMM: Volatile market detected - trade size reduced to {size_adj:.1f}×")
+
+        # 4. FreqAI Signal filter
+        # This requires current market features to be passed
+        # For demo purposes, we'll create dummy features.
+        freqai_features = pd.DataFrame({
+            'open': [request.entry_price * 0.99],
+            'high': [request.entry_price * 1.01],
+            'low': [request.entry_price * 0.98],
+            'close': [request.entry_price],
+            'volume': [10000.0] # Dummy volume
+        })
+        freqai_signal = self.get_freqai_signal(freqai_features)
+
+        if freqai_signal == 0 and request.side == "long": # Assuming 0 is a bearish/no-buy signal
+            return ValidationResult(
+                approved=False,
+                reason="❌ ADAPT FreqAI: No-buy signal for long entry"
+            )
+        elif freqai_signal == 1 and request.side == "short": # Assuming 1 is a bullish/no-short signal
+            return ValidationResult(
+                approved=False,
+                reason="❌ ADAPT FreqAI: No-short signal for short entry"
+            )
+        elif freqai_signal == "NO_SIGNAL_UNTRAINED" or freqai_signal == "NO_SIGNAL_ERROR":
+            warnings.append(f"⚠️ ADAPT FreqAI: Signal unavailable ({freqai_signal}). Proceeding without ML guidance.")
+
+        # 5. Order Book RL Simulation (DEPTH)
+        # Run a micro-simulation of the trade's potential impact
+        rl_simulation_result = self.run_depth_rl_simulation()
+        if rl_simulation_result["final_portfolio_value"] < self.config.get("depth_config", {}).get("min_acceptable_portfolio_value_after_rl", self.GLOBAL_MAX_POSITION_USD):
+            return ValidationResult(
+                approved=False,
+                reason=f"❌ DEPTH RL: Simulation shows negative outcome. Final PnL: ${rl_simulation_result["final_portfolio_value"]:.2f}"
+            )
+        elif rl_simulation_result["total_reward"] < self.config.get("depth_config", {}).get("min_acceptable_rl_reward", 0.0):
+            size_adj *= self.config.get("depth_config", {}).get("rl_negative_reward_size_reduction_factor", 0.9)
+            warnings.append(f"⚠️ DEPTH RL: Simulation shows low reward ({rl_simulation_result["total_reward"]:.2f}). Size reduced to {size_adj:.1f}×")
+
+            size_adj *= self.config.get("depth_config", {}).get("rl_negative_reward_size_reduction_factor", 0.9)
+            warnings.append(f"⚠️ DEPTH RL: Simulation shows low reward ({rl_simulation_result["total_reward"]:.2f}). Size reduced to {size_adj:.1f}×")
+
+        # 7. On-Chain Signals Filter (FLOW)
+        self.update_flow_onchain_data(asset=request.asset) # Fetch latest on-chain data
+        exchange_flow_signal = self.get_flow_exchange_signal(asset=request.asset)
+        whale_signal = self.get_flow_whale_signal(asset=request.asset)
+        stablecoin_signal = self.get_flow_stablecoin_signal()
+
+        if exchange_flow_signal == "BEARISH_EXCHANGE_INFLOW":
+            if request.side == "long":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ FLOW On-Chain: Bearish exchange inflow detected - halting new long entries"
+                )
+            else:
+                size_adj *= self.config.get("flow_config", {}).get("bearish_inflow_short_size_factor", 0.8)
+                warnings.append(f"⚠️ FLOW On-Chain: Bearish exchange inflow - short trade size reduced to {size_adj:.1f}×")
+        elif exchange_flow_signal == "BULLISH_EXCHANGE_OUTFLOW":
+            if request.side == "short":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ FLOW On-Chain: Bullish exchange outflow detected - halting new short entries"
+                )
+            else:
+                size_adj *= self.config.get("flow_config", {}).get("bullish_outflow_long_size_factor", 0.8)
+                warnings.append(f"⚠️ FLOW On-Chain: Bullish exchange outflow - long trade size reduced to {size_adj:.1f}×")
+        
+        if whale_signal == "BEARISH_WHALE_ACTIVITY":
+            if request.side == "long":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ FLOW On-Chain: Bearish whale activity detected - halting new long entries"
+                )
+            else:
+                size_adj *= self.config.get("flow_config", {}).get("bearish_whale_short_size_factor", 0.7)
+                warnings.append(f"⚠️ FLOW On-Chain: Bearish whale activity - short trade size reduced to {size_adj:.1f}×")
+        elif whale_signal == "BULLISH_WHALE_ACTIVITY":
+            if request.side == "short":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ FLOW On-Chain: Bullish whale activity detected - halting new short entries"
+                )
+            else:
+                size_adj *= self.config.get("flow_config", {}).get("bullish_whale_long_size_factor", 0.7)
+                warnings.append(f"⚠️ FLOW On-Chain: Bullish whale activity - long trade size reduced to {size_adj:.1f}×")
+
+        if stablecoin_signal == "BEARISH_STABLECOIN_OUTFLOW":
+            if request.side == "long":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ FLOW On-Chain: Bearish stablecoin outflow - halting new long entries"
+                )
+            else:
+                size_adj *= self.config.get("flow_config", {}).get("bearish_stablecoin_short_size_factor", 0.9)
+                warnings.append(f"⚠️ FLOW On-Chain: Bearish stablecoin outflow - short trade size reduced to {size_adj:.1f}×")
+        elif stablecoin_signal == "BULLISH_STABLECOIN_INFLOW":
+            if request.side == "short":
+                return ValidationResult(
+                    approved=False,
+                    reason="❌ FLOW On-Chain: Bullish stablecoin inflow - halting new short entries"
+                )
+            else:
+                size_adj *= self.config.get("flow_config", {}).get("bullish_stablecoin_long_size_factor", 0.9)
+                warnings.append(f"⚠️ FLOW On-Chain: Bullish stablecoin inflow - long trade size reduced to {size_adj:.1f}×")
+
+        # 8. Aave Health Factor floor
         hf_config = self.config.get("global_filters", {}).get("aave_health_factor", {})
         min_hf_for_entry = hf_config.get("min_for_new_entries", 2.20)
         flatten_hf = hf_config.get("flatten_all_if_below", 2.00)
@@ -474,6 +755,10 @@ class TacticalRiskGate:
                 break
         
         logger.info(f"📝 Trade {trade_id} closed: ${pnl_usd:+.2f} | Session P&L: ${self.session_pnl_usd:+.2f} | Streak: {self.consecutive_losses} losses")
+
+        # Analyze session performance after each trade closure
+        session_stats = self.get_session_stats()
+        self.reflect_agent.analyze_session_performance(session_stats)
     
     def add_trade_to_session(self, trade_id: str, request: TradeRequest):
         """Add new trade to session tracking"""
@@ -538,59 +823,5 @@ class TacticalRiskGate:
         return False, ""
 
 
-def demo_usage():
-    """Demonstration of risk gate usage"""
-    
-    # Initialize gate
-    gate = TacticalRiskGate()
-    
-    # Simulate market data updates
-    gate.update_positioning("BTC", long_pct=43.8, short_pct=56.2)
-    gate.update_funding("BTC", binance_bps=2.9, okx_bps=-0.7)
-    gate.update_aave_health_factor(2.45)
-    gate.update_oi_change(2.98)
-    
-    # Create a trade request
-    request = TradeRequest(
-        strategy_name="BTC_range_scalp",
-        asset="BTC",
-        side="long",
-        notional_usd=25.0,
-        stop_loss_bps=28,
-        entry_price=106800,
-        conditions_met={"reclaim": True, "delta_positive": True},
-        timestamp=datetime.now()
-    )
-    
-    # Validate
-    result = gate.validate_trade(request)
-    
-    print(f"\n{'='*60}")
-    print(f"Trade Validation Result")
-    print(f"{'='*60}")
-    print(f"Approved: {result.approved}")
-    print(f"Reason: {result.reason}")
-    print(f"Size adjustment: {result.size_adjustment:.2f}×")
-    print(f"Adjusted notional: ${request.notional_usd * result.size_adjustment:.2f}")
-    print(f"Stop: {result.stop_adjustment_bps or request.stop_loss_bps} bps")
-    
-    if result.warnings:
-        print(f"\nWarnings:")
-        for warning in result.warnings:
-            print(f"  {warning}")
-    
-    print(f"\nSession Stats:")
-    stats = gate.get_session_stats()
-    for key, value in stats.items():
-        print(f"  {key}: {value}")
-    
-    print(f"{'='*60}\n")
 
-
-if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s [%(levelname)s] %(message)s'
-    )
-    demo_usage()
 
