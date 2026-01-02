@@ -604,7 +604,7 @@
   "positions_monitor": {
     "enabled": true,
     "check_interval_seconds": 60,
-    "last_check": "2026-01-02T02:08:04.814738",
+    "last_check": "2026-01-02T02:20:01.532778",
     "positions": [
       {
         "symbol": "LINK",
