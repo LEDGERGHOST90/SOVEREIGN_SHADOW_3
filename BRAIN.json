@@ -1,153 +1,601 @@
 {
-  "version": "3.0",
-  "last_updated": "2026-01-02T12:39:07.094921",
-  "system_location": "/Volumes/LegacySafe/SS_III/",
+  "version": "1.1",
+  "last_updated": "2026-01-02T12:54:22.700142",
+  "system_name": "LegacyLoop",
   "portfolio": {
-    "net_worth": 5433.87,
-    "snapshot_time": "2025-12-06",
+    "net_worth": 5431.18,
+    "snapshot_time": "2025-11-27T10:26:15.384177Z",
     "ledger": {
-      "total": 5715.91,
-      "AAVE_wstETH": 3040.25,
+      "wstETH_aave": 3040.25,
       "BTC": 1508.32,
       "XRP": 1099.17,
       "USDC": 53.61,
       "ETH": 14.56
     },
     "exchanges": {
-      "total": 595.76,
-      "kraken": 2.65,
-      "binance_us": 73.16,
-      "coinbase": 519.95
-    },
-    "aave": {
-      "collateral": 3211.76,
-      "debt": 662.23,
-      "health_factor": 3.93
-    }
-  },
-  "wallets": {
-    "eth": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
-    "btc": "bc1qlpkhy9lzh6qwjhc0muhlrzqf3vfrhgezmjp0kx",
-    "xrp": "rGvSX7BMyuzkghXbaJqLHk529pYE2j5WR3",
-    "sol": "RovUJaZwiZ1X36sEW7TBmhie5unzPmxtMg1ATwFtGVk"
-  },
-  "credentials_location": "ECO_SYSTEM_4/.env",
-  "systems": {
-    "ECO_SYSTEM_4": {
-      "location": "ECO_SYSTEM_4/",
-      "entry_point": "ECO_SYSTEM_4/main.py",
-      "purpose": "6-stage autonomous trading pipeline",
-      "files": 4878,
-      "skill": ".claude/skills/eco-system/SKILL.md"
-    },
-    "core": {
-      "location": "core/",
-      "files": 151,
-      "subdirectories": 30,
-      "modules": {
-        "agents": "core/agents/ - 12 trading agents",
-        "banking": "core/banking/ - 50 wallet/wealth modules",
-        "autonomous": "core/autonomous/ - 8 24/7 loops",
-        "swarm": "core/swarm/ - 11 swarm agents",
-        "ai": "core/ai/ - 5 AI integration modules"
+      "total": 78.9,
+      "kraken": {
+        "balances": {
+          "PEPE": 41666.66,
+          "SOL": 0.005920978,
+          "USDG": 1.25915294,
+          "ETH": 0.0003643565,
+          "DOGE": 2.52666899,
+          "USD": 0.0037
+        },
+        "total_usd": 3.79
+      },
+      "binance_us": {
+        "balances": {
+          "USDC": 73.16006075,
+          "RENDER": 0.0094344,
+          "PEPE": 372.32
+        },
+        "total_usd": 73.18
+      },
+      "coinbase": {
+        "balances": {
+          "USDC": 1.930563
+        },
+        "total_usd": 1.93
       }
     },
-    "AAVE_system": {
-      "location": "AAVE_system/",
-      "files": 12,
-      "purpose": "DeFi ladder, siphon, profit tracking",
-      "skill": ".claude/skills/aave-system/SKILL.md"
+    "aave": {
+      "collateral": 3028.36,
+      "debt": -360.94,
+      "net": 2367.43,
+      "health_factor": 3.71,
+      "debt_breakdown": {
+        "usdc": 655.82,
+        "usdtb": 5.13
+      },
+      "status": "REDUCED - $300 manual repayment executed"
     },
-    "meme_machine": {
-      "location": "meme_machine/",
-      "files": 12,
-      "purpose": "Token scanning, whale tracking",
-      "skill": ".claude/skills/meme-machine/SKILL.md"
+    "allocation": {
+      "current": {
+        "eth": 53.4,
+        "btc": 26.4,
+        "sol": 0.0,
+        "xrp": 19.2
+      },
+      "target": {
+        "btc": 40,
+        "eth": 30,
+        "sol": 20,
+        "xrp": 10
+      }
+    },
+    "cost_basis": {
+      "xrp": 2.32
+    },
+    "exchange_balances": {
+      "coinbase": {},
+      "kraken": {
+        "PEPE": 41666.66,
+        "SOL": 0.0059233372,
+        "USDG": 1.25963558,
+        "XETH": 0.0003644201,
+        "XXDG": 2.52666899,
+        "ZUSD": 0.0037
+      },
+      "binance_us": {
+        "USDC": 73.16006075,
+        "RENDER": 0.0094344,
+        "PEPE": 372.32
+      }
+    },
+    "last_prices": {
+      "BTC": 86734,
+      "ETH": 2843.65,
+      "SOL": 127.14,
+      "XRP": 2.05,
+      "DOGE": 0.137289,
+      "PEPE": 4.16e-06
+    },
+    "exchange_total": 76.21,
+    "aave_debt": 360.94,
+    "ledger_total": 5715.91,
+    "ledger_net": 5354.97
+  },
+  "prices": {
+    "btc": 91737.7,
+    "eth": 3034.48,
+    "sol": 142.15,
+    "xrp": 2.19,
+    "updated": "2025-11-27T10:26:07.620367Z"
+  },
+  "trading": {
+    "journal_summary": {
+      "total_trades": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0.0,
+      "total_pnl": -18.11,
+      "starting_capital": 500.0,
+      "current_capital": 471.89,
+      "drawdown_pct": -5.6
+    },
+    "last_trade": {
+      "id": "T0001",
+      "symbol": "ZEC/USDC",
+      "type": "long",
+      "entry": 452.85,
+      "exit": 436.0,
+      "size": 1.08202526,
+      "pnl": -18.11,
+      "date": "2025-11-30",
+      "notes": "Stop loss executed by Guardian at $430. Saved $34 vs holding to $404.",
+      "lesson": "Entry was premature - lacked confirmation. Defense was correct."
+    },
+    "psychology": {
+      "losses_today": 1,
+      "trading_allowed": true
+    },
+    "strategies": {
+      "threshold_rebalancer_15pct": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "rl_dqn_momentum": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "btc_eth_pair_trading": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "volatility_breakout_dip": {
+        "status": "incubating",
+        "trades": 0
+      },
+      "fear_greed_contrarian": {
+        "status": "incubating",
+        "trades": 0
+      }
+    }
+  },
+  "session": {
+    "date": "2025-11-30",
+    "accomplishments": [
+      "Built Aurora - ElevenLabs voice assistant (Jessica voice)",
+      "Created 8 unique council voices (Architect, Elder, Banker, Ghost, Siren, Hostage, Mirror, SHADE)",
+      "Generated Vegas 808 trap casino alert sounds",
+      "Set up ntfy.sh push notifications to phone",
+      "Wired meme scanner to send push + voice alerts when tokens score 70+",
+      "Created speak.py for voice responses",
+      "Established interactive voice session style as default",
+      "Scanned Coinbase top performers (RAIN, KAS, QNT momentum)",
+      "Ran live meme_machine scans (MEME at 66, TWITCH at 62)",
+      "Built AURORA Neural Hub (FastAPI + React) - Claude's execution stack",
+      "Extracted GIO strategySynthai (175KB TypeScript) - Gemini's research stack",
+      "Established AI Council: AURORA (Executor) + GIO (Researcher)",
+      "Collaborated on December Battle Plan - Option C: Partial Repay + Swing",
+      "Unified strategy: $400 debt repay + $260 swing capital",
+      "Executive decision: $300 AAVE debt repayment (manual)"
+    ],
+    "priorities": [
+      "Paper trade setup (Dec 1-7)",
+      "Signal generation via GIO",
+      "Track paper P&L in dashboard"
+    ],
+    "next": "Execute Option C - AAVE repayment first"
+  },
+  "interaction_style": {
+    "mode": "voice_interactive",
+    "voice_assistant": "Aurora",
+    "voice_id": "cgSgspJ2msm6clMCkdW9",
+    "elevenlabs_enabled": true,
+    "speak_responses": true,
+    "alert_sounds": {
+      "primary": "vegas_trap.mp3",
+      "voice": "shadow_alert.mp3"
+    },
+    "push_notifications": {
+      "enabled": true,
+      "service": "ntfy.sh",
+      "topic": "sovereignshadow_dc4d2fa1"
+    }
+  },
+  "december_campaign": {
+    "week": 1,
+    "phase": "paper_trading",
+    "capital": 260,
+    "rules": {
+      "max_position": 50,
+      "stop_loss": "3%",
+      "take_profit": "5%",
+      "go_live_threshold": "60% win rate"
+    },
+    "trades": 0,
+    "wins": 0
+  },
+  "config": {
+    "apis": {
+      "coinbase": "ACTIVE",
+      "kraken": "ACTIVE",
+      "binance_us": "ACTIVE (IPv4)",
+      "okx": "DISABLED",
+      "ledger": "MANUAL"
+    },
+    "wallets": {
+      "eth": "0xC08413B63ecA84E2d9693af9414330dA88dcD81C",
+      "btc": "bc1qlpkhy9lzh6qwjhc0muhlrzqf3vfrhgezmjp0kx",
+      "xrp": "rGvS...5WR3"
+    },
+    "mcp_servers": {
+      "shadow-sdk": "shadow_sdk/mcp_server.py",
+      "exchange-manager": "shadow_sdk/mcp_exchange_server.py",
+      "ds-star": "ds_star/mcp_server.py"
+    }
+  },
+  "agents": {
+    "shade_agent": {
+      "alias": "SHADE//AGENT",
+      "path": "agents/shade_agent.py",
+      "role": "strategy_enforcement"
+    },
+    "psychology_tracker": {
+      "alias": "MIND//LOCK",
+      "path": "agents/psychology_tracker.py",
+      "role": "emotion_monitoring"
+    },
+    "trade_journal": {
+      "alias": "LEDGER//ECHO",
+      "path": "agents/trade_journal.py",
+      "role": "trade_logging"
+    },
+    "portfolio_rebalancer": {
+      "path": "agents/portfolio_rebalancer.py",
+      "role": "rebalancing"
+    },
+    "rl_agent": {
+      "path": "agents/rl_rebalancing_agent.py",
+      "role": "ml_recommendations"
+    }
+  },
+  "ai_services": {
+    "gemini": {
+      "status": "active",
+      "model": "gemini-2.5-flash",
+      "alias": "ShadowMind",
+      "path": "shadow_sdk/gemini.py"
+    }
+  },
+  "ai_council": {
+    "established": "2025-11-29",
+    "members": {
+      "AURORA": {
+        "powered_by": "Claude (Anthropic)",
+        "role": "The Executor",
+        "responsibilities": [
+          "Trade execution",
+          "Signal generation",
+          "Position management",
+          "Risk calculations",
+          "Voice/notification alerts",
+          "Code implementation"
+        ],
+        "stack": "neural_hub/ (FastAPI + React)",
+        "interface": "Cursor Terminal / Claude Code CLI",
+        "status": "operational"
+      },
+      "GIO": {
+        "powered_by": "Gemini (Google)",
+        "full_name": "Google Interpreting Operator",
+        "role": "The Researcher",
+        "responsibilities": [
+          "Market analysis",
+          "Sentiment tracking",
+          "Pattern recognition",
+          "Strategy code generation",
+          "Research synthesis"
+        ],
+        "stack": "strategySynthai/ (TypeScript + React)",
+        "interface": "Google AI Studio / Sovereign Command",
+        "status": "operational"
+      },
+      "ARCHITECT_PRIME": {
+        "powered_by": "GPT (OpenAI)",
+        "role": "The Integrator",
+        "responsibilities": [
+          "Cross-agent coherence",
+          "System architecture design",
+          "Workflow orchestration",
+          "Inter-agent communication standards",
+          "Blueprint and config generation",
+          "Ecosystem unification"
+        ],
+        "stack": "ChatGPT floating interface",
+        "interface": "ChatGPT Desktop / Web",
+        "status": "operational"
+      }
+    },
+    "collaboration_protocol": [
+      "GIO scans market conditions daily",
+      "GIO flags high-conviction setups to AURORA",
+      "AURORA generates technical signals",
+      "AURORA executes if signal confidence > 70%",
+      "Both AIs log to shared trade journal"
+    ],
+    "unified_recommendation": {
+      "strategy": "Option C: Partial Repay + Swing Trade",
+      "details": "Repay $400 debt (reduce bleed to ~$14/yr), keep $260 for swing trading",
+      "rationale": [
+        "Immediately reduces debt bleed by 60%",
+        "Maintains capital for proven swing strategy",
+        "Balances risk management with growth potential",
+        "Leverages AURORA's 100% win rate"
+      ]
+    }
+  },
+  "projects": {
+    "shadow_council": {
+      "status": "operational",
+      "path": "ShadowCouncil/",
+      "description": "Personified decision framework for trading psychology",
+      "notebooklm_source": "ShadowCouncil/CRYPTODEX_ASSET_PODCAST.md",
+      "characters": {
+        "assets": [
+          "btc_elder",
+          "xrp_siren",
+          "eth_hostage",
+          "sol_ghost",
+          "aave_banker"
+        ],
+        "guardians": [
+          "shade_guardian",
+          "mirror",
+          "architect"
+        ],
+        "platforms": [
+          "ledger_vault",
+          "coinbase_populist",
+          "kraken_viking",
+          "binance_institution",
+          "okx_wildcard",
+          "metamask_gateway",
+          "phantom_multiverse"
+        ]
+      },
+      "trust_scores": {
+        "btc_elder": {
+          "current": 94,
+          "baseline": 92,
+          "trades": 1,
+          "wins": 1,
+          "reason": "Another win following the system"
+        },
+        "xrp_siren": {
+          "current": 20,
+          "baseline": 23,
+          "trades": 8,
+          "wins": 1,
+          "reason": "Another loss on XRP"
+        },
+        "eth_hostage": {
+          "current": 78,
+          "baseline": 78,
+          "trades": 0,
+          "wins": 0,
+          "reason": "Reliable foundation, locked as collateral"
+        },
+        "sol_ghost": {
+          "current": 65,
+          "baseline": 65,
+          "trades": 0,
+          "wins": 0,
+          "reason": "Never traded - 0% allocation"
+        },
+        "aave_banker": {
+          "current": 50,
+          "baseline": 50,
+          "trades": 0,
+          "wins": 0,
+          "reason": "Creditor, not advisor"
+        },
+        "shade_guardian": {
+          "current": 100,
+          "baseline": 100,
+          "overrides": 8,
+          "override_losses": 7,
+          "reason": "Perfect when obeyed"
+        },
+        "mirror": {
+          "current": 85,
+          "baseline": 85,
+          "predictions": 12,
+          "accurate": 10,
+          "reason": "Accurate emotion detection"
+        },
+        "architect": {
+          "current": 88,
+          "baseline": 88,
+          "systems_built": 15,
+          "reason": "Systems work when used"
+        },
+        "ledger_vault": {
+          "current": 95,
+          "baseline": 95,
+          "reason": "Hardware security - holds 80%"
+        },
+        "kraken_viking": {
+          "current": 82,
+          "baseline": 82,
+          "reason": "Battle-tested, reliable"
+        },
+        "coinbase_populist": {
+          "current": 55,
+          "baseline": 55,
+          "reason": "Distracting notifications"
+        },
+        "binance_institution": {
+          "current": 60,
+          "baseline": 60,
+          "reason": "IPv6 fixed, operational"
+        },
+        "phantom_multiverse": {
+          "current": 70,
+          "baseline": 70,
+          "reason": "Multi-chain ready, awaiting SOL"
+        },
+        "metamask_gateway": {
+          "current": 65,
+          "baseline": 65,
+          "reason": "Hot wallet risk"
+        },
+        "okx_wildcard": {
+          "current": 25,
+          "baseline": 25,
+          "reason": "API expired, DISABLED"
+        }
+      },
+      "features": [
+        "character_loader",
+        "emotion_mapping",
+        "trust_tracking",
+        "council_debates"
+      ],
+      "integration": {
+        "council_integration.py": "Bridges Mirror + SHADE with character voices",
+        "psychology_tracker.py": "THE MIRROR - now identifies who's speaking",
+        "shade_agent.py": "SHADE//AGENT - now has emotional veto power via council"
+      },
+      "core_mechanic": "Emotion -> Character -> Veto Decision"
     },
     "ds_star": {
-      "location": "ds_star/",
-      "files": 15,
-      "purpose": "Analysis tools, strategy builder",
-      "skill": ".claude/skills/ds-star/SKILL.md"
+      "status": "operational",
+      "path": "ds_star/",
+      "description": "Decision Support - Strategic Trading Analysis & Research",
+      "modules": {
+        "synoptic_core": "Smart Asset Score (0-100)",
+        "architect_forge": "NL \u2192 Strategy code builder",
+        "oracle_interface": "NL \u2192 Charts and metrics",
+        "gatekeeper": "Data normalization (Sovereign Standard)",
+        "transparent_analyst": "Step-by-step reasoning"
+      },
+      "mcp_server": "ds_star/mcp_server.py",
+      "launcher_commands": [
+        "dstest",
+        "score BTC",
+        "ask '...'"
+      ]
     },
-    "agents": {
-      "location": "agents/",
-      "files": 15,
-      "purpose": "Specialized trading agents"
+    "meme_machine": {
+      "status": "operational",
+      "path": "meme_machine/",
+      "features": [
+        "dexscreener",
+        "breakout_scoring",
+        "smart_money",
+        "pumpfun"
+      ]
     },
-    "neural_hub": {
-      "location": "neural_hub/",
-      "files": 6,
-      "purpose": "Gemini AI integration"
-    },
-    "exchanges": {
-      "location": "exchanges/",
-      "files": 8,
-      "purpose": "Exchange connectors"
-    },
-    "web_api": {
-      "location": "web_api/",
-      "entry_point": "web_api/app.py",
-      "files": 4,
-      "purpose": "Flask REST API"
+    "strategy_scout": {
+      "status": "operational",
+      "url": "https://sovereignnshadowii.abacusai.app",
+      "platform": "AbacusAI",
+      "features": [
+        "youtube_analysis",
+        "audio_transcription",
+        "knowledge_graph",
+        "sovereign_protocols"
+      ],
+      "modules": {
+        "A": "Local Agent (file scanning)",
+        "B": "Summarizer (code intelligence)",
+        "C": "Daily Recorder (session logs)",
+        "D": "Knowledge Graph (visualization)"
+      },
+      "ai_fallback": [
+        "gemini",
+        "claude",
+        "openai"
+      ]
     }
   },
-  "apis": {
-    "coinbase": "ACTIVE",
-    "kraken": "ACTIVE",
-    "binance_us": "ACTIVE",
-    "ledger": "MANUAL",
-    "anthropic": "ACTIVE",
-    "google_gemini": "ACTIVE",
-    "elevenlabs": "ACTIVE"
+  "naming_convention": {
+    "cmd_": "executable commands/scripts",
+    "core_": "core system files",
+    "scan_": "scanning/monitoring",
+    "test_": "test files",
+    "demo_": "demonstration files",
+    "doc_": "documentation",
+    "spec_": "specifications",
+    "report_": "reports/summaries"
   },
-  "current_goal": "Test trading automations with $500 Coinbase deposit",
-  "agents": {
-    "swarm_agent": {
-      "status": "idle",
-      "last_run": "2025-12-13T14:39:37.845973"
+  "system": {
+    "health": "operational",
+    "git_uncommitted": true,
+    "lines_of_code": 52644,
+    "python_files": 228
+  },
+  "council_motions": [
+    {
+      "id": "M20251130174430",
+      "source": "GIO",
+      "type": "market_analysis",
+      "content": "ZEC trade post-mortem: Entry was premature. Discipline breach confirmed.",
+      "confidence": 85,
+      "data": {
+        "trade_id": "T0001",
+        "pnl": -18.11,
+        "failure_mode": "SNIPER_MISFIRE"
+      },
+      "timestamp": "2025-11-30T17:44:30.843699",
+      "status": "pending",
+      "votes": []
     },
-    "risk_agent": {
-      "status": "idle",
-      "last_run": "2025-12-14T05:40:31.899766"
+    {
+      "id": "M20251130180853",
+      "source": "AURORA",
+      "type": "executive_decision",
+      "content": "AAVE debt repayment handled manually. Executive decision made. Assume $300 payment executed. GIO: Disregard AAVE priority - focus on other campaign objectives. Debt is no longer blocking.",
+      "confidence": 100,
+      "data": {
+        "decision": "AAVE_MANUAL_OVERRIDE",
+        "payment_amount": 300,
+        "new_debt_estimate": 360.94,
+        "status": "EXECUTED",
+        "directive_to_gio": "Focus on paper trading setup and signal generation for Dec 1-7"
+      },
+      "timestamp": "2025-11-30T18:08:53.742291",
+      "status": "pending",
+      "votes": []
+    },
+    {
+      "id": "M20251130210550",
+      "source": "AURORA",
+      "type": "status_update",
+      "content": "SS3 Desktop Launcher complete. One-click startup now available: starts Council Bridge, GIO Frontend, and Claude Code with BRAIN BLAST. Shadow effect banner implemented. Ready for Dec 1 paper trading phase.",
+      "confidence": 100,
+      "data": {
+        "launcher_path": "~/Desktop/SovereignShadow3.app",
+        "features": [
+          "auto-start services",
+          "SHADOW III banner",
+          "brain context loading"
+        ]
+      },
+      "timestamp": "2025-11-30T21:05:50.764458",
+      "status": "pending",
+      "votes": []
     }
-  },
+  ],
+  "last_session": "2025-12-01",
+  "next_session_todos": [
+    "Review overnight market movements",
+    "Check scheduled job logs (scanner, state updater)",
+    "Begin December Campaign Week 1 - Paper Trading Setup",
+    "Configure paper trading parameters ($260 capital)",
+    "Set up trade journal for December tracking",
+    "Test DS-STAR scoring on potential entries"
+  ],
   "council_decisions": [
     {
       "symbol": "BTC",
       "decision": "HOLD",
       "confidence": 50,
-      "timestamp": "2026-01-02T11:22:28.810829"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2026-01-02T11:37:43.475230"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2026-01-02T11:52:59.404584"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2026-01-02T12:08:18.005818"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2026-01-02T12:23:50.466175"
-    },
-    {
-      "symbol": "BTC",
-      "decision": "HOLD",
-      "confidence": 50,
-      "timestamp": "2026-01-02T12:39:07.094349"
+      "timestamp": "2026-01-02T12:54:22.699249"
     }
   ]
 }
