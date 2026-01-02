@@ -13,8 +13,31 @@ from dataclasses import dataclass, field
 from enum import Enum
 import json
 
-from interfaces import BaseModule, EventBus
-from container import DIContainer
+# Import from correct path - exchange_interfaces is in core/exchanges/
+try:
+    from core.exchanges.interfaces import BaseModule, EventBus
+except ImportError:
+    # Fallback: Define minimal stubs if interfaces not available
+    from abc import ABC, abstractmethod
+    from typing import Any
+
+    class BaseModule(ABC):
+        """Base class for all system modules"""
+        @abstractmethod
+        async def process(self, input_data: Any) -> Any:
+            pass
+        @abstractmethod
+        async def initialize(self) -> bool:
+            pass
+        @abstractmethod
+        async def shutdown(self) -> None:
+            pass
+
+    class EventBus(ABC):
+        """Abstract event bus stub"""
+        pass
+
+# DIContainer was imported but never used - removed
 
 logger = logging.getLogger(__name__)
 
